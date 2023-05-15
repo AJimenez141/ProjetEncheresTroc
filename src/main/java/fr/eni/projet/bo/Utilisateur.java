@@ -12,21 +12,7 @@ public class Utilisateur {
 	Adresse adresse;
 	double credit;
 	boolean administrateur;
-	
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String motDePasse,
-			String telephone, Adresse adresse, double credit, boolean administrateur) {
-		super();
-		this.noUtilisateur = noUtilisateur;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.motDePasse = motDePasse;
-		this.telephone = telephone;
-		this.adresse = adresse;
-		this.credit = credit;
-		this.administrateur = administrateur;
-	}
+	boolean actif;
 	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String motDePasse,
 			String telephone, Adresse adresse, double credit) {
@@ -41,6 +27,22 @@ public class Utilisateur {
 		this.adresse = adresse;
 		this.credit = credit;
 		this.administrateur = false;
+		this.actif = true;
+	}
+	
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String motDePasse,
+			String telephone, Adresse adresse, double credit) {
+		super();
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+		this.telephone = telephone;
+		this.adresse = adresse;
+		this.credit = credit;
+		this.administrateur = false;
+		this.actif = true;
 	}
 
 	public int getNoUtilisateur() {
@@ -103,11 +105,20 @@ public class Utilisateur {
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
+	
+	public boolean isActif() {
+		return actif;
+	}
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
+	}
+
 	@Override
 	public String toString() {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
-				+ prenom + ", email=" + email + ", telephone=" + telephone + ", adresse="
-				+ adresse + ", credit=" + credit + ", administrateur=" + administrateur + "]";
+				+ prenom + ", email=" + email + ", motDePasse=" + motDePasse + ", telephone=" + telephone + ", adresse="
+				+ adresse + ", credit=" + credit + ", administrateur=" + administrateur + ", actif=" + actif + "]";
 	}
 
 }

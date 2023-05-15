@@ -15,7 +15,6 @@ public abstract class TestBO {
 
 		// INFOS ENCHERISSEURS
 		Adresse adresseEncherisseur1 = new Adresse("95 rue des champs", "44100", "Nantes");
-		// Constructeur sans "administrateur" = administrateur à false par défaut.
 		Utilisateur encherisseur1 = new Utilisateur(1, "jdupont", "dupont", "jean", "jdupont@mail.com", "mdp",
 				"0612345678", adresseEncherisseur1, 15.00);
 		
@@ -30,7 +29,7 @@ public abstract class TestBO {
 		// INFOS VENDEUR
 		Adresse adresseVendeur = new Adresse("22 rue des prés", "44100", "Nantes");
 		Utilisateur vendeur = new Utilisateur(2, "pdubois", "dubois", "pierre", "pdubois@mail.com", "mdp", "0787654321",
-				adresseVendeur, 35.00, true);
+				adresseVendeur, 35.00);
 
 		// INFOS ENCHÈRE
 		LocalDate dateDebutEnchere = LocalDate.of(2023, 05, 15);
