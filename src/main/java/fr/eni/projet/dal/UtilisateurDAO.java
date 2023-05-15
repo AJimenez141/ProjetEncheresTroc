@@ -42,7 +42,7 @@ public interface UtilisateurDAO {
 	 * @param pUtilisateurId
 	 * @throws UtilisateurDALException
 	 */
-	public void desactiverUtilisateur(int pUtilisateurId) throws UtilisateurDALException;
+//	public void desactiverUtilisateur(int pUtilisateurId) throws UtilisateurDALException;
 	
 	/**
 	 * modifier un utilisateur
