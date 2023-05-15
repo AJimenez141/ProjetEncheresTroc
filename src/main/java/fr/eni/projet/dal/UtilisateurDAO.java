@@ -52,4 +52,12 @@ public interface UtilisateurDAO {
 	 */
 	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException;
 	
+	/**
+	 * modifier les credits de l'utilisateur
+	 * 
+	 * @param pUtilisateurId
+	 * @throws UtilisateurDALException
+	 */
+	public void modifierCredit(int pUtilisateurId) throws UtilisateurDALException;
+	
 }
