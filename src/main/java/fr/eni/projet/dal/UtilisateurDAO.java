@@ -59,5 +59,6 @@ public interface UtilisateurDAO {
 	 * @throws UtilisateurDALException
 	 */
 	public void modifierCredit(int pUtilisateurId) throws UtilisateurDALException;
+
 	
 }
