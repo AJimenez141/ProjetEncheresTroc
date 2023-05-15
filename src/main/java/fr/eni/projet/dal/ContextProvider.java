@@ -19,7 +19,7 @@ abstract class ContextProvider {
 		Context context;
 		try {
 			context = new InitialContext();
-			ContextProvider.dataSource = (DataSource)context.lookup("java:comp/env/jdbc/pool_cnx");
+			ContextProvider.dataSource = (DataSource)context.lookup("java:comp/env/jdbc/enchere_cnx");
 		} catch (NamingException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Impossible d'accéder à la base de données");
