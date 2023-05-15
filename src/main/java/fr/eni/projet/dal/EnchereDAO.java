@@ -1,5 +1,7 @@
 package fr.eni.projet.dal;
 
+import java.util.List;
+
 public interface EnchereDAO {
 	/**
 	 * selectionner une enchere
@@ -33,5 +35,5 @@ public interface EnchereDAO {
 	 * @param pEnchereId
 	 * @throws EnchereDALException
 	 */
-	public void encherir(Enchere pEnchere) throws EnchereDALException;	
+	public void encherir(int pEnchereId) throws EnchereDALException;	
 }
