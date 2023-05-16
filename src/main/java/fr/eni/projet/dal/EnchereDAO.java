@@ -6,6 +6,16 @@ import java.util.List;
 import fr.eni.projet.bo.Enchere;
 
 public interface EnchereDAO {
+	
+//	/**
+//	 * selectionner un article
+//	 * 
+//	 * @param pArticleVenduId
+//	 * @return
+//	 * @throws ArticleVenduDALException
+//	 */
+//	public ArticleVendu selectArticleById(int pArticleVenduId) throws ArticleVenduDALException;
+	
 	/**
 	 * selectionner une enchere
 	 * 
@@ -21,7 +31,7 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws EnchereDALException
 	 */
-	public List<Enchere> selectAll() throws EnchereDALException, SQLException;
+	public List<Enchere> selectAll() throws EnchereDALException, SQLException, ArticleVenduDALException;
 	
 	/**
 	 * selectionner les encheres d'un utilisateur
