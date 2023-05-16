@@ -1,22 +1,22 @@
 package fr.eni.projet.bo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ArticleVendu {
 	
 	int noArticle;
 	String nomArticle;
 	String description;
-	Date dateDebutEncheres;
-	Date dateFinEncheres;
+	LocalDate dateDebutEncheres;
+	LocalDate dateFinEncheres;
 	int miseAPrix;
 	int prixVente;
 	boolean enVente;
 	Utilisateur vendeur;
 	Categorie categorie;
 	
-	public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
-			Date dateFinEncheres, int miseAPrix, int prixVente, boolean enVente, Utilisateur vendeur, Categorie categorie) {
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, boolean enVente, Utilisateur vendeur, Categorie categorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -30,8 +30,8 @@ public class ArticleVendu {
 		this.categorie = categorie;
 	}
 	
-	public ArticleVendu(String nomArticle, String description, Date dateDebutEncheres,
-			Date dateFinEncheres, int miseAPrix, int prixVente, boolean enVente, Utilisateur vendeur, Categorie categorie) {
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, boolean enVente, Utilisateur vendeur, Categorie categorie) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -68,19 +68,19 @@ public class ArticleVendu {
 		this.description = description;
 	}
 
-	public Date getDateDebutEncheres() {
+	public LocalDate getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 
-	public void setDateDebutEncheres(Date dateDebutEncheres) {
+	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 
-	public Date getDateFinEncheres() {
+	public LocalDate getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 
-	public void setDateFinEncheres(Date dateFinEncheres) {
+	public void setDateFinEncheres(LocalDate dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
