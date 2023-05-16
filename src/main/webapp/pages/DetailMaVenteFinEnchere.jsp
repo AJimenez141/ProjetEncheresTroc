@@ -6,8 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>Détail fin enchère</title>
 </head>
+<header>
+	<jsp:include page="Header.jsp" />
+</header>
+
 <body>
-	<h1>ENI - Enchères</h1>
 	
 	<h2>XXX a remporté l'enchère</h2>
 	<div>
@@ -51,8 +54,8 @@
 		</div>
 		<br>
 	
-		<a>
-			<input type="button" id="btnRetraitEffec" name="btnRetraitEffec" value="Retrait effectué">
+		<a href="ListeEncheresConnecte.jsp">
+			<button id="btnRetraitEffec" name="btnRetraitEffec">Retrait effectué</button>
 		</a>
 		</div>
 	</div>

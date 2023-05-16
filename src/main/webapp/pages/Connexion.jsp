@@ -5,9 +5,11 @@
 <meta charset="ISO-8859-1">
 <title>Connexion</title>
 </head>
-<body>
+<header>
 	<h1>ENI - Enchères</h1>
-	
+</header>
+
+<body>
 	<div>
 		<label for="id">Identifiant :</label>
 		<input type="text" id="id" name="id">
@@ -21,7 +23,9 @@
 	<br>
 	
 	<div>
-		<input type="button" id="btnConnexion" name="btnConnexion" value="Connexion">
+		<a href="ListeEncheresConnecte.jsp">
+			<button id="btnConnexion" name="btnConnexion">Connexion</button>
+		</a>
 		
 		<input type="checkbox" id="ckSouvenir" name="ckSouvenir">
 		<label for="ckSouvenir">Se souvenir de moi</label>
@@ -30,7 +34,7 @@
 	<br>
 	
 	<a href="CreerCompte.jsp">
-		<input type="button"id="btnCreerCompte" name="btnCreerCompte" value="Créer un compte">
+		<button id="btnCreerCompte" name="btnCreerCompte">Créer un compte</button>
 	</a>
 	
 </body>

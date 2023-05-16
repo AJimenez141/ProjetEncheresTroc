@@ -6,8 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>Mon Profil</title>
 </head>
+<header>
+	<jsp:include page="Header.jsp" />
+</header>
+
 <body>
-	<h1>ENI - Enchères</h1>
 	
 	<div>
 		<label for="pseudo">Pseudo :</label>
@@ -58,7 +61,7 @@
 	<br>
 	
 	<a href="ModifierProfil.jsp">
-		<input type="button" id="btnModifier" name="btnModifier" value="Modifier">
+		<button id="btnModifier" name="btnModifier">Modifier</button>
 	</a>
 </body>
 </html>

@@ -6,9 +6,12 @@
 <meta charset="ISO-8859-1">
 <title>Créer un compte</title>
 </head>
-<body>
+<header>
 	<h1>ENI - Enchères</h1>
-	
+</header>
+
+<body>
+
 	<h2>Mon profil</h2>
 	
 	<form method="POST">
@@ -52,8 +55,12 @@
 		</div>
 		<br>
 		
-		<input type="submit" id="btnCreer" name="btnCreer" value="Créer">
-		<input type="button" id="btnAnnuler" name="btnAnnuler" value="Annuler">
+		<a href="ListeEncheresConnecte.jsp">
+			<button type="submit" id="btnCreer" name="btnCreer">Créer</button>
+		</a>
+		<a href="Connexion.jsp">
+			<button id="btnAnnuler" name="btnAnnuler">Annuler</button>
+		</a>
 	</form>
 </body>
 </html>

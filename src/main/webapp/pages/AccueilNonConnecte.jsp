@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Accueil</title>
 </head>
 	<%-- <jsp:include page="Header.jsp" /> --%>
 <header>
 	<h1>ENI-Enchères</h1>
 	<ul>
-		<li><a href="/Inscription">S'inscrire</a></li>
-		<li><a href="/Connexion">Se Connecter</a></li>
+		<li><a href="CreerCompte.jsp">S'inscrire</a></li>
+		<li><a href="Connexion.jsp">Se Connecter</a></li>
 	</ul>
 </header>
 <body>
@@ -23,21 +23,19 @@
 			
 			<form action="<%=request.getContextPath()%>/AccueilNonConnecte" method="GET">
 
-			<input type="text" name="filtre"/>
-			
-			<label name="labelCategorie" for="categorie">Categorie : </label>
-			<select>
-				<option value="toutes">Toutes</option>
-			</select>
+				<input type="text" name="filtre"/>
+				
+				<label name="labelCategorie" for="categorie">Categorie : </label>
+				<select>
+					<option value="toutes">Toutes</option>
+				</select>
 	
-		</form>
+			</form>
 		</div>
 		<div>
-			<button name="btnRechercher" value="Submit">Rechercher</button>
+			<button type="submit" name="btnRechercher">Rechercher</button>
 		</div>
 	</div>
-	
-	
 	
 	<div>
 		<div>

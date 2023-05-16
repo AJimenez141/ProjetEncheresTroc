@@ -6,9 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>Acquisition</title>
 </head>
+<header>
+	<jsp:include page="Header.jsp" />
+</header>
+
 <body>
-	<h1>ENI - Enchères</h1>
-	
 	<h2>Vous avez remporté la vente</h2>
 	<div>
 		<img width="200" height="200">
@@ -51,8 +53,8 @@
 		</div>
 		<br>
 	
-		<a>
-			<input type="button" id="btnRetour" name="btnRetour" value="Retour">
+		<a href="ListeEncheresConnecte.jsp">
+			<button id="btnRetour" name="btnRetour">Retour</button>
 		</a>
 	</div>
 

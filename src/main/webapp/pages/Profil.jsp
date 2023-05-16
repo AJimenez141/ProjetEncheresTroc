@@ -6,8 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>Profil</title>
 </head>
+<header>
+	<jsp:include page="Header.jsp" />
+</header>
+
 <body>
-	<h1>ENI - Enchères</h1>
 	
 	<div>
 		<label for="pseudo">Pseudo :</label>
@@ -33,7 +36,7 @@
 	</div>
 	<br>
 	
-	<div>
+	<!-- <div>
 		<label for="tel">Téléphone :</label>
 		XXX
 	</div>
@@ -43,7 +46,7 @@
 		<label for="rue">Rue :</label>
 		XXX
 	</div>
-	<br>
+	<br> -->
 	
 	<div>
 		<label for="cp">Code postal :</label>

@@ -6,8 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>Modifier profil</title>
 </head>
+<header>
+	<jsp:include page="Header.jsp" />
+</header>
+
 <body>
-	<h1>ENI - Enchères</h1>
 	
 	<h2>Mon profil</h2>
 	
@@ -64,11 +67,11 @@
 		</div>
 		<br>
 		
-		<!-- Refresh de la page ? -->
-		<input type="submit" id="btnEnregistrer" name="btnEnregistrer" value="Enregistrer">
-		
+		<a href="MonProfil.jsp">
+			<button type="submit" id="btnEnregistrer" name="btnEnregistrer">Enregistrer</button>
+		</a>
 		<a href="AccueilNonConnecte.jsp">
-			<input type="button" id="btnSupprimer" name="btnSupprimer" value="Supprimer mon compte">
+			<button id="btnSupprimer" name="btnSupprimer">Supprimer mon compte</button>
 		</a>
 	</form>
 </body>

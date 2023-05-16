@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Enchère non commencé</title>
 </head>
+<header>
 	<jsp:include page="Header.jsp" />
+</header>
+
 <body>
 	<h2>Nouvelle vente</h2>
 	
@@ -18,39 +21,46 @@
 		<div>
 			<form action="<%=request.getContextPath()%>/VendreUnArticle" method="POST">
 
-			<label name="labelArticle" for="article">Article : </label>
-			<input type="text" name="article"/>
-			
-			<label name="labelDescription" for="description">Description : </label>
-			<input type="text" name="description"/>
-			
-			<label name="labelCategorie" for="categorie">Catégorie : </label>
-			<select>
-				<option value=""></option>
-			</select>
-			
-			<label name="labelDebutEnchere" for="debutEnchere">Début de l'enchère : </label>
-			<input type="date" name="debutEnchere"/>
-			
-			<label name="labelFinEnchere" for="finEnchere">Fin de l'enchère : </label>
-			<input type="date" name="finEnchere"/>
-			
-			Retrait
-			
-			<label name="labelRue" for="rue">Rue : </label>
-			<input type="text" name="rue"/>
-			
-			<label name="labelCodePostal" for="codePostal">Code postal : </label>
-			<input type="text" name="codePostal"/>
-			
-			<label name="labelVille" for="ville">Ville : </label>
-			<input type="text" name="ville"/>
-			
-	
-			<button name="btnEnregistrer" value="Submit">Enregistrer</button>
-			<button name="btnAnnuler" value="cancel">Annuler</button>
+				<label name="labelArticle" for="article">Article : </label>
+				<input type="text" name="article"/>
+				
+				<label name="labelDescription" for="description">Description : </label>
+				<input type="text" name="description"/>
+				
+				<label name="labelCategorie" for="categorie">Catégorie : </label>
+				<select>
+					<option value=""></option>
+				</select>
+				
+				<label name="labelDebutEnchere" for="debutEnchere">Début de l'enchère : </label>
+				<input type="date" name="debutEnchere"/>
+				
+				<label name="labelFinEnchere" for="finEnchere">Fin de l'enchère : </label>
+				<input type="date" name="finEnchere"/>
+				
+				Retrait
+				
+				<label name="labelRue" for="rue">Rue : </label>
+				<input type="text" name="rue"/>
+				
+				<label name="labelCodePostal" for="codePostal">Code postal : </label>
+				<input type="text" name="codePostal"/>
+				
+				<label name="labelVille" for="ville">Ville : </label>
+				<input type="text" name="ville"/>
+				
+				<a href="ListeEncheresConnecte.jsp">
+					<button type="submit" id="btnEnregistrer" name="btnEnregistrer">Enregistrer</button>
+				</a>
+				<a href="LsiteEncheresConnecte.jsp">
+					<button id="btnAnnuler" name="btnAnnuler">Annuler</button>
+				</a>
+				<a href="LsiteEncheresConnecte.jsp">
+					<button id="btnAnnuler" name="btnAnnuler">Annuler la vente</button>
+				</a>
+		
+			</form>
 		</div>
-		</form>
 	</div>
 	
 	

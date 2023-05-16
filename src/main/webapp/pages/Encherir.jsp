@@ -6,8 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>Enchérir</title>
 </head>
+<header>
+	<jsp:include page="Header.jsp" />
+</header>
+
 <body>
-	<h1>ENI - Enchères</h1>
 	
 	<h2>Détail vente</h2>
 	<div>
@@ -60,7 +63,7 @@
 		<div>
 			<label for="proposition">Ma proposition :</label>
 			<input type="number">
-			<input type="button" id="btnEncherir" name="btnEncherir" value="Enchérir">
+			<button id="btnEncherir" name="btnEncherir">Enchérir</button>
 		</div>
 		<br>
 		</div>
