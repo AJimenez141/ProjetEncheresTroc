@@ -33,7 +33,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String CONNEXION_UTILISATEUR_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ? AND mot_de_passe = ?";
 	
 //	Definition de nombre de credit par defaut
-	private final int DEFAULT_CREDIT	= 0;
+	private final int DEFAULT_CREDIT	= 100;
 
 	@Override
 	public Utilisateur selectById(int pUtilisateurId) throws UtilisateurDALException, SQLException {
