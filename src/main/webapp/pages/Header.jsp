@@ -7,14 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>ENI-Enchères</h1>
-	<ul>
-		<li><a href="GestionUtilisateurs.jsp">Gestion des utilisateurs</a></li>
-		<li><a href="GestionCategories.jsp">Gestion des catégories</a></li>
-		<li><a href="ListeEncheresConnecte.jsp">Enchères</a></li>
-		<li><a href="VendreUnArticle.jsp">Vendre un Article</a></li>
-		<li><a href="MonProfil.jsp">Mon Profil</a></li>
-		<li><a href="AccueilNonConnecte.jsp">Déconnexion</a></li>
-	</ul>
+	<div class="conteneur">
+		<h1>ENI-Enchères</h1>
+		<ul>
+			<li><a href="GestionUtilisateurs.jsp">Gestion des utilisateurs</a></li>
+			<li><a href="GestionCategories.jsp">Gestion des catégories</a></li>
+			<li><a href="ListeEncheresConnecte.jsp">Enchères</a></li>
+			<li><a href="VendreUnArticle.jsp">Vendre un Article</a></li>
+			<li><a href="MonProfil.jsp">Mon Profil</a></li>
+			<li><a href="AccueilNonConnecte.jsp">Déconnexion</a></li>
+		</ul>
+	</div>
 </body>
 </html>
