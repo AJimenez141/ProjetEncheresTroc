@@ -48,19 +48,19 @@ public abstract class TestBO {
 		System.out.println(article.getNomArticle() +  ", en vente: " + article.isEnVente());
 		System.out.println("Début des enchères");
 		
-		Enchere enchere1 = new Enchere(LocalDate.now(), 25.00, encherisseur1, article);
+		Enchere enchere1 = new Enchere(LocalDate.now(), 25, encherisseur1, article);
 		System.out.println(enchere1);
 		
-		Enchere enchere2 = new Enchere(LocalDate.now(), 45.00, encherisseur2, article);
+		Enchere enchere2 = new Enchere(LocalDate.now(), 45, encherisseur2, article);
 		System.out.println(enchere2);
 		
-		Enchere enchere3 = new Enchere(LocalDate.now(), 65.00, encherisseur1, article);
+		Enchere enchere3 = new Enchere(LocalDate.now(), 65, encherisseur1, article);
 		System.out.println(enchere3);
 		
-		Enchere enchere4 = new Enchere(LocalDate.now(), 1200.00, encherisseur2, article);
+		Enchere enchere4 = new Enchere(LocalDate.now(), 1200, encherisseur2, article);
 		System.out.println(enchere4);
 		
-		Enchere enchere5 = new Enchere(LocalDate.now(), 1201.00, encherisseur1, article);
+		Enchere enchere5 = new Enchere(LocalDate.now(), 1201, encherisseur1, article);
 		System.out.println(enchere5);
 		
 		article.setEnVente(false);

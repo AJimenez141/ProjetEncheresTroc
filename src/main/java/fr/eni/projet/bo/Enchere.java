@@ -4,12 +4,22 @@ import java.time.LocalDate;
 
 public class Enchere {
 	
+	int noEnchere;
 	LocalDate dateEnchere;
-	double montant_enchere;
+	int montant_enchere;
 	Utilisateur encherisseur;
 	ArticleVendu articleVendu;
+	
+	public Enchere(int noEnchere, LocalDate dateEnchere, int montant_enchere, Utilisateur encherisseur, ArticleVendu articleVendu) {
+		super();
+		this.noEnchere = noEnchere;
+		this.dateEnchere = dateEnchere;
+		this.montant_enchere = montant_enchere;
+		this.encherisseur = encherisseur;
+		this.articleVendu = articleVendu;
+	}
 
-	public Enchere(LocalDate dateEnchere, double montant_enchere, Utilisateur encherisseur, ArticleVendu articleVendu) {
+	public Enchere(LocalDate dateEnchere, int montant_enchere, Utilisateur encherisseur, ArticleVendu articleVendu) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montant_enchere = montant_enchere;
@@ -17,19 +27,27 @@ public class Enchere {
 		this.articleVendu = articleVendu;
 	}
 
-	public LocalDate getDateEnchère() {
+	public int getNoEnchere() {
+		return noEnchere;
+	}
+
+	public void setNoEnchere(int noEnchere) {
+		this.noEnchere = noEnchere;
+	}
+
+	public LocalDate getDateEnchere() {
 		return dateEnchere;
 	}
 
-	public void setDateEnchère(LocalDate dateEnchere) {
+	public void setDateEnchere(LocalDate dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 
-	public double getMontant_enchere() {
+	public int getMontant_enchere() {
 		return montant_enchere;
 	}
 
-	public void setMontant_enchere(double montant_enchere) {
+	public void setMontant_enchere(int montant_enchere) {
 		this.montant_enchere = montant_enchere;
 	}
 

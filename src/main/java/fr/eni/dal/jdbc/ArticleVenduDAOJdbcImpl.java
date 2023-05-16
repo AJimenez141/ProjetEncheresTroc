@@ -1,6 +1,7 @@
 package fr.eni.dal.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,12 +19,25 @@ import fr.eni.projet.dal.ConnectionProvider;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
-	private static final String SELECT_ARTICLE_BY_ID = ""; //TODO
-	private static final String SELECT_ALL_ARTICLE = ""; //TODO
-	private static final String SELECT_ARTICLE_BY_UTILISATEUR = ""; //TODO
-	private static final String DELETE_ARTICLE = ""; //TODO
-	private static final String SELECT_ARTICLE_BY_CATEGORIE = ""; //TODO
-	private static final String INSERT_ARTICLE = ""; //TODO
+	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ? "
+													 + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+													 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	
+	private static final String SELECT_ALL_ARTICLE = "SELECT * FROM ARTICLES_VENDUS "
+												   + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+												   + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	
+	private static final String SELECT_ARTICLE_BY_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS WHERE ARTICLES_VENDUS.no_utilisateur = ? "
+			 												  + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+			 												  + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	
+	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
+	
+	private static final String SELECT_ARTICLE_BY_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE ARTICLES_VENDUS.no_categorie = ? "
+			  												+ "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+			  												+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	
+	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?,?)";
 
 	@Override
 	public ArticleVendu selectById(int pArticleVenduId) throws ArticleVenduDALException {
@@ -179,8 +193,17 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 	@Override
 	public void supprimerArticleVendu(int pArticleVenduId) throws ArticleVenduDALException {
-		// TODO Auto-generated method stub
-		
+
+		try(
+				Connection connexion = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = connexion.prepareStatement(DELETE_ARTICLE);
+			){
+				pStmt.setInt(1, pArticleVenduId);
+				pStmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new ArticleVenduDALException("Une erreur est survenue lors de la suppression de l'article");
+			}
 	}
 
 	@Override
@@ -236,7 +259,35 @@ List<ArticleVendu> articles = new ArrayList<>();
 
 	@Override
 	public void insererArticleVendu(ArticleVendu pArticleVendu) throws ArticleVenduDALException {
-		// TODO Auto-generated method stub
+
+
+		try(
+				Connection connexion = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = connexion.prepareStatement(INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS);
+			){
+				
+				Utilisateur vendeurArticle = pArticleVendu.getVendeur();
+				Categorie categorieArticle = pArticleVendu.getCategorie();
+				
+				pStmt.setString(1, pArticleVendu.getNomArticle());
+				pStmt.setString(2, pArticleVendu.getDescription());
+				pStmt.setDate(3, java.sql.Date.valueOf(pArticleVendu.getDateDebutEncheres()));
+				pStmt.setDate(4, java.sql.Date.valueOf(pArticleVendu.getDateFinEncheres()));
+				pStmt.setInt(5, pArticleVendu.getMiseAPrix());
+				pStmt.setInt(6, pArticleVendu.getPrixVente());
+				pStmt.setInt(7, vendeurArticle.getNoUtilisateur());
+				pStmt.setInt(8, categorieArticle.getNoCategorie());
+				
+				pStmt.executeUpdate();
+				
+				ResultSet rs = pStmt.getGeneratedKeys();
+				if(rs.next()) {
+					pArticleVendu.setNoArticle(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new ArticleVenduDALException("Impossible d'insérer l'article",e);
+			}
 		
 	}
 
