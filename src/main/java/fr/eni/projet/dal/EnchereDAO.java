@@ -23,7 +23,7 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws EnchereDALException
 	 */
-	public Enchere selectById(int pArticleVenduId) throws EnchereDALException,SQLException;
+	public Enchere selectById(int pArticleVenduId) throws EnchereDALException,SQLException,ArticleVenduDALException;
 	
 	/**
 	 * selectionner toutes les encheres en cours

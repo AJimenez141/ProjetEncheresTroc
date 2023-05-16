@@ -22,6 +22,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article";
 	
+	private static final String SELECT_ENCHERE_BY_ID = "SELECT * FROM ENCHERESAS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE no_enchere = ?";
+	
 	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ? "
 			 + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
 			 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
@@ -132,9 +134,46 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	}
 
 	@Override
-	public Enchere selectById(int pArticleVenduId) throws EnchereDALException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public Enchere selectById(int pArticleVenduId) throws EnchereDALException, SQLException, ArticleVenduDALException {
+		Enchere enchere = null;
+		
+		try(
+			Connection connexion = ConnectionProvider.getConnection();
+			Statement pStmt = connexion.createStatement();
+		){
+			ResultSet rs = pStmt.executeQuery(SELECT_ENCHERE_BY_ID);
+			
+			while(rs.next()) {
+//				Utilisateur
+				int noUtilisateur  	= rs.getInt("no_utilisateur");
+				String pseudo		= rs.getString("pseudo");
+				String nom			= rs.getString("nom");
+				String prenom		= rs.getString("prenom");
+				String email		= rs.getString("email");
+				String telephone	= rs.getString("telephone");
+				String rue			= rs.getString("rue");
+				String code_postal	= rs.getString("code_postal");
+				String ville		= rs.getString("ville");
+				int credit			= rs.getInt("credit");
+				
+				Adresse adresse 	= new Adresse(rue,code_postal,ville);
+				
+				Utilisateur utilisateur = new Utilisateur(noUtilisateur,pseudo,nom,prenom,email,telephone,adresse,credit);
+				
+//				ArticleVendu				
+				ArticleVendu articleVendu = selectArticleById(rs.getInt("no_article"));	
+				
+//				Enchere
+				int noEnchere				= rs.getInt("no_enchere");
+				LocalDate dateEnchere 		= rs.getDate("date_enchere").toLocalDate();
+				int montantEnchere			= rs.getInt("montant_enchere");
+				
+				enchere = new Enchere(noEnchere, dateEnchere, montantEnchere, utilisateur, articleVendu);
+			}
+			
+		}
+		
+		return enchere;
 	}
 
 }
