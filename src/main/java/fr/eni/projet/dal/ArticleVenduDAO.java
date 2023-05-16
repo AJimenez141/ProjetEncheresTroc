@@ -1,5 +1,9 @@
 package fr.eni.projet.dal;
 
+import java.util.List;
+
+import fr.eni.projet.bo.ArticleVendu;
+
 public interface ArticleVenduDAO {
 
 	/**
@@ -18,15 +22,6 @@ public interface ArticleVenduDAO {
 	 * @throws ArticleVenduDALException
 	 */
 	public List<ArticleVendu> selectAll() throws ArticleVenduDALException;
-	
-	/**
-	 * selectionner un article appartenant a un utilisateur
-	 * 
-	 * @param pUtilisateurId
-	 * @return
-	 * @throws ArticleVenduDALException
-	 */
-	public ArticleVendu selectArticleByUtilisateur(int pUtilisateurId) throws ArticleVenduDALException;
 	
 	/**
 	 * lister les ventes d'un utilisateur
