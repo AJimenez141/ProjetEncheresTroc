@@ -19,12 +19,25 @@ import fr.eni.projet.dal.ConnectionProvider;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
-	private static final String SELECT_ARTICLE_BY_ID = ""; //TODO
-	private static final String SELECT_ALL_ARTICLE = ""; //TODO
-	private static final String SELECT_ARTICLE_BY_UTILISATEUR = ""; //TODO
-	private static final String DELETE_ARTICLE = ""; //TODO
-	private static final String SELECT_ARTICLE_BY_CATEGORIE = ""; //TODO
-	private static final String INSERT_ARTICLE = ""; //TODO
+	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ? "
+													 + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+													 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	
+	private static final String SELECT_ALL_ARTICLE = "SELECT * FROM ARTICLES_VENDUS "
+												   + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+												   + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	
+	private static final String SELECT_ARTICLE_BY_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS WHERE ARTICLES_VENDUS.no_utilisateur = ? "
+			 												  + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+			 												  + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	
+	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
+	
+	private static final String SELECT_ARTICLE_BY_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE ARTICLES_VENDUS.no_categorie = ? "
+			  												+ "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+			  												+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	
+	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?,?)";
 
 	@Override
 	public ArticleVendu selectById(int pArticleVenduId) throws ArticleVenduDALException {
