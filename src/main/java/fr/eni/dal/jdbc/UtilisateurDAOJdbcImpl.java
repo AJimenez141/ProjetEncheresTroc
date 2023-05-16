@@ -35,6 +35,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 //	Definition de nombre de credit par defaut
 	private final int DEFAULT_CREDIT	= 100;
 
+	/**
+	 * Selectionner un utilisateur en fonction de son id
+	 */
 	@Override
 	public Utilisateur selectById(int pUtilisateurId) throws UtilisateurDALException, SQLException {
 		Utilisateur utilisateur = null;
@@ -104,6 +107,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		return utilisateurs;
 	}
 
+	/**
+	 * Inserer un nouvel utilisateur
+	 */
 	@Override
 	public void insererUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException {
 		try(
@@ -138,6 +144,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 	}
 
+	/**
+	 * Supprimer un utilisateur
+	 */
 	@Override
 	public void supprimerUtilisateur(int pUtilisateurId) throws UtilisateurDALException, SQLException {
 		try(
@@ -153,6 +162,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 	}
 
+	/**
+	 * Modifier un utilisateur
+	 */
 	@Override
 	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException, SQLException {
 		try(
@@ -184,6 +196,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}		
 	}
 
+	/**
+	 * Comparer le mail et le pseudo pour la connexion 
+	 */
 	@Override
 	public Utilisateur seConnecter(String pEmailOrPseudo, String pMotDePasse)
 			throws UtilisateurDALException, SQLException, ConnexionException {
