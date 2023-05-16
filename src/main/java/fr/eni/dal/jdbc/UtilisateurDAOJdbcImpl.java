@@ -18,19 +18,19 @@ import fr.eni.projet.bo.Adresse;
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 //	Liste des requetes
-	private final String SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEUR WHERE noUtilisateur ?";
+	private final String SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEURS WHERE noUtilisateur ?";
 	
-	private final String SELECT_ALL_UTILISATEUR = "SELECT * FROM UTILISATEUR";
+	private final String SELECT_ALL_UTILISATEUR = "SELECT * FROM UTILISATEURS";
 	
-	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEUR(no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,0,0)";
+	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,0,0)";
 	
-	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE noUtilisateur = ?";
+	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE noUtilisateur = ?";
 	
-	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEUR SET  WHERE noUtilisateur = ?";
+	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET  WHERE noUtilisateur = ?";
 	
-	private final String CONNEXION_UTILISATEUR_EMAIL = "SELECT * FROM UTILISATEUR WHERE email = ? AND mot_de_passe = ?";
+	private final String CONNEXION_UTILISATEUR_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ? AND mot_de_passe = ?";
 	
-	private final String CONNEXION_UTILISATEUR_PSEUDO = "SELECT * FROM UTILISATEUR WHERE pseudo = ? AND mot_de_passe = ?";
+	private final String CONNEXION_UTILISATEUR_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ? AND mot_de_passe = ?";
 	
 //	Definition de nombre de credit par defaut
 	private final int DEFAULT_CREDIT	= 0;
