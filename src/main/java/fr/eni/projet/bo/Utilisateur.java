@@ -54,6 +54,19 @@ public class Utilisateur {
 		this.administrateur = false;
 		this.actif = true;
 	}
+	
+	public Utilisateur(String pseudo, String nom, String prenom, String email,String telephone, Adresse adresse, double credit, boolean administrateur) {
+		super();
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.adresse = adresse;
+		this.credit = credit;
+		this.administrateur = administrateur;
+		this.actif = true;
+	}
 
 	public int getNoUtilisateur() {
 		return noUtilisateur;
