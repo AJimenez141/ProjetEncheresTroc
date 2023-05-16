@@ -1,6 +1,9 @@
 package fr.eni.projet.dal;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import fr.eni.projet.bo.Enchere;
 
 public interface EnchereDAO {
 	/**
@@ -10,7 +13,7 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws EnchereDALException
 	 */
-	public Enchere selectById(int pArticleVenduId) throws EnchereDALException;
+	public Enchere selectById(int pArticleVenduId) throws EnchereDALException,SQLException;
 	
 	/**
 	 * selectionner toutes les encheres en cours
@@ -18,7 +21,7 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws EnchereDALException
 	 */
-	public List<Enchere> selectAll() throws EnchereDALException;
+	public List<Enchere> selectAll() throws EnchereDALException, SQLException;
 	
 	/**
 	 * selectionner les encheres d'un utilisateur
@@ -27,7 +30,7 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws EnchereDALException
 	 */
-	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException;
+	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException,SQLException;
 	
 	/**
 	 * effectuer une enchere
@@ -35,5 +38,5 @@ public interface EnchereDAO {
 	 * @param pEnchereId
 	 * @throws EnchereDALException
 	 */
-	public void encherir(int pEnchereId) throws EnchereDALException;	
+	public void encherir(int pEnchereId) throws EnchereDALException,SQLException;	
 }
