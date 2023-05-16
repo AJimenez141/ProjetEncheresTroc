@@ -2,6 +2,8 @@ package fr.eni.projet.dal;
 
 import java.util.List;
 
+import fr.eni.projet.bo.Utilisateur;
+
 public interface UtilisateurDAO {
 	/**
 	 * selectionner un utilisateur par son id
@@ -59,6 +61,4 @@ public interface UtilisateurDAO {
 	 * @throws UtilisateurDALException
 	 */
 	public void modifierCredit(int pUtilisateurId) throws UtilisateurDALException;
-
-	
 }
