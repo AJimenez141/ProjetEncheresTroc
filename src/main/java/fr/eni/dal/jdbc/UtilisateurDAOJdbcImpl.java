@@ -26,7 +26,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE noUtilisateur = ?";
 	
-	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET  WHERE noUtilisateur = ?";
+	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ? WHERE noUtilisateur = ?";
 	
 	private final String CONNEXION_UTILISATEUR_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ? AND mot_de_passe = ?";
 	
@@ -173,21 +173,19 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		){
 			Adresse adresseUtilisateur = pUtilisateur.getAdresse();
 			
-			pStmt.setInt(1, pUtilisateur.getNoUtilisateur());
-			pStmt.setString(2, pUtilisateur.getPseudo());
-			pStmt.setString(3, pUtilisateur.getNom());
-			pStmt.setString(4, pUtilisateur.getPrenom());
-			pStmt.setString(5, pUtilisateur.getEmail());
+			pStmt.setString(1, pUtilisateur.getPseudo());
+			pStmt.setString(2, pUtilisateur.getNom());
+			pStmt.setString(3, pUtilisateur.getPrenom());
+			pStmt.setString(4, pUtilisateur.getEmail());
 			
 //			TODO à redéfinir après la création de la méthode avec HASH
-			pStmt.setString(6, pUtilisateur.getMotDePasse());
+			pStmt.setString(5, pUtilisateur.getMotDePasse());
 			
-			pStmt.setString(7, pUtilisateur.getTelephone());
-			pStmt.setString(8, adresseUtilisateur.getRue());
-			pStmt.setString(9, adresseUtilisateur.getCodePostal());
-			pStmt.setString(10, adresseUtilisateur.getVille());
-			pStmt.setInt(11, pUtilisateur.getCredit());
-			pStmt.setBoolean(12, false);
+			pStmt.setString(6, pUtilisateur.getTelephone());
+			pStmt.setString(7, adresseUtilisateur.getRue());
+			pStmt.setString(8, adresseUtilisateur.getCodePostal());
+			pStmt.setString(9, adresseUtilisateur.getVille());
+			pStmt.setInt(10, pUtilisateur.getCredit());
 			
 			pStmt.executeUpdate();
 		} catch (SQLException e) {
