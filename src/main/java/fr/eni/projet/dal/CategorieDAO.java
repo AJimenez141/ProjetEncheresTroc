@@ -44,16 +44,16 @@ public interface CategorieDAO {
 	 * @throws UtilisateurDALException
 	 * @throws CategorieDALException 
 	 */
-	public void supprimerCategorie(int pCategorieId) throws CategorieDALException;
+	public void supprimerCategorie(int pCategorieId) throws CategorieDALException, SQLException;
 	
 	/**
 	 * modifier une categorie
 	 * 
-	 * @param pCategorieId
+	 * @param pCategorie
 	 * @return
 	 * @throws UtilisateurDALException
 	 * @throws CategorieDALException 
 	 */
-	public void modifierCategorie(int pCategorieId) throws CategorieDALException;
+	public void modifierCategorie(Categorie pCategorie) throws CategorieDALException;
 
 }

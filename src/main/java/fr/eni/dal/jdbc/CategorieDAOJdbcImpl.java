@@ -10,7 +10,6 @@ import java.util.List;
 
 import fr.eni.projet.bo.Adresse;
 import fr.eni.projet.bo.Categorie;
-import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.CategorieDALException;
 import fr.eni.projet.dal.CategorieDAO;
 import fr.eni.projet.dal.ConnectionProvider;
@@ -79,16 +78,55 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	@Override
 	public void insererCategorie(Categorie pCategorie) throws CategorieDALException {
-		// TODO Auto-generated method stub
+
+
+		try(
+				Connection connexion = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = connexion.prepareStatement(INSERT_CATEGORIE, Statement.RETURN_GENERATED_KEYS);
+			){
+				
+				pStmt.setString(1, pCategorie.getLibelle());
+				
+				pStmt.executeUpdate();
+				
+				ResultSet rs = pStmt.getGeneratedKeys();
+				if(rs.next()) {
+					pCategorie.setNoCategorie(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new CategorieDALException("Impossible d'insérer la catégorie",e);
+			}
 	}
 
 	@Override
-	public void supprimerCategorie(int pCategorieId) throws CategorieDALException {
-		// TODO Auto-generated method stub
+	public void supprimerCategorie(int pCategorieId) throws CategorieDALException, SQLException {
+		try(
+				Connection connexion = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = connexion.prepareStatement(DELETE_CATEGORIE);
+			){
+				pStmt.setInt(1, pCategorieId);
+				pStmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new CategorieDALException("Une erreur est survenue lors de la suppression de la categorie");
+			}	
 	}
 
 	@Override
-	public void modifierCategorie(int pCategorieId) throws CategorieDALException {
-		// TODO Auto-generated method stub
+	public void modifierCategorie(Categorie pCategorie) throws CategorieDALException {
+
+		try(
+				Connection connexion = ConnectionProvider.getConnection();	
+				PreparedStatement pStmt = connexion.prepareStatement(UPDATE_CATEGORIE)
+			){
+				pStmt.setString(1, pCategorie.getLibelle());
+				pStmt.setInt(2, pCategorie.getNoCategorie());
+				
+				pStmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new CategorieDALException("Impossible de mettre à jour la categorie");
+			}		
 	}
 }
