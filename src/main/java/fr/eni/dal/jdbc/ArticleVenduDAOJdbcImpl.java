@@ -18,17 +18,62 @@ import fr.eni.projet.dal.ConnectionProvider;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
-	private static final String SELECT_ARTICLE_BY_ID = "";
-	private static final String SELECT_ALL_ARTICLE = "";
-	private static final String SELECT_ARTICLE_BY_UTILISATEUR = "";
-	private static final String DELETE_ARTICLE = "";
-	private static final String SELECT_ARTICLE_BY_CATEGORIE = "";
-	private static final String INSERT_ARTICLE = "";
+	private static final String SELECT_ARTICLE_BY_ID = ""; //TODO
+	private static final String SELECT_ALL_ARTICLE = ""; //TODO
+	private static final String SELECT_ARTICLE_BY_UTILISATEUR = ""; //TODO
+	private static final String DELETE_ARTICLE = ""; //TODO
+	private static final String SELECT_ARTICLE_BY_CATEGORIE = ""; //TODO
+	private static final String INSERT_ARTICLE = ""; //TODO
 
 	@Override
 	public ArticleVendu selectById(int pArticleVenduId) throws ArticleVenduDALException {
-		// TODO Auto-generated method stub
-		return null;
+
+		ArticleVendu article = null;
+		
+		try(
+			Connection connexion = ConnectionProvider.getConnection();
+			Statement pStmt = connexion.createStatement();
+		) {
+			ResultSet rs = pStmt.executeQuery(SELECT_ARTICLE_BY_ID);
+			
+			while(rs.next() ) {
+
+				int noArticle 			= rs.getInt("no_article");
+				String nomArticle 		= rs.getString("nom_article");
+				String description 		= rs.getString("description");
+				Date dateDebutEncheres 	= rs.getDate("date_debut_encheres");
+				Date dateFinEncheres 	= rs.getDate("date_fin_encheres");
+				int miseAPrix 			= rs.getInt("prix_initial");
+				int prixVente 			= rs.getInt("prix_vente");
+				boolean enVente 		= rs.getBoolean("en_vente");
+				
+				int noUtilisateur  		= rs.getInt("no_utilisateur");
+				String pseudo			= rs.getString("pseudo");
+				String nom				= rs.getString("nom");
+				String prenom			= rs.getString("prenom");
+				String email			= rs.getString("email");
+				String telephone		= rs.getString("telephone");
+				String rue				= rs.getString("rue");
+				String code_postal		= rs.getString("code_postal");
+				String ville			= rs.getString("ville");
+				int credit				= rs.getInt("credit");
+				
+				int noCategorie			= rs.getInt("no_categorie");
+				String libelle			= rs.getString("libelle");
+				
+				Adresse adresseVendeur = new Adresse(rue, code_postal, ville);
+				Utilisateur vendeur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
+				Categorie categorie = new Categorie(noCategorie, libelle);
+				
+				article = new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ArticleVenduDALException("Impossible de sélectionner les articles dans la base",e);
+		}
+		
+		return article;
+		
 	}
 
 	@Override
@@ -49,8 +94,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 				String description 		= rs.getString("description");
 				Date dateDebutEncheres 	= rs.getDate("date_debut_encheres");
 				Date dateFinEncheres 	= rs.getDate("date_fin_encheres");
-				Double miseAPrix 		= rs.getDouble("prix_initial");
-				Double prixVente 		= rs.getDouble("prix_vente");
+				int miseAPrix 			= rs.getInt("prix_initial");
+				int prixVente 			= rs.getInt("prix_vente");
 				boolean enVente 		= rs.getBoolean("en_vente");
 				
 				int noUtilisateur  		= rs.getInt("no_utilisateur");
@@ -62,7 +107,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 				String rue				= rs.getString("rue");
 				String code_postal		= rs.getString("code_postal");
 				String ville			= rs.getString("ville");
-				Double credit			= rs.getDouble("credit");
+				int credit				= rs.getInt("credit");
 				
 				int noCategorie			= rs.getInt("no_categorie");
 				String libelle			= rs.getString("libelle");
@@ -83,8 +128,53 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 	@Override
 	public List<ArticleVendu> selectArticleVenduByUtilisateur(int pUtilisateurId) throws ArticleVenduDALException {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<ArticleVendu> articles = new ArrayList<>();
+		
+		try(
+			Connection connexion = ConnectionProvider.getConnection();
+			Statement pStmt = connexion.createStatement();
+		) {
+			ResultSet rs = pStmt.executeQuery(SELECT_ARTICLE_BY_UTILISATEUR);
+			
+			while(rs.next() ) {
+
+				int noArticle 			= rs.getInt("no_article");
+				String nomArticle 		= rs.getString("nom_article");
+				String description 		= rs.getString("description");
+				Date dateDebutEncheres 	= rs.getDate("date_debut_encheres");
+				Date dateFinEncheres 	= rs.getDate("date_fin_encheres");
+				int miseAPrix 			= rs.getInt("prix_initial");
+				int prixVente 			= rs.getInt("prix_vente");
+				boolean enVente 		= rs.getBoolean("en_vente");
+				
+				int noUtilisateur  		= rs.getInt("no_utilisateur");
+				String pseudo			= rs.getString("pseudo");
+				String nom				= rs.getString("nom");
+				String prenom			= rs.getString("prenom");
+				String email			= rs.getString("email");
+				String telephone		= rs.getString("telephone");
+				String rue				= rs.getString("rue");
+				String code_postal		= rs.getString("code_postal");
+				String ville			= rs.getString("ville");
+				int credit				= rs.getInt("credit");
+				
+				int noCategorie			= rs.getInt("no_categorie");
+				String libelle			= rs.getString("libelle");
+				
+				Adresse adresseVendeur = new Adresse(rue, code_postal, ville);
+				Utilisateur vendeur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
+				Categorie categorie = new Categorie(noCategorie, libelle);
+				
+				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ArticleVenduDALException("Impossible de sélectionner les articles dans la base",e);
+		}
+		
+		return articles;
+		
 	}
 
 	@Override
@@ -95,8 +185,53 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 	@Override
 	public List<ArticleVendu> selectionnerParCategorie(String pLibelleCategorie) throws ArticleVenduDALException {
-		// TODO Auto-generated method stub
-		return null;
+
+List<ArticleVendu> articles = new ArrayList<>();
+		
+		try(
+			Connection connexion = ConnectionProvider.getConnection();
+			Statement pStmt = connexion.createStatement();
+		) {
+			ResultSet rs = pStmt.executeQuery(SELECT_ARTICLE_BY_CATEGORIE);
+			
+			while(rs.next() ) {
+
+				int noArticle 			= rs.getInt("no_article");
+				String nomArticle 		= rs.getString("nom_article");
+				String description 		= rs.getString("description");
+				Date dateDebutEncheres 	= rs.getDate("date_debut_encheres");
+				Date dateFinEncheres 	= rs.getDate("date_fin_encheres");
+				int miseAPrix 			= rs.getInt("prix_initial");
+				int prixVente 			= rs.getInt("prix_vente");
+				boolean enVente 		= rs.getBoolean("en_vente");
+				
+				int noUtilisateur  		= rs.getInt("no_utilisateur");
+				String pseudo			= rs.getString("pseudo");
+				String nom				= rs.getString("nom");
+				String prenom			= rs.getString("prenom");
+				String email			= rs.getString("email");
+				String telephone		= rs.getString("telephone");
+				String rue				= rs.getString("rue");
+				String code_postal		= rs.getString("code_postal");
+				String ville			= rs.getString("ville");
+				int credit			= rs.getInt("credit");
+				
+				int noCategorie			= rs.getInt("no_categorie");
+				String libelle			= rs.getString("libelle");
+				
+				Adresse adresseVendeur = new Adresse(rue, code_postal, ville);
+				Utilisateur vendeur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
+				Categorie categorie = new Categorie(noCategorie, libelle);
+				
+				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ArticleVenduDALException("Impossible de sélectionner les articles dans la base",e);
+		}
+		
+		return articles;
+		
 	}
 
 	@Override

@@ -10,11 +10,11 @@ public class Utilisateur {
 	String motDePasse;
 	String telephone;
 	Adresse adresse;
-	double credit;
+	int credit;
 	boolean administrateur;
 	boolean actif;
 	
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email,String telephone, Adresse adresse, double credit) {
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email,String telephone, Adresse adresse, int credit) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -28,7 +28,7 @@ public class Utilisateur {
 		this.actif = true;
 	}
 	
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String motDePasse, String telephone, Adresse adresse, double credit) {
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String motDePasse, String telephone, Adresse adresse, int credit) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -42,7 +42,7 @@ public class Utilisateur {
 		this.actif = true;
 	}
 	
-	public Utilisateur(String pseudo, String nom, String prenom, String email,String telephone, Adresse adresse, double credit) {
+	public Utilisateur(String pseudo, String nom, String prenom, String email,String telephone, Adresse adresse, int credit) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -55,7 +55,7 @@ public class Utilisateur {
 		this.actif = true;
 	}
 	
-	public Utilisateur(int noUtilisateur,String pseudo, String nom, String prenom, String email,String telephone, Adresse adresse, double credit, boolean administrateur) {
+	public Utilisateur(int noUtilisateur,String pseudo, String nom, String prenom, String email,String telephone, Adresse adresse, int credit, boolean administrateur) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -69,7 +69,7 @@ public class Utilisateur {
 		this.actif = true;
 	}
 	
-	public Utilisateur(String pseudo, String nom, String prenom, String email,String telephone, Adresse adresse, double credit, boolean administrateur) {
+	public Utilisateur(String pseudo, String nom, String prenom, String email,String telephone, Adresse adresse, int credit, boolean administrateur) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -130,10 +130,10 @@ public class Utilisateur {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-	public double getCredit() {
+	public int getCredit() {
 		return credit;
 	}
-	public void setCredit(double credit) {
+	public void setCredit(int credit) {
 		this.credit = credit;
 	}
 	public boolean isAdministrateur() {

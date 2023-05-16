@@ -9,14 +9,14 @@ public class ArticleVendu {
 	String description;
 	Date dateDebutEncheres;
 	Date dateFinEncheres;
-	double miseAPrix;
-	double prixVente;
+	int miseAPrix;
+	int prixVente;
 	boolean enVente;
 	Utilisateur vendeur;
 	Categorie categorie;
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
-			Date dateFinEncheres, double miseAPrix, double prixVente, boolean enVente, Utilisateur vendeur, Categorie categorie) {
+			Date dateFinEncheres, int miseAPrix, int prixVente, boolean enVente, Utilisateur vendeur, Categorie categorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -31,7 +31,7 @@ public class ArticleVendu {
 	}
 	
 	public ArticleVendu(String nomArticle, String description, Date dateDebutEncheres,
-			Date dateFinEncheres, double miseAPrix, double prixVente, boolean enVente, Utilisateur vendeur, Categorie categorie) {
+			Date dateFinEncheres, int miseAPrix, int prixVente, boolean enVente, Utilisateur vendeur, Categorie categorie) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -84,19 +84,19 @@ public class ArticleVendu {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
-	public double getMiseAPrix() {
+	public int getMiseAPrix() {
 		return miseAPrix;
 	}
 
-	public void setMiseAPrix(double miseAPrix) {
+	public void setMiseAPrix(int miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
 
-	public double getPrixVente() {
+	public int getPrixVente() {
 		return prixVente;
 	}
 
-	public void setPrixVente(double prixVente) {
+	public void setPrixVente(int prixVente) {
 		this.prixVente = prixVente;
 	}
 
