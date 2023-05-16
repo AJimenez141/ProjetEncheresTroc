@@ -15,29 +15,27 @@ public abstract class TestBO {
 
 		// INFOS ENCHERISSEURS
 		Adresse adresseEncherisseur1 = new Adresse("95 rue des champs", "44100", "Nantes");
-		Utilisateur encherisseur1 = new Utilisateur(1, "jdupont", "dupont", "jean", "jdupont@mail.com", "mdp",
-				"0612345678", adresseEncherisseur1, 15.00);
+		Utilisateur encherisseur1 = new Utilisateur(1, "jdupont", "dupont", "jean", "jdupont@mail.com", "0612345678", adresseEncherisseur1, 15);
 		
 		System.out.println(encherisseur1);
 
 		Adresse adresseEncherisseur2 = new Adresse("200 rue des coquillettes", "44100", "Nantes");
-		Utilisateur encherisseur2 = new Utilisateur(1, "llucas", "lucas", "luc", "llucas@mail.com", "mdp", "0712345678",
-				adresseEncherisseur2, 25.00);
+		Utilisateur encherisseur2 = new Utilisateur(1, "llucas", "lucas", "luc", "llucas@mail.com", "0712345678",
+				adresseEncherisseur2, 25);
 		
 		System.out.println(encherisseur2);
 
 		// INFOS VENDEUR
 		Adresse adresseVendeur = new Adresse("22 rue des prés", "44100", "Nantes");
-		Utilisateur vendeur = new Utilisateur(2, "pdubois", "dubois", "pierre", "pdubois@mail.com", "mdp", "0787654321",
-				adresseVendeur, 35.00);
+		Utilisateur vendeur = new Utilisateur(2, "pdubois", "dubois", "pierre", "pdubois@mail.com", "0787654321",
+				adresseVendeur, 35);
 
 		// INFOS ENCHÈRE
 		LocalDate dateDebutEnchere = LocalDate.of(2023, 05, 15);
 		LocalDate dateFinEnchere = LocalDate.of(2023, 06, 15);
 
 		Categorie categorieArticle = new Categorie(1, "Ustensiles de cuisine");
-		ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",
-				dateDebutEnchere, dateFinEnchere, 20.00, 599.00, true, vendeur, categorieArticle);
+		ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.", dateDebutEnchere, dateFinEnchere, 20, 599, true, vendeur, categorieArticle);
 		
 		System.out.println(article);
 

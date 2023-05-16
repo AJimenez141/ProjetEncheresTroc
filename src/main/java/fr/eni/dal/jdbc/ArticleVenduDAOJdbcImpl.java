@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
+import java.time.LocalDate;
 
 import fr.eni.projet.bo.Adresse;
 import fr.eni.projet.bo.ArticleVendu;
@@ -38,32 +38,32 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			
 			while(rs.next() ) {
 
-				int noArticle 			= rs.getInt("no_article");
-				String nomArticle 		= rs.getString("nom_article");
-				String description 		= rs.getString("description");
-				Date dateDebutEncheres 	= rs.getDate("date_debut_encheres");
-				Date dateFinEncheres 	= rs.getDate("date_fin_encheres");
-				int miseAPrix 			= rs.getInt("prix_initial");
-				int prixVente 			= rs.getInt("prix_vente");
-				boolean enVente 		= rs.getBoolean("en_vente");
+				int noArticle 				= rs.getInt("no_article");
+				String nomArticle 			= rs.getString("nom_article");
+				String description 			= rs.getString("description");
+				LocalDate dateDebutEncheres = rs.getDate("date_debut_encheres").toLocalDate();
+				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
+				int miseAPrix 				= rs.getInt("prix_initial");
+				int prixVente 				= rs.getInt("prix_vente");
+				boolean enVente 			= rs.getBoolean("en_vente");
 				
-				int noUtilisateur  		= rs.getInt("no_utilisateur");
-				String pseudo			= rs.getString("pseudo");
-				String nom				= rs.getString("nom");
-				String prenom			= rs.getString("prenom");
-				String email			= rs.getString("email");
-				String telephone		= rs.getString("telephone");
-				String rue				= rs.getString("rue");
-				String code_postal		= rs.getString("code_postal");
-				String ville			= rs.getString("ville");
-				int credit				= rs.getInt("credit");
+				int noUtilisateur  			= rs.getInt("no_utilisateur");
+				String pseudo				= rs.getString("pseudo");
+				String nom					= rs.getString("nom");
+				String prenom				= rs.getString("prenom");
+				String email				= rs.getString("email");
+				String telephone			= rs.getString("telephone");
+				String rue					= rs.getString("rue");
+				String code_postal			= rs.getString("code_postal");
+				String ville				= rs.getString("ville");
+				int credit					= rs.getInt("credit");
 				
-				int noCategorie			= rs.getInt("no_categorie");
-				String libelle			= rs.getString("libelle");
+				int noCategorie				= rs.getInt("no_categorie");
+				String libelle				= rs.getString("libelle");
 				
-				Adresse adresseVendeur = new Adresse(rue, code_postal, ville);
-				Utilisateur vendeur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
-				Categorie categorie = new Categorie(noCategorie, libelle);
+				Adresse adresseVendeur 	= new Adresse(rue, code_postal, ville);
+				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
+				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
 				article = new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie);
 			}
@@ -89,32 +89,32 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			
 			while(rs.next() ) {
 
-				int noArticle 			= rs.getInt("no_article");
-				String nomArticle 		= rs.getString("nom_article");
-				String description 		= rs.getString("description");
-				Date dateDebutEncheres 	= rs.getDate("date_debut_encheres");
-				Date dateFinEncheres 	= rs.getDate("date_fin_encheres");
-				int miseAPrix 			= rs.getInt("prix_initial");
-				int prixVente 			= rs.getInt("prix_vente");
-				boolean enVente 		= rs.getBoolean("en_vente");
+				int noArticle 				= rs.getInt("no_article");
+				String nomArticle 			= rs.getString("nom_article");
+				String description 			= rs.getString("description");
+				LocalDate dateDebutEncheres = rs.getDate("date_debut_encheres").toLocalDate();
+				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
+				int miseAPrix 				= rs.getInt("prix_initial");
+				int prixVente 				= rs.getInt("prix_vente");
+				boolean enVente 			= rs.getBoolean("en_vente");
 				
-				int noUtilisateur  		= rs.getInt("no_utilisateur");
-				String pseudo			= rs.getString("pseudo");
-				String nom				= rs.getString("nom");
-				String prenom			= rs.getString("prenom");
-				String email			= rs.getString("email");
-				String telephone		= rs.getString("telephone");
-				String rue				= rs.getString("rue");
-				String code_postal		= rs.getString("code_postal");
-				String ville			= rs.getString("ville");
-				int credit				= rs.getInt("credit");
+				int noUtilisateur  			= rs.getInt("no_utilisateur");
+				String pseudo				= rs.getString("pseudo");
+				String nom					= rs.getString("nom");
+				String prenom				= rs.getString("prenom");
+				String email				= rs.getString("email");
+				String telephone			= rs.getString("telephone");
+				String rue					= rs.getString("rue");
+				String code_postal			= rs.getString("code_postal");
+				String ville				= rs.getString("ville");
+				int credit					= rs.getInt("credit");
 				
-				int noCategorie			= rs.getInt("no_categorie");
-				String libelle			= rs.getString("libelle");
+				int noCategorie				= rs.getInt("no_categorie");
+				String libelle				= rs.getString("libelle");
 				
-				Adresse adresseVendeur = new Adresse(rue, code_postal, ville);
-				Utilisateur vendeur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
-				Categorie categorie = new Categorie(noCategorie, libelle);
+				Adresse adresseVendeur 	= new Adresse(rue, code_postal, ville);
+				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
+				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
 				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie));
 			}
@@ -139,32 +139,32 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			
 			while(rs.next() ) {
 
-				int noArticle 			= rs.getInt("no_article");
-				String nomArticle 		= rs.getString("nom_article");
-				String description 		= rs.getString("description");
-				Date dateDebutEncheres 	= rs.getDate("date_debut_encheres");
-				Date dateFinEncheres 	= rs.getDate("date_fin_encheres");
-				int miseAPrix 			= rs.getInt("prix_initial");
-				int prixVente 			= rs.getInt("prix_vente");
-				boolean enVente 		= rs.getBoolean("en_vente");
+				int noArticle 				= rs.getInt("no_article");
+				String nomArticle 			= rs.getString("nom_article");
+				String description 			= rs.getString("description");
+				LocalDate dateDebutEncheres = rs.getDate("date_debut_encheres").toLocalDate();
+				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
+				int miseAPrix 				= rs.getInt("prix_initial");
+				int prixVente 				= rs.getInt("prix_vente");
+				boolean enVente 			= rs.getBoolean("en_vente");
 				
-				int noUtilisateur  		= rs.getInt("no_utilisateur");
-				String pseudo			= rs.getString("pseudo");
-				String nom				= rs.getString("nom");
-				String prenom			= rs.getString("prenom");
-				String email			= rs.getString("email");
-				String telephone		= rs.getString("telephone");
-				String rue				= rs.getString("rue");
-				String code_postal		= rs.getString("code_postal");
-				String ville			= rs.getString("ville");
-				int credit				= rs.getInt("credit");
+				int noUtilisateur  			= rs.getInt("no_utilisateur");
+				String pseudo				= rs.getString("pseudo");
+				String nom					= rs.getString("nom");
+				String prenom				= rs.getString("prenom");
+				String email				= rs.getString("email");
+				String telephone			= rs.getString("telephone");
+				String rue					= rs.getString("rue");
+				String code_postal			= rs.getString("code_postal");
+				String ville				= rs.getString("ville");
+				int credit					= rs.getInt("credit");
 				
-				int noCategorie			= rs.getInt("no_categorie");
-				String libelle			= rs.getString("libelle");
+				int noCategorie				= rs.getInt("no_categorie");
+				String libelle				= rs.getString("libelle");
 				
-				Adresse adresseVendeur = new Adresse(rue, code_postal, ville);
-				Utilisateur vendeur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
-				Categorie categorie = new Categorie(noCategorie, libelle);
+				Adresse adresseVendeur 	= new Adresse(rue, code_postal, ville);
+				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
+				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
 				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie));
 			}
@@ -196,32 +196,32 @@ List<ArticleVendu> articles = new ArrayList<>();
 			
 			while(rs.next() ) {
 
-				int noArticle 			= rs.getInt("no_article");
-				String nomArticle 		= rs.getString("nom_article");
-				String description 		= rs.getString("description");
-				Date dateDebutEncheres 	= rs.getDate("date_debut_encheres");
-				Date dateFinEncheres 	= rs.getDate("date_fin_encheres");
-				int miseAPrix 			= rs.getInt("prix_initial");
-				int prixVente 			= rs.getInt("prix_vente");
-				boolean enVente 		= rs.getBoolean("en_vente");
+				int noArticle 				= rs.getInt("no_article");
+				String nomArticle 			= rs.getString("nom_article");
+				String description 			= rs.getString("description");
+				LocalDate dateDebutEncheres = rs.getDate("date_debut_encheres").toLocalDate();
+				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
+				int miseAPrix 				= rs.getInt("prix_initial");
+				int prixVente 				= rs.getInt("prix_vente");
+				boolean enVente 			= rs.getBoolean("en_vente");
 				
-				int noUtilisateur  		= rs.getInt("no_utilisateur");
-				String pseudo			= rs.getString("pseudo");
-				String nom				= rs.getString("nom");
-				String prenom			= rs.getString("prenom");
-				String email			= rs.getString("email");
-				String telephone		= rs.getString("telephone");
-				String rue				= rs.getString("rue");
-				String code_postal		= rs.getString("code_postal");
-				String ville			= rs.getString("ville");
-				int credit			= rs.getInt("credit");
+				int noUtilisateur  			= rs.getInt("no_utilisateur");
+				String pseudo				= rs.getString("pseudo");
+				String nom					= rs.getString("nom");
+				String prenom				= rs.getString("prenom");
+				String email				= rs.getString("email");
+				String telephone			= rs.getString("telephone");
+				String rue					= rs.getString("rue");
+				String code_postal			= rs.getString("code_postal");
+				String ville				= rs.getString("ville");
+				int credit					= rs.getInt("credit");
 				
-				int noCategorie			= rs.getInt("no_categorie");
-				String libelle			= rs.getString("libelle");
+				int noCategorie				= rs.getInt("no_categorie");
+				String libelle				= rs.getString("libelle");
 				
-				Adresse adresseVendeur = new Adresse(rue, code_postal, ville);
-				Utilisateur vendeur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
-				Categorie categorie = new Categorie(noCategorie, libelle);
+				Adresse adresseVendeur 	= new Adresse(rue, code_postal, ville);
+				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
+				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
 				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie));
 			}
