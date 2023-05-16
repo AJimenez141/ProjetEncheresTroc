@@ -1,5 +1,6 @@
 package fr.eni.projet.dal;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.projet.bo.Utilisateur;
@@ -11,8 +12,9 @@ public interface UtilisateurDAO {
 	 * @param pUtilisateurId
 	 * @return
 	 * @throws UtilisateurDALException
+	 * @throws SQLException 
 	 */
-	public Utilisateur selectById(int pUtilisateurId) throws UtilisateurDALException;
+	public Utilisateur selectById(int pUtilisateurId) throws UtilisateurDALException, SQLException;
 	
 	/**
 	 * selectionner tous les utilisateurs
@@ -35,8 +37,9 @@ public interface UtilisateurDAO {
 	 * 
 	 * @param pUtilisateurId
 	 * @throws UtilisateurDALException
+	 * @throws SQLException 
 	 */
-	public void supprimerUtilisateur(int pUtilisateurId) throws UtilisateurDALException;
+	public void supprimerUtilisateur(int pUtilisateurId) throws UtilisateurDALException, SQLException;
 	
 	/**
 	 * desactiver un utilisateur
@@ -51,14 +54,20 @@ public interface UtilisateurDAO {
 	 * 
 	 * @param pUtilisateur
 	 * @throws UtilisateurDALException
+	 * @throws SQLException 
 	 */
-	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException;
+	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException, SQLException;
 	
 	/**
-	 * modifier les credits de l'utilisateur
+	 * connexion de l'utilisateur
 	 * 
-	 * @param pUtilisateurId
+	 * @param pEmail
+	 * @param pMotDePasse
+	 * @return 
 	 * @throws UtilisateurDALException
+	 * @throws SQLException
+	 * @throws ConnexionException
 	 */
-	public void modifierCredit(int pUtilisateurId) throws UtilisateurDALException;
+	public Utilisateur seConnecter(String pEmail, String pMotDePasse) throws UtilisateurDALException, SQLException, ConnexionException;
+	
 }
