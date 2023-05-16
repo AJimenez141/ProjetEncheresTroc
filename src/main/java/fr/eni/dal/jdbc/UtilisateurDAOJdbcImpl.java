@@ -106,7 +106,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pStmt.setString(2, pUtilisateur.getNom());
 			pStmt.setString(3, pUtilisateur.getPrenom());
 			pStmt.setString(4, pUtilisateur.getEmail());
+			
+//			TODO à redéfinir après la création de la méthode
 			pStmt.setString(5, pUtilisateur.getMotDePasseHashe());
+			
 			pStmt.setString(6, pUtilisateur.getTelephone());
 			pStmt.setString(7, adresseUtilisateur.getRue());
 			pStmt.setString(8, adresseUtilisateur.getCodePostal());
@@ -152,7 +155,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pStmt.setString(3, pUtilisateur.getNom());
 			pStmt.setString(4, pUtilisateur.getPrenom());
 			pStmt.setString(5, pUtilisateur.getEmail());
+			
+//			TODO à redéfinir après la création de la méthode
 			pStmt.setString(6, pUtilisateur.getMotDePasseHashe());
+			
 			pStmt.setString(7, pUtilisateur.getTelephone());
 			pStmt.setString(8, adresseUtilisateur.getRue());
 			pStmt.setString(9, adresseUtilisateur.getCodePostal());
@@ -197,7 +203,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 						rs.getString("ville")
 					),
 					rs.getDouble("credit"),
-					rs.getInt("administrateur")
+					rs.getBoolean("administrateur")
 				);				
 			}
 			
@@ -220,7 +226,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 						rs.getString("ville")
 					),
 					rs.getDouble("credit"),
-					rs.getInt("administrateur")
+					rs.getBoolean("administrateur")
 				);				
 			}
 			
