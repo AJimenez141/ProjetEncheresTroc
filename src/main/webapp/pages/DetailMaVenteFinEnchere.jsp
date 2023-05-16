@@ -5,6 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Détail fin enchère</title>
+<link href="../ressources/styles/main_test.css" rel="stylesheet">
+
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
@@ -14,49 +16,53 @@
 	
 	<h2>XXX a remporté l'enchère</h2>
 	<div class="conteneur" id="DetailMaVenteFinEnchere">
-		<img width="200" height="200">
-		<div>
-				XXX
-		
+		<div class="section">
 			<div>
-				<label for="description">Description :</label>
-				XXX
+				<img width="200" height="200">
 			</div>
-			<br>
-		
 			<div>
-				<label for="offre">Meilleur offre :</label>
-				XXX
+					XXX
+			
+				<div>
+					<label for="description">Description :</label>
+					XXX
+				</div>
+				<br>
+			
+				<div>
+					<label for="offre">Meilleur offre :</label>
+					XXX
+				</div>
+				<br>
+			
+				<div>
+					<label for="prix">Mise à prix :</label>
+					XXX
+				</div>
+				<br>
+			
+				<div>
+					<label for="finEnchere">Fin de l'enchère :</label>
+					XXX
+				</div>
+				<br>
+			
+				<div>
+					<label for="retrait">Retrait :</label>
+					XXX
+				</div>
+				<br>
+			
+				<div>
+					<label for="vendeur">Vendeur :</label>
+					XXX
+				</div>
+				<br>
+			
+				<a href="ListeEncheresConnecte.jsp">
+					<button id="btnRetraitEffec" class="button__enregistrer--color" name="btnRetraitEffec">Retrait effectué</button>
+				</a>
 			</div>
-			<br>
-		
-			<div>
-				<label for="prix">Mise à prix :</label>
-				XXX
-			</div>
-			<br>
-		
-			<div>
-				<label for="finEnchere">Fin de l'enchère :</label>
-				XXX
-			</div>
-			<br>
-		
-			<div>
-				<label for="retrait">Retrait :</label>
-				XXX
-			</div>
-			<br>
-		
-			<div>
-				<label for="vendeur">Vendeur :</label>
-				XXX
-			</div>
-			<br>
-		
-			<a href="ListeEncheresConnecte.jsp">
-				<button id="btnRetraitEffec" name="btnRetraitEffec">Retrait effectué</button>
-			</a>
 		</div>
 	</div>
 </body>

@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+
+
+/* GENERAL */
+
+html {
+  font-size: .625em; /* fallback IE8+ */
+  
+--couleur_fond: #FAF0CA;
+--couleur_texte: #0C2134;
+--couleur_encadre: #1A2123;
+--couleur_souligne: #1A2123;
+
+
+--couleur_bouton_supprimer: #F95738;
+--couleur_bouton_enregistrer: #55B44B;
+--couleur_bouton_general: #BA9B80;
+--couleur_bouton_texte: #1A2123;
+
+font-family: 'Oswald', sans-serif;
+ 
+   box-sizing: border-box;
+}
+
+body {
+  font-size: 1.4em; /* base font-size is equivalent "14px" */
+  background-color: var(--couleur_fond);
+  color: var(--couleur_texte);
+}
+
+h2 {
+	text-align: center;
+}
+/* CLASSES */
+
+.conteneur {
+	margin: 5rem;
+	padding: 5rem;
+	width: 1800px;
+	
+	/* display: flex;
+	flex-wrap: wrap; */
+	justify-content: center;
+	
+}
+
+.section {
+	margin: 5rem;
+	padding: 5rem;
+	border: 4px solid var(--couleur_encadre);
+	border-radius: 4px;
+	
+	width: auto;
+	
+	display: flex;
+	flex-wrap: wrap;
+}
+
+ .section > * {
+	flex: 1;
+} 
+
+/* ID */
+
+
+
+
+/* BOUTONS */
+
+button {
+	background-color: var(--couleur_bouton_general);
+	color : var(--couleur_bouton_texte);
+}
+
+.button__supprimer--color {
+	background-color: var(--couleur_bouton_supprimer);
+}
+.button__enregistrer--color {
+	background-color: var(--couleur_bouton_enregistrer);
+}
+.button__text--color {
+	color: var(--couleur_bouton_text);
+}

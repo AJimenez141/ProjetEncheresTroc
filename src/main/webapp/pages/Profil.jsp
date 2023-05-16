@@ -5,6 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Profil</title>
+<link href="../ressources/styles/main_test.css" rel="stylesheet">
+
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
@@ -13,53 +15,28 @@
 <body>
 	
 	<div class="conteneur" id="Profil">
-		<div>
-			<label for="pseudo">Pseudo :</label>
-			XXX
+		<div class="section">
+			<div>
+				<label for="pseudo">Pseudo :</label>
+				XXX
+				<br>
+				<label for="nom">Nom :</label>
+				XXX			
+				<br>			
+				<label for="prenom">Prénom :</label>
+				XXX			
+				<br>			
+				<label for="email">Email :</label>
+				XXX			
+				<br>								
+				<label for="cp">Code postal :</label>
+				XXX
+				<br>
+				<label for="ville">Ville :</label>
+				XXX
+				<br>
+			</div>
 		</div>
-		<br>
-		
-		<div>
-			<label for="nom">Nom :</label>
-			XXX
-		</div>
-		<br>
-			
-		<div>
-			<label for="prenom">Prénom :</label>
-			XXX
-		</div>
-		<br>
-		
-		<div>
-			<label for="email">Email :</label>
-			XXX
-		</div>
-		<br>
-		
-		<!-- <div>
-			<label for="tel">Téléphone :</label>
-			XXX
-		</div>
-		<br>
-		
-		<div>
-			<label for="rue">Rue :</label>
-			XXX
-		</div>
-		<br> -->
-		
-		<div>
-			<label for="cp">Code postal :</label>
-			XXX
-		</div>
-		<br>
-		
-		<div>
-			<label for="ville">Ville :</label>
-			XXX
-		</div>
-		<br>
 	</div>
 </body>
 </html>
