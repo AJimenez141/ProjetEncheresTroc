@@ -1,6 +1,7 @@
 package fr.eni.dal.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -179,8 +180,17 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 	@Override
 	public void supprimerArticleVendu(int pArticleVenduId) throws ArticleVenduDALException {
-		// TODO Auto-generated method stub
-		
+
+		try(
+				Connection connexion = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = connexion.prepareStatement(DELETE_ARTICLE);
+			){
+				pStmt.setInt(1, pArticleVenduId);
+				pStmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new ArticleVenduDALException("Une erreur est survenue lors de la suppression de l'article");
+			}
 	}
 
 	@Override
@@ -236,7 +246,35 @@ List<ArticleVendu> articles = new ArrayList<>();
 
 	@Override
 	public void insererArticleVendu(ArticleVendu pArticleVendu) throws ArticleVenduDALException {
-		// TODO Auto-generated method stub
+
+
+		try(
+				Connection connexion = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = connexion.prepareStatement(INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS);
+			){
+				
+				Utilisateur vendeurArticle = pArticleVendu.getVendeur();
+				Categorie categorieArticle = pArticleVendu.getCategorie();
+				
+				pStmt.setString(1, pArticleVendu.getNomArticle());
+				pStmt.setString(2, pArticleVendu.getDescription());
+				pStmt.setDate(3, java.sql.Date.valueOf(pArticleVendu.getDateDebutEncheres()));
+				pStmt.setDate(4, java.sql.Date.valueOf(pArticleVendu.getDateFinEncheres()));
+				pStmt.setInt(5, pArticleVendu.getMiseAPrix());
+				pStmt.setInt(6, pArticleVendu.getPrixVente());
+				pStmt.setInt(7, vendeurArticle.getNoUtilisateur());
+				pStmt.setInt(8, categorieArticle.getNoCategorie());
+				
+				pStmt.executeUpdate();
+				
+				ResultSet rs = pStmt.getGeneratedKeys();
+				if(rs.next()) {
+					pArticleVendu.setNoArticle(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new ArticleVenduDALException("Impossible d'insérer l'article",e);
+			}
 		
 	}
 
