@@ -1,0 +1,4 @@
+If(db_id(N'ENCHERES') IS NULL)
+    BEGIN 
+        CREATE DATABASE ENCHERES
+    END;
