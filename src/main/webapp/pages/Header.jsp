@@ -9,7 +9,7 @@
 <body>
 	<h1>ENI-Enchères</h1>
 	<ul>
-		<li><a href="GestionUtilisateurs.jsp">Gestion des Utilisateurs</a></li>
+		<li><a href="GestionUtilisateurs.jsp">Gestion des utilisateurs</a></li>
 		<li><a href="GestionCategories.jsp">Gestion des catégories</a></li>
 		<li><a href="ListeEncheresConnecte.jsp">Enchères</a></li>
 		<li><a href="VendreUnArticle.jsp">Vendre un Article</a></li>

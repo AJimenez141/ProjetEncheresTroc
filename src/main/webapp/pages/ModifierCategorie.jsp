@@ -14,16 +14,18 @@
 	
 	<h2>Nouvelle catégorie</h2>
 	
-	<form method="GET">
-		<div>
-			<label for="libelle">Nom :</label>
-			<input type="text" id="libelle" name="libelle">
-		</div>
-		<br>
-		
-		<a href="GestionCategories.jsp">
-			<button id="btnEnregistrer" name="btnEnregistrer">Enregistrer</button>
-		</a>
-	</form>
+	<div class="conteneur" id="ModifierCategorie">
+		<form method="GET">
+			<div>
+				<label for="libelle">Nom :</label>
+				<input type="text" id="libelle" name="libelle">
+			</div>
+			<br>
+			
+			<a href="GestionCategories.jsp">
+				<button id="btnEnregistrer" name="btnEnregistrer">Enregistrer</button>
+			</a>
+		</form>
+	</div>
 </body>
 </html>

@@ -33,7 +33,7 @@
 			</form>
 		</div>
 		<div>
-			<button type="submit" name="btnRechercher">Rechercher</button>
+			<button type="submit" id="btnRechercher" name="btnRechercher">Rechercher</button>
 		</div>
 	</div>
 	

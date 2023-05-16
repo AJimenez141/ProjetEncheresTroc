@@ -13,16 +13,18 @@
 <body>	
 	<h2>Nouvelle catégorie</h2>
 	
-	<form method="POST">
-		<div>
-			<label for="pseudo">Nom :</label>
-			<input type="text" id="pseudo" name="pseudo">
-		</div>
-		<br>
-		
-		<a href="GestionCategories.jsp">
-			<button type="submit" id="btnCreer" name="btnCreer">Créer</button>
-		</a>
-	</form>
+	<div class="conteneur" id="Ajoutercategorie">
+		<form method="POST">
+			<div>
+				<label for="pseudo">Nom :</label>
+				<input type="text" id="pseudo" name="pseudo">
+			</div>
+			<br>
+			
+			<a href="GestionCategories.jsp">
+				<button type="submit" id="btnCreer" name="btnCreer">Créer</button>
+			</a>
+		</form>
+	</div>
 </body>
 </html>
