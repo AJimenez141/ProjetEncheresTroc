@@ -36,6 +36,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			 + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
 			 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
 
+	/**
+	 * retourne un article en fonction de son ID
+	 * 
+	 * @param pArticleVenduId
+	 * @return
+	 * @throws ArticleVenduDALException
+	 */
 	private static ArticleVendu selectArticleById(int pArticleVenduId) throws ArticleVenduDALException {
 		ArticleVendu article = null;
 		
@@ -83,6 +90,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		return article;
 	}
 
+	/**
+	 * Recuperer toutes les enchères
+	 */
 	@Override
 	public List<Enchere> selectAll() throws EnchereDALException, SQLException, ArticleVenduDALException {
 		List<Enchere> encheres = new ArrayList<>();
@@ -122,14 +132,17 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				
 				encheres.add(new Enchere(noEnchere, dateEnchere, montantEnchere, utilisateur, articleVendu));
 				
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new EnchereDALException("Impossible de récupérer les enchères",e);
-			}
+			} 
+		}catch (SQLException e) {
+			e.printStackTrace();
+			throw new EnchereDALException("Impossible de récupérer les enchères",e);
 		}
 		return encheres;
 	}
 
+	/**
+	 * Recuperer toutes les encheres d'un utilisateur
+	 */
 	@Override
 	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException, SQLException, ArticleVenduDALException {
 		List<Enchere> encheres = null;
@@ -176,6 +189,10 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		return encheres;
 	}
 
+	/**
+	 * Mise à jour de l'enchere quand un utilisateur enchérit 
+	 * (jusqu'à la cloture de l'enchère)
+	 */
 	@Override
 	public void encherir(Enchere pEnchere) throws EnchereDALException, SQLException {
 		try(
@@ -199,6 +216,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		
 	}
 
+	/**
+	 * Selectionner une enchere par son id
+	 */
 	@Override
 	public Enchere selectById(int pEnchereId) throws EnchereDALException, SQLException, ArticleVenduDALException {
 		Enchere enchere = null;
@@ -244,6 +264,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		return enchere;
 	}
 
+	/**
+	 * Creation d'une enchere
+	 */
 	@Override
 	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException, ArticleVenduDALException {
 		try(
