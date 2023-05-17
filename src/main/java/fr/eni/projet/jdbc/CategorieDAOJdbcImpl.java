@@ -119,12 +119,12 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 		try(
 				Connection connexion = ConnectionProvider.getConnection();	
-				PreparedStatement pStmt = connexion.prepareStatement(UPDATE_CATEGORIE)
 			){
+				PreparedStatement pStmt = connexion.prepareStatement(UPDATE_CATEGORIE);
 				pStmt.setString(1, pCategorie.getLibelle());
 				pStmt.setInt(2, pCategorie.getNoCategorie());
-				
 				pStmt.executeUpdate();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new CategorieDALException("Impossible de mettre à jour la categorie");
