@@ -22,7 +22,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	
 	private final String SELECT_ALL_CATEGORIE = "SELECT * FROM CATEGORIES";
 	
-	private final String INSERT_CATEGORIE = "INSERT INTO CATEGORIES(libelle) VALUES ?";
+	private final String INSERT_CATEGORIE = "INSERT INTO CATEGORIES(libelle) VALUES(?)";
 	
 	private final String DELETE_CATEGORIE = "DELETE FROM CATEGORIES WHERE no_categorie = ?";
 	

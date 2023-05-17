@@ -30,17 +30,17 @@ public class TestServletCategorie extends HttpServlet {
 		
 		//=======================TEST 1 - INSERTION (REUSSI)===========================================
 		
-		/*
+		
 		Categorie categorie = new Categorie("Art");
 		
-		try {
-			categorieManager.ajouterCategorie(categorie);
-			response.getWriter().append("Served at: ").append("Categorie insérée");
-		} catch (CategorieDALException e) {
-			response.getWriter().append("Served at: ").append(e.toString());
-			e.printStackTrace();
-		} 
-		*/
+//		try {
+//			categorieManager.ajouterCategorie(categorie);
+//			response.getWriter().append("Served at: ").append("Categorie insérée");
+//		} catch (CategorieDALException e) {
+//			response.getWriter().append("Served at: ").append(e.toString());
+//			e.printStackTrace();
+//		} 
+		
 		
 		//=======================TEST 2 - SELECT BY ID (REUSSI)===========================================
 		
