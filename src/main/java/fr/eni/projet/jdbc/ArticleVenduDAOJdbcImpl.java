@@ -207,15 +207,17 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	}
 
 	@Override
-	public List<ArticleVendu> selectionnerParCategorie(String pLibelleCategorie) throws ArticleVenduDALException {
+	public List<ArticleVendu> selectionnerParCategorie(int pNoCategorie) throws ArticleVenduDALException {
 
 List<ArticleVendu> articles = new ArrayList<>();
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
 		) {
-			ResultSet rs = pStmt.executeQuery(SELECT_ARTICLE_BY_CATEGORIE);
+			//TODO vérifier pour les autres requêtes avec des paramètres
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ARTICLE_BY_CATEGORIE);
+			pStmt.setInt(1, pNoCategorie);
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next() ) {
 
