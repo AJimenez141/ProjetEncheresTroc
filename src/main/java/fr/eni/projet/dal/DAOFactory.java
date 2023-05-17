@@ -33,6 +33,11 @@ public abstract class DAOFactory {
 		return new EnchereDAOJdbcImpl();
 	}
 	
+	/**
+	 * recuperer l'instance de CategogieDAOJdbcImpl
+	 * 
+	 * @return
+	 */
 	public static CategorieDAO recupererCategorieDAO() {
 		return new CategorieDAOJdbcImpl();
 	}
