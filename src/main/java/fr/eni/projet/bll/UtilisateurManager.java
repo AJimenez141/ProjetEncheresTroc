@@ -89,14 +89,23 @@ public class UtilisateurManager {
 	 * TODO - methode dans le DAOJdbcImpl possiblement à revoir,
 	 * ajout d'un token en front ?
 	 * 
-	 * @param pEmailOrLogin
+	 * @param pEmailOrPseudo
 	 * @param pMotDePasse
 	 * @return Utilisateur
 	 * @throws UtilisateurDALException
 	 * @throws SQLException
 	 * @throws ConnexionException
 	 */
-	public Utilisateur seConnecter(String pEmailOrLogin, String pMotDePasse) throws UtilisateurDALException, SQLException, ConnexionException {
-		return this.utilisateurDAO.seConnecter(pEmailOrLogin, pMotDePasse);
+	public Utilisateur seConnecter(String pEmailOrPseudo, String pMotDePasse) throws UtilisateurDALException, SQLException, ConnexionException {
+		Utilisateur utilisateurConnecte;
+		
+		if(this.utilisateurDAO.seConnecterEmail(pEmailOrPseudo, pMotDePasse)  != null) {
+			utilisateurConnecte = this.utilisateurDAO.seConnecterEmail(pEmailOrPseudo, pMotDePasse);
+		} else {
+			utilisateurConnecte = this.utilisateurDAO.seConnecterPseudo(pEmailOrPseudo, pMotDePasse);
+		}
+		
+		return utilisateurConnecte;
 	}
+
 }
