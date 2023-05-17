@@ -23,7 +23,7 @@ html {
    margin: 0 auto;
 }
 body {
-	font-size: 1.4em; /* base font-size is equivalent "14px" */
+	font-size: 1.8em; /* base font-size is equivalent "14px" */
 	background-color: var(--couleur_fond);
 	color: var(--couleur_texte);
 }
@@ -32,6 +32,7 @@ h1 {
 	font-size: 60px;
 }
 h2 {
+	font-size: 2em;
 	text-align: center;
 }
 
@@ -65,16 +66,27 @@ h2 {
 
 button {
 	background-color: var(--couleur_bouton_general);
-	color : var(--couleur_bouton_texte);
+	color: var(--couleur_bouton_texte);
+	
+	width: 20rem;
+	height: 10rem;
+
+	border: 0;
+	border-radius: 0px;
+	
+	font-family: Oswald, sans-serif;
 }
 
-.button__supprimer--color {
+button:hover {
+	background-color: #FFC336;
+}
+.bouton__supprimer--couleur {
 	background-color: var(--couleur_bouton_supprimer);
 }
-.button__enregistrer--color {
+.bouton__enregistrer--couleur {
 	background-color: var(--couleur_bouton_enregistrer);
 }
-.button__text--color {
+.bouton__text--couleur {
 	color: var(--couleur_bouton_text);
 }
 
@@ -87,6 +99,15 @@ button {
 }
 
 #Acquisition img, #Encherir img, #DetailMaVenteFinEnchere img {
+	margin: 0;
+	padding: 5.5rem;
+	width: 400px;
+	height: 400px;
+}
+
+/* CONNEXION, MONPROFIL, PROFIL */
+
+#Connexion form, #MonProfil form, #Profil form {
 	margin: 0;
 	padding: 5rem;
 	background-color: var(--couleur_fond_2)

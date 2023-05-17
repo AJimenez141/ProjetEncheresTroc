@@ -26,7 +26,7 @@
 				<br>
 				
 				<a href="GestionCategories.jsp">
-					<button class="button__enregistrer--color" id="btnEnregistrer" name="btnEnregistrer">Enregistrer</button>
+					<button class="bouton__enregistrer--couleur" id="btnEnregistrer" name="btnEnregistrer">Enregistrer</button>
 				</a>
 			</form>
 		</div>

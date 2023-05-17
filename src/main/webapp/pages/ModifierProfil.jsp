@@ -62,10 +62,10 @@
 				</div>
 				
 				<a href="MonProfil.jsp">
-					<button type="submit" class="button__enregistrer--color" id="btnEnregistrerTest" name="btnEnregistrerTest">Enregistrer</button>
+					<button type="submit" class="bouton__enregistrer--couleur" id="btnEnregistrerTest" name="btnEnregistrerTest">Enregistrer</button>
 				</a>
 				<a href="AccueilNonConnecte.jsp">
-					<button class="button__supprimer--color" id="btnSupprimerTest" name="btnSupprimerTest">Supprimer mon compte</button>
+					<button class="bouton__supprimer--couleur" id="btnSupprimerTest" name="btnSupprimerTest">Supprimer mon compte</button>
 				</a>
 			</form>
 		</div>

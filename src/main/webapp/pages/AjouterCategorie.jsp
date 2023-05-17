@@ -25,7 +25,7 @@
 				<br>
 				
 				<a href="GestionCategories.jsp">
-					<button type="submit" class="button__enregistrer--color" id="btnCreer" name="btnCreer">Créer</button>
+					<button type="submit" class="bouton__enregistrer--couleur" id="btnCreer" name="btnCreer">Créer</button>
 				</a>
 			</form>
 		</div>

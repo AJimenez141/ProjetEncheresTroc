@@ -48,7 +48,7 @@
 							</select>
 						</td>
 						<td>
-							<button class="button__supprimer--color" id="btnSupprimer" name="btnSupprimer">Supprimer</button>
+							<button class="bouton__supprimer--couleur" id="btnSupprimer" name="btnSupprimer">Supprimer</button>
 						</td>
 					</tr>
 				</tbody>

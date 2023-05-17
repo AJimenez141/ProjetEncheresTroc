@@ -15,32 +15,26 @@
 	<div class="conteneur" id="Connexion">
 		<div class="section">
 			<div>
-				<div>
 					<label for="id">Identifiant :</label>
 					<input type="text" id="id" name="id">
-				</div>
 				<br>
-				
-				<div>
+				<br>
 					<label for="mdp">Mot de passe :</label>
 					<input type="password" id="mdp" name="mdp">
-				</div>
 				<br>
-				
-				<div>
+				<br>
 					<a href="ListeEncheresConnecte.jsp">
 						<button id="btnConnexion" name="btnConnexion">Connexion</button>
 					</a>
-					<div>
-						<input type="checkbox" id="ckSouvenir" name="ckSouvenir">
-						<label for="ckSouvenir">Se souvenir de moi</label>
-						<a href="https://www.google.com">Mot de passe oublié</a>
-					</div>
-				</div>
 				<br>
-				
+				<br>
+					<input type="checkbox" id="ckSouvenir" name="ckSouvenir">
+					<label for="ckSouvenir">Se souvenir de moi</label>
+					<a href="https://www.google.com">Mot de passe oublié</a>
+				<br>
+				<br>
 				<a href="CreerCompte.jsp">
-					<button id="btnCreerCompte" name="btnCreerCompte">Créer un compte</button>
+					<button class="bouton__enregistrer--couleur" id="btnCreerCompte" name="btnCreerCompte">Créer un compte</button>
 				</a>
 			</div>
 		</div>
