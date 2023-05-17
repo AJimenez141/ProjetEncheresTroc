@@ -94,7 +94,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Recuperer toutes les enchères
 	 */
 	@Override
-	public List<Enchere> selectAll() throws EnchereDALException, SQLException, ArticleVenduDALException {
+	public List<Enchere> selectAll() throws EnchereDALException, SQLException {
 		List<Enchere> encheres = new ArrayList<>();
 		ArticleVendu articleVendu = null;
 		
@@ -144,7 +144,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Recuperer toutes les encheres d'un utilisateur
 	 */
 	@Override
-	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException, SQLException, ArticleVenduDALException {
+	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException, SQLException {
 		List<Enchere> encheres = null;
 		
 		try(
@@ -220,7 +220,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Selectionner une enchere par son id
 	 */
 	@Override
-	public Enchere selectById(int pEnchereId) throws EnchereDALException, SQLException, ArticleVenduDALException {
+	public Enchere selectById(int pEnchereId) throws EnchereDALException, SQLException {
 		Enchere enchere = null;
 		
 		try(
@@ -268,7 +268,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Creation d'une enchere
 	 */
 	@Override
-	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException, ArticleVenduDALException {
+	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException {
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
 			PreparedStatement pStmt = connexion.prepareStatement(INSERT_ENCHERE, Statement.RETURN_GENERATED_KEYS);	
