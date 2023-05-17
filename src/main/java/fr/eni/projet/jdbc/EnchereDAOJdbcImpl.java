@@ -1,4 +1,4 @@
-package fr.eni.dal.jdbc;
+package fr.eni.projet.jdbc;
 
 import java.sql.Connection;
 import java.sql.Date;

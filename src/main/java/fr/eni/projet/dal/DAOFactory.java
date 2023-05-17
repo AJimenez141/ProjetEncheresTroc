@@ -1,9 +1,9 @@
 package fr.eni.projet.dal;
 
-import fr.eni.dal.jdbc.ArticleVenduDAOJdbcImpl;
-import fr.eni.dal.jdbc.EnchereDAOJdbcImpl;
-import fr.eni.dal.jdbc.UtilisateurDAOJdbcImpl;
-import fr.eni.dal.jdbc.CategorieDAOJdbcImpl;
+import fr.eni.projet.jdbc.ArticleVenduDAOJdbcImpl;
+import fr.eni.projet.jdbc.CategorieDAOJdbcImpl;
+import fr.eni.projet.jdbc.EnchereDAOJdbcImpl;
+import fr.eni.projet.jdbc.UtilisateurDAOJdbcImpl;
 
 public abstract class DAOFactory {
 	/**
