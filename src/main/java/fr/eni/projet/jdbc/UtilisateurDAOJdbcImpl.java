@@ -22,7 +22,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	private final String SELECT_ALL_UTILISATEUR = "SELECT * FROM UTILISATEURS";
 	
-	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,0,0)";
+	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,0)";
 	
 	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE noUtilisateur = ?";
 	
@@ -101,7 +101,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new UtilisateurDALException("Impossible de sélectionner les utilisateurs dans la base");
+			throw new UtilisateurDALException("Impossible de sélectionner les utilisateurs dans la base",e);
 		}
 		
 		return utilisateurs;
@@ -118,18 +118,21 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		){
 			Adresse adresseUtilisateur = pUtilisateur.getAdresse();
 			
+			
+//			private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,0)";
+			
 			pStmt.setString(1, pUtilisateur.getPseudo());
 			pStmt.setString(2, pUtilisateur.getNom());
 			pStmt.setString(3, pUtilisateur.getPrenom());
 			pStmt.setString(4, pUtilisateur.getEmail());
+			pStmt.setString(5, pUtilisateur.getTelephone());
+			pStmt.setString(6, adresseUtilisateur.getRue());
+			pStmt.setString(7, adresseUtilisateur.getCodePostal());
+			pStmt.setString(8, adresseUtilisateur.getVille());
 			
 //			TODO à redéfinir après la création de la méthode avec HASH
-			pStmt.setString(5, pUtilisateur.getMotDePasse());
+			pStmt.setString(9, pUtilisateur.getMotDePasse());
 			
-			pStmt.setString(6, pUtilisateur.getTelephone());
-			pStmt.setString(7, adresseUtilisateur.getRue());
-			pStmt.setString(8, adresseUtilisateur.getCodePostal());
-			pStmt.setString(9, adresseUtilisateur.getVille());
 			pStmt.setInt(10, DEFAULT_CREDIT);
 			
 			pStmt.executeUpdate();
