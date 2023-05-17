@@ -32,3 +32,4 @@ public class RetraitManager {
 		this.retraitDAO.creerRetraitArticle(pRetrait);
 	}
 }
+ 
