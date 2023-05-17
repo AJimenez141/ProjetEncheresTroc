@@ -43,14 +43,6 @@ public interface EnchereDAO {
 	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException,SQLException;
 	
 	/**
-	 * effectuer une enchere
-	 * 
-	 * @param pEnchereId
-	 * @throws EnchereDALException
-	 */
-	public void encherir(Enchere pEnchere) throws EnchereDALException,SQLException;	
-	
-	/**
 	 * Creer une nouvelle enchere
 	 * 
 	 * @param pEnchere
