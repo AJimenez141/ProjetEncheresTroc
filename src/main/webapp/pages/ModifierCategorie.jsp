@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Modifier catégorie</title>
 <link href="../ressources/styles/main_test.css" rel="stylesheet">
-
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
@@ -24,7 +24,6 @@
 					<input type="text" id="libelle" name="libelle">
 				</div>
 				<br>
-				
 				<a href="GestionCategories.jsp">
 					<button class="bouton__enregistrer--couleur" id="btnEnregistrer" name="btnEnregistrer">Enregistrer</button>
 				</a>

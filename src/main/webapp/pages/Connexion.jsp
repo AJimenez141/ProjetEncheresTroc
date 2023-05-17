@@ -5,7 +5,7 @@
 <meta charset="ISO-8859-1">
 <title>Connexion</title>
 <link href="../ressources/styles/main_test.css" rel="stylesheet">
-
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<h1>ENI - Enchères</h1>
@@ -13,8 +13,8 @@
 
 <body>
 	<div class="conteneur" id="Connexion">
-		<div class="section">
-			<div>
+		<div class="section" id="section_connexion">
+			<div id="section_connexion_div">
 					<label for="id">Identifiant :</label>
 					<input type="text" id="id" name="id">
 				<br>
@@ -30,6 +30,7 @@
 				<br>
 					<input type="checkbox" id="ckSouvenir" name="ckSouvenir">
 					<label for="ckSouvenir">Se souvenir de moi</label>
+				<br>
 					<a href="https://www.google.com">Mot de passe oublié</a>
 				<br>
 				<br>

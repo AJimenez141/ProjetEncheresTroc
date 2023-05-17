@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Profil</title>
 <link href="../ressources/styles/main_test.css" rel="stylesheet">
-
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
@@ -15,27 +15,31 @@
 <body>
 	
 	<div class="conteneur" id="Profil">
-		<div class="section">
-			<div>
+		<div class="section" id="section_profil">
 				<label for="pseudo">Pseudo :</label>
 				XXX
-				<br>
+			<br>
+			<br>
 				<label for="nom">Nom :</label>
 				XXX			
-				<br>			
+			<br>
+			<br>			
 				<label for="prenom">Prénom :</label>
 				XXX			
-				<br>			
+			<br>
+			<br>			
 				<label for="email">Email :</label>
 				XXX			
-				<br>								
+			<br>	
+			<br>							
 				<label for="cp">Code postal :</label>
 				XXX
-				<br>
+			<br>
+			<br>
 				<label for="ville">Ville :</label>
 				XXX
-				<br>
-			</div>
+			<br>
+			<br>
 		</div>
 	</div>
 </body>
