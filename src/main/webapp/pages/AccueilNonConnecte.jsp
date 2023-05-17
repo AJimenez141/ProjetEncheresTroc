@@ -10,20 +10,20 @@
 </head>
 	<%-- <jsp:include page="Header.jsp" /> --%>
 <header>
-	<h1>ENI-Enchères</h1>
+	<a href="#"><h1 class="ombre_foncee">ENI-Enchères</h1></a>
 	<ul>
-		<li><a href="CreerCompte.jsp">S'inscrire</a></li>
-		<li><a href="Connexion.jsp">Se Connecter</a></li>
+		<li><a class="ombre_foncee" href="CreerCompte.jsp">S'inscrire</a></li>
+		<li><a class="ombre_foncee" href="Connexion.jsp">Se Connecter</a></li>
 	</ul>
 </header>
 <body>
-	<h2>Liste des Enchères</h2>
+	<h2 class="ombre_foncee">Liste des Enchères</h2>
 	<div class="conteneur" id="AccueilNonConnecte">
 		<div class="section">
 			<div>
-				<h3>Filtres : </h3>
 				
 				<form action="<%=request.getContextPath()%>/AccueilNonConnecte" method="GET">
+					<h3>Filtres : </h3>
 	
 					<input type="text" name="filtre"/>
 					

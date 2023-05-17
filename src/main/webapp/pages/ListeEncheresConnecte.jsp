@@ -13,7 +13,7 @@
 </header>
 
 <body>
-	<h2>Liste des Enchères</h2>
+	<h2 class="ombre_foncee">Liste des Enchères</h2>
 	
 	<div class="conteneur" id="ListeEncheresConnecte">
 		<div class="section">

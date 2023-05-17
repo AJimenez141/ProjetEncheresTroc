@@ -4,7 +4,7 @@
 /* GENERAL */
 
 html {
-  font-size: .625em; /* fallback IE8+ */
+	font-size: .625rem;
   
 	--couleur_fond: #FAF0CA;
 	--couleur_fond_2: #E58E54;
@@ -20,25 +20,44 @@ html {
 	--couleur_bouton_hover: #FFC336;
 	
 	font-family: 'Oswald', sans-serif;
- 
-   box-sizing: border-box;
-   margin: 0 auto;
+	
+	scroll-behavior: smooth;
+	
+	box-sizing: border-box;
+	margin: 0 auto;
 }
 
 body {
-	font-size: 1.8em; /* base font-size is equivalent "14px" */
+	font-size: 1.8rem; /* base font-size is equivalent "14px" */
 	background-color: var(--couleur_fond);
 	color: var(--couleur_texte);
+	
 }
 
 h1 {
 	margin-top: 0;
-	font-size: 60px;
+	font-size: 6rem;
 }
 
 h2 {
-	font-size: 40px;
+	font-size: 4rem;
 	text-align: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:link {
+	color: var(--couleur_texte);
+}
+
+a:visited {
+	color: var(--couleur_texte);
+}
+
+a:hover {
+	color: var(--couleur_bouton_hover);
 }
 
 /* CLASSES */
@@ -67,7 +86,15 @@ h2 {
 
 .section > * {
 	flex: 1;
-} 
+}
+
+.ombre_claire {
+	text-shadow: 2px 2px 1px var(--couleur_fond);
+}
+
+.ombre_foncee {
+	text-shadow: 2px 2px 1px var(--couleur_bouton_general);
+}
 
 /* BOUTONS */
 
@@ -78,13 +105,11 @@ button {
 	width: 20rem;
 	height: 10rem;
 	
-	/* border: 5px solid var(--couleur_encadre);
-	border-radius: 4px; */
 	border: 0;
 	border-radius: 0px;
 	
 	font-family: Oswald, sans-serif;
-	font-size: 3.5rem;
+	font-size: 3rem;
 }
 
 button:hover {
@@ -105,9 +130,22 @@ form {
 	padding: 5rem;
 	background-color: var(--couleur_fond_2);
 	border-top: 3rem solid var(--couleur_bouton_hover);
+	
+	display: flex;
+	justify-content: space-around;
 }
 
 /* ACCUEIL NON CONNECTE */
+
+#AccueilNonConnecte form {
+	display: flex;
+	flex-wrap: wrap;
+} 
+
+#AccueilNonConnecte form > * {
+	margin: 0 2rem 1rem 0;
+	width: 40%;
+}
 
 #AccueilNonConnecte #divBouton {
 	display: flex;
@@ -174,7 +212,12 @@ form {
 
 #Header ul {
 	list-style: none;
+	display: flex;
+	align-items: center;
 }
 #Header li {
 	display: inline-block;
+	font-size: 1.5em;
+	
+	margin: 0 1em;
 }

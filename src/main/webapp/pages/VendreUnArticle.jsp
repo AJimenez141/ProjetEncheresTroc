@@ -13,7 +13,7 @@
 </header>
 
 <body>
-	<h2>Nouvelle vente</h2>
+	<h2 class="ombre_foncee">Nouvelle vente</h2>
 	<div class="conteneur" id="VendreUnArticle">
 		<div class="section">
 			<div>
