@@ -1,6 +1,7 @@
 package fr.eni.projet.servlets.test;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,9 +22,14 @@ public class TestServletCategorie extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Categorie categorie = new Categorie("Aliments");
 		CategorieManager categorieManager = new CategorieManager();
 		
+		//=======================TEST 1 - INSERTION (REUSSI)===========================================
+		
+		
+		Categorie categorie = new Categorie("Art");
+		
+		/*
 		try {
 			categorieManager.ajouterCategorie(categorie);
 			response.getWriter().append("Served at: ").append("Categorie insérée");
@@ -31,6 +37,23 @@ public class TestServletCategorie extends HttpServlet {
 			response.getWriter().append("Served at: ").append(e.toString());
 			e.printStackTrace();
 		} 
+		*/
+		
+		//=======================TEST 2 - SELECT BY ID (REUSSI)===========================================
+		
+		/*
+		try {
+			Categorie categorie = categorieManager.recupererUneCategorie(1);
+			response.getWriter().append("Served at: ").append(categorie.toString());
+		} catch (CategorieDALException e) {
+			response.getWriter().append("Served at: ").append(e.toString());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		*/
+		
+		//=======================TEST 3 - SELECT ALL===========================================
 		
 	}
 }
