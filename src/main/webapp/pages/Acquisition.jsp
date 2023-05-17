@@ -19,47 +19,49 @@
 				<img width="200" height="200">
 			</div>
 			<div>
-					XXX
-			
-				<div>
-					<label for="description">Description :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="offre">Meilleur offre :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="prix">Mise à prix :</label>
-					XXX
-				</div>
-				<br>
-		
-				<div>
-					<label for="retrait">Retrait :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="vendeur">Vendeur :</label>
-					XXX
-				</div>
-				<br>
+				<form>
+						XXX
 				
-				<div>
-					<label for="tel">Tél :</label>
-					XXX
-				</div>
-				<br>
+					<div>
+						<label for="description">Description :</label>
+						XXX
+					</div>
+					<br>
+				
+					<div>
+						<label for="offre">Meilleur offre :</label>
+						XXX
+					</div>
+					<br>
+				
+					<div>
+						<label for="prix">Mise à prix :</label>
+						XXX
+					</div>
+					<br>
 			
-				<a href="ListeEncheresConnecte.jsp">
-					<button id="btnRetour" name="btnRetour">Retour</button>
-				</a>
+					<div>
+						<label for="retrait">Retrait :</label>
+						XXX
+					</div>
+					<br>
+				
+					<div>
+						<label for="vendeur">Vendeur :</label>
+						XXX
+					</div>
+					<br>
+					
+					<div>
+						<label for="tel">Tél :</label>
+						XXX
+					</div>
+					<br>
+				
+					<a href="ListeEncheresConnecte.jsp">
+						<button id="btnRetour" name="btnRetour">Retour</button>
+					</a>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -21,47 +21,49 @@
 				<img width="200" height="200">
 			</div>
 			<div>
-					XXX
-			
-				<div>
-					<label for="description">Description :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="offre">Meilleur offre :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="prix">Mise à prix :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="finEnchere">Fin de l'enchère :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="retrait">Retrait :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="vendeur">Vendeur :</label>
-					XXX
-				</div>
-				<br>
-			
-				<a href="ListeEncheresConnecte.jsp">
-					<button id="btnRetraitEffec" class="button__enregistrer--color" name="btnRetraitEffec">Retrait effectué</button>
-				</a>
+				<form>
+						XXX
+				
+					<div>
+						<label for="description">Description :</label>
+						XXX
+					</div>
+					<br>
+				
+					<div>
+						<label for="offre">Meilleur offre :</label>
+						XXX
+					</div>
+					<br>
+				
+					<div>
+						<label for="prix">Mise à prix :</label>
+						XXX
+					</div>
+					<br>
+				
+					<div>
+						<label for="finEnchere">Fin de l'enchère :</label>
+						XXX
+					</div>
+					<br>
+				
+					<div>
+						<label for="retrait">Retrait :</label>
+						XXX
+					</div>
+					<br>
+				
+					<div>
+						<label for="vendeur">Vendeur :</label>
+						XXX
+					</div>
+					<br>
+				
+					<a href="ListeEncheresConnecte.jsp">
+						<button id="btnRetraitEffec" class="button__enregistrer--color" name="btnRetraitEffec">Retrait effectué</button>
+					</a>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -14,13 +14,13 @@
 
 <body>
 	
-	<h2>Nouvelle catégorie</h2>
+	<h2>Modifier catégorie</h2>
 	
 	<div class="conteneur" id="ModifierCategorie">
 		<div class="section">
 			<form method="GET">
 				<div>
-					<label for="libelle">Nom :</label>
+					<label for="libelle">Libellé :</label>
 					<input type="text" id="libelle" name="libelle">
 				</div>
 				<br>

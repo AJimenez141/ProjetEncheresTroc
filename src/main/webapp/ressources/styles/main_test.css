@@ -1,49 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
 
-
 /* GENERAL */
 
 html {
   font-size: .625em; /* fallback IE8+ */
   
---couleur_fond: #FAF0CA;
---couleur_texte: #0C2134;
---couleur_encadre: #1A2123;
---couleur_souligne: #1A2123;
-
-
---couleur_bouton_supprimer: #F95738;
---couleur_bouton_enregistrer: #55B44B;
---couleur_bouton_general: #BA9B80;
---couleur_bouton_texte: #1A2123;
-
-font-family: 'Oswald', sans-serif;
+	--couleur_fond: #FAF0CA;
+	--couleur_fond_2: #E58E54;
+	--couleur_texte: #0C2134;
+	--couleur_encadre: #1A2123;
+	--couleur_souligne: #1A2123;
+	
+	
+	--couleur_bouton_supprimer: #F95738;
+	--couleur_bouton_enregistrer: #55B44B;
+	--couleur_bouton_general: #BA9B80;
+	--couleur_bouton_texte: #1A2123;
+	
+	font-family: 'Oswald', sans-serif;
  
    box-sizing: border-box;
+   margin: 0 auto;
 }
-
 body {
-  font-size: 1.4em; /* base font-size is equivalent "14px" */
-  background-color: var(--couleur_fond);
-  color: var(--couleur_texte);
+	font-size: 1.4em; /* base font-size is equivalent "14px" */
+	background-color: var(--couleur_fond);
+	color: var(--couleur_texte);
 }
-
+h1 {
+	margin-top: 0;
+	font-size: 60px;
+}
 h2 {
 	text-align: center;
 }
+
 /* CLASSES */
 
 .conteneur {
-	margin: 5rem;
-	padding: 5rem;
-	width: 1800px;
+	margin: 0 5rem 5rem 5rem;
+	padding: 0 5rem 5rem 5rem;
+	width: 180rem;
 	
-	/* display: flex;
-	flex-wrap: wrap; */
+	
 	justify-content: center;
 	
 }
-
 .section {
 	margin: 5rem;
 	padding: 5rem;
@@ -55,15 +57,9 @@ h2 {
 	display: flex;
 	flex-wrap: wrap;
 }
-
  .section > * {
 	flex: 1;
 } 
-
-/* ID */
-
-
-
 
 /* BOUTONS */
 
@@ -80,4 +76,18 @@ button {
 }
 .button__text--color {
 	color: var(--couleur_bouton_text);
+}
+
+/* ACQUISITION, ENCHERIR, DETAILMAVENTEFINENCHERE */
+
+#Acquisition form, #Encherir form, #DetailMaVenteFinEnchere form {
+	margin: 0;
+	padding: 5rem;
+	background-color: var(--couleur_fond_2)
+}
+
+#Acquisition img, #Encherir img, #DetailMaVenteFinEnchere img {
+	margin: 0;
+	padding: 5rem;
+	background-color: var(--couleur_fond_2)
 }
