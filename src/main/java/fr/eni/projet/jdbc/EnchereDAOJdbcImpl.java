@@ -43,7 +43,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * @return
 	 * @throws ArticleVenduDALException
 	 */
-	private static ArticleVendu selectArticleById(int pArticleVenduId) throws ArticleVenduDALException {
+	private static ArticleVendu selectArticleById(int pArticleVenduId) throws EnchereDALException {
 		ArticleVendu article = null;
 		
 		try(
@@ -85,7 +85,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new ArticleVenduDALException("Impossible de sélectionner les articles dans la base",e);
+			throw new EnchereDALException("Impossible de sélectionner les articles dans la base",e);
 		}		
 		return article;
 	}

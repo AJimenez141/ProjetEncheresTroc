@@ -23,7 +23,7 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws EnchereDALException
 	 */
-	public Enchere selectById(int pArticleVenduId) throws EnchereDALException,SQLException,ArticleVenduDALException;
+	public Enchere selectById(int pArticleVenduId) throws EnchereDALException,SQLException;
 	
 	/**
 	 * selectionner toutes les encheres en cours
@@ -31,7 +31,7 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws EnchereDALException
 	 */
-	public List<Enchere> selectAll() throws EnchereDALException, SQLException, ArticleVenduDALException;
+	public List<Enchere> selectAll() throws EnchereDALException, SQLException;
 	
 	/**
 	 * selectionner les encheres d'un utilisateur
@@ -40,7 +40,7 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws EnchereDALException
 	 */
-	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException,SQLException, ArticleVenduDALException;
+	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException,SQLException;
 	
 	/**
 	 * effectuer une enchere
@@ -58,5 +58,5 @@ public interface EnchereDAO {
 	 * @throws SQLException
 	 * @throws ArticleVenduDALException
 	 */
-	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException, ArticleVenduDALException;
+	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException;
 }
