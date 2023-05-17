@@ -63,15 +63,6 @@ h1 {
 	flex: 1;
 } 
 
-/* ID */
-
-#VendreUnArticle {
-	display: flex;
-	flex-wrap: wrap;
-	/* flex-direction: column; */
-}
-
-
 /* BOUTONS */
 
 button {
@@ -92,18 +83,40 @@ button {
 button:hover {
 	background-color: #FFC336;
 }
-.button__supprimer--color {
+.bouton__supprimer--couleur {
 	background-color: var(--couleur_bouton_supprimer);
 }
-.button__enregistrer--color {
+.bouton__enregistrer--couleur {
 	background-color: var(--couleur_bouton_enregistrer);
 }
-.button__text--color {
+.bouton__text--couleur {
 	color: var(--couleur_bouton_text);
 }
 
 form {
 	margin: 0;
 	padding: 5rem;
-	background-color: var(--couleur_fond_2)
+	background-color: var(--couleur_fond_2);
+}
+
+/* VENDRE UN ARTICLE */
+
+/* #VendreUnArticle {
+	display: flex;
+	flex-wrap: wrap;
+} */
+
+#VendreUnArticle form {
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+
+#VendreUnArticle form > *{
+	margin: 0 2rem 1rem 0;
+	width: 40%;
+}
+
+#VendreUnArticle h3 {
+	margin-top: 2rem;
 }

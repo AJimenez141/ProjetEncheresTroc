@@ -39,7 +39,7 @@
 					<label name="labelFinEnchere" for="finEnchere">Fin de l'enchère : </label>
 					<input type="date" name="finEnchere"/>
 					
-					Retrait
+					<h3>Retrait</h3><div></div>
 					
 					<label name="labelRue" for="rue">Rue : </label>
 					<input type="text" name="rue"/>
@@ -51,7 +51,7 @@
 					<input type="text" name="ville"/>
 					
 			
-					<button type="submit" id="btnEnregistrer" name="btnEnregistrer">Enregistrer</button>
+					<button class="bouton__enregistrer--couleur" id="btnEnregistrer" name="btnEnregistrer" type="submit">Enregistrer</button>
 					<button id="btnAnnuler" name="btnAnnuler">Annuler</button>
 			
 				</form>
