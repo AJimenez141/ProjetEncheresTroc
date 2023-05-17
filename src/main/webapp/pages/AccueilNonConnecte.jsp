@@ -34,7 +34,7 @@
 		
 				</form>
 			</div>
-			<div>
+			<div id="divBouton">
 				<button class="couleur__bouton--general"type="submit" id="btnRechercher" name="btnRechercher">Rechercher</button>
 			</div>
 		</div>
