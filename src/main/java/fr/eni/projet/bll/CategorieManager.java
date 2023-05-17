@@ -34,7 +34,7 @@ public class CategorieManager {
 	 * 
 	 * @throws CategorieDALException
 	 */
-	public List<Categorie> recupererLesCategorie() throws CategorieDALException, SQLException 
+	public List<Categorie> recupererLesCategorie() throws CategorieDALException 
 	{
 		return this.categorieDAO.SelectAll();
 	}
@@ -44,7 +44,7 @@ public class CategorieManager {
 	 * 
 	 * @throws CategorieDALException
 	 */
-	public void ajouterCategorie(Categorie pCategorie) throws CategorieDALException, SQLException 
+	public void ajouterCategorie(Categorie pCategorie) throws CategorieDALException 
 	{
 		this.categorieDAO.insererCategorie(pCategorie);
 	}
@@ -54,7 +54,7 @@ public class CategorieManager {
 	 * 
 	 * @throws CategorieDALException
 	 */
-	public void modifierCategorie(Categorie pCategorie) throws CategorieDALException, SQLException 
+	public void modifierCategorie(Categorie pCategorie) throws CategorieDALException 
 	{
 		this.categorieDAO.modifierCategorie(pCategorie);
 	}
@@ -64,7 +64,7 @@ public class CategorieManager {
 	 * 
 	 * @throws CategorieDALException
 	 */
-	public void supprimerCategorie(int pNoCategorie) throws CategorieDALException, SQLException 
+	public void supprimerCategorie(int pNoCategorie) throws CategorieDALException, SQLException  
 	{
 		this.categorieDAO.supprimerCategorie(pNoCategorie);
 	}
