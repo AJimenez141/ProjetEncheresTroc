@@ -7,7 +7,6 @@ import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.dal.ArticleVenduDALException;
 import fr.eni.projet.dal.ArticleVenduDAO;
 import fr.eni.projet.dal.DAOFactory;
-import fr.eni.projet.dal.UtilisateurDALException;
 
 public class ArticleVenduManager {
 	
