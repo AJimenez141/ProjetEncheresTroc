@@ -3,6 +3,7 @@ package fr.eni.projet.dal;
 import fr.eni.projet.jdbc.ArticleVenduDAOJdbcImpl;
 import fr.eni.projet.jdbc.CategorieDAOJdbcImpl;
 import fr.eni.projet.jdbc.EnchereDAOJdbcImpl;
+import fr.eni.projet.jdbc.RetraitDAOJdbcImpl;
 import fr.eni.projet.jdbc.UtilisateurDAOJdbcImpl;
 
 public abstract class DAOFactory {
@@ -40,5 +41,14 @@ public abstract class DAOFactory {
 	 */
 	public static CategorieDAO recupererCategorieDAO() {
 		return new CategorieDAOJdbcImpl();
+	}
+	
+	/**
+	 * recuperer l'instance de RetraitDAOJdbcImpl
+	 * 
+	 * @return
+	 */
+	public static RetraitDAO recupererRetraitDAO() {
+		return new RetraitDAOJdbcImpl();
 	}
 }
