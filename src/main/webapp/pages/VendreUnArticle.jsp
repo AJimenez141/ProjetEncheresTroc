@@ -6,6 +6,7 @@
 	<meta charset="ISO-8859-1">
 	<title>Vendre un article</title>
 	<link href="../ressources/styles/main.css" rel="stylesheet">
+	<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<jsp:include page="Header.jsp" />

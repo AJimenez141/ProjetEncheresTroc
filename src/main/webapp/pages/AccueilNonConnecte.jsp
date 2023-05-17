@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Accueil</title>
 <link href="../ressources/styles/main.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 	<%-- <jsp:include page="Header.jsp" /> --%>
 <header>

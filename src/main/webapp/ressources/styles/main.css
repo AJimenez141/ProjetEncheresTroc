@@ -25,7 +25,7 @@ html {
 }
 
 body {
-	font-size: 1.4em; /* base font-size is equivalent "14px" */
+	font-size: 1.8em; /* base font-size is equivalent "14px" */
 	background-color: var(--couleur_fond);
 	color: var(--couleur_texte);
 }
@@ -101,15 +101,13 @@ form {
 
 /* VENDRE UN ARTICLE */
 
-/* #VendreUnArticle {
-	display: flex;
-	flex-wrap: wrap;
-} */
-
 #VendreUnArticle form {
 	display: flex;
 	flex-wrap: wrap;
 	
+}
+#VendreUnArticle div:nth-child(2) {
+	flex: 2;
 }
 
 #VendreUnArticle form > *{
@@ -119,4 +117,29 @@ form {
 
 #VendreUnArticle h3 {
 	margin-top: 2rem;
+}
+
+/* HEADER */
+
+#Header {
+	display: flex;
+	justify-content: space-between;
+}
+
+#Header img {
+	max-width : 25%;
+	height : 60%;
+	
+	margin-right: 4rem;
+}
+
+#Header > div {
+	display: flex;
+}
+
+#Header ul {
+	list-style: none;
+}
+#Header li {
+	display: inline-block;
 }
