@@ -18,15 +18,15 @@ import fr.eni.projet.bo.Adresse;
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 //	Liste des requetes
-	private final String SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEURS WHERE noUtilisateur ?";
+	private final String SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 	
 	private final String SELECT_ALL_UTILISATEUR = "SELECT * FROM UTILISATEURS";
 	
 	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,0)";
 	
-	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE noUtilisateur = ?";
+	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 	
-	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ? WHERE noUtilisateur = ?";
+	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ? WHERE no_utilisateur = ?";
 	
 	private final String CONNEXION_UTILISATEUR_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ? AND mot_de_passe = ?";
 	
@@ -40,12 +40,14 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	 */
 	@Override
 	public Utilisateur selectById(int pUtilisateurId) throws UtilisateurDALException, SQLException {
+		
 		Utilisateur utilisateur = null;
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
 			PreparedStatement pStmt = connexion.prepareStatement(SELECT_UTILISATEUR_BY_ID);
 		){
+			pStmt.setInt(1, pUtilisateurId);
 			
 			ResultSet rs = pStmt.executeQuery();
 			
@@ -66,7 +68,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				utilisateur = new Utilisateur(noUtilisateur,pseudo,nom,prenom,email,telephone,adresse,credit);
 			}
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new UtilisateurDALException("Impossible de récupérer l'utilisateur avec l'id "+pUtilisateurId, e);
 		}
+		
 		return utilisateur;
 	}
 
@@ -118,9 +124,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		){
 			Adresse adresseUtilisateur = pUtilisateur.getAdresse();
 			
-			
-//			private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,0)";
-			
 			pStmt.setString(1, pUtilisateur.getPseudo());
 			pStmt.setString(2, pUtilisateur.getNom());
 			pStmt.setString(3, pUtilisateur.getPrenom());
@@ -156,8 +159,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			Connection connexion = ConnectionProvider.getConnection();
 			PreparedStatement pStmt = connexion.prepareStatement(DELETE_UTILISATEUR);
 		){
-			pStmt.setInt(pUtilisateurId, pUtilisateurId);
+			pStmt.setInt(1, pUtilisateurId);
 			pStmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new UtilisateurDALException("Une erreur est survenue lors de la suppression de l'utilisateur");
@@ -215,7 +219,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pStmt.setString(2, pMotDePasse);
 			
 			ResultSet rs = pStmt.executeQuery();
-			
 			if(rs.next()) {
 				resultat = new Utilisateur(
 					rs.getInt("no_utilisateur"),
@@ -259,8 +262,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
-			throw new ConnexionException("Impossible de se connecter, vérifier les informations de connexion ");
-		}		
+			throw new ConnexionException("Impossible de se connecter, vérifier les informations de connexion",e);
+		}
+		
 		return resultat;
 	}
 }
