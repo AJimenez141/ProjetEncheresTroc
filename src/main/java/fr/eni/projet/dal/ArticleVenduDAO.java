@@ -55,6 +55,6 @@ public interface ArticleVenduDAO {
 	 * @return
 	 * @throws ArticleVenduDALException
 	 */
-	public List<ArticleVendu> selectionnerParCategorie(String pLibelleCategorie) throws ArticleVenduDALException;
+	public List<ArticleVendu> selectionnerParCategorie(int pNoCategorie) throws ArticleVenduDALException;
 	
 }
