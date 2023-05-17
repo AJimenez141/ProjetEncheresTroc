@@ -96,7 +96,7 @@ public class UtilisateurManager {
 	 * @throws SQLException
 	 * @throws ConnexionException
 	 */
-	public Utilisateur seConnecter(String pEmailOrPseudo, String pMotDePasse) throws UtilisateurDALException, SQLException, ConnexionException {
+	public Utilisateur seConnecter(String pEmailOrPseudo, String pMotDePasse) throws UtilisateurDALException, SQLException {
 		Utilisateur utilisateurConnecte;
 		
 		if(this.utilisateurDAO.seConnecterEmail(pEmailOrPseudo, pMotDePasse)  != null) {
