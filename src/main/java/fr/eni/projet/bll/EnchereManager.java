@@ -72,20 +72,4 @@ public class EnchereManager {
 	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException, ArticleVenduDALException {
 		this.enchereDAO.creerEnchere(pEnchere);
 	}
-	
-	/**
-	 * Remplace l'utilisateur ayant fait une enchere
-	 * par le dernier encherisseur
-	 * 
-	 * TODO - faire des controles pour verifier que l'enchere
-	 * ait un prix superieur
-	 * 
-	 * @param pEnchere
-	 * @throws EnchereDALException
-	 * @throws SQLException
-	 */
-	public void encherir(Enchere pEnchere) throws EnchereDALException, SQLException {
-		this.enchereDAO.encherir(pEnchere);
-	}
-	
 }

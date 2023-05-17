@@ -30,8 +30,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (?,?,?,?)";
 	
-	private static final String ENCHERIR = "UPDATE ENCHERES SET";
-	
 	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ? "
 			 + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
 			 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
@@ -187,33 +185,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		}
 		
 		return encheres;
-	}
-
-	/**
-	 * Mise à jour de l'enchere quand un utilisateur enchérit 
-	 * (jusqu'à la cloture de l'enchère)
-	 */
-	@Override
-	public void encherir(Enchere pEnchere) throws EnchereDALException, SQLException {
-		try(
-			Connection connexion = ConnectionProvider.getConnection();
-			PreparedStatement pStmt = connexion.prepareStatement(ENCHERIR);
-		){
-			int utilisateurId = pEnchere.getEncherisseur().getNoUtilisateur();
-			int articleId = pEnchere.getArticleVendu().getNoArticle();
-			
-			pStmt.setDate(1, Date.valueOf(pEnchere.getDateEnchere()));
-			pStmt.setInt(2, pEnchere.getMontant_enchere());
-			pStmt.setInt(3, utilisateurId);
-			pStmt.setInt(4, articleId);
-			
-			pStmt.executeUpdate();
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-			throw new EnchereDALException("Impossible de modifier l'enchère",e);
-		}
-		
 	}
 
 	/**
