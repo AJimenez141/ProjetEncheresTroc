@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Liste des enchères</title>
 <link href="../ressources/styles/main.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
@@ -14,7 +15,7 @@
 <body>
 	<h2>Liste des Enchères</h2>
 	
-	<div class="conteneur">
+	<div class="conteneur" id="ListeEncheresConnecte">
 		<div class="section">
 			<div>
 				
@@ -29,9 +30,9 @@
 						<option value="toutes">Toutes</option>
 					</select>
 					
-					<div>
-						<input type="radio" value="achats" name="choixListe"/>
-						<label name="labelAchats" for="achats">Achats</label>
+					<div id="divAchats">
+						<h3><input type="radio" value="achats" name="choixListe"/>
+						<label name="labelAchats" for="achats">Achats</label></h3>
 							<input type="checkbox" name="enchereOuvertes"/>
 							<label name="labelEncheresOuvertes" for="encheresOuvertes">enchères ouvertes</label>
 							
@@ -40,9 +41,10 @@
 							
 							<input type="checkbox" name="mesEncheresRemportees"/>
 							<label name="labelMesEncheresRemportees" for="mesEncheresRemportees">mes enchères remportées</label>
-						
-						<input type="radio" value="mesVentes" name="choixListe"/>
-						<label name="labelVentes" for="ventes">Mes Ventes</label>
+					</div>
+					<div id="divVentes">
+						<h3><input type="radio" value="mesVentes" name="choixListe"/>
+						<label name="labelVentes" for="ventes">Mes Ventes</label></h3>
 							<input type="checkbox" name="mesVentesEnCours"/>
 							<label name="labelMesVentesEnCours" for="mesVentesEnCours">mes ventes en cours</label>
 							
@@ -54,7 +56,7 @@
 					</div>
 				</form>
 			</div>
-			<div>
+			<div id="divBouton">
 				<button type="submit" id="btnRechercher" name="btnRechercher">Rechercher</button>
 			</div>
 		</div>

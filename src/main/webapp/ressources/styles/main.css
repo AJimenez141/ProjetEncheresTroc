@@ -35,6 +35,11 @@ h1 {
 	font-size: 60px;
 }
 
+h2 {
+	font-size: 40px;
+	text-align: center;
+}
+
 /* CLASSES */
 
 .conteneur {
@@ -59,7 +64,7 @@ h1 {
 	flex-wrap: wrap;
 }
 
- .section > * {
+.section > * {
 	flex: 1;
 } 
 
@@ -78,6 +83,7 @@ button {
 	border-radius: 0px;
 	
 	font-family: Oswald, sans-serif;
+	font-size: 2rem;
 }
 
 button:hover {
@@ -97,6 +103,25 @@ form {
 	margin: 0;
 	padding: 5rem;
 	background-color: var(--couleur_fond_2);
+}
+
+/* LISTE ENCHERES CONNECTE*/
+
+#ListeEncheresConnecte form {
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+
+#ListeEncheresConnecte form > *{
+	margin: 0 2rem 1rem 0;
+	width: 40%;
+}
+
+#ListeEncheresConnecte #divBouton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* VENDRE UN ARTICLE */
