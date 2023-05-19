@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Gestion des catégories</title>
-<link href="../ressources/styles/main_test.css" rel="stylesheet">
+<link href="../ressources/styles/main.css" rel="stylesheet">
 <link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
@@ -14,17 +14,18 @@
 
 <body>
 	
-	<h2>Gestion des catégories</h2>
+	<h2 class="ombre_foncee">Gestion des catégories</h2>
 	<br>
 	<div class="conteneur" id="GestionCategories">
 		<div class="section">
 			<table>
-				<caption>Liste des catégories</caption>
-				<tbody>
+				<thead class="couleur__fond_jaune">
 					<tr>
 						<th scope="col">Nom de la catégorie</th>
 		      			<th scope="col">Nombre d'articles</th>
 					</tr>
+				</thead>
+				<tbody class="couleur__fond_orange">
 					<tr>
 						<td>XXX</td>
 						<td>XXX</td>
@@ -39,11 +40,12 @@
 					</tr>
 				</tbody>
 			</table>
-			<br>
-			
-			<a href="AjouterCategorie.jsp">
-				<button class="button__enregistrer--color" id="btnAjouter" name="btnAjouter">Ajouter</button>
-			</a>
+
+			<div>
+				<a href="AjouterCategorie.jsp">
+					<button id="boutonAjouter" class="button__enregistrer--color" id="btnAjouter" name="btnAjouter">Ajouter</button>
+				</a>			
+			</div>
 		</div>
 	</div>
 </body>

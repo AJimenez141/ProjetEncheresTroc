@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Gestion des utilisateurs</title>
-<link href="../ressources/styles/main_test.css" rel="stylesheet">
+<link href="../ressources/styles/main.css" rel="stylesheet">
 <link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
@@ -14,13 +14,12 @@
 
 <body>
 	
-	<h2>Gestion des utilisateurs</h2>
+	<h2 class="ombre_foncee">Gestion des utilisateurs</h2>
 	
 	<div class="conteneur" id="GestionUtilisateurs">
 		<div class="section">
 			<table>
-				<caption>Liste des utilisateurs</caption>
-				<tbody>
+				<thead class="couleur__fond_jaune">
 					<tr>
 						<th scope="col">Pseudo</th>
 		      			<th scope="col">Nom</th>
@@ -31,8 +30,10 @@
 		      			<th scope="col">Code postal</th>
 		      			<th scope="col">Ville</th>
 		      			<th scope="col">Etat</th>
-					</tr>
-					<tr>
+		      		</tr>
+				</thead>
+				<tbody>
+					<tr class="couleur__fond_orange">
 						<td>XXX</td>
 						<td>XXX</td>
 						<td>XXX</td>

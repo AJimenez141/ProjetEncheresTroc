@@ -60,10 +60,28 @@ a:hover {
 	color: var(--couleur_bouton_hover);
 }
 
+th, td {
+	border: 2px solid var(--couleur_encadre);
+	padding: 0;
+}
+
+table button {
+	margin: 0;
+	padding: 0;
+	display: block;
+  	width: 100%;
+  	min-width: 4em;
+}
+
+td, th {
+	min-width: 4em;
+	text-align: center;
+}
+
 /* CLASSES */
 
 .conteneur {
-	margin: 0 5rem 5rem 5rem;
+	/* margin: 0 5rem 5rem 5rem; */
 	padding: 0 5rem 5rem 5rem;
 	width: 180rem;
 	
@@ -86,6 +104,14 @@ a:hover {
 
 .section > * {
 	flex: 1;
+}
+
+.couleur__fond_jaune {
+	background-color: var(--couleur_bouton_hover);
+}
+
+.couleur__fond_orange {
+	background-color: var(--couleur_fond_2);
 }
 
 .ombre_claire {
@@ -219,5 +245,16 @@ form {
 	display: inline-block;
 	font-size: 1.5em;
 	
+	text-align: center;	
 	margin: 0 1em;
+}
+
+/* GESTION DES CATEGORIES */
+
+#GestionCategories .section {
+	flex-direction: column;
+}
+
+#GestionCategories #boutonAjouter {
+	margin: 1em 2px 2px 2px;
 }

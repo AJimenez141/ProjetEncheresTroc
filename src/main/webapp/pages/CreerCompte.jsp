@@ -13,7 +13,6 @@
 </header>
 
 <body>
-
 	<h2>Mon profil</h2>
 	<div class="conteneur" id="CreerCompte">
 		<div class="section">
