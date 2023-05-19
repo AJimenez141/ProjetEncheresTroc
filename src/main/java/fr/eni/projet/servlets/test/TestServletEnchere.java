@@ -1,6 +1,7 @@
 package fr.eni.projet.servlets.test;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Enchere;
 import fr.eni.projet.bo.Utilisateur;
+import fr.eni.projet.dal.ArticleVenduDALException;
+import fr.eni.projet.dal.UtilisateurDALException;
 
 @WebServlet("/TestServletEnchere")
 public class TestServletEnchere extends HttpServlet {
@@ -29,25 +32,37 @@ public class TestServletEnchere extends HttpServlet {
 		
 		//=======================TEST 1 - INSERTION===========================================
 
-		Utilisateur encherisseur = null;
-		ArticleVendu articleVendu = null;
-		
-		try {
-			encherisseur = UtilisateurManager.getInstance().recupererUnUtilisateur(8);
-			articleVendu = ArticleVenduManager.getInstance().recupererUnArticleVendu(3);
-		} catch (BLLException e) {
-			e.printStackTrace();
-		} 
-		
-		Enchere uneEnchere = new Enchere(LocalDate.now(), 45, encherisseur, articleVendu);
-		
-		try {
-			EnchereManager.getInstance().creerEnchere(uneEnchere);
-			response.getWriter().append("Enchere - " + uneEnchere.getMontant_enchere());
-		} catch (BLLException e) {
-			response.getWriter().append("Served at: ").append(e.toString());
-			e.printStackTrace();
-		} 
+//		Utilisateur encherisseur = null;
+//		ArticleVendu articleVendu = null;
+//		
+//
+//			try {
+//				encherisseur = UtilisateurManager.getInstance().recupererUnUtilisateur(2);
+//			} catch (UtilisateurDALException e) {
+//				e.printStackTrace();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} catch (BLLException e) {
+//				e.printStackTrace();
+//			}
+//			try {
+//				articleVendu = ArticleVenduManager.getInstance().recupererUnArticleVendu(1);
+//			} catch (ArticleVenduDALException e) {
+//				e.printStackTrace();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//
+//		
+//		Enchere uneEnchere = new Enchere(LocalDate.now(), 46, encherisseur, articleVendu);
+//		
+//		try {
+//			EnchereManager.getInstance().creerEnchere(uneEnchere);
+//			response.getWriter().append("Enchere - " + uneEnchere.getMontant_enchere());
+//		} catch (BLLException e) {
+//			response.getWriter().append("Served at: ").append(e.toString());
+//			e.printStackTrace();
+//		} 
 		
 		//=======================TEST 2 - SELECT BY ID=======================================================
 		
@@ -96,7 +111,7 @@ public class TestServletEnchere extends HttpServlet {
 		
 //			Enchere enchere;
 //			try {
-//				enchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(3);
+//				enchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(2);
 //				
 //				
 //				response.getWriter().append(enchere != null ? enchere.toString()+"\n" : "Pas encore d'enchères pour cet article");

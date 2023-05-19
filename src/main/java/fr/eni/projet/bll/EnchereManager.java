@@ -130,6 +130,12 @@ public class EnchereManager {
 		if((encherisseur.getCredit() - pEnchere.getMontant_enchere()) < 0) {
 			sb.append("Pas assez de crédits pour cette enchère. \n");
 		}
+		
+		//Check montant supérieur à prix initial
+		if(pEnchere.getMontant_enchere() < articleVendu.getMiseAPrix()) {
+			sb.append("Le montant doit être supérieur au prix initial. \n");
+		}
+		
 		//Check montant enchère supérieure
 		if(enchereMax != null) {
 			if(pEnchere.getMontant_enchere() < enchereMax.getMontant_enchere()) {
