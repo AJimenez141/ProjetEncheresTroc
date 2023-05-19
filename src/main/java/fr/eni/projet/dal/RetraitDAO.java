@@ -14,6 +14,6 @@ public interface RetraitDAO {
 	 * @throws DALException
 	 * @throws SQLException
 	 */
-	public void creerRetraitArticle(Retrait pRetrait) throws RetraitDALException, DALException, SQLException;
+	public void creerRetraitArticle(Retrait pRetrait) throws RetraitDALException, SQLException;
 
 }

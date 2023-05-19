@@ -16,10 +16,10 @@ import fr.eni.projet.dal.RetraitDAO;
 public class RetraitDAOJdbcImpl implements RetraitDAO {
 	
 //	Requetes
-	private final String INSERT_RETRAIT = "INSERT INTO RETRAIT(rue,code_postal, ville) VALUES (?,?,?)";
+	private final String INSERT_RETRAIT = "INSERT INTO RETRAITS(rue,code_postal,ville, no_article) VALUES (?,?,?,?)";
 
 	@Override
-	public void creerRetraitArticle(Retrait pRetrait) throws RetraitDALException, DALException, SQLException {
+	public void creerRetraitArticle(Retrait pRetrait) throws RetraitDALException, SQLException {
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
 			PreparedStatement pStmt = connexion.prepareStatement(INSERT_RETRAIT);		
@@ -34,7 +34,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 			pStmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new RetraitDALException("Impossible de créer le retrait");
+			throw new RetraitDALException("Impossible de créer le retrait", e);
 		}
 	}
 
