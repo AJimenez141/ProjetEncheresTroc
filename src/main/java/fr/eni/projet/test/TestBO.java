@@ -35,7 +35,7 @@ public abstract class TestBO {
 		LocalDate dateFinEnchere = LocalDate.of(2023, 06, 15);
 
 		Categorie categorieArticle = new Categorie(1, "Ustensiles de cuisine");
-		ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.", dateDebutEnchere, dateFinEnchere, 20, 599, true, vendeur, categorieArticle);
+		ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.", dateDebutEnchere, dateFinEnchere, 20, 599, vendeur, categorieArticle);
 		
 		System.out.println(article);
 

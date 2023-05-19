@@ -61,7 +61,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
 				int miseAPrix 				= rs.getInt("prix_initial");
 				int prixVente 				= rs.getInt("prix_vente");
-				boolean enVente 			= rs.getBoolean("en_vente");
 				
 				int noUtilisateur  			= rs.getInt("no_utilisateur");
 				String pseudo				= rs.getString("pseudo");
@@ -81,7 +80,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
 				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
-				article = new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie);
+				article = new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,vendeur,categorie);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

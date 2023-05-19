@@ -75,7 +75,7 @@ public class TestServletArticleVendu extends HttpServlet {
 //		TEST INSERTION
 			
 		try {
-			ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",dateDebutEnchere, dateFinEnchere, 20, 599, true, utilisateurJJ, art);
+			ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",dateDebutEnchere, dateFinEnchere, 20, 599, utilisateurJJ, art);
 			
 			articleManager.ajouterArticleVendu(article);
 			response.getWriter().append("Article "+article.getDescription()+" correctement inséré");
