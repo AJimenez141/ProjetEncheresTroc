@@ -192,23 +192,23 @@ form {
 	align-items: center;
 }
 
-/* VENDRE UN ARTICLE */
+/* VENDRE UN ARTICLE - ENCHERE NON COMMENCEE */
 
-#VendreUnArticle form {
+#VendreUnArticle form, #EnchereNonCommencee form {
 	display: flex;
 	flex-wrap: wrap;
 	
 }
-#VendreUnArticle div:nth-child(2) {
+#VendreUnArticle div:nth-child(2), #EnchereNonCommencee div:nth-child(2) {
 	flex: 2;
 }
 
-#VendreUnArticle form > *{
+#VendreUnArticle form > *, #EnchereNonCommencee form > *{
 	margin: 0 2rem 1rem 0;
 	width: 40%;
 }
 
-#VendreUnArticle h3 {
+#VendreUnArticle h3, #EnchereNonCommencee h3 {
 	margin-top: 2rem;
 }
 

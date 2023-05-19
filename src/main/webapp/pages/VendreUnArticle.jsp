@@ -30,6 +30,7 @@
 					<input type="text" name="description"/>
 					
 					<label name="labelCategorie" for="categorie">Catégorie : </label>
+					
 					<select>
 						<option value=""></option>
 					</select>
