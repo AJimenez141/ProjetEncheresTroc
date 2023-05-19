@@ -8,13 +8,14 @@
 <link href="../ressources/styles/main.css" rel="stylesheet">
 <link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
-	<%-- <jsp:include page="Header.jsp" /> --%>
 <header>
-	<a href="#"><h1 class="ombre_foncee">ENI-Enchères</h1></a>
-	<ul>
-		<li><a class="ombre_foncee" href="CreerCompte.jsp">S'inscrire</a></li>
-		<li><a class="ombre_foncee" href="Connexion.jsp">Se Connecter</a></li>
-	</ul>
+	<div class="conteneur" id="Header">
+		<a href="#"><h1 class="ombre_foncee">Tacos - Enchères</h1></a>
+		<ul>
+			<li><a class="ombre_foncee" href="CreerCompte.jsp">S'inscrire</a></li>
+			<li><a class="ombre_foncee" href="Connexion.jsp">Se Connecter</a></li>
+		</ul>
+	</div>
 </header>
 <body>
 	<h2 class="ombre_foncee">Liste des Enchères</h2>

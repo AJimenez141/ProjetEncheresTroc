@@ -9,7 +9,9 @@
 <link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
-	<h1>ENI - Enchères</h1>
+	<div class="conteneur" id="Header">
+		<a href="AccueilNonConnecte.jsp"><h1 class="ombre_foncee">Tacos - Enchères</h1></a>
+	</div>
 </header>
 
 <body>
