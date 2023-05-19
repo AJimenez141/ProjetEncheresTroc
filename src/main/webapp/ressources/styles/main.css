@@ -8,15 +8,15 @@ html {
   
 	--couleur_fond: #FAF0CA;
 	--couleur_fond_2: #E58E54;
-	--couleur_texte: #0C2134;
-	--couleur_encadre: #1A2123;
-	--couleur_souligne: #1A2123;
+	--couleur_texte: #4C210C;
+	--couleur_encadre: #4C210C;
+	--couleur_souligne: #4C210C;
 	
 	
 	--couleur_bouton_supprimer: #F95738;
 	--couleur_bouton_enregistrer: #55B44B;
 	--couleur_bouton_general: #BA9B80;
-	--couleur_bouton_texte: #1A2123;
+	--couleur_bouton_texte: #4C210C;
 	--couleur_bouton_hover: #FFC336;
 	
 	font-family: 'Oswald', sans-serif;
@@ -83,7 +83,6 @@ td, th {
 .conteneur {
 	/* margin: 0 5rem 5rem 5rem; */
 	padding: 0 5rem 5rem 5rem;
-	width: 180rem;
 	justify-content: center;
 }
 
