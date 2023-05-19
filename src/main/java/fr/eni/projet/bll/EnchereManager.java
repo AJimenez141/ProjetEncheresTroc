@@ -7,6 +7,7 @@ import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Enchere;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ArticleVenduDALException;
+import fr.eni.projet.dal.DAOFactory;
 import fr.eni.projet.dal.EnchereDALException;
 import fr.eni.projet.dal.EnchereDAO;
 
@@ -16,8 +17,12 @@ public class EnchereManager {
 	private static EnchereManager instance;
 	
 	/**
-	 * Recuperer EnchereDAO via la Factory
+	 * Recuperer categorieDAO via la Factory
 	 */
+	private EnchereManager() {
+		enchereDAO = DAOFactory.recupererEnchereDAO();
+	}
+	
 	public static EnchereManager getInstance() {
 		if(instance==null) {
 			instance = new EnchereManager();
@@ -86,6 +91,7 @@ public class EnchereManager {
 	 * @throws ArticleVenduDALException
 	 */
 	public void creerEnchere(Enchere pEnchere) throws BLLException {
+		validerEnchere(pEnchere);
 		try {
 			enchereDAO.creerEnchere(pEnchere);
 		} catch (EnchereDALException e) {
@@ -102,13 +108,11 @@ public class EnchereManager {
 	 * @throws SQLException
 	 */
 	public Enchere recupererEnchereLaPlusHaute(int pEnchereId) throws BLLException {
-		Enchere enchereMax = null;
 		try {
-			enchereMax = enchereDAO.selectMaxEnchereByArticle(pEnchereId);
+			return enchereDAO.selectMaxEnchereByArticle(pEnchereId);
 		} catch (EnchereDALException e) {
 			throw new BLLException(e.getMessage());
 		}
-		return enchereMax;
 	}
 	
 	private void validerEnchere(Enchere pEnchere) throws BLLException{
@@ -126,15 +130,12 @@ public class EnchereManager {
 		if((encherisseur.getCredit() - pEnchere.getMontant_enchere()) < 0) {
 			sb.append("Pas assez de crédits pour cette enchère. \n");
 		}
-		//Check montant enchère suppérieure
+		//Check montant enchère supérieure
 		if(enchereMax != null) {
 			if(pEnchere.getMontant_enchere() < enchereMax.getMontant_enchere()) {
-				sb.append("L'enchère doit être suppérieure à la dernière enchère. \n");
+				sb.append("L'enchère doit être supérieure à la dernière enchère. \n");
 			}
 		}
-		
-		
-		
 		
 		if(sb.length()>0) {
 			throw new BLLException(sb.toString());

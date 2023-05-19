@@ -4,6 +4,7 @@ import java.util.List;
 import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.dal.CategorieDALException;
 import fr.eni.projet.dal.CategorieDAO;
+import fr.eni.projet.dal.DAOFactory;
 
 public class CategorieManager {
 	
@@ -13,6 +14,10 @@ public class CategorieManager {
 	/**
 	 * Recuperer categorieDAO via la Factory
 	 */
+	private CategorieManager() {
+		categorieDAO = DAOFactory.recupererCategorieDAO();
+	}
+	
 	public static CategorieManager getInstance() {
 		if(instance==null) {
 			instance = new CategorieManager();
