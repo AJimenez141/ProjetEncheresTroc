@@ -1,8 +1,6 @@
 package fr.eni.projet.servlets.test;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,14 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.bll.EnchereManager;
-import fr.eni.projet.bll.UtilisateurManager;
-import fr.eni.projet.bll.ArticleVenduManager;
+import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bo.Enchere;
-import fr.eni.projet.bo.Utilisateur;
-import fr.eni.projet.dal.ArticleVenduDALException;
-import fr.eni.projet.dal.EnchereDALException;
-import fr.eni.projet.dal.UtilisateurDALException;
-import fr.eni.projet.bo.ArticleVendu;
 
 @WebServlet("/TestServletEnchere")
 public class TestServletEnchere extends HttpServlet {
@@ -29,10 +21,6 @@ public class TestServletEnchere extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		EnchereManager enchereManager = new EnchereManager();
-		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		ArticleVenduManager articleVenduManager = new ArticleVenduManager();
 		
 		//=======================TEST 1 - INSERTION===========================================
 
@@ -79,19 +67,15 @@ public class TestServletEnchere extends HttpServlet {
 		
 //		//=======================TEST 3 - SELECT ALL=========================================================
 		
-//		try {
-//			List<Enchere> lesEncheres = enchereManager.recupererLesEncheres();
-//			for(Enchere enchere1 : lesEncheres) {
-//				response.getWriter().append(enchere1.toString());
-//			}
-//		} catch (EnchereDALException e) {
-//			response.getWriter().append("Served at: ").append(e.toString());
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (ArticleVenduDALException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			List<Enchere> lesEncheres = EnchereManager.getInstance().recupererLesEncheres();
+			for(Enchere enchere1 : lesEncheres) {
+				response.getWriter().append(enchere1.toString());
+			}
+		} catch (BLLException e) {
+			response.getWriter().append("Served at: ").append(e.toString());
+			e.printStackTrace();
+		} 
 		
 //		//=======================TEST 4 - SELECT ALL BY UTILISATEUR==========================================
 	
@@ -113,12 +97,13 @@ public class TestServletEnchere extends HttpServlet {
 		
 //		//=======================TEST 4 - selectMaxEnchereByArticle ==========================================
 		
-//		try {
-//			Enchere enchere = enchereManager.recupererEnchereLaPlusHaute(3);
-//			response.getWriter().append(enchere.toString()+"\n");
-//		} catch (EnchereDALException | SQLException e) {
-//			e.printStackTrace();
-//		}
-		
+//			Enchere enchere;
+//			try {
+//				enchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(3);
+//				response.getWriter().append(enchere.toString()+"\n");
+//			} catch (BLLException e) {
+//				response.getWriter().append(e.toString());
+//				e.printStackTrace();
+//			}
 	}
 }

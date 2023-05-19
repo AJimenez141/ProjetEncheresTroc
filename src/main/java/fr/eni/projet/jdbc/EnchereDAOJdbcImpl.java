@@ -94,7 +94,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Recuperer toutes les enchères
 	 */
 	@Override
-	public List<Enchere> selectAll() throws EnchereDALException, SQLException {
+	public List<Enchere> selectAll() throws EnchereDALException {
 		List<Enchere> encheres = new ArrayList<>();
 		ArticleVendu articleVendu = null;
 		
@@ -144,7 +144,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Recuperer toutes les encheres d'un utilisateur
 	 */
 	@Override
-	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException, SQLException {
+	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException {
 		
 		List<Enchere> encheres = new ArrayList<>();
 		try(
@@ -194,7 +194,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Selectionner une enchere par son id
 	 */
 	@Override
-	public Enchere selectById(int pEnchereId) throws EnchereDALException, SQLException {
+	public Enchere selectById(int pEnchereId) throws EnchereDALException {
 		Enchere enchere = null;
 		
 		try(
@@ -243,7 +243,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Creation d'une enchere
 	 */
 	@Override
-	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException {
+	public void creerEnchere(Enchere pEnchere) throws EnchereDALException {
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
 			PreparedStatement pStmt = connexion.prepareStatement(INSERT_ENCHERE, Statement.RETURN_GENERATED_KEYS);	
@@ -275,7 +275,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Recuperer l'enchère la plus haute en cours pour un article donné
 	 */
 	@Override
-	public Enchere selectMaxEnchereByArticle(int pArticleVenduId) throws EnchereDALException, SQLException {
+	public Enchere selectMaxEnchereByArticle(int pArticleVenduId) throws EnchereDALException {
 		Enchere enchere = null;
 		
 		try(
@@ -315,7 +315,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
-			throw new EnchereDALException("Impossible de récupérer les enchères", e);
+			throw new EnchereDALException("Impossible de récupérer le'enchères", e);
 		}
 		
 		return enchere;

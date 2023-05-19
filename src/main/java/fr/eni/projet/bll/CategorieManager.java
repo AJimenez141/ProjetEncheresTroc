@@ -1,12 +1,9 @@
 package fr.eni.projet.bll;
 
-import java.sql.SQLException;
 import java.util.List;
-
 import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.dal.CategorieDALException;
 import fr.eni.projet.dal.CategorieDAO;
-import fr.eni.projet.dal.DAOFactory;
 
 public class CategorieManager {
 	
