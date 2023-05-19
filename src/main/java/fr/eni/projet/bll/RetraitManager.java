@@ -28,7 +28,7 @@ public class RetraitManager {
 	 * @throws DALException
 	 * @throws SQLException
 	 */
-	public void creerRetrait(Retrait pRetrait) throws RetraitDALException, DALException, SQLException {
+	public void creerRetrait(Retrait pRetrait) throws RetraitDALException, SQLException {
 		this.retraitDAO.creerRetraitArticle(pRetrait);
 	}
 }

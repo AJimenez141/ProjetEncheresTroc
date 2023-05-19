@@ -34,29 +34,21 @@ public class TestServletRetrait extends HttpServlet {
 		
 		ArticleVendu articleVendu = null;
 		
+//		RECUPERATION DE L'ARTICLE | OK
 		try {
-			articleVendu = articleVenduManager.recupererUnArticleVendu(1);
-			
-		} catch (ArticleVenduDALException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+			articleVendu = articleVenduManager.recupererUnArticleVendu(3);
+		} catch (ArticleVenduDALException | SQLException e) {
 			e.printStackTrace();
 		}
-		
 		Utilisateur vendeur = articleVendu.getVendeur();
 		
+//		CREATION DU RETRAIT
 		Retrait unRetrait = new Retrait(vendeur.getAdresse(), articleVendu);
 		
 		try {
 			retraitManager.creerRetrait(unRetrait);
-			
 			response.getWriter().append("Served at: ").append("Lieu de retrait ajouté");
-		} catch (RetraitDALException e) {
-			response.getWriter().append("Served at: ").append(e.toString());
-			e.printStackTrace();
-		} catch (DALException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (RetraitDALException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
