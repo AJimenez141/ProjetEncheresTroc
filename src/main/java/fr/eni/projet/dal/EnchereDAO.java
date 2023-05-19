@@ -28,7 +28,8 @@ public interface EnchereDAO {
 	/**
 	 * selectionner toutes les encheres en cours
 	 * 
-	 * @return
+	 * @param pUtilisateurId
+	 * @return Enchere
 	 * @throws EnchereDALException
 	 */
 	public List<Enchere> selectAll() throws EnchereDALException, SQLException;
@@ -36,8 +37,6 @@ public interface EnchereDAO {
 	/**
 	 * selectionner les encheres d'un utilisateur
 	 * 
-	 * @param pUtilisateurId
-	 * @return
 	 * @throws EnchereDALException
 	 */
 	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException,SQLException;
@@ -45,10 +44,20 @@ public interface EnchereDAO {
 	/**
 	 * Creer une nouvelle enchere
 	 * 
-	 * @param pEnchere
+	 * @param pUtilisateurId
 	 * @throws EnchereDALException
 	 * @throws SQLException
 	 * @throws ArticleVenduDALException
 	 */
 	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException;
+	
+	/**
+	 * selectionner l'enchère la plus haute en cours pour un article donné
+	 * 
+	 * @param pArticleVenduId
+	 * @throws EnchereDALException
+	 * @throws SQLException
+	 * @throws ArticleVenduDALException
+	 */
+	public Enchere selectMaxEnchereByArticle(int pArticleVenduId) throws EnchereDALException,SQLException;
 }

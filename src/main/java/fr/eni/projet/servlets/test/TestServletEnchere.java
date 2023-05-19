@@ -40,7 +40,7 @@ public class TestServletEnchere extends HttpServlet {
 		ArticleVendu articleVendu = null;
 		
 		try {
-			encherisseur = utilisateurManager.recupererUnUtilisateur(1);
+			encherisseur = utilisateurManager.recupererUnUtilisateur(2);
 			articleVendu = articleVenduManager.recupererUnArticleVendu(1);
 			
 			
@@ -52,7 +52,7 @@ public class TestServletEnchere extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		Enchere uneEnchere = new Enchere(LocalDate.now(), 25, encherisseur, articleVendu);
+		Enchere uneEnchere = new Enchere(LocalDate.now(), 45, encherisseur, articleVendu);
 		
 		try {
 			enchereManager.creerEnchere(uneEnchere);
@@ -69,55 +69,55 @@ public class TestServletEnchere extends HttpServlet {
 		
 		//=======================TEST 2 - SELECT BY ID=======================================================
 		
-		try {
-			Enchere enchere = enchereManager.recupererUneEnchere(1);
-			
-			response.getWriter().append("Served at: ").append(enchere.toString());
-		} catch (EnchereDALException e) {
-			response.getWriter().append("Served at: ").append(e.toString());
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ArticleVenduDALException e) {
-			e.printStackTrace();
-		}		
-		
-		//=======================TEST 3 - SELECT ALL=========================================================
-		
-		try {
-			List<Enchere> lesEncheres = enchereManager.recupererLesEncheres();
-			
-			for(Enchere enchere1 : lesEncheres) {
-				response.getWriter().append("\n").append(enchere1.toString());
-			}
-			
-		} catch (EnchereDALException e) {
-			response.getWriter().append("Served at: ").append(e.toString());
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ArticleVenduDALException e) {
-			e.printStackTrace();
-		}
-		
-		
-		//=======================TEST 4 - SELECT ALL BY UTILISATEUR==========================================
-		
-		try {
-			List<Enchere> lesEncheresDunUtilisateur = enchereManager.recupererLesEncheresUtilisateur(1);
-			
-			for(Enchere enchere2 : lesEncheresDunUtilisateur) {
-				response.getWriter().append("\n").append(enchere2.toString());
-			}
-			
-		} catch (EnchereDALException e) {
-			response.getWriter().append("Served at: ").append(e.toString());
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ArticleVenduDALException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Enchere enchere = enchereManager.recupererUneEnchere(1);
+//			
+//			response.getWriter().append("Served at: ").append(enchere.toString());
+//		} catch (EnchereDALException e) {
+//			response.getWriter().append("Served at: ").append(e.toString());
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (ArticleVenduDALException e) {
+//			e.printStackTrace();
+//		}		
+//		
+//		//=======================TEST 3 - SELECT ALL=========================================================
+//		
+//		try {
+//			List<Enchere> lesEncheres = enchereManager.recupererLesEncheres();
+//			
+//			for(Enchere enchere1 : lesEncheres) {
+//				response.getWriter().append("\n").append(enchere1.toString());
+//			}
+//			
+//		} catch (EnchereDALException e) {
+//			response.getWriter().append("Served at: ").append(e.toString());
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (ArticleVenduDALException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		//=======================TEST 4 - SELECT ALL BY UTILISATEUR==========================================
+//		
+//		try {
+//			List<Enchere> lesEncheresDunUtilisateur = enchereManager.recupererLesEncheresUtilisateur(1);
+//			
+//			for(Enchere enchere2 : lesEncheresDunUtilisateur) {
+//				response.getWriter().append("\n").append(enchere2.toString());
+//			}
+//			
+//		} catch (EnchereDALException e) {
+//			response.getWriter().append("Served at: ").append(e.toString());
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (ArticleVenduDALException e) {
+//			e.printStackTrace();
+//		}
 		
 		
 	}
