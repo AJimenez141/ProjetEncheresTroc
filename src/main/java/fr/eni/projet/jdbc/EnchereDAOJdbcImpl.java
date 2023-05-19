@@ -33,6 +33,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ? "
 			 + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
 			 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	
+	private static final String SELECT_MAX_ENCHERE_BY_ARTICLE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur WHERE no_article = ? AND montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES)";
 
 	/**
 	 * retourne un article en fonction de son ID
@@ -264,4 +266,57 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			throw new EnchereDALException("Impossible d'insérer l'enchère",e);
 		}
 	}
+	
+	
+	
+	/**
+	 * Recuperer l'enchère la plus haute en cours pour un article donné
+	 */
+	@Override
+	public Enchere selectMaxEnchereByArticle(int pArticleVenduId) throws EnchereDALException, SQLException {
+		Enchere enchere = null;
+		
+		try(
+			Connection connexion = ConnectionProvider.getConnection();
+		){
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_MAX_ENCHERE_BY_ARTICLE);
+			pStmt.setInt(1, pArticleVenduId);
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+//				Utilisateur
+				int noUtilisateur  	= rs.getInt("no_utilisateur");
+				String pseudo		= rs.getString("pseudo");
+				String nom			= rs.getString("nom");
+				String prenom		= rs.getString("prenom");
+				String email		= rs.getString("email");
+				String telephone	= rs.getString("telephone");
+				String rue			= rs.getString("rue");
+				String code_postal	= rs.getString("code_postal");
+				String ville		= rs.getString("ville");
+				int credit			= rs.getInt("credit");
+				
+				Adresse adresse 	= new Adresse(rue,code_postal,ville);
+				
+				Utilisateur utilisateur = new Utilisateur(noUtilisateur,pseudo,nom,prenom,email,telephone,adresse,credit);
+				
+//				ArticleVendu				
+				ArticleVendu articleVendu = selectArticleById(rs.getInt("no_article"));	
+				
+//				Enchere
+				int noEnchere				= rs.getInt("no_enchere");
+				LocalDate dateEnchere 		= rs.getDate("date_enchere").toLocalDate();
+				int montantEnchere			= rs.getInt("montant_enchere");
+				
+				enchere = new Enchere(noEnchere, dateEnchere, montantEnchere, utilisateur, articleVendu);
+			} 
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			throw new EnchereDALException("Impossible de récupérer les enchères", e);
+		}
+		
+		return enchere;
+	}
+	
 }
