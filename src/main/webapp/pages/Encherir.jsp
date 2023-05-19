@@ -5,8 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Enchérir</title>
-<link href="../ressources/styles/main_test.css" rel="stylesheet">
-
+<link href="../ressources/styles/main.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
@@ -18,59 +18,49 @@
 	<div class="conteneur" id="Encherir">
 		<div class="section">
 			<div>
-				<img width="200" height="200">
+				<img src="../ressources/images/tacos_dos.jpg" alt="J'ai faim !">
 			</div>
 			<div>
-					XXX
-			
-				<div>
-					<label for="description">Description :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="categorie">Catégorie :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="offre">Meilleur offre :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="prix">Mise à prix :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="finEnchere">Fin de l'enchère :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="retrait">Retrait :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="vendeur">Vendeur :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="proposition">Ma proposition :</label>
-					<input type="number">
-					<button class="button__enregistrer--color" id="btnEncherir" name="btnEncherir">Enchérir</button>
-				</div>
-				<br>
+				<form action="">
+					<div>
+						XXX
+						<br>
+						<br>
+							<label for="description">Description :</label>
+							XXX						
+						<br>
+						<br>
+							<label for="categorie">Catégorie :</label>
+							XXX
+						<br>
+						<br>
+							<label for="offre">Meilleur offre :</label>
+							XXX
+						<br>
+						<br>
+							<label for="prix">Mise à prix :</label>
+							XXX
+						<br>
+						<br>
+							<label for="finEnchere">Fin de l'enchère :</label>
+							XXX
+						<br>
+						<br>
+							<label for="retrait">Retrait :</label>
+							XXX
+						<br>
+						<br>
+							<label for="vendeur">Vendeur :</label>
+							XXX
+						<br>
+						<br>
+							<label for="proposition">Ma proposition :</label>
+							<input type="number">
+						<br>
+						<br>
+							<button class="bouton__enregistrer--couleur" id="btnEncherir" name="btnEncherir">Enchérir</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

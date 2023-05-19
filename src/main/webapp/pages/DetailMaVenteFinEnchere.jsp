@@ -5,8 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Détail fin enchère</title>
-<link href="../ressources/styles/main_test.css" rel="stylesheet">
-
+<link href="../ressources/styles/main.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
@@ -18,50 +18,43 @@
 	<div class="conteneur" id="DetailMaVenteFinEnchere">
 		<div class="section">
 			<div>
-				<img width="200" height="200">
+				<img src="../ressources/images/tacos_tres.jpg" alt="Manger, manger !">
 			</div>
 			<div>
-					XXX
-			
-				<div>
-					<label for="description">Description :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="offre">Meilleur offre :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="prix">Mise à prix :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="finEnchere">Fin de l'enchère :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="retrait">Retrait :</label>
-					XXX
-				</div>
-				<br>
-			
-				<div>
-					<label for="vendeur">Vendeur :</label>
-					XXX
-				</div>
-				<br>
-			
-				<a href="ListeEncheresConnecte.jsp">
-					<button id="btnRetraitEffec" class="button__enregistrer--color" name="btnRetraitEffec">Retrait effectué</button>
-				</a>
+				<form>
+					<div>
+							XXX
+						<br>
+						<br>
+							<label for="description">Description :</label>
+							XXX
+						<br>
+						<br>
+							<label for="offre">Meilleur offre :</label>
+							XXX
+						<br>
+						<br>
+							<label for="prix">Mise à prix :</label>
+							XXX
+						<br>
+						<br>
+							<label for="finEnchere">Fin de l'enchère :</label>
+							XXX
+						<br>
+						<br>
+							<label for="retrait">Retrait :</label>
+							XXX
+						<br>
+						<br>
+							<label for="vendeur">Vendeur :</label>
+							XXX
+						<br>
+						<br>
+						<a href="ListeEncheresConnecte.jsp">
+							<button id="btnRetraitEffec" class="bouton__enregistrer--couleur" name="btnRetraitEffec">Retrait effectué</button>
+						</a>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

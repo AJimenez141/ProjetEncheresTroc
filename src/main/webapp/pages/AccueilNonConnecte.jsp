@@ -6,23 +6,25 @@
 <meta charset="ISO-8859-1">
 <title>Accueil</title>
 <link href="../ressources/styles/main.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
-	<%-- <jsp:include page="Header.jsp" /> --%>
 <header>
-	<h1>ENI-Enchères</h1>
-	<ul>
-		<li><a href="CreerCompte.jsp">S'inscrire</a></li>
-		<li><a href="Connexion.jsp">Se Connecter</a></li>
-	</ul>
+	<div class="conteneur" id="Header">
+		<a href="#"><h1 class="ombre_foncee">Tacos - Enchères</h1></a>
+		<ul>
+			<li><a class="ombre_foncee" href="CreerCompte.jsp">S'inscrire</a></li>
+			<li><a class="ombre_foncee" href="Connexion.jsp">Se Connecter</a></li>
+		</ul>
+	</div>
 </header>
 <body>
-	<h2>Liste des Enchères</h2>
+	<h2 class="ombre_foncee">Liste des Enchères</h2>
 	<div class="conteneur" id="AccueilNonConnecte">
 		<div class="section">
 			<div>
-				<h3>Filtres : </h3>
 				
 				<form action="<%=request.getContextPath()%>/AccueilNonConnecte" method="GET">
+					<h3>Filtres : </h3>
 	
 					<input type="text" name="filtre"/>
 					
@@ -33,7 +35,7 @@
 		
 				</form>
 			</div>
-			<div>
+			<div id="divBouton">
 				<button class="couleur__bouton--general"type="submit" id="btnRechercher" name="btnRechercher">Rechercher</button>
 			</div>
 		</div>

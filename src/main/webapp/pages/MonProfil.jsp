@@ -5,8 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Mon Profil</title>
-<link href="../ressources/styles/main_test.css" rel="stylesheet">
-
+<link href="../ressources/styles/main.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
@@ -15,37 +15,42 @@
 <body>
 	
 	<div class="conteneur" id="MonProfil">
-		<div class="section">
-			<div>
+		<div class="section" id="section_profil">
 				<label for="pseudo">Pseudo :</label>
 				XXX
-				<br>
+			<br>
+			<br>
 				<label for="nom">Nom :</label>
 				XXX			
-				<br>			
+			<br>
+			<br>			
 				<label for="prenom">Prénom :</label>
 				XXX			
-				<br>			
+			<br>
+			<br>			
 				<label for="email">Email :</label>
 				XXX			
-				<br>			
+			<br>
+			<br>			
 				<label for="tel">Téléphone :</label>
 				XXX			
-				<br>					
+			<br>
+			<br>					
 				<label for="rue">Rue :</label>
 				XXX			
-				<br>			
+			<br>
+			<br>			
 				<label for="cp">Code postal :</label>
 				XXX
-				<br>
+			<br>
+			<br>
 				<label for="ville">Ville :</label>
 				XXX
-				<br>
-							
+			<br>
+			<br>			
 				<a href="ModifierProfil.jsp">
 					<button id="btnModifier" name="btnModifier">Modifier</button>
 				</a>
-			</div>
 		</div>
 	</div>
 </body>

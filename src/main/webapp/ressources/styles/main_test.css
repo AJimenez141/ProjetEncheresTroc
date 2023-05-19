@@ -1,49 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
 
-
 /* GENERAL */
 
 html {
   font-size: .625em; /* fallback IE8+ */
   
---couleur_fond: #FAF0CA;
---couleur_texte: #0C2134;
---couleur_encadre: #1A2123;
---couleur_souligne: #1A2123;
-
-
---couleur_bouton_supprimer: #F95738;
---couleur_bouton_enregistrer: #55B44B;
---couleur_bouton_general: #BA9B80;
---couleur_bouton_texte: #1A2123;
-
-font-family: 'Oswald', sans-serif;
- 
-   box-sizing: border-box;
+	--couleur_fond: #FAF0CA;
+	--couleur_fond_2: #E58E54;
+	--couleur_texte: #0C2134;
+	--couleur_encadre: #1A2123;
+	--couleur_souligne: #1A2123;
+	
+	
+	--couleur_bouton_supprimer: #F95738;
+	--couleur_bouton_enregistrer: #55B44B;
+	--couleur_bouton_general: #BA9B80;
+	--couleur_bouton_texte: #1A2123;
+	--couleur_bouton_hover: #FFC336;
+	
+	font-family: 'Oswald', sans-serif;
+ 	
+ 	scroll-behavior: smooth;
+ 	
+   	box-sizing: border-box;
+   	margin: 0 auto;
 }
 
 body {
-  font-size: 1.4em; /* base font-size is equivalent "14px" */
-  background-color: var(--couleur_fond);
-  color: var(--couleur_texte);
+	font-size: 1.8em; /* base font-size is equivalent "14px" */
+	background-color: var(--couleur_fond);
+	color: var(--couleur_texte);
 }
 
+h1 {
+	margin-top: 0;
+	font-size: 6rem;
+}
 h2 {
+	font-size: 4rem;
 	text-align: center;
 }
+
+a {
+	text-decoration: none;
+}
+a:link {
+	color: var(--couleur_texte);
+}
+a:visited {
+	color: var(--couleur_texte);
+}
+a:hover {
+	color: var(--couleur_bouton_hover);
+}
+
 /* CLASSES */
 
 .conteneur {
-	margin: 5rem;
-	padding: 5rem;
-	width: 1800px;
+	margin: 0 5rem 5rem 5rem;
+	padding: 0 5rem 5rem 5rem;
+	width: 180rem;
 	
-	/* display: flex;
-	flex-wrap: wrap; */
+	
 	justify-content: center;
 	
 }
-
 .section {
 	margin: 5rem;
 	padding: 5rem;
@@ -55,29 +76,227 @@ h2 {
 	display: flex;
 	flex-wrap: wrap;
 }
-
  .section > * {
 	flex: 1;
 } 
 
-/* ID */
+.ombre_claire {
+	text-shadow: 2px 2px 1px var(--couleur_fond);
+}
 
-
-
+.ombre_foncee {
+	text-shadow: 2px 2px 1px var(--couleur_bouton_general);
+}
 
 /* BOUTONS */
 
 button {
 	background-color: var(--couleur_bouton_general);
-	color : var(--couleur_bouton_texte);
+	color: var(--couleur_bouton_texte);
+	
+	width: 20rem;
+	height: 10rem;
+
+	border: 0;
+	border-radius: 0px;
+	
+	font-family: Oswald, sans-serif;
+	font-size: 3rem;
 }
 
-.button__supprimer--color {
-	background-color: var(--couleur_bouton_supprimer);
+button:hover {
+	background-color: var(--couleur_bouton_hover);
 }
-.button__enregistrer--color {
+.bouton__supprimer--couleur {
+	background-color: var(--couleur_bouton_supprimer); 
+}
+.bouton__enregistrer--couleur {
 	background-color: var(--couleur_bouton_enregistrer);
 }
-.button__text--color {
+.bouton__text--couleur {
 	color: var(--couleur_bouton_text);
 }
+form {
+	margin: 0;
+	padding: 5rem;
+	background-color: var(--couleur_fond_2);
+	border-top: 3rem solid var(--couleur_bouton_hover);
+	
+	display: flex;
+	justify-content: space-around;
+}
+
+/* ACCUEIL NON CONNECTE */
+
+#AccueilNonConnecte form {
+	display: flex;
+	flex-wrap: wrap;
+} 
+
+#AccueilNonConnecte form > * {
+	margin: 0 2rem 1rem 0;
+	width: 40%;
+}
+
+#AccueilNonConnecte #divBouton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* LISTE ENCHERES CONNECTE*/
+
+#ListeEncheresConnecte form {
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+
+#ListeEncheresConnecte form > *{
+	margin: 0 2rem 1rem 0;
+	width: 40%;
+}
+
+#ListeEncheresConnecte #divBouton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* VENDRE UN ARTICLE */
+
+#VendreUnArticle form {
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+#VendreUnArticle div:nth-child(2) {
+	flex: 2;
+}
+
+#VendreUnArticle form > *{
+	margin: 0 2rem 1rem 0;
+	width: 40%;
+}
+
+#VendreUnArticle h3 {
+	margin-top: 2rem;
+}
+
+/* HEADER */
+
+#Header {
+	display: flex;
+	justify-content: space-between;
+}
+
+#Header img {
+	max-width : 25%;
+	height : 60%;
+	
+	margin-right: 4rem;
+}
+
+#Header > div {
+	display: flex;
+}
+
+#Header ul {
+	list-style: none;
+	display: flex;
+	align-items: center;
+}
+#Header li {
+	display: inline-block;
+	font-size: 1.5em;
+	
+	margin: 0 1em;
+}
+
+/* ACQUISITION, ENCHERIR, DETAILMAVENTEFINENCHERE */
+
+#Acquisition form, #Encherir form, #DetailMaVenteFinEnchere form {
+	margin: 0;
+	padding: 5rem;
+	background-color: var(--couleur_fond_2)
+}
+
+#Acquisition img, #Encherir img, #DetailMaVenteFinEnchere img {
+	margin: 0;
+	padding: 5.5rem;
+	width: 400px;
+	height: 400px;
+}
+
+/* CONNEXION */
+
+#Connexion #section_connexion {
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	justify-content: center;
+} 
+
+#Connexion #section_connexion #section_connexion_div {
+  	display: block;
+  	justify-content: center;
+  	align-items: center;
+  	text-align: center;
+}
+
+#Connexion #section_connexion_id_div label {
+	display:block;
+	float:left;
+	width:190px;
+}
+
+#Connexion #section_connexion_id_div input {
+	float: left;
+}
+
+/* MONPROFIL, PROFIL */
+
+#MonProfil #section_profil, #Profil #section_profil {
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	display: block;
+  	justify-content: center;
+  	align-items: center;
+  	text-align: center;
+} 
+
+/* CREERCOMPTE, MODIFIERPROFIL */
+
+#CreerCompte #section_profil,#section_profil_bouton, #ModifierProfil #section_profil, #section_profil_bouton {
+	display: flex;
+	flex-wrap:wrap;
+	justify-content: space-evenly;
+	align-items: center;
+  	text-align: justify;
+}
+
+#CreerCompte label, #ModifierProfil label {
+	display:block;
+	float:left;
+	width:160px;
+}
+
+#CreerCompte input, #ModifierProfil input {
+	float: left;
+}
+
+#CreerCompte form, #ModifierProfil form{
+	display: inline;
+	
+}
+
+#CreerCompte form > *, #ModifierProfil form > *{
+	margin: 0 2rem 1rem 0;
+	width: auto;
+} 
+
+
+

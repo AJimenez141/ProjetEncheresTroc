@@ -6,13 +6,14 @@
 	<meta charset="ISO-8859-1">
 	<title>Vendre un article</title>
 	<link href="../ressources/styles/main.css" rel="stylesheet">
+	<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
 </header>
 
 <body>
-	<h2>Nouvelle vente</h2>
+	<h2 class="ombre_foncee">Nouvelle vente</h2>
 	<div class="conteneur" id="VendreUnArticle">
 		<div class="section">
 			<div>
@@ -29,6 +30,7 @@
 					<input type="text" name="description"/>
 					
 					<label name="labelCategorie" for="categorie">Catégorie : </label>
+					
 					<select>
 						<option value=""></option>
 					</select>
@@ -39,7 +41,7 @@
 					<label name="labelFinEnchere" for="finEnchere">Fin de l'enchère : </label>
 					<input type="date" name="finEnchere"/>
 					
-					Retrait
+					<h3>Retrait</h3><div></div>
 					
 					<label name="labelRue" for="rue">Rue : </label>
 					<input type="text" name="rue"/>
@@ -51,7 +53,7 @@
 					<input type="text" name="ville"/>
 					
 			
-					<button type="submit" id="btnEnregistrer" name="btnEnregistrer">Enregistrer</button>
+					<button class="bouton__enregistrer--couleur" id="btnEnregistrer" name="btnEnregistrer" type="submit">Enregistrer</button>
 					<button id="btnAnnuler" name="btnAnnuler">Annuler</button>
 			
 				</form>

@@ -5,8 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Ajouter catégorie</title>
-<link href="../ressources/styles/main_test.css" rel="stylesheet">
-
+<link href="../ressources/styles/main.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<jsp:include page="Header.jsp" />
@@ -25,7 +25,7 @@
 				<br>
 				
 				<a href="GestionCategories.jsp">
-					<button type="submit" class="button__enregistrer--color" id="btnCreer" name="btnCreer">Créer</button>
+					<button type="submit" class="bouton__enregistrer--couleur" id="btnCreer" name="btnCreer">Créer</button>
 				</a>
 			</form>
 		</div>
