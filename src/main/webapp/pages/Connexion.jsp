@@ -35,7 +35,7 @@
 					<input type="checkbox" id="ckSouvenir" name="ckSouvenir">
 					<label for="ckSouvenir">Se souvenir de moi</label>
 				<br>
-					<a href="https://www.google.com">Mot de passe oublié</a>
+					<a href="#">Mot de passe oublié</a>
 				<br>
 				<br>
 				<a href="CreerCompte.jsp">
