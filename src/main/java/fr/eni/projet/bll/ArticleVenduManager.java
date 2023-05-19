@@ -11,12 +11,20 @@ import fr.eni.projet.dal.DAOFactory;
 public class ArticleVenduManager {
 	
 	private ArticleVenduDAO articleVenduDAO;
+	private static ArticleVenduManager instance;
 	
 	/**
-	 * Recuperer articleVenduDAO via la Factory
+	 * Recuperer categorieDAO via la Factory
 	 */
-	public ArticleVenduManager() {
-		this.articleVenduDAO=DAOFactory.recupererArticleVenduDAO();
+	private ArticleVenduManager() {
+		articleVenduDAO = DAOFactory.recupererArticleVenduDAO();
+	}
+	
+	public static ArticleVenduManager getInstance() {
+		if(instance==null) {
+			instance = new ArticleVenduManager();
+		}
+		return instance;
 	}
 	
 	/**
