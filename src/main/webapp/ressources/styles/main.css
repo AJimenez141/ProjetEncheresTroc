@@ -84,10 +84,7 @@ td, th {
 	/* margin: 0 5rem 5rem 5rem; */
 	padding: 0 5rem 5rem 5rem;
 	width: 180rem;
-	
-	
 	justify-content: center;
-	
 }
 
 .section {
@@ -95,9 +92,7 @@ td, th {
 	padding: 5rem;
 	border: 4px solid var(--couleur_encadre);
 	border-radius: 4px;
-	
 	width: auto;
-	
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -156,7 +151,6 @@ form {
 	padding: 5rem;
 	background-color: var(--couleur_fond_2);
 	border-top: 3rem solid var(--couleur_bouton_hover);
-	
 	display: flex;
 	justify-content: space-around;
 }
@@ -258,3 +252,87 @@ form {
 #GestionCategories #boutonAjouter {
 	margin: 1em 2px 2px 2px;
 }
+
+/* ACQUISITION, ENCHERIR, DETAILMAVENTEFINENCHERE */
+
+#Acquisition form, #Encherir form, #DetailMaVenteFinEnchere form {
+	margin: 0;
+	padding: 5rem;
+	background-color: var(--couleur_fond_2)
+}
+
+#Acquisition img, #Encherir img, #DetailMaVenteFinEnchere img {
+	margin: 0;
+	padding: 5.5rem;
+	width: 400px;
+	height: 400px;
+}
+
+/* CONNEXION */
+
+#Connexion #section_connexion {
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	justify-content: center;
+} 
+
+#Connexion #section_connexion #section_connexion_div {
+  	display: block;
+  	justify-content: center;
+  	align-items: center;
+  	text-align: center;
+}
+
+#Connexion #section_connexion_id_div label {
+	display:block;
+	float:left;
+	width:190px;
+}
+
+#Connexion #section_connexion_id_div input {
+	float: left;
+}
+
+/* MONPROFIL, PROFIL */
+
+#MonProfil #section_profil, #Profil #section_profil {
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	display: block;
+  	justify-content: center;
+  	align-items: center;
+  	text-align: center;
+} 
+
+/* CREERCOMPTE, MODIFIERPROFIL */
+
+#CreerCompte #section_profil,#section_profil_bouton, #ModifierProfil #section_profil, #section_profil_bouton {
+	display: flex;
+	flex-wrap:wrap;
+	justify-content: space-evenly;
+	align-items: center;
+  	text-align: justify;
+}
+
+#CreerCompte label, #ModifierProfil label {
+	display:block;
+	float:left;
+	width:160px;
+}
+
+#CreerCompte input, #ModifierProfil input {
+	float: left;
+}
+
+#CreerCompte form, #ModifierProfil form{
+	display: inline;
+}
+
+#CreerCompte form > *, #ModifierProfil form > *{
+	margin: 0 2rem 1rem 0;
+	width: auto;
+} 

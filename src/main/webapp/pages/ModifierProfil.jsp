@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Modifier profil</title>
-<link href="../ressources/styles/main_test.css" rel="stylesheet">
+<link href="../ressources/styles/main.css" rel="stylesheet">
 <link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
 </head>
 <header>
