@@ -1,6 +1,5 @@
 package fr.eni.projet.dal;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.projet.bo.Categorie;

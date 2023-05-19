@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projet.bll.ArticleVenduManager;
+import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.Adresse;
@@ -68,7 +69,7 @@ public class TestServletArticleVendu extends HttpServlet {
 		Categorie art = null;
 		try {
 			art = categorieManager.recupererUneCategorie(2);
-		} catch (CategorieDALException | SQLException e) {
+		} catch (BLLException e) {
 			e.printStackTrace();
 		}
 		

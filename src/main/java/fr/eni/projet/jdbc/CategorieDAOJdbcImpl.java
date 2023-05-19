@@ -8,12 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.projet.bo.Adresse;
 import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.dal.CategorieDALException;
 import fr.eni.projet.dal.CategorieDAO;
 import fr.eni.projet.dal.ConnectionProvider;
-import fr.eni.projet.dal.UtilisateurDALException;
 
 public class CategorieDAOJdbcImpl implements CategorieDAO {
 	
