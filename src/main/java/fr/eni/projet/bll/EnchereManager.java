@@ -72,4 +72,16 @@ public class EnchereManager {
 	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException, ArticleVenduDALException {
 		this.enchereDAO.creerEnchere(pEnchere);
 	}
+	
+	/**
+	 * Recuperer l'enchere la plus haute
+	 * 
+	 * @param pEnchereId
+	 * @return 
+	 * @throws EnchereDALException
+	 * @throws SQLException
+	 */
+	public Enchere recupererEnchereLaPlusHaute(int pEnchereId) throws EnchereDALException, SQLException {
+		return this.enchereDAO.selectMaxEnchereByArticle(pEnchereId);
+	}
 }

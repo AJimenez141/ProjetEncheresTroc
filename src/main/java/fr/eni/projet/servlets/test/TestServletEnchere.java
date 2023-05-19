@@ -66,26 +66,24 @@ public class TestServletEnchere extends HttpServlet {
 		
 		//=======================TEST 2 - SELECT BY ID=======================================================
 		
-		try {
-			Enchere enchere = enchereManager.recupererUneEnchere(1);
-			response.getWriter().append("Enchere - " + enchere.getMontant_enchere());
-		} catch (EnchereDALException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ArticleVenduDALException e) {
-			e.printStackTrace();
-		}		
-//		
+//		try {
+//			Enchere enchere = enchereManager.recupererUneEnchere(1);
+//			response.getWriter().append("Enchere - " + enchere.getMontant_enchere());
+//		} catch (EnchereDALException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (ArticleVenduDALException e) {
+//			e.printStackTrace();
+//		}		
+		
 //		//=======================TEST 3 - SELECT ALL=========================================================
-//		
+		
 //		try {
 //			List<Enchere> lesEncheres = enchereManager.recupererLesEncheres();
-//			
 //			for(Enchere enchere1 : lesEncheres) {
-//				response.getWriter().append("\n").append(enchere1.toString());
+//				response.getWriter().append(enchere1.toString());
 //			}
-//			
 //		} catch (EnchereDALException e) {
 //			response.getWriter().append("Served at: ").append(e.toString());
 //			e.printStackTrace();
@@ -94,15 +92,14 @@ public class TestServletEnchere extends HttpServlet {
 //		} catch (ArticleVenduDALException e) {
 //			e.printStackTrace();
 //		}
-//		
-//		
+		
 //		//=======================TEST 4 - SELECT ALL BY UTILISATEUR==========================================
-//		
+	
 //		try {
-//			List<Enchere> lesEncheresDunUtilisateur = enchereManager.recupererLesEncheresUtilisateur(1);
+//			List<Enchere> lesEncheresDunUtilisateur = enchereManager.recupererLesEncheresUtilisateur(8);
 //			
-//			for(Enchere enchere2 : lesEncheresDunUtilisateur) {
-//				response.getWriter().append("\n").append(enchere2.toString());
+//			for(Enchere enchere : lesEncheresDunUtilisateur) {
+//				response.getWriter().append(enchere.toString()+"\n");
 //			}
 //			
 //		} catch (EnchereDALException e) {
@@ -114,6 +111,14 @@ public class TestServletEnchere extends HttpServlet {
 //			e.printStackTrace();
 //		}
 		
+//		//=======================TEST 4 - selectMaxEnchereByArticle ==========================================
+		
+//		try {
+//			Enchere enchere = enchereManager.recupererEnchereLaPlusHaute(3);
+//			response.getWriter().append(enchere.toString()+"\n");
+//		} catch (EnchereDALException | SQLException e) {
+//			e.printStackTrace();
+//		}
 		
 	}
 }

@@ -26,7 +26,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String SELECT_ENCHERE_BY_ID = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE no_enchere = ?";
 	
-	private static final String SELECT_ENCHERE_BY_UTILISATEUR_ID = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE no_utilisateur = ?";
+	private static final String SELECT_ENCHERE_BY_UTILISATEUR_ID = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE E.no_utilisateur = ?";
 	
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (?,?,?,?)";
 	
@@ -48,9 +48,10 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ARTICLE_BY_ID);
 		) {
-			ResultSet rs = pStmt.executeQuery(SELECT_ARTICLE_BY_ID);
+			pStmt.setInt(1, pArticleVenduId);
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next() ) {
 
@@ -144,13 +145,14 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 */
 	@Override
 	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException, SQLException {
-		List<Enchere> encheres = null;
 		
+		List<Enchere> encheres = new ArrayList<>();
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ENCHERE_BY_UTILISATEUR_ID);
 		){
-			ResultSet rs = pStmt.executeQuery(SELECT_ENCHERE_BY_UTILISATEUR_ID);
+			pStmt.setInt(1, pUtilisateurId);
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next()) {
 //				Utilisateur
@@ -278,8 +280,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-		){
 			PreparedStatement pStmt = connexion.prepareStatement(SELECT_MAX_ENCHERE_BY_ARTICLE);
+		){
 			pStmt.setInt(1, pArticleVenduId);
 			ResultSet rs = pStmt.executeQuery();
 			
