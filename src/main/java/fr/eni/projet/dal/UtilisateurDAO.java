@@ -59,7 +59,7 @@ public interface UtilisateurDAO {
 	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException, SQLException;
 	
 	/**
-	 * connexion de l'utilisateur
+	 * connexion de l'utilisateur avec l'email
 	 * 
 	 * @param pEmail
 	 * @param pMotDePasse
@@ -68,6 +68,18 @@ public interface UtilisateurDAO {
 	 * @throws SQLException
 	 * @throws ConnexionException
 	 */
-	public Utilisateur seConnecter(String pEmail, String pMotDePasse) throws UtilisateurDALException, SQLException, ConnexionException;
+	public Utilisateur seConnecterEmail(String pEmail, String pMotDePasse) throws UtilisateurDALException, SQLException;
 	
+	
+	/**
+	 * connexion de l'utilisateur avec le pseudo
+	 * 
+	 * @param pPseudo
+	 * @param pMotDePasse
+	 * @return 
+	 * @throws UtilisateurDALException
+	 * @throws SQLException
+	 * @throws ConnexionException
+	 */
+	public Utilisateur seConnecterPseudo(String pPseudo, String pMotDePasse) throws UtilisateurDALException, SQLException;
 }

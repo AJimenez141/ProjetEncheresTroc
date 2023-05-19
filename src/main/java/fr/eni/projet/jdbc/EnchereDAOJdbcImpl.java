@@ -1,4 +1,4 @@
-package fr.eni.dal.jdbc;
+package fr.eni.projet.jdbc;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -26,15 +26,15 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String SELECT_ENCHERE_BY_ID = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE no_enchere = ?";
 	
-	private static final String SELECT_ENCHERE_BY_UTILISATEUR_ID = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE no_utilisateur = ?";
+	private static final String SELECT_ENCHERE_BY_UTILISATEUR_ID = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE E.no_utilisateur = ?";
 	
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (?,?,?,?)";
 	
-	private static final String ENCHERIR = "UPDATE ENCHERES SET";
+	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS "
+			 + "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+			 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie WHERE no_article = ?";
 	
-	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ? "
-			 + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
-			 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	private static final String SELECT_MAX_ENCHERE_BY_ARTICLE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur WHERE no_article = ? AND montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES)";
 
 	/**
 	 * retourne un article en fonction de son ID
@@ -43,14 +43,15 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * @return
 	 * @throws ArticleVenduDALException
 	 */
-	private static ArticleVendu selectArticleById(int pArticleVenduId) throws ArticleVenduDALException {
+	private static ArticleVendu selectArticleById(int pArticleVenduId) throws EnchereDALException {
 		ArticleVendu article = null;
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ARTICLE_BY_ID);
 		) {
-			ResultSet rs = pStmt.executeQuery(SELECT_ARTICLE_BY_ID);
+			pStmt.setInt(1, pArticleVenduId);
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next() ) {
 
@@ -61,7 +62,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
 				int miseAPrix 				= rs.getInt("prix_initial");
 				int prixVente 				= rs.getInt("prix_vente");
-				boolean enVente 			= rs.getBoolean("en_vente");
 				
 				int noUtilisateur  			= rs.getInt("no_utilisateur");
 				String pseudo				= rs.getString("pseudo");
@@ -81,11 +81,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
 				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
-				article = new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie);
+				article = new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,vendeur,categorie);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new ArticleVenduDALException("Impossible de sélectionner les articles dans la base",e);
+			throw new EnchereDALException("Impossible de sélectionner les articles dans la base",e);
 		}		
 		return article;
 	}
@@ -94,7 +94,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Recuperer toutes les enchères
 	 */
 	@Override
-	public List<Enchere> selectAll() throws EnchereDALException, SQLException, ArticleVenduDALException {
+	public List<Enchere> selectAll() throws EnchereDALException, SQLException {
 		List<Enchere> encheres = new ArrayList<>();
 		ArticleVendu articleVendu = null;
 		
@@ -144,14 +144,15 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Recuperer toutes les encheres d'un utilisateur
 	 */
 	@Override
-	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException, SQLException, ArticleVenduDALException {
-		List<Enchere> encheres = null;
+	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException, SQLException {
 		
+		List<Enchere> encheres = new ArrayList<>();
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ENCHERE_BY_UTILISATEUR_ID);
 		){
-			ResultSet rs = pStmt.executeQuery(SELECT_ENCHERE_BY_UTILISATEUR_ID);
+			pStmt.setInt(1, pUtilisateurId);
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next()) {
 //				Utilisateur
@@ -190,44 +191,18 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	}
 
 	/**
-	 * Mise à jour de l'enchere quand un utilisateur enchérit 
-	 * (jusqu'à la cloture de l'enchère)
-	 */
-	@Override
-	public void encherir(Enchere pEnchere) throws EnchereDALException, SQLException {
-		try(
-			Connection connexion = ConnectionProvider.getConnection();
-			PreparedStatement pStmt = connexion.prepareStatement(ENCHERIR);
-		){
-			int utilisateurId = pEnchere.getEncherisseur().getNoUtilisateur();
-			int articleId = pEnchere.getArticleVendu().getNoArticle();
-			
-			pStmt.setDate(1, Date.valueOf(pEnchere.getDateEnchere()));
-			pStmt.setInt(2, pEnchere.getMontant_enchere());
-			pStmt.setInt(3, utilisateurId);
-			pStmt.setInt(4, articleId);
-			
-			pStmt.executeUpdate();
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-			throw new EnchereDALException("Impossible de modifier l'enchère",e);
-		}
-		
-	}
-
-	/**
 	 * Selectionner une enchere par son id
 	 */
 	@Override
-	public Enchere selectById(int pEnchereId) throws EnchereDALException, SQLException, ArticleVenduDALException {
+	public Enchere selectById(int pEnchereId) throws EnchereDALException, SQLException {
 		Enchere enchere = null;
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ENCHERE_BY_ID);
 		){
-			ResultSet rs = pStmt.executeQuery(SELECT_ENCHERE_BY_ID);
+			pStmt.setInt(1, pEnchereId);
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next()) {
 //				Utilisateur
@@ -268,7 +243,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	 * Creation d'une enchere
 	 */
 	@Override
-	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException, ArticleVenduDALException {
+	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException {
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
 			PreparedStatement pStmt = connexion.prepareStatement(INSERT_ENCHERE, Statement.RETURN_GENERATED_KEYS);	
@@ -282,6 +257,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			pStmt.setInt(3, noArticle);
 			pStmt.setInt(4, noUtilisateur);
 			
+			pStmt.executeUpdate();
+			
 			ResultSet rs = pStmt.getGeneratedKeys();
 			if(rs.next()) {
 				pEnchere.setNoEnchere(rs.getInt(1));
@@ -291,4 +268,57 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			throw new EnchereDALException("Impossible d'insérer l'enchère",e);
 		}
 	}
+	
+	
+	
+	/**
+	 * Recuperer l'enchère la plus haute en cours pour un article donné
+	 */
+	@Override
+	public Enchere selectMaxEnchereByArticle(int pArticleVenduId) throws EnchereDALException, SQLException {
+		Enchere enchere = null;
+		
+		try(
+			Connection connexion = ConnectionProvider.getConnection();
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_MAX_ENCHERE_BY_ARTICLE);
+		){
+			pStmt.setInt(1, pArticleVenduId);
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+//				Utilisateur
+				int noUtilisateur  	= rs.getInt("no_utilisateur");
+				String pseudo		= rs.getString("pseudo");
+				String nom			= rs.getString("nom");
+				String prenom		= rs.getString("prenom");
+				String email		= rs.getString("email");
+				String telephone	= rs.getString("telephone");
+				String rue			= rs.getString("rue");
+				String code_postal	= rs.getString("code_postal");
+				String ville		= rs.getString("ville");
+				int credit			= rs.getInt("credit");
+				
+				Adresse adresse 	= new Adresse(rue,code_postal,ville);
+				
+				Utilisateur utilisateur = new Utilisateur(noUtilisateur,pseudo,nom,prenom,email,telephone,adresse,credit);
+				
+//				ArticleVendu				
+				ArticleVendu articleVendu = selectArticleById(rs.getInt("no_article"));	
+				
+//				Enchere
+				int noEnchere				= rs.getInt("no_enchere");
+				LocalDate dateEnchere 		= rs.getDate("date_enchere").toLocalDate();
+				int montantEnchere			= rs.getInt("montant_enchere");
+				
+				enchere = new Enchere(noEnchere, dateEnchere, montantEnchere, utilisateur, articleVendu);
+			} 
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			throw new EnchereDALException("Impossible de récupérer les enchères", e);
+		}
+		
+		return enchere;
+	}
+	
 }

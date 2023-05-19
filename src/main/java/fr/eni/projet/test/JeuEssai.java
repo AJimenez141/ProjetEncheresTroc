@@ -62,7 +62,7 @@ public abstract class JeuEssai {
 
 		Categorie categorieArticle = new Categorie(1, "Ustensiles de cuisine");
 		ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",
-				dateDebutEnchere, dateFinEnchere, 20, 599, true, vendeur1, categorieArticle);
+				dateDebutEnchere, dateFinEnchere, 20, 599, vendeur1, categorieArticle);
 		
 		System.out.println(article);
 

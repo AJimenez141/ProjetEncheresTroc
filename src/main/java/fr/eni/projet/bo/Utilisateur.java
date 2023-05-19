@@ -28,6 +28,21 @@ public class Utilisateur {
 		this.actif = true;
 	}
 	
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String motDePasse,String telephone, Adresse adresse, int credit, boolean administrateur) {
+		super();
+		this.noUtilisateur = noUtilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+		this.telephone = telephone;
+		this.adresse = adresse;
+		this.credit = credit;
+		this.administrateur = administrateur;
+		this.actif = true;
+	}
+	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String motDePasse,String telephone, Adresse adresse, int credit) {
 		super();
 		this.noUtilisateur = noUtilisateur;

@@ -23,40 +23,41 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws EnchereDALException
 	 */
-	public Enchere selectById(int pArticleVenduId) throws EnchereDALException,SQLException,ArticleVenduDALException;
+	public Enchere selectById(int pArticleVenduId) throws EnchereDALException,SQLException;
 	
 	/**
 	 * selectionner toutes les encheres en cours
 	 * 
-	 * @return
+	 * @param pUtilisateurId
+	 * @return Enchere
 	 * @throws EnchereDALException
 	 */
-	public List<Enchere> selectAll() throws EnchereDALException, SQLException, ArticleVenduDALException;
+	public List<Enchere> selectAll() throws EnchereDALException, SQLException;
 	
 	/**
 	 * selectionner les encheres d'un utilisateur
 	 * 
-	 * @param pUtilisateurId
-	 * @return
 	 * @throws EnchereDALException
 	 */
-	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException,SQLException, ArticleVenduDALException;
-	
-	/**
-	 * effectuer une enchere
-	 * 
-	 * @param pEnchereId
-	 * @throws EnchereDALException
-	 */
-	public void encherir(Enchere pEnchere) throws EnchereDALException,SQLException;	
+	public List<Enchere> selectEnchereByUtilisateur(int pUtilisateurId) throws EnchereDALException,SQLException;
 	
 	/**
 	 * Creer une nouvelle enchere
 	 * 
-	 * @param pEnchere
+	 * @param pUtilisateurId
 	 * @throws EnchereDALException
 	 * @throws SQLException
 	 * @throws ArticleVenduDALException
 	 */
-	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException, ArticleVenduDALException;
+	public void creerEnchere(Enchere pEnchere) throws EnchereDALException, SQLException;
+	
+	/**
+	 * selectionner l'enchère la plus haute en cours pour un article donné
+	 * 
+	 * @param pArticleVenduId
+	 * @throws EnchereDALException
+	 * @throws SQLException
+	 * @throws ArticleVenduDALException
+	 */
+	public Enchere selectMaxEnchereByArticle(int pArticleVenduId) throws EnchereDALException,SQLException;
 }

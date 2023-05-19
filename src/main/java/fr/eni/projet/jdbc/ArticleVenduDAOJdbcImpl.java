@@ -1,4 +1,4 @@
-package fr.eni.dal.jdbc;
+package fr.eni.projet.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,22 +19,20 @@ import fr.eni.projet.dal.ConnectionProvider;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
-	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ? "
-													 + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
-													 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie WHERE no_article = ?";
 	
 	private static final String SELECT_ALL_ARTICLE = "SELECT * FROM ARTICLES_VENDUS "
-												   + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+												   + "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
 												   + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
 	
-	private static final String SELECT_ARTICLE_BY_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS WHERE ARTICLES_VENDUS.no_utilisateur = ? "
-			 												  + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
-			 												  + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	private static final String SELECT_ARTICLE_BY_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS "
+			 												  + "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+			 												  + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie WHERE ARTICLES_VENDUS.no_utilisateur = ?";
 	
 	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 	
 	private static final String SELECT_ARTICLE_BY_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE ARTICLES_VENDUS.no_categorie = ? "
-			  												+ "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+			  												+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
 			  												+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
 	
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?,?)";
@@ -46,9 +44,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ARTICLE_BY_ID);
 		) {
-			ResultSet rs = pStmt.executeQuery(SELECT_ARTICLE_BY_ID);
+			pStmt.setInt(1, pArticleVenduId);
+			
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next() ) {
 
@@ -59,7 +59,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
 				int miseAPrix 				= rs.getInt("prix_initial");
 				int prixVente 				= rs.getInt("prix_vente");
-				boolean enVente 			= rs.getBoolean("en_vente");
 				
 				int noUtilisateur  			= rs.getInt("no_utilisateur");
 				String pseudo				= rs.getString("pseudo");
@@ -79,7 +78,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
 				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
-				article = new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie);
+				article = new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,vendeur,categorie);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,7 +109,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
 				int miseAPrix 				= rs.getInt("prix_initial");
 				int prixVente 				= rs.getInt("prix_vente");
-				boolean enVente 			= rs.getBoolean("en_vente");
 				
 				int noUtilisateur  			= rs.getInt("no_utilisateur");
 				String pseudo				= rs.getString("pseudo");
@@ -130,7 +128,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
 				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
-				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie));
+				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,vendeur,categorie));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -147,9 +145,10 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ARTICLE_BY_UTILISATEUR);
 		) {
-			ResultSet rs = pStmt.executeQuery(SELECT_ARTICLE_BY_UTILISATEUR);
+			pStmt.setInt(1, pUtilisateurId);
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next() ) {
 
@@ -160,7 +159,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
 				int miseAPrix 				= rs.getInt("prix_initial");
 				int prixVente 				= rs.getInt("prix_vente");
-				boolean enVente 			= rs.getBoolean("en_vente");
 				
 				int noUtilisateur  			= rs.getInt("no_utilisateur");
 				String pseudo				= rs.getString("pseudo");
@@ -180,7 +178,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
 				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
-				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie));
+				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,vendeur,categorie));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -207,15 +205,17 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	}
 
 	@Override
-	public List<ArticleVendu> selectionnerParCategorie(String pLibelleCategorie) throws ArticleVenduDALException {
+	public List<ArticleVendu> selectionnerParCategorie(int pNoCategorie) throws ArticleVenduDALException {
 
 List<ArticleVendu> articles = new ArrayList<>();
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
 		) {
-			ResultSet rs = pStmt.executeQuery(SELECT_ARTICLE_BY_CATEGORIE);
+			//TODO vérifier pour les autres requêtes avec des paramètres
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ARTICLE_BY_CATEGORIE);
+			pStmt.setInt(1, pNoCategorie);
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next() ) {
 
@@ -226,7 +226,6 @@ List<ArticleVendu> articles = new ArrayList<>();
 				LocalDate dateFinEncheres 	= rs.getDate("date_fin_encheres").toLocalDate();
 				int miseAPrix 				= rs.getInt("prix_initial");
 				int prixVente 				= rs.getInt("prix_vente");
-				boolean enVente 			= rs.getBoolean("en_vente");
 				
 				int noUtilisateur  			= rs.getInt("no_utilisateur");
 				String pseudo				= rs.getString("pseudo");
@@ -246,7 +245,7 @@ List<ArticleVendu> articles = new ArrayList<>();
 				Utilisateur vendeur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, adresseVendeur, credit);
 				Categorie categorie 	= new Categorie(noCategorie, libelle);
 				
-				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,enVente,vendeur,categorie));
+				articles.add(new ArticleVendu(noArticle,nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,vendeur,categorie));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

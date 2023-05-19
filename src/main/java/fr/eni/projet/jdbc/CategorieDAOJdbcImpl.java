@@ -1,4 +1,4 @@
-package fr.eni.dal.jdbc;
+package fr.eni.projet.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,15 +18,15 @@ import fr.eni.projet.dal.UtilisateurDALException;
 public class CategorieDAOJdbcImpl implements CategorieDAO {
 	
 //	Liste des requetes
-	private final String SELECT_CATEGORIE_BY_ID = "SELECT * FROM CATEGORIE WHERE no_categorie ?";
+	private final String SELECT_CATEGORIE_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie = (?)";
 	
-	private final String SELECT_ALL_CATEGORIE = "SELECT * FROM CATEGORIE";
+	private final String SELECT_ALL_CATEGORIE = "SELECT * FROM CATEGORIES";
 	
-	private final String INSERT_CATEGORIE = "INSERT INTO CATEGORIE(libelle) VALUES (?)";
+	private final String INSERT_CATEGORIE = "INSERT INTO CATEGORIES(libelle) VALUES(?)";
 	
-	private final String DELETE_CATEGORIE = "DELETE FROM CATEGORIE WHERE no_categorie = ?";
+	private final String DELETE_CATEGORIE = "DELETE FROM CATEGORIES WHERE no_categorie = (?)";
 	
-	private final String UPDATE_CATEGORIE = "UPDATE CATEGORIE SET libelle = ? WHERE no_categorie = ?";
+	private final String UPDATE_CATEGORIE = "UPDATE CATEGORIES SET libelle = (?) WHERE no_categorie = (?)";
 
 	@Override
 	public Categorie selectById(int pCategorieId) throws CategorieDALException, SQLException {
@@ -35,9 +35,10 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			PreparedStatement pStmt = connexion.prepareStatement(SELECT_CATEGORIE_BY_ID);
 		){
 			
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_CATEGORIE_BY_ID);
+			pStmt.setInt(1, pCategorieId);
 			ResultSet rs = pStmt.executeQuery();
 			
 			if(rs.next()) {
@@ -118,12 +119,12 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 		try(
 				Connection connexion = ConnectionProvider.getConnection();	
-				PreparedStatement pStmt = connexion.prepareStatement(UPDATE_CATEGORIE)
 			){
+				PreparedStatement pStmt = connexion.prepareStatement(UPDATE_CATEGORIE);
 				pStmt.setString(1, pCategorie.getLibelle());
 				pStmt.setInt(2, pCategorie.getNoCategorie());
-				
 				pStmt.executeUpdate();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new CategorieDALException("Impossible de mettre à jour la categorie");
