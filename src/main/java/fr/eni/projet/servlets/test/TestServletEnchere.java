@@ -36,43 +36,25 @@ public class TestServletEnchere extends HttpServlet {
 		
 		//=======================TEST 1 - INSERTION===========================================
 
-		Utilisateur encherisseur = null;
-		ArticleVendu articleVendu = null;
-		
-		try {
-			encherisseur = utilisateurManager.recupererUnUtilisateur(2);
-			articleVendu = articleVenduManager.recupererUnArticleVendu(1);
-			
-			
-		} catch (UtilisateurDALException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ArticleVenduDALException e) {
-			e.printStackTrace();
-		}
-		
-		Enchere uneEnchere = new Enchere(LocalDate.now(), 45, encherisseur, articleVendu);
-		
-		try {
-			enchereManager.creerEnchere(uneEnchere);
-			
-			response.getWriter().append("Served at: ").append("Enchère ajoutée");
-		} catch (EnchereDALException e) {
-			response.getWriter().append("Served at: ").append(e.toString());
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ArticleVenduDALException e) {
-			e.printStackTrace();
-		}
-		
-		//=======================TEST 2 - SELECT BY ID=======================================================
-		
+//		Utilisateur encherisseur = null;
+//		ArticleVendu articleVendu = null;
+//		
 //		try {
-//			Enchere enchere = enchereManager.recupererUneEnchere(1);
-//			
-//			response.getWriter().append("Served at: ").append(enchere.toString());
+//			encherisseur = utilisateurManager.recupererUnUtilisateur(8);
+//			articleVendu = articleVenduManager.recupererUnArticleVendu(3);
+//		} catch (UtilisateurDALException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (ArticleVenduDALException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		Enchere uneEnchere = new Enchere(LocalDate.now(), 45, encherisseur, articleVendu);
+//		
+//		try {
+//			enchereManager.creerEnchere(uneEnchere);
+//			response.getWriter().append("Enchere - " + uneEnchere.getMontant_enchere());
 //		} catch (EnchereDALException e) {
 //			response.getWriter().append("Served at: ").append(e.toString());
 //			e.printStackTrace();
@@ -80,7 +62,20 @@ public class TestServletEnchere extends HttpServlet {
 //			e.printStackTrace();
 //		} catch (ArticleVenduDALException e) {
 //			e.printStackTrace();
-//		}		
+//		}
+		
+		//=======================TEST 2 - SELECT BY ID=======================================================
+		
+		try {
+			Enchere enchere = enchereManager.recupererUneEnchere(1);
+			response.getWriter().append("Enchere - " + enchere.getMontant_enchere());
+		} catch (EnchereDALException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ArticleVenduDALException e) {
+			e.printStackTrace();
+		}		
 //		
 //		//=======================TEST 3 - SELECT ALL=========================================================
 //		

@@ -30,9 +30,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (?,?,?,?)";
 	
-	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ? "
-			 + "INNER JOIN UTILISATEURS ON UTILISATEUR.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
-			 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie ";
+	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS "
+			 + "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+			 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie WHERE no_article = ?";
 	
 	private static final String SELECT_MAX_ENCHERE_BY_ARTICLE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur WHERE no_article = ? AND montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES)";
 
@@ -197,9 +197,10 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
-			Statement pStmt = connexion.createStatement();
+			PreparedStatement pStmt = connexion.prepareStatement(SELECT_ENCHERE_BY_ID);
 		){
-			ResultSet rs = pStmt.executeQuery(SELECT_ENCHERE_BY_ID);
+			pStmt.setInt(1, pEnchereId);
+			ResultSet rs = pStmt.executeQuery();
 			
 			while(rs.next()) {
 //				Utilisateur
