@@ -58,7 +58,7 @@ public class TestServletArticleVendu extends HttpServlet {
 		
 		Utilisateur utilisateurJJ = null;
 		try {
-			utilisateurJJ = utilisateurManager.recupererUnUtilisateur(7);
+			utilisateurJJ = utilisateurManager.recupererUnUtilisateur(1);
 		} catch (UtilisateurDALException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -74,15 +74,15 @@ public class TestServletArticleVendu extends HttpServlet {
 		
 //		TEST INSERTION
 			
-//		try {
-//			ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",dateDebutEnchere, dateFinEnchere, 20, 599, true, utilisateurJJ, art);
-//			
-//			articleManager.ajouterArticleVendu(article);
-//			response.getWriter().append("Article "+article.getDescription()+" correctement inséré");
-//			
-//		} catch (ArticleVenduDALException | SQLException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",dateDebutEnchere, dateFinEnchere, 20, 599, true, utilisateurJJ, art);
+			
+			articleManager.ajouterArticleVendu(article);
+			response.getWriter().append("Article "+article.getDescription()+" correctement inséré");
+			
+		} catch (ArticleVenduDALException | SQLException e) {
+			e.printStackTrace();
+		}
 		
 //		TEST RECUPERER AVEC ID
 		

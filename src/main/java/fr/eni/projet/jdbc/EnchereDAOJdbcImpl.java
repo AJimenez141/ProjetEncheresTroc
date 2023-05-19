@@ -253,6 +253,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			pStmt.setInt(3, noArticle);
 			pStmt.setInt(4, noUtilisateur);
 			
+			pStmt.executeUpdate();
+			
 			ResultSet rs = pStmt.getGeneratedKeys();
 			if(rs.next()) {
 				pEnchere.setNoEnchere(rs.getInt(1));
