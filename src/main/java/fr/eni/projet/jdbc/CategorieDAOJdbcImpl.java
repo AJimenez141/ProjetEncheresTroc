@@ -29,7 +29,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	private final String UPDATE_CATEGORIE = "UPDATE CATEGORIES SET libelle = (?) WHERE no_categorie = (?)";
 
 	@Override
-	public Categorie selectById(int pCategorieId) throws CategorieDALException, SQLException {
+	public Categorie selectById(int pCategorieId) throws CategorieDALException {
 		
 		Categorie categorie = null;
 		
@@ -48,7 +48,11 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 				categorie = new Categorie(noCategorie, libelle);
 			}
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new CategorieDALException("Impossible de sélectionner cette categorie dans la base");
 		}
+		
 		return categorie;
 	}
 
@@ -101,7 +105,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	}
 
 	@Override
-	public void supprimerCategorie(int pCategorieId) throws CategorieDALException, SQLException {
+	public void supprimerCategorie(int pCategorieId) throws CategorieDALException {
 		try(
 				Connection connexion = ConnectionProvider.getConnection();
 				PreparedStatement pStmt = connexion.prepareStatement(DELETE_CATEGORIE);

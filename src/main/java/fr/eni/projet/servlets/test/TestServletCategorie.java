@@ -1,7 +1,6 @@
 package fr.eni.projet.servlets.test;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,11 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
 import fr.eni.projet.bo.Categorie;
-import fr.eni.projet.dal.CategorieDALException;
+import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.CategorieManager;
 
 @WebServlet("/TestServletCategorie")
@@ -26,20 +22,18 @@ public class TestServletCategorie extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		CategorieManager categorieManager = new CategorieManager();
-		
 		//=======================TEST 1 - INSERTION (REUSSI)===========================================
 		
 		
-		Categorie categorie = new Categorie("Art");
+		Categorie categorie = new Categorie("");
 		
-//		try {
-//			categorieManager.ajouterCategorie(categorie);
-//			response.getWriter().append("Served at: ").append("Categorie insérée");
-//		} catch (CategorieDALException e) {
-//			response.getWriter().append("Served at: ").append(e.toString());
-//			e.printStackTrace();
-//		} 
+		try {
+			CategorieManager.getInstance().ajouterCategorie(categorie);
+			response.getWriter().append("Served at: ").append("Categorie insérée");
+		} catch (BLLException e) {
+			response.getWriter().append("Served at: ").append(e.toString());
+			e.printStackTrace();
+		}
 		
 		
 		//=======================TEST 2 - SELECT BY ID (REUSSI)===========================================

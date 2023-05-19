@@ -15,7 +15,7 @@ public interface CategorieDAO {
 	 * @throws UtilisateurDALException
 	 * @throws CategorieDALException 
 	 */
-	public Categorie selectById(int pCategorieId) throws CategorieDALException, SQLException;
+	public Categorie selectById(int pCategorieId) throws CategorieDALException;
 	
 	/**
 	 * selectionner toutes les categories
@@ -44,7 +44,7 @@ public interface CategorieDAO {
 	 * @throws UtilisateurDALException
 	 * @throws CategorieDALException 
 	 */
-	public void supprimerCategorie(int pCategorieId) throws CategorieDALException, SQLException;
+	public void supprimerCategorie(int pCategorieId) throws CategorieDALException;
 	
 	/**
 	 * modifier une categorie
