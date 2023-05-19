@@ -84,6 +84,7 @@ public class UtilisateurManager {
 	 * @throws BLLException 
 	 */
 	public void insererUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException, BLLException {
+		validerUtilisateur(pUtilisateur);
 		try {
 			this.utilisateurDAO.insererUtilisateur(pUtilisateur);
 		} catch (UtilisateurDALException e) {
@@ -194,56 +195,45 @@ public class UtilisateurManager {
 		
 		StringBuilder sb = new StringBuilder();
 		
-//		String pseudo;
-//		String nom;
-//		String prenom;
-//		String email;
-//		String motDePasse;
-//		String telephone;
-//		Adresse adresse
-//		rue
-//		code postal
-//		
-		
 		if(pUtilisateur.getPseudo() == null || pUtilisateur.getPseudo().isBlank()) {
-			sb.append("Le pseudo doit être renseigné.");
+			sb.append("Le pseudo doit être renseigné.\n");
 		}
 		if(pUtilisateur.getNom() == null || pUtilisateur.getNom().isBlank()) {
-			sb.append("Le nom de l'utilisateur doit être renseigné");
+			sb.append("Le nom de l'utilisateur doit être renseigné.\n");
 		}
 		if(pUtilisateur.getPrenom() == null || pUtilisateur.getPrenom().isBlank()) {
-			sb.append("Le prénom de l'utilisateur doit être renseigné");
+			sb.append("Le prénom de l'utilisateur doit être renseigné.\n");
 		}
 		if(pUtilisateur.getEmail() == null || pUtilisateur.getEmail().isBlank()) {
-			sb.append("L'email de l'utilisateur doit être renseigné.");
+			sb.append("L'email de l'utilisateur doit être renseigné.\n");
 		}
 		if(!this.validerFormatEmail(pUtilisateur.getEmail())) {
-			sb.append("L'email doit respecter le format standard.");
+			sb.append("L'email doit respecter le format standard.\n");
 		}
 		
 		/**
 		 * TODO - À redéfinir une fois que le hash du mot de passe sera correctement défini
 		 */
 		if(pUtilisateur.getMotDePasse() == null ||pUtilisateur.getMotDePasse().isBlank()) {
-			sb.append("Le mot de passe doit être défini");
+			sb.append("Le mot de passe doit être défini.\n");
 		}
 		if(pUtilisateur.getTelephone() == null || pUtilisateur.getTelephone().isBlank()) {
-			sb.append("Le numéro de téléphone doit être rensigné.");
+			sb.append("Le numéro de téléphone doit être rensigné.\n");
 		}
 		if(!this.validerFormatTelephone(pUtilisateur.getTelephone())) {
-			sb.append("Le numéro de téléphone doit correspondre au format français");
+			sb.append("Le numéro de téléphone doit correspondre au format français.\n");
 		}
 		if(pUtilisateur.getAdresse().getRue() == null || pUtilisateur.getAdresse().getRue().isBlank()) {
-			sb.append("Le numero de rue doit être renseigné.");
+			sb.append("Le numero de rue doit être renseigné.\n");
 		}
 		if(pUtilisateur.getAdresse().getVille() == null || pUtilisateur.getAdresse().getVille().isBlank()) {
-			sb.append("Le nom de la ville doit être renseigné.");
+			sb.append("Le nom de la ville doit être renseigné.\n");
 		}
 		if(pUtilisateur.getAdresse().getCodePostal() == null || pUtilisateur.getAdresse().getCodePostal().isBlank()) {
-			sb.append("Le code postal doit être renseigné.");
+			sb.append("Le code postal doit être renseigné.\n");
 		}
 		if(!validerFormatCodePostal(pUtilisateur.getAdresse().getCodePostal())) {
-			sb.append("Le code postal doit être renseigné.");
+			sb.append("Le code postal doit correspondre au format français.\n");
 		}	
 		if(sb.length() > 0) {
 			throw new BLLException(sb.toString());
