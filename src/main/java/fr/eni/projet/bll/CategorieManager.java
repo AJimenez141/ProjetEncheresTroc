@@ -1,8 +1,6 @@
 package fr.eni.projet.bll;
 
-import java.sql.SQLException;
 import java.util.List;
-
 import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.dal.CategorieDALException;
 import fr.eni.projet.dal.CategorieDAO;
@@ -11,12 +9,20 @@ import fr.eni.projet.dal.DAOFactory;
 public class CategorieManager {
 	
 	private CategorieDAO categorieDAO;
+	private static CategorieManager instance;
 	
 	/**
 	 * Recuperer categorieDAO via la Factory
 	 */
-	public CategorieManager() {
-		this.categorieDAO=DAOFactory.recupererCategorieDAO();
+	private CategorieManager() {
+		categorieDAO = DAOFactory.recupererCategorieDAO();
+	}
+	
+	public static CategorieManager getInstance() {
+		if(instance==null) {
+			instance = new CategorieManager();
+		}
+		return instance;
 	}
 	
 	/**
@@ -24,9 +30,13 @@ public class CategorieManager {
 	 * 
 	 * @throws CategorieDALException
 	 */
-	public Categorie recupererUneCategorie(int pNoCategorie) throws CategorieDALException, SQLException 
+	public Categorie recupererUneCategorie(int pNoCategorie) throws BLLException 
 	{
-		return this.categorieDAO.selectById(pNoCategorie);
+			try {
+				return categorieDAO.selectById(pNoCategorie);
+			} catch (CategorieDALException e) {
+				throw new BLLException(e.getMessage());
+			}
 	}
 	
 	/**
@@ -34,9 +44,13 @@ public class CategorieManager {
 	 * 
 	 * @throws CategorieDALException
 	 */
-	public List<Categorie> recupererLesCategorie() throws CategorieDALException 
+	public List<Categorie> recupererLesCategorie() throws BLLException 
 	{
-		return this.categorieDAO.SelectAll();
+		try {
+			return categorieDAO.SelectAll();
+		} catch (CategorieDALException e) {
+			throw new BLLException(e.getMessage());
+		}
 	}
 	
 	/**
@@ -44,9 +58,14 @@ public class CategorieManager {
 	 * 
 	 * @throws CategorieDALException
 	 */
-	public void ajouterCategorie(Categorie pCategorie) throws CategorieDALException 
+	public void ajouterCategorie(Categorie pCategorie) throws BLLException  
 	{
-		this.categorieDAO.insererCategorie(pCategorie);
+			validerCategorie(pCategorie);
+			try {
+				categorieDAO.insererCategorie(pCategorie);
+			} catch (CategorieDALException e) {
+				throw new BLLException(e.getMessage());
+			}
 	}
 	
 	/**
@@ -54,9 +73,14 @@ public class CategorieManager {
 	 * 
 	 * @throws CategorieDALException
 	 */
-	public void modifierCategorie(Categorie pCategorie) throws CategorieDALException 
+	public void modifierCategorie(Categorie pCategorie) throws BLLException 
 	{
-		this.categorieDAO.modifierCategorie(pCategorie);
+			validerCategorie(pCategorie);
+			try {
+				categorieDAO.modifierCategorie(pCategorie);
+			} catch (CategorieDALException e) {
+				throw new BLLException(e.getMessage());
+			}
 	}
 	
 	/**
@@ -64,8 +88,25 @@ public class CategorieManager {
 	 * 
 	 * @throws CategorieDALException
 	 */
-	public void supprimerCategorie(int pNoCategorie) throws CategorieDALException, SQLException  
+	public void supprimerCategorie(int pNoCategorie) throws BLLException   
 	{
-		this.categorieDAO.supprimerCategorie(pNoCategorie);
+		try {
+			categorieDAO.supprimerCategorie(pNoCategorie);
+		} catch (CategorieDALException e) {
+			throw new BLLException(e.getMessage());
+		}
+	}
+	
+	private void validerCategorie(Categorie pCategorie) throws BLLException{
+		
+		StringBuilder sb = new StringBuilder();
+		
+		if(pCategorie.getLibelle()==null || pCategorie.getLibelle().isBlank()) {
+			sb.append("Le libellé de la catégorie doit être renseigné. \n");
+		}
+		
+		if(sb.length()>0) {
+			throw new BLLException(sb.toString());
+		}
 	}
 }
