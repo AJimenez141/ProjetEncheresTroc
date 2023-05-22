@@ -63,7 +63,7 @@ public class TestServletArticleVendu extends HttpServlet {
 
 		try {
 			utilisateurJJ = utilisateurManager.recupererUnUtilisateur(9);
-		} catch (UtilisateurDALException | SQLException | BLLException e) {
+		} catch (BLLException e) {
 			e.printStackTrace();
 		}
 

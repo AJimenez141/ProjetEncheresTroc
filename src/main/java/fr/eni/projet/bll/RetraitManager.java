@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.dal.ArticleVenduDALException;
-import fr.eni.projet.dal.DALException;
 import fr.eni.projet.dal.DAOFactory;
 import fr.eni.projet.dal.RetraitDALException;
 import fr.eni.projet.dal.RetraitDAO;
@@ -52,16 +51,7 @@ public class RetraitManager {
 	 */
 	public Retrait selectionnerRetraitArticle(int pArticleVenduId) throws BLLException {
 		
-		ArticleVendu articleVendu = null;
 		Retrait retrait = null;
-		
-		try {
-			articleVendu = ArticleVenduManager.getInstance().recupererUnArticleVendu(pArticleVenduId);
-		} catch (ArticleVenduDALException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
 		try {
 			retrait = retraitDAO.selectRetraitArticle(pArticleVenduId);
@@ -71,14 +61,12 @@ public class RetraitManager {
 				return retrait;
 			}
 			//Si il n'y a pas de point de retrait, on prend l'adresse du vendeur
-			else if (articleVendu != null) {
+			else {
+				ArticleVendu articleVendu = ArticleVenduManager.getInstance().recupererUnArticleVendu(pArticleVenduId);
 				return new Retrait(articleVendu.getVendeur().getAdresse(), articleVendu);
-			//Sinon renvoyer null
-			} else {
-				return null;
 			}
 			
-		} catch (RetraitDALException e) {
+		} catch (RetraitDALException | NullPointerException e) {
 			throw new BLLException(e.getMessage());
 		}
 		
