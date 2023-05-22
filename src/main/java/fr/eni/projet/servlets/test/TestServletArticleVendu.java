@@ -42,9 +42,6 @@ public class TestServletArticleVendu extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		Instanciantion du manager
-		ArticleVenduManager articleManager = new ArticleVenduManager();
-		CategorieManager categorieManager = new CategorieManager();
-		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		
 //	FIXTURES
 //		ARTICLE 1
@@ -58,17 +55,19 @@ public class TestServletArticleVendu extends HttpServlet {
 //		RECUPERATION UTILISATEUR
 		
 		Utilisateur utilisateurJJ = null;
+
 		try {
-			utilisateurJJ = utilisateurManager.recupererUnUtilisateur(1);
-		} catch (UtilisateurDALException | SQLException e) {
+			utilisateurJJ = UtilisateurManager.getInstance().recupererUnUtilisateur(1);
+		} catch (BLLException e) {
 			e.printStackTrace();
 		}
+
 		
 //		RECUPERATION CATEGORIE
 		
 		Categorie art = null;
 		try {
-			art = categorieManager.recupererUneCategorie(2);
+			art = CategorieManager.getInstance().recupererUneCategorie(2);
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
@@ -78,7 +77,7 @@ public class TestServletArticleVendu extends HttpServlet {
 		try {
 			ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",dateDebutEnchere, dateFinEnchere, 20, 599, utilisateurJJ, art);
 			
-			articleManager.ajouterArticleVendu(article);
+			ArticleVenduManager.getInstance().ajouterArticleVendu(article);
 			response.getWriter().append("Article "+article.getDescription()+" correctement inséré");
 			
 		} catch (ArticleVenduDALException | SQLException e) {

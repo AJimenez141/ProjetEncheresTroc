@@ -47,7 +47,7 @@ public class UtilisateurManager {
 	 * @throws UtilisateurDALException
 	 * @throws BLLException 
 	 */
-	public List<Utilisateur> recupererLesUtilisateurs() throws UtilisateurDALException, BLLException {
+	public List<Utilisateur> recupererLesUtilisateurs() throws BLLException {
 		try {
 			return this.utilisateurDAO.selectAll();
 		} catch (UtilisateurDALException e) {
@@ -65,7 +65,7 @@ public class UtilisateurManager {
 	 * @throws SQLException
 	 * @throws BLLException 
 	 */
-	public Utilisateur recupererUnUtilisateur(int pIdUtilisateur) throws UtilisateurDALException, SQLException, BLLException {
+	public Utilisateur recupererUnUtilisateur(int pIdUtilisateur) throws BLLException {
 		try {
 			return this.utilisateurDAO.selectById(pIdUtilisateur);
 		} catch (UtilisateurDALException e) {
@@ -83,7 +83,7 @@ public class UtilisateurManager {
 	 * @throws UtilisateurDALException
 	 * @throws BLLException 
 	 */
-	public void insererUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException, BLLException {
+	public void insererUtilisateur(Utilisateur pUtilisateur) throws BLLException {
 		validerUtilisateur(pUtilisateur);
 		try {
 			this.utilisateurDAO.insererUtilisateur(pUtilisateur);
@@ -103,7 +103,7 @@ public class UtilisateurManager {
 	 * @throws SQLException
 	 * @throws BLLException 
 	 */
-	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException, SQLException, BLLException {
+	public void modifierUtilisateur(Utilisateur pUtilisateur) throws BLLException {
 		try {
 			this.utilisateurDAO.modifierUtilisateur(pUtilisateur);
 		} catch (UtilisateurDALException e) {
@@ -123,7 +123,7 @@ public class UtilisateurManager {
 	 * @throws SQLException
 	 * @throws BLLException 
 	 */
-	public void supprimerUtilisateur(int pUtilisateurId) throws UtilisateurDALException, SQLException, BLLException {
+	public void supprimerUtilisateur(int pUtilisateurId) throws BLLException {
 		try {
 			this.utilisateurDAO.supprimerUtilisateur(pUtilisateurId);
 		} catch (UtilisateurDALException e) {
@@ -146,13 +146,18 @@ public class UtilisateurManager {
 	 * @throws SQLException
 	 * @throws ConnexionException
 	 */
-	public Utilisateur seConnecter(String pEmailOrPseudo, String pMotDePasse) throws UtilisateurDALException, SQLException {
+	public Utilisateur seConnecter(String pEmailOrPseudo, String pMotDePasse) throws BLLException {
 		Utilisateur utilisateurConnecte;
 		
-		if(this.utilisateurDAO.seConnecterEmail(pEmailOrPseudo, pMotDePasse)  != null) {
-			utilisateurConnecte = this.utilisateurDAO.seConnecterEmail(pEmailOrPseudo, pMotDePasse);
-		} else {
-			utilisateurConnecte = this.utilisateurDAO.seConnecterPseudo(pEmailOrPseudo, pMotDePasse);
+		try {
+			if(this.utilisateurDAO.seConnecterEmail(pEmailOrPseudo, pMotDePasse)  != null) {
+				utilisateurConnecte = this.utilisateurDAO.seConnecterEmail(pEmailOrPseudo, pMotDePasse);
+			} else {
+				utilisateurConnecte = this.utilisateurDAO.seConnecterPseudo(pEmailOrPseudo, pMotDePasse);
+			}
+		} catch (UtilisateurDALException e) {
+			e.printStackTrace();
+			throw new BLLException("Impossible de se connecter");
 		}
 		
 		return utilisateurConnecte;

@@ -14,7 +14,7 @@ public interface UtilisateurDAO {
 	 * @throws UtilisateurDALException
 	 * @throws SQLException 
 	 */
-	public Utilisateur selectById(int pUtilisateurId) throws UtilisateurDALException, SQLException;
+	public Utilisateur selectById(int pUtilisateurId) throws UtilisateurDALException;
 	
 	/**
 	 * selectionner tous les utilisateurs
@@ -39,7 +39,7 @@ public interface UtilisateurDAO {
 	 * @throws UtilisateurDALException
 	 * @throws SQLException 
 	 */
-	public void supprimerUtilisateur(int pUtilisateurId) throws UtilisateurDALException, SQLException;
+	public void supprimerUtilisateur(int pUtilisateurId) throws UtilisateurDALException;
 	
 	/**
 	 * desactiver un utilisateur
@@ -56,7 +56,7 @@ public interface UtilisateurDAO {
 	 * @throws UtilisateurDALException
 	 * @throws SQLException 
 	 */
-	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException, SQLException;
+	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException;
 	
 	/**
 	 * connexion de l'utilisateur avec l'email
@@ -68,7 +68,7 @@ public interface UtilisateurDAO {
 	 * @throws SQLException
 	 * @throws ConnexionException
 	 */
-	public Utilisateur seConnecterEmail(String pEmail, String pMotDePasse) throws UtilisateurDALException, SQLException;
+	public Utilisateur seConnecterEmail(String pEmail, String pMotDePasse) throws UtilisateurDALException;
 	
 	
 	/**
@@ -81,5 +81,5 @@ public interface UtilisateurDAO {
 	 * @throws SQLException
 	 * @throws ConnexionException
 	 */
-	public Utilisateur seConnecterPseudo(String pPseudo, String pMotDePasse) throws UtilisateurDALException, SQLException;
+	public Utilisateur seConnecterPseudo(String pPseudo, String pMotDePasse) throws UtilisateurDALException;
 }
