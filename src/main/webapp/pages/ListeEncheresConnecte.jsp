@@ -19,7 +19,7 @@
 		<div class="section">
 			<div>
 				
-				<form action="<%=request.getContextPath()%>/ListeEncheresConnecte" method="POST">
+				<form action="<%=request.getContextPath()%>/Accueil" method="POST">
 					<h3>Filtres : </h3>
 					
 					<input type="text" name="filtre"/>

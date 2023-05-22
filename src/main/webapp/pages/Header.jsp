@@ -9,15 +9,15 @@
 	<div class="conteneur" id="Header">
 		<div>
 			<img alt="" src="../ressources/images/tacos_logo.png">
-			<a class="ombre_foncee" href="ListeEncheresConnecte.jsp"><h1>Tacos - Enchères</h1></a>
+			<a class="ombre_foncee" href="<%=request.getContextPath()%>/Accueil"><h1>Tacos - Enchères</h1></a>
 		</div>
 		<ul>
 			<li><a class="ombre_foncee" href="GestionUtilisateurs.jsp">Gestion des utilisateurs</a></li>
 			<li><a class="ombre_foncee" href="GestionCategories.jsp">Gestion des catégories</a></li>
-			<li><a class="ombre_foncee" href="ListeEncheresConnecte.jsp">Enchères</a></li>
-			<li><a class="ombre_foncee" href="VendreUnArticle.jsp">Vendre un Article</a></li>
-			<li><a class="ombre_foncee" href="MonProfil.jsp">Mon Profil</a></li>
-			<li><a class="ombre_foncee" href="AccueilNonConnecte.jsp">Déconnexion</a></li>
+			<li><a class="ombre_foncee" href="action="<%=request.getContextPath()%>/Accueil"">Enchères</a></li>
+			<li><a class="ombre_foncee" href="action="<%=request.getContextPath()%>/VendreUnArticle"">Vendre un Article</a></li>
+			<li><a class="ombre_foncee" href="action="<%=request.getContextPath()%>/Profil"">Mon Profil</a></li>
+			<li><a class="ombre_foncee" href="action="<%=request.getContextPath()%>/AccueilNonConnecte"">Déconnexion</a></li>
 		</ul>
 	</div>
 </body>

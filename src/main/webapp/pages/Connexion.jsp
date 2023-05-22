@@ -17,15 +17,15 @@
 	<div class="conteneur" id="Connexion">
 		<div class="section" id="section_connexion">
 			<div id="section_connexion_div">
-			<div id="section_connexion_id_div">
-					<label for="id">Identifiant :</label>
-					<input type="text" id="id" name="id">
-				<br>
-				<br>
-					<label for="mdp">Mot de passe :</label>
-					<input type="password" id="mdp" name="mdp">
-				<br>
-				<br>
+				<div id="section_connexion_id_div">
+						<label for="id">Identifiant :</label>
+						<input type="text" id="id" name="id">
+					<br>
+					<br>
+						<label for="mdp">Mot de passe :</label>
+						<input type="password" id="mdp" name="mdp">
+					<br>
+					<br>
 				</div>
 					<a href="ListeEncheresConnecte.jsp">
 						<button id="btnConnexion" name="btnConnexion">Connexion</button>
