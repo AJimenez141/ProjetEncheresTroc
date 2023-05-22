@@ -158,7 +158,7 @@ public class UtilisateurManager {
 			}
 		} catch (UtilisateurDALException e) {
 			e.printStackTrace();
-			throw new BLLException("Impossible de se connecter");
+			throw new BLLException("Impossible de se connecter",e);
 		}
 		
 		return utilisateurConnecte;
