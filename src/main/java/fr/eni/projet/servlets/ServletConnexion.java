@@ -46,37 +46,33 @@ public class ServletConnexion extends HttpServlet {
 		
 		System.out.println("emailOuPseudo " + emailOuPseudo + " mdp " + mdp);
 		
-		Utilisateur utilisateur = null;
+//		Utilisateur utilisateur = null;
 		
 		try {
-			utilisateur = UtilisateurManager.getInstance().seConnecter(emailOuPseudo, mdp);
+			Utilisateur utilisateur = UtilisateurManager.getInstance().seConnecter(emailOuPseudo, mdp);
 			System.out.println(utilisateur);
+			System.out.println(utilisateur);
+			
+			HttpSession session = request.getSession();
+			
+//			session.setAttribute("pseudo", utilisateur.getPseudo());
+//			session.setAttribute("nom", utilisateur.getNom());
+//			session.setAttribute("prenom", utilisateur.getPrenom());
+//			session.setAttribute("email", utilisateur.getEmail());
+//			session.setAttribute("tel", utilisateur.getTelephone());
+//			session.setAttribute("rue", utilisateur.getAdresse().getRue());
+//			session.setAttribute("cp", utilisateur.getAdresse().getCodePostal());
+//			session.setAttribute("ville", utilisateur.getAdresse().getVille());
+//			session.setAttribute("credit", utilisateur.getCredit());
+			
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
+			rd.forward(request, response);
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if( (emailOuPseudo == utilisateur.getPseudo() || emailOuPseudo == utilisateur.getEmail() ) && mdp == utilisateur.getMotDePasse())
-		{
-			System.out.println(utilisateur);
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("pseudo", utilisateur.getPseudo());
-			session.setAttribute("nom", utilisateur.getNom());
-			session.setAttribute("prenom", utilisateur.getPrenom());
-			session.setAttribute("email", utilisateur.getEmail());
-			session.setAttribute("tel", utilisateur.getTelephone());
-			session.setAttribute("rue", utilisateur.getAdresse().getRue());
-			session.setAttribute("cp", utilisateur.getAdresse().getCodePostal());
-			session.setAttribute("ville", utilisateur.getAdresse().getVille());
-			session.setAttribute("credit", utilisateur.getCredit());
-			
-			
-//			RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
-//			rd.forward(request, response);
-		} else {
-			System.out.println("identifiants incorrects");
-		}
+
 		
 	}
-
 }
