@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.bll.RetraitManager;
 import fr.eni.projet.bll.ArticleVenduManager;
+import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ArticleVenduDALException;
@@ -44,11 +45,12 @@ public class TestServletRetrait extends HttpServlet {
 //		CREATION DU RETRAIT
 		Retrait unRetrait = new Retrait(vendeur.getAdresse(), articleVendu);
 		
-		try {
-			retraitManager.creerRetrait(unRetrait);
-			response.getWriter().append("Served at: ").append("Lieu de retrait ajouté");
-		} catch (RetraitDALException | SQLException e) {
-			e.printStackTrace();
-		}
+			try {
+				retraitManager.creerRetrait(unRetrait);
+				response.getWriter().append("Served at: ").append("Lieu de retrait ajouté");
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
+			
 	}
 }
