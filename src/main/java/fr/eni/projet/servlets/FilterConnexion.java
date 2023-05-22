@@ -7,6 +7,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
@@ -35,18 +36,18 @@ public class FilterConnexion implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		if(httpRequest.getServletPath().toLowerCase().contains("connexion") || httpRequest.getServletPath().toLowerCase().contains("creation") || httpRequest.getServletPath().toLowerCase().contains("accueilnonconnecte"))
+		if(!httpRequest.getServletPath().toLowerCase().contains("connexion") && !httpRequest.getServletPath().toLowerCase().contains("creation") && !httpRequest.getServletPath().toLowerCase().contains("accueilnonconnecte"))
+		{
+			//Renvoyons une 403 à l'utilisateur
+			HttpServletResponse httpResponse = (HttpServletResponse) response;
+			httpResponse.sendRedirect("AccueilNonConnecte");
+			System.out.println("vous n'êtes pas connecté");
+		}
+		else
 		{
 			//Laissons passer la requête vers là où elle doit aller
 			System.out.println("vous êtes connecté");
 			chain.doFilter(request, response);
-		}
-		else
-		{
-			//Renvoyons une 403 à l'utilisateur
-//			HttpServletResponse httpResponse = (HttpServletResponse) response;
-//			httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
-			System.out.println("vous n'êtes pas connecté");
 		}
 	}
 
