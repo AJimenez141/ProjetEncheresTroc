@@ -59,7 +59,7 @@ public class TestServletUtilisateur extends HttpServlet {
 			response.getWriter().append("Utilisateur " + encherisseur1.getEmail() + " inséré");
 //			utilisateurManager.insererUtilisateur(encherisseur2);
 //			response.getWriter().append("Utilisateur " + encherisseur2.getEmail() + " inséré");
-		} catch (UtilisateurDALException | BLLException e) {
+		} catch (BLLException e) {
 			e.printStackTrace();
 			response.getWriter().append(e.toString());
 		}

@@ -60,17 +60,19 @@ public class TestServletArticleVendu extends HttpServlet {
 //		RECUPERATION UTILISATEUR
 		
 		Utilisateur utilisateurJJ = null;
+
 		try {
 			utilisateurJJ = utilisateurManager.recupererUnUtilisateur(9);
 		} catch (UtilisateurDALException | SQLException | BLLException e) {
 			e.printStackTrace();
 		}
+
 		
 //		RECUPERATION CATEGORIE
 		
 		Categorie art = null;
 		try {
-			art = categorieManager.recupererUneCategorie(2);
+			art = CategorieManager.getInstance().recupererUneCategorie(2);
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}

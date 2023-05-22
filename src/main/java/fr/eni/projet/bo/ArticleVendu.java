@@ -25,7 +25,7 @@ public class ArticleVendu {
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
-		this.enVente = LocalDate.now().isBefore(dateFinEncheres);
+		this.enVente = LocalDate.now().isAfter(dateDebutEncheres) && LocalDate.now().isBefore(dateFinEncheres);
 		this.vendeur = vendeur;
 		this.categorie = categorie;
 	}
@@ -39,7 +39,7 @@ public class ArticleVendu {
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
-		this.enVente = LocalDate.now().isBefore(dateFinEncheres);
+		this.enVente = LocalDate.now().isAfter(dateDebutEncheres) && LocalDate.now().isBefore(dateFinEncheres);
 		this.vendeur = vendeur;
 		this.categorie = categorie;
 	}
