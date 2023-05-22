@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="fr.eni.projet.bo.Categorie" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -31,9 +34,18 @@
 					
 					<label name="labelCategorie" for="categorie">Catégorie : </label>
 					
-					<select>
-						<option value=""></option>
+					<% @SuppressWarnings("unchecked")
+					List<Categorie> listeCategories = (List<Categorie>)request.getAttribute("listeCategories");
+					%>
+					
+					<select name="selectCategories">
+						<c:forEach var="categorie" items="${listeCategories}">
+							<option value='<c:out value="${categorie.getNoCategorie()}"/>'><c:out value="${categorie.getLibelle()}"/></option>				
+						</c:forEach>
 					</select>
+					
+					<label name="labelPrixDepart" for="prixDepart">Prix de départ : </label>
+					<input type="number" name="prixDepart"/>
 					
 					<label name="labelDebutEnchere" for="debutEnchere">Début de l'enchère : </label>
 					<input type="date" name="debutEnchere"/>
