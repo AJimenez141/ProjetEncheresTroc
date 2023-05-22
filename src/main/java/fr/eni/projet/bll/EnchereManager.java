@@ -107,9 +107,9 @@ public class EnchereManager {
 	 * @throws EnchereDALException
 	 * @throws SQLException
 	 */
-	public Enchere recupererEnchereLaPlusHaute(int pEnchereId) throws BLLException {
+	public Enchere recupererEnchereLaPlusHaute(int pArticleVenduId) throws BLLException {
 		try {
-			return enchereDAO.selectMaxEnchereByArticle(pEnchereId);
+			return enchereDAO.selectMaxEnchereByArticle(pArticleVenduId);
 		} catch (EnchereDALException e) {
 			throw new BLLException(e.getMessage());
 		}
