@@ -6,11 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Créer un compte</title>
 <link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet">
-<<<<<<< Updated upstream
 <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/ressources/images/tacos_favicon.png">
-=======
-<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
->>>>>>> Stashed changes
 </head>
 <header>
 	<div class="conteneur" id="Header">

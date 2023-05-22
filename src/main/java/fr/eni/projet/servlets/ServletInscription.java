@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet.bll.BLLException;
+import fr.eni.projet.bll.UtilisateurManager;
+import fr.eni.projet.bo.Adresse;
+import fr.eni.projet.bo.Utilisateur;
+
 /**
  * Servlet implementation class ServletInscription
  */
@@ -36,7 +41,23 @@ public class ServletInscription extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Adresse adresse = new Adresse(request.getParameter("rue"), request.getParameter("cp"), request.getParameter("ville"));
 		
+		Utilisateur utilisateur = new Utilisateur(
+				request.getParameter("pseudo"),
+				request.getParameter("nom"),
+				request.getParameter("prenom"),
+				request.getParameter("email"),
+				request.getParameter("mdp"),
+				request.getParameter("tel"),
+				adresse,
+				100);
+		System.out.println(utilisateur);
+		try {
+			UtilisateurManager.getInstance().insererUtilisateur(utilisateur);
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
 }
