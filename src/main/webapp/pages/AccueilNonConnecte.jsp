@@ -10,7 +10,9 @@
 </head>
 <header>
 	<div class="conteneur" id="Header">
-		<a href="#"><h1 class="ombre_foncee">Tacos - Enchères</h1></a>
+		<a href="<%=request.getContextPath()%>/AccueilNonConnecte">
+			<h1 class="ombre_foncee">Tacos - Enchères</h1>
+		</a>
 		<ul>
 			<li><a class="ombre_foncee" href="CreerCompte.jsp">S'inscrire</a></li>
 			<li><a class="ombre_foncee" href="Connexion.jsp">Se Connecter</a></li>
