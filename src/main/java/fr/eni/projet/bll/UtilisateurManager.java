@@ -104,6 +104,7 @@ public class UtilisateurManager {
 	 * @throws BLLException 
 	 */
 	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException, SQLException, BLLException {
+		validerUtilisateur(pUtilisateur);
 		try {
 			this.utilisateurDAO.modifierUtilisateur(pUtilisateur);
 		} catch (UtilisateurDALException e) {

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.bll.RetraitManager;
 import fr.eni.projet.bll.ArticleVenduManager;
+import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ArticleVenduDALException;
@@ -30,14 +31,14 @@ public class TestServletRetrait extends HttpServlet {
 		//=======================TEST 1 - INSERTION===========================================
 		
 		RetraitManager retraitManager = new RetraitManager();
-		ArticleVenduManager articleVenduManager = new ArticleVenduManager();
+		ArticleVenduManager articleVenduManager = ArticleVenduManager.getInstance();
 		
 		ArticleVendu articleVendu = null;
 		
 //		RECUPERATION DE L'ARTICLE | OK
 		try {
 			articleVendu = articleVenduManager.recupererUnArticleVendu(3);
-		} catch (ArticleVenduDALException | SQLException e) {
+		} catch (BLLException e) {
 			e.printStackTrace();
 		}
 		Utilisateur vendeur = articleVendu.getVendeur();

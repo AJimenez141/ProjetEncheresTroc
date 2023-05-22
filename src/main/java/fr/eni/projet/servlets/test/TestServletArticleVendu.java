@@ -42,25 +42,27 @@ public class TestServletArticleVendu extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		Instanciantion du manager
-		ArticleVenduManager articleManager = new ArticleVenduManager();
-		CategorieManager categorieManager = new CategorieManager();
-		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		ArticleVenduManager articleManager = ArticleVenduManager.getInstance();
+		CategorieManager categorieManager = CategorieManager.getInstance();
+		UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
 		
 //	FIXTURES
 //		ARTICLE 1
 		
 		Adresse adresseJeanLuc = new Adresse("200 rue des coquillettes", "44100", "Nantes");
 		Utilisateur jeanLuc = new Utilisateur(1, "jjluc", "Jean-Luc", "Grandfan", "jluclefan@mail.com", "aeroTiti000", "0712345678",adresseJeanLuc, 25);
-		LocalDate dateDebutEnchere = LocalDate.of(2023, 05, 15);
-		LocalDate dateFinEnchere = LocalDate.of(2023, 04, 15); 
+//		LocalDate dateDebutEnchere = LocalDate.of(2023, 05, 15);
+		LocalDate dateDebutEnchere = LocalDate.of(2023, 04, 15);
+		LocalDate dateFinEnchere = LocalDate.of(2023, 10, 15); 
+//		LocalDate dateFinEnchere = LocalDate.of(2023, 04, 15); 
 // TODO - erreur date de fin d'enchère antérieure à la date de début
 		
 //		RECUPERATION UTILISATEUR
 		
 		Utilisateur utilisateurJJ = null;
 		try {
-			utilisateurJJ = utilisateurManager.recupererUnUtilisateur(1);
-		} catch (UtilisateurDALException | SQLException e) {
+			utilisateurJJ = utilisateurManager.recupererUnUtilisateur(9);
+		} catch (UtilisateurDALException | SQLException | BLLException e) {
 			e.printStackTrace();
 		}
 		
@@ -76,13 +78,32 @@ public class TestServletArticleVendu extends HttpServlet {
 //		TEST INSERTION
 			
 		try {
-			ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",dateDebutEnchere, dateFinEnchere, 20, 599, utilisateurJJ, art);
+//			ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",dateDebutEnchere, dateFinEnchere, 20, 599, utilisateurJJ, art);
+			
+//			public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+//					LocalDate dateFinEncheres, int miseAPrix, int prixVente, Utilisateur vendeur, Categorie categorie) {
+//				super();
+//				this.noArticle = noArticle;
+//				this.nomArticle = nomArticle;
+//				this.description = description;
+//				this.dateDebutEncheres = dateDebutEncheres;
+//				this.dateFinEncheres = dateFinEncheres;
+//				this.miseAPrix = miseAPrix;
+//				this.prixVente = prixVente;
+//				this.enVente = LocalDate.now().isBefore(dateFinEncheres);
+//				this.vendeur = vendeur;
+//				this.categorie = categorie;
+//			}
+			
+			ArticleVendu article = new ArticleVendu(1, "Truc", "truc enorme",LocalDate.of(2023, 04, 15), LocalDate.of(2023, 10, 15), 20, 0, utilisateurJJ, art);
+
 			
 			articleManager.ajouterArticleVendu(article);
-			response.getWriter().append("Article "+article.getDescription()+" correctement inséré");
+			response.getWriter().append(article.toString());
 			
-		} catch (ArticleVenduDALException | SQLException e) {
+		} catch (BLLException e) {
 			e.printStackTrace();
+			response.getWriter().append(e.toString());
 		}
 		
 //		TEST RECUPERER AVEC ID
