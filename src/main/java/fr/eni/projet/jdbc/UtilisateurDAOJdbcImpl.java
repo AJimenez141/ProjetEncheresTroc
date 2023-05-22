@@ -39,7 +39,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	 * Selectionner un utilisateur en fonction de son id
 	 */
 	@Override
-	public Utilisateur selectById(int pUtilisateurId) throws UtilisateurDALException, SQLException {
+	public Utilisateur selectById(int pUtilisateurId) throws UtilisateurDALException {
 		
 		Utilisateur utilisateur = null;
 		
@@ -156,7 +156,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	 * Supprimer un utilisateur
 	 */
 	@Override
-	public void supprimerUtilisateur(int pUtilisateurId) throws UtilisateurDALException, SQLException {
+	public void supprimerUtilisateur(int pUtilisateurId) throws UtilisateurDALException {
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
 			PreparedStatement pStmt = connexion.prepareStatement(DELETE_UTILISATEUR);
@@ -175,7 +175,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	 * Modifier un utilisateur
 	 */
 	@Override
-	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException, SQLException {
+	public void modifierUtilisateur(Utilisateur pUtilisateur) throws UtilisateurDALException {
 		try(
 			Connection connexion = ConnectionProvider.getConnection();	
 			PreparedStatement pStmt = connexion.prepareStatement(UPDATE_UTILISATEUR)
@@ -211,8 +211,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	 * Comparer le mail et le pseudo pour la connexion 
 	 */
 	@Override
-	public Utilisateur seConnecterEmail(String pEmail, String pMotDePasse)
-			throws UtilisateurDALException, SQLException {
+	public Utilisateur seConnecterEmail(String pEmail, String pMotDePasse) throws UtilisateurDALException {
 		
 		Utilisateur resultat = null;
 		
@@ -256,8 +255,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	 * Comparer le mail et le pseudo pour la connexion 
 	 */
 	@Override
-	public Utilisateur seConnecterPseudo(String pPseudo, String pMotDePasse)
-			throws UtilisateurDALException, SQLException {
+	public Utilisateur seConnecterPseudo(String pPseudo, String pMotDePasse) throws UtilisateurDALException {
 		
 		Utilisateur resultat = null;
 		

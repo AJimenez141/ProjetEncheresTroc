@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.Adresse;
 import fr.eni.projet.bo.Utilisateur;
@@ -36,29 +37,32 @@ public class TestServletUtilisateur extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		UtilisateurManager utilisateurManager =  UtilisateurManager.getInstance();
 
 //	FIXTURES :
 		
 //		UTILISATEUR 1
-		Adresse adresseEncherisseur1 = new Adresse("95 rue des champs", "44100", "Nantes");
-		Utilisateur encherisseur1 = new Utilisateur(1, "jdupont", "dupont", "jean", "jdupont@mail.com","aeroToto000","0612345678", adresseEncherisseur1, 15);
+		Adresse adresseEncherisseur1 = new Adresse("", "4410", "");
+//		Adresse adresseEncherisseur1 = new Adresse("95 rue des champs", "44100", "Nantes");
+//		Utilisateur encherisseur1 = new Utilisateur(1, "jdupont", "dupont", "jean", "jdupont@mail.com","aeroToto000","0612345678", adresseEncherisseur1, 15);
+		Utilisateur encherisseur1 = new Utilisateur(1, "", "", "jeanjacques", "jjdu18.truc.com","","061238", adresseEncherisseur1, 15);
 		
 //		UTILISATEUR 2
-		Adresse adresseEncherisseur2 = new Adresse("200 rue des coquillettes", "44100", "Nantes");
-		Utilisateur encherisseur2 = new Utilisateur(1, "llucas", "lucas", "luc", "llucas@mail.com", "aeroTiti000", "0712345678",adresseEncherisseur2, 25);
+//		Adresse adresseEncherisseur2 = new Adresse("200 rue des coquillettes", "44100", "Nantes");
+//		Utilisateur encherisseur2 = new Utilisateur(1, "llucas", "lucas", "luc", "llucas@mail.com", "aeroTiti000", "0712345678",adresseEncherisseur2, 25);
 	
 		
 //	TESTS INSERTION	
 		
-//		try {
-//			utilisateurManager.insererUtilisateur(encherisseur1);
-//			response.getWriter().append("Utilisateur " + encherisseur1.getEmail() + " inséré");
+		try {
+			utilisateurManager.insererUtilisateur(encherisseur1);
+			response.getWriter().append("Utilisateur " + encherisseur1.getEmail() + " inséré");
 //			utilisateurManager.insererUtilisateur(encherisseur2);
 //			response.getWriter().append("Utilisateur " + encherisseur2.getEmail() + " inséré");
-//		} catch (UtilisateurDALException e) {
-//			e.printStackTrace();
-//		}
+		} catch (BLLException e) {
+			e.printStackTrace();
+			response.getWriter().append(e.toString());
+		}
 				
 //	TEST SELECT ALL
 		

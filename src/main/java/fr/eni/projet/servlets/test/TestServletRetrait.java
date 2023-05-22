@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.bll.RetraitManager;
 import fr.eni.projet.bll.ArticleVenduManager;
+import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ArticleVenduDALException;
@@ -30,26 +31,36 @@ public class TestServletRetrait extends HttpServlet {
 		//=======================TEST 1 - INSERTION===========================================
 		
 		RetraitManager retraitManager = new RetraitManager();
-		ArticleVenduManager articleVenduManager = new ArticleVenduManager();
+		ArticleVenduManager articleVenduManager = ArticleVenduManager.getInstance();
 		
 		ArticleVendu articleVendu = null;
 		
-//		RECUPERATION DE L'ARTICLE | OK
+////		RECUPERATION DE L'ARTICLE | OK
+//		try {
+//			articleVendu = ArticleVenduManager.getInstance().recupererUnArticleVendu(1);
+//		} catch (ArticleVenduDALException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//		Utilisateur vendeur = articleVendu.getVendeur();
+//		
+////		CREATION DU RETRAIT
+//		Retrait unRetrait = new Retrait(vendeur.getAdresse(), articleVendu);
+//		
+//			try {
+//				RetraitManager.getInstance().creerRetrait(unRetrait);
+//				response.getWriter().append("Served at: ").append("Lieu de retrait ajouté");
+//			} catch (BLLException e) {
+//				e.printStackTrace();
+//			}
+			
+		//GET 
 		try {
-			articleVendu = articleVenduManager.recupererUnArticleVendu(3);
-		} catch (ArticleVenduDALException | SQLException e) {
+			Retrait retrait = RetraitManager.getInstance().selectionnerRetraitArticle(2);
+			response.getWriter().append("Served at: ").append(retrait.toString());
+		} catch (BLLException e) {
 			e.printStackTrace();
 		}
-		Utilisateur vendeur = articleVendu.getVendeur();
 		
-//		CREATION DU RETRAIT
-		Retrait unRetrait = new Retrait(vendeur.getAdresse(), articleVendu);
-		
-		try {
-			retraitManager.creerRetrait(unRetrait);
-			response.getWriter().append("Served at: ").append("Lieu de retrait ajouté");
-		} catch (RetraitDALException | SQLException e) {
-			e.printStackTrace();
-		}
+			
 	}
 }
