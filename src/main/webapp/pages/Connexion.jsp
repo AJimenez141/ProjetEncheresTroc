@@ -4,8 +4,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Connexion</title>
-<link href="../ressources/styles/main.css" rel="stylesheet">
-<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
+<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<div class="conteneur" id="Header">

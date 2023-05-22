@@ -30,7 +30,7 @@ public class ServletArticle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/pages/AccueilNonConnecte.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/pages/Encherir.jsp");
 		rd.forward(request, response);
 	}
 
