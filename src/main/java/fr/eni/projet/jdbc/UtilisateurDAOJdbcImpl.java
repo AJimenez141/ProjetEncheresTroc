@@ -231,8 +231,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 					rs.getString("nom"),
 					rs.getString("prenom"),
 					rs.getString("email"),
-					rs.getString("telephone"),
 					rs.getString("mot_de_passe"),
+					rs.getString("telephone"),
 					new Adresse(
 						rs.getString("rue"),
 						rs.getString("code_postal"),
@@ -276,8 +276,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 					rs.getString("nom"),
 					rs.getString("prenom"),
 					rs.getString("email"),
-					rs.getString("telephone"),
 					rs.getString("mot_de_passe"),
+					rs.getString("telephone"),
 					new Adresse(
 						rs.getString("rue"),
 						rs.getString("code_postal"),
