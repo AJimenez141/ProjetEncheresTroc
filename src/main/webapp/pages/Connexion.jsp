@@ -6,6 +6,7 @@
 <title>Connexion</title>
 <link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet">
 <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/ressources/images/tacos_favicon.png">
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 </head>
 <header>
 	<div class="conteneur" id="Header">
@@ -16,7 +17,7 @@
 <body>
 	<div class="conteneur" id="Connexion">
 		<div class="section" id="section_connexion">
-			<div id="section_connexion_div">
+			<form id="section_connexion_div" method="post">
 				<div id="section_connexion_id_div">
 						<label for="id">Identifiant :</label>
 						<input type="text" id="id" name="id">
@@ -27,7 +28,7 @@
 					<br>
 					<br>
 				</div>
-					<a href="ListeEncheresConnecte.jsp">
+					<a href="/Connexion">
 						<button id="btnConnexion" name="btnConnexion">Connexion</button>
 					</a>
 				<br>
@@ -38,10 +39,10 @@
 					<a href="#">Mot de passe oublié</a>
 				<br>
 				<br>
-				<a href="CreerCompte.jsp">
+				<a href="/Inscription">
 					<button class="bouton__enregistrer--couleur" id="btnCreerCompte" name="btnCreerCompte">Créer un compte</button>
 				</a>
-			</div>
+			</form>
 		</div>
 	</div>
 </body>
