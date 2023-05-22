@@ -30,13 +30,12 @@ public class TestServletRetrait extends HttpServlet {
 		//=======================TEST 1 - INSERTION===========================================
 		
 		RetraitManager retraitManager = new RetraitManager();
-		ArticleVenduManager articleVenduManager = new ArticleVenduManager();
 		
 		ArticleVendu articleVendu = null;
 		
 //		RECUPERATION DE L'ARTICLE | OK
 		try {
-			articleVendu = articleVenduManager.recupererUnArticleVendu(3);
+			articleVendu = ArticleVenduManager.getInstance().recupererUnArticleVendu(3);
 		} catch (ArticleVenduDALException | SQLException e) {
 			e.printStackTrace();
 		}

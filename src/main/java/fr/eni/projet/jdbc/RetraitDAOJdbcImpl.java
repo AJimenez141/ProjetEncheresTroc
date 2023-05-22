@@ -19,7 +19,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 	private final String INSERT_RETRAIT = "INSERT INTO RETRAITS(rue,code_postal,ville, no_article) VALUES (?,?,?,?)";
 
 	@Override
-	public void creerRetraitArticle(Retrait pRetrait) throws RetraitDALException, SQLException {
+	public void creerRetraitArticle(Retrait pRetrait) throws RetraitDALException {
 		try(
 			Connection connexion = ConnectionProvider.getConnection();
 			PreparedStatement pStmt = connexion.prepareStatement(INSERT_RETRAIT);		
