@@ -63,7 +63,7 @@ public class TestServletArticleVendu extends HttpServlet {
 
 		try {
 			utilisateurJJ = utilisateurManager.recupererUnUtilisateur(9);
-		} catch (UtilisateurDALException | SQLException | BLLException e) {
+		} catch (BLLException e) {
 			e.printStackTrace();
 		}
 
@@ -82,23 +82,7 @@ public class TestServletArticleVendu extends HttpServlet {
 		try {
 //			ArticleVendu article = new ArticleVendu(1, "Grille-Pain en or", "Grille-Pain en or, très très rare.",dateDebutEnchere, dateFinEnchere, 20, 599, utilisateurJJ, art);
 			
-//			public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-//					LocalDate dateFinEncheres, int miseAPrix, int prixVente, Utilisateur vendeur, Categorie categorie) {
-//				super();
-//				this.noArticle = noArticle;
-//				this.nomArticle = nomArticle;
-//				this.description = description;
-//				this.dateDebutEncheres = dateDebutEncheres;
-//				this.dateFinEncheres = dateFinEncheres;
-//				this.miseAPrix = miseAPrix;
-//				this.prixVente = prixVente;
-//				this.enVente = LocalDate.now().isBefore(dateFinEncheres);
-//				this.vendeur = vendeur;
-//				this.categorie = categorie;
-//			}
-			
-			ArticleVendu article = new ArticleVendu(1, "Truc", "truc enorme",LocalDate.of(2023, 04, 15), LocalDate.of(2023, 10, 15), 20, 0, utilisateurJJ, art);
-
+			ArticleVendu article = new ArticleVendu(1, "Truc", "truc enorme", LocalDate.of(2023, 04, 15),LocalDate.of(2023, 10, 15), 0, utilisateurJJ, art);
 			
 			articleManager.ajouterArticleVendu(article);
 			response.getWriter().append(article.toString());
