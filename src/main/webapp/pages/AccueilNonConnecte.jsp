@@ -5,8 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Accueil</title>
-<link href="../ressources/styles/main.css" rel="stylesheet">
-<link rel="icon" type="image/png" href="../ressources/images/tacos_favicon.png">
+<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/ressources/images/tacos_favicon.png">
 </head>
 <header>
 	<div class="conteneur" id="Header">
@@ -14,8 +14,8 @@
 			<h1 class="ombre_foncee">Tacos - Enchères</h1>
 		</a>
 		<ul>
-			<li><a class="ombre_foncee" href="CreerCompte.jsp">S'inscrire</a></li>
-			<li><a class="ombre_foncee" href="Connexion.jsp">Se Connecter</a></li>
+			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Inscription">S'inscrire</a></li>
+			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Connexion">Se Connecter</a></li>
 		</ul>
 	</div>
 </header>

@@ -36,7 +36,11 @@
 //	 */
 //	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 //		HttpServletRequest httpRequest = (HttpServletRequest) request;
+<<<<<<< Updated upstream
 //		if(!httpRequest.getServletPath().toLowerCase().contains("connexion") && !httpRequest.getServletPath().toLowerCase().contains("creation") && !httpRequest.getServletPath().toLowerCase().contains("accueilnonconnecte"))
+=======
+//		if(!httpRequest.getServletPath().toLowerCase().contains("connexion") && !httpRequest.getServletPath().toLowerCase().contains("inscription") && !httpRequest.getServletPath().toLowerCase().contains("accueilnonconnecte"))
+>>>>>>> Stashed changes
 //		{
 //			//Renvoyons une 403 à l'utilisateur
 //			HttpServletResponse httpResponse = (HttpServletResponse) response;
