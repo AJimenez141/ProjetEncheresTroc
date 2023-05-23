@@ -81,8 +81,8 @@
 					<a href="<%=request.getContextPath()%>/Profil">
 						<button type="submit" class="bouton__enregistrer--couleur" id="btnEnregistrerTest" name="btnEnregistrerTest">Enregistrer</button>
 					</a>
-					<a href="AccueilNonConnecte.jsp">
-						<button class="bouton__supprimer--couleur" id="btnSupprimerTest" name="btnSupprimerTest">Supprimer mon compte</button>
+					<a href="<%=request.getContextPath()%>/Deconnexion">
+						<button type="button" class="bouton__supprimer--couleur" id="btnSupprimerTest" name="btnSupprimerTest">Supprimer mon compte</button>
 					</a>
 				</div>
 			</form>
