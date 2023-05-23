@@ -34,31 +34,31 @@ public class ServletAccueilNonConnecte extends HttpServlet {
     /**
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
     	
-    	List<Enchere> encheres = new ArrayList<>();
-    	List<Enchere> enchereCourantes = new ArrayList<>();
-    	
-    	EnchereManager mgr = EnchereManager.getInstance();
-    	
-		try {
-			encheres = mgr.recupererLesEncheres();
-			
-		} catch (BLLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		for (Enchere enchere : encheres) {
-			if(enchere.getArticleVendu().isEnVente()) {
-				
-				enchereCourantes.add(enchere);
-			}
-		}	
-		
-    	this.getServletContext().setAttribute("encheresCourantes", enchereCourantes);
-    	
-    	
+//    	List<Enchere> encheres = new ArrayList<>();
+//    	List<Enchere> enchereCourantes = new ArrayList<>();
+//    	
+//    	EnchereManager mgr = EnchereManager.getInstance();
+//    	
+//		try {
+//			encheres = mgr.recupererLesEncheres();
+//			
+//		} catch (BLLException e) {
+//			
+//			e.printStackTrace();
+//		}
+//		
+//		for (Enchere enchere : encheres) {
+//			if(enchere.getArticleVendu().isEnVente()) {
+//				
+//				enchereCourantes.add(enchere);
+//			}
+//		}	
+//		
+//    	this.getServletContext().setAttribute("encheresCourantes", enchereCourantes);
+  	
     	RequestDispatcher rd = request.getRequestDispatcher("/pages/AccueilNonConnecte.jsp");
     	rd.forward(request, response);
     }
@@ -68,33 +68,34 @@ public class ServletAccueilNonConnecte extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		String categorie = request.getParameter("categorie");
-		String recherche = request.getParameter("filtre");
-		
-		List<Enchere> encheresFiltrees = new ArrayList<>();
-    	EnchereManager mgr = EnchereManager.getInstance();
-		
-		if(categorie != null && recherche != null) {
-			try {
-				encheresFiltrees = mgr.recupererEnchereFiltreeRechercheCategorie(recherche, categorie);
-			} catch (BLLException e) {
-				e.printStackTrace();
-			}
-		} else if(recherche != null) {
-			try {
-				encheresFiltrees = mgr.recupererEnchereFiltreeRecherche(recherche);
-			} catch (BLLException e) {
-				e.printStackTrace();
-			}
-		} else if(categorie != null) {
-			try {
-				encheresFiltrees = mgr.recupererEnchereFiltreeCategorie(categorie);
-			} catch (BLLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		this.getServletContext().setAttribute("encheresFiltrees", encheresFiltrees);
+//		String categorie = request.getParameter("categorie");
+//		String recherche = request.getParameter("filtre");
+//		
+//		List<Enchere> encheresFiltrees = new ArrayList<>();
+//    	EnchereManager mgr = EnchereManager.getInstance();
+//    	String test = null;
+//		
+//		if(categorie != null && recherche != null) {
+//			try {
+//				encheresFiltrees = mgr.recupererEnchereFiltreeRechercheCategorie(recherche, categorie);
+//			} catch (BLLException e) {
+//				e.printStackTrace();
+//			}
+//		} else if(recherche != null) {
+//			try {
+//				encheresFiltrees = mgr.recupererEnchereFiltreeRecherche(recherche);
+//			} catch (BLLException e) {
+//				e.printStackTrace();
+//			}
+//		} else if(categorie != null) {
+//			try {
+//				encheresFiltrees = mgr.recupererEnchereFiltreeCategorie(categorie);
+//			} catch (BLLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		this.getServletContext().setAttribute("encheresFiltrees", encheresFiltrees);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/AccueilNonConnecte.jsp");
     	rd.forward(request, response);

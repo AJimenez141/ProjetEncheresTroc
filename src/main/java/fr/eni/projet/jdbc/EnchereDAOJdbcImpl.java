@@ -208,7 +208,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				
 //				Enchere
 				int noEnchere				= rs.getInt("no_enchere");
-				LocalDate dateEnchere 		= rs.getDate("date_enchere").toLocalDate();
+				LocalDate dateEnchere 		= rs.getDate("date_debut_encheres").toLocalDate();
 				int montantEnchere			= rs.getInt("montant_enchere");
 				
 				encheres.add(new Enchere(noEnchere, dateEnchere, montantEnchere, utilisateur, articleVendu));
