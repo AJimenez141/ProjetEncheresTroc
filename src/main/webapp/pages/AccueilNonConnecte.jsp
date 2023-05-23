@@ -35,11 +35,7 @@
 					<input type="text" name="filtre"/>
 					
 					<label name="labelCategorie" for="categorie">Categorie : </label>
-<<<<<<< Updated upstream
-					<select name="selectCategorie">
-=======
 					<select name="categorie">
->>>>>>> Stashed changes
 						<option value="toutes">Toutes</option>
 						<!-- 
 						<c:forEach var="categorie" items="${ categories }">
