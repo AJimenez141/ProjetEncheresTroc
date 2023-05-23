@@ -60,4 +60,51 @@ public interface EnchereDAO {
 	 * @throws ArticleVenduDALException
 	 */
 	public Enchere selectMaxEnchereByArticle(int pArticleVenduId) throws EnchereDALException;
+	
+	/**
+	 * Selectionner les encheres en fonction du champs de recherche
+	 * 
+	 * @param pRecherche
+	 * @return
+	 * @throws EnchereDALException
+	 */
+	public List<Enchere> selectEncheresByRecherche(String pRecherche) throws EnchereDALException;
+	
+	/**
+	 * Selectionner les encheres en fonction de la categorie
+	 * 
+	 * @param pLibelleCategorie
+	 * @return
+	 * @throws EnchereDALException
+	 */
+	public List<Enchere> selectEncheresByCategorie(String pLibelleCategorie) throws EnchereDALException;
+	
+	/**
+	 * Selectionner les encheres en fonction de la categorie ET de la recherche
+	 * 
+	 * @param pRecherche
+	 * @param pLibelleCategorie
+	 * @return
+	 * @throws EnchereDALException
+	 */
+	public List<Enchere> selectEncheresByCategorieEtRecherche(String pRecherche, String pLibelleCategorie) throws EnchereDALException;
+	
+	
+	/**
+	 * Selectionner les ventes de l'utilisateur
+	 * 
+	 * @param pUtilisateurId
+	 * @return
+	 * @throws EnchereDALException
+	 */
+	public List<Enchere> selectMesVentes(int pUtilisateurId) throws EnchereDALException;
+	
+	/**
+	 * Selectionner les encheres de l'utilisateur
+	 * 
+	 * @param pUtilisateurId
+	 * @return
+	 * @throws EnchereDALException
+	 */
+	public List<Enchere> selectMesAchats(int pUtilisateurId) throws EnchereDALException;
 }

@@ -115,6 +115,46 @@ public class EnchereManager {
 		}
 	}
 	
+	public List<Enchere> recupererEnchereFiltreeRechercheCategorie(String pRecherche, String pCategorie) throws BLLException {
+		try {
+			return enchereDAO.selectEncheresByCategorieEtRecherche(pRecherche,pCategorie);
+		} catch (EnchereDALException e) {
+			throw new BLLException(e.getMessage());
+		}
+	}
+	
+	public List<Enchere> recupererEnchereFiltreeRecherche(String pRecherche) throws BLLException {
+		try {
+			return enchereDAO.selectEncheresByRecherche(pRecherche);
+		} catch (EnchereDALException e) {
+			throw new BLLException(e.getMessage());
+		}
+	}
+	
+	public List<Enchere> recupererEnchereFiltreeCategorie(String pCategorie) throws BLLException {
+		try {
+			return enchereDAO.selectEncheresByCategorie(pCategorie);
+		} catch (EnchereDALException e) {
+			throw new BLLException(e.getMessage());
+		}
+	}
+	
+	public List<Enchere> recupererVenteUtilisateurs(int pUtilisateurId) throws BLLException {
+		try {
+			return enchereDAO.selectMesVentes(pUtilisateurId);
+		} catch (EnchereDALException e) {
+			throw new BLLException(e.getMessage());
+		}
+	}
+	
+	public List<Enchere> recupererEncheresUtilisateurs(int pUtilisateurId) throws BLLException {
+		try {
+			return enchereDAO.selectMesAchats(pUtilisateurId);
+		} catch (EnchereDALException e) {
+			throw new BLLException(e.getMessage());
+		}
+	}
+	
 	private void validerEnchere(Enchere pEnchere) throws BLLException{
 		
 		StringBuilder sb = new StringBuilder();
