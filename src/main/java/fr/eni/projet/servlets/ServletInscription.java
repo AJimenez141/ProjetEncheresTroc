@@ -42,7 +42,7 @@ public class ServletInscription extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Adresse adresse = new Adresse(request.getParameter("rue"), request.getParameter("cp"), request.getParameter("ville"));
-		
+
 		Utilisateur utilisateur = new Utilisateur(
 				request.getParameter("pseudo"),
 				request.getParameter("nom"),

@@ -38,7 +38,7 @@
 				<br>
 				<br>
 				<a href="<%=request.getContextPath()%>/Inscription">
-					<button class="bouton__enregistrer--couleur" id="btnCreerCompte" name="btnCreerCompte">Créer un compte</button>
+					<button type=button class="bouton__enregistrer--couleur" id="btnCreerCompte" name="btnCreerCompte">Créer un compte</button>
 				</a>
 			</form>
 		</div>

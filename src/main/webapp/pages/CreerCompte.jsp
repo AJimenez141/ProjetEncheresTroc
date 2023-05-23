@@ -18,7 +18,7 @@
 	<h2>Mon profil</h2>
 	<div class="conteneur" id="CreerCompte">
 		<div class="section">
-			<form method="POST">
+			<form method="POST" action="<%=request.getContextPath()%>/Inscription">
 				<div id="section_profil">
 					<div>
 						<label for="pseudo">Pseudo :</label>
@@ -67,11 +67,9 @@
 					</div>
 				</div>
 				<div id="section_profil_bouton">
-					<a href="ListeEncheresConnecte.jsp">
-						<button type="submit" class="bouton__enregistrer--couleur" id="btnCreer" name="btnCreer">Créer</button>
-					</a>
-					<a href="Connexion.jsp">
-						<button id="btnAnnuler" name="btnAnnuler">Annuler</button>
+					<button type="submit" class="bouton__enregistrer--couleur" id="btnCreer" name="btnCreer">Créer</button>
+					<a href="<%=request.getContextPath()%>/AccueilNonConnecte">
+						<button type="button" id="btnAnnuler" name="btnAnnuler">Annuler</button>
 					</a>
 				</div>
 			</form>
