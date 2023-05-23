@@ -1,6 +1,8 @@
 package fr.eni.projet.servlets;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +21,8 @@ import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.Categorie;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Servlet implementation class ServeltAccueil
@@ -32,7 +36,6 @@ public class ServletAccueil extends HttpServlet {
      */
     public ServletAccueil() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -51,8 +54,7 @@ public class ServletAccueil extends HttpServlet {
 //    	CREATION D'UNE LISTE D'ERREUR POUR AFFICHAGE
     	List<String> erreurs = new ArrayList<>();
     	
-//    	ENCHERES
-    	
+//    	ENCHERES	
 		try {
 			encheres = mgr.recupererLesEncheres();
 			
@@ -70,7 +72,6 @@ public class ServletAccueil extends HttpServlet {
 		}
     	
 //    	CATEGORIES
-    	
     	try {
     		categories = mgrCat.recupererLesCategorie();
 		} catch (Exception e) {
@@ -114,10 +115,17 @@ public class ServletAccueil extends HttpServlet {
 		String ventesNonDebutees = request.getParameter("ventesNonDebutees");
 		String ventesTerminees = request.getParameter("ventesTerminees");
 				
-//		RECUPERATION DES LISTES
+//		RECUPERATION DES LISTES - ACHATS
 		List<Enchere> encheresFiltrees = new ArrayList<>();
 		List<Enchere> encheresUtilisateur = new ArrayList<>();
-		List<Enchere> enchereGagneeUtilisateur = new ArrayList<>();
+		List<Enchere> enchereGagneesUtilisateur = new ArrayList<>();
+		
+//		RECUPERATION DES LISTES - VENTES
+		List<Enchere> ventesUtilisateur = new ArrayList<>();
+		
+		List<Enchere> ventesUtilisateurEnCours = new ArrayList<>();
+		List<Enchere> ventesUtilisateurTerminees = new ArrayList<>();
+		List<Enchere> ventesUtilisateurNonDebutees = new ArrayList<>();
 		
 //		RECUPERATION DES CATEGORIES
     	List<Categorie> categories = new ArrayList<>();
@@ -130,28 +138,31 @@ public class ServletAccueil extends HttpServlet {
 		
 //    	String test = null;
     	
-//    	------------------ ACHAT ------------------
-    	
-//    	ENCHERES REMPORTEES
-//    	TODO - A FINALISER AVEC DAO
-    	
-//    	if(mesEncheresRemportees != null) {
-//    		try {
-//    			
-//    		}catch (BLLException e) {
-//				e.printStackTrace();
-//				erreurs.add(e.toString());
-//			}
-//    	}
+//    	------------------ ACHAT ------------------   	
     	
 //    	ENCHERES UTILISATEURS
-    	if(mesEncheres != null) {
+    	if(mesEncheres != null || mesEncheresRemportees != null) {
     		try {
     			encheresUtilisateur = mgr.recupererEncheresUtilisateurs(idUtilisateur);
     		} catch (Exception e) {
 				e.printStackTrace();
 				erreurs.add(e.toString());
 			}
+    		
+    		if(mesEncheres != null) {
+    			for (Enchere enchere : encheresUtilisateur) {
+    				if(enchere.getArticleVendu().isEnVente()) {
+    					encheresUtilisateur.add(enchere);
+    				}
+    			}
+    		}
+    		if(mesEncheresRemportees != null) {
+    			for (Enchere enchere : encheresUtilisateur) {
+    				if(!enchere.getArticleVendu().isEnVente()) {
+    					enchereGagneesUtilisateur.add(enchere);
+    				}
+    			}
+    		}
     	}
 		
 //    	ENCHERES COURANTES
@@ -180,7 +191,55 @@ public class ServletAccueil extends HttpServlet {
 		
 //    	------------------ VENTE ------------------
 		
-//    	CATEGORIES	
+//		VENTES EN COURS
+		if(mesVentesEnCours != null) {
+			try {
+				ventesUtilisateur = mgr.recupererVenteUtilisateurs(idUtilisateur);
+			}catch (BLLException e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+			
+			for (Enchere enchere : ventesUtilisateur) {
+				if(Date.from(Instant.now()).after(Date.from(enchere.getArticleVendu().getDateDebutEncheres().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())) && Date.from(Instant.now()).before(Date.from(enchere.getArticleVendu().getDateFinEncheres().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+					ventesUtilisateurEnCours.add(enchere);
+				}
+			}
+		}
+		
+//		VENTES NON DEBUTEES
+		if(ventesNonDebutees != null) {
+			try {
+				ventesUtilisateur = mgr.recupererVenteUtilisateurs(idUtilisateur);
+			}catch (BLLException e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+			
+			for (Enchere enchere : ventesUtilisateur) {
+				if(Date.from(Instant.now()).before(Date.from(enchere.getArticleVendu().getDateDebutEncheres().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+					ventesUtilisateurNonDebutees.add(enchere);
+				}
+			}
+		}
+		
+//		VENTES TERMINEES
+		if(ventesTerminees != null) {
+			try {
+				ventesUtilisateur = mgr.recupererVenteUtilisateurs(idUtilisateur);
+			}catch (BLLException e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+			
+			for (Enchere enchere : ventesUtilisateur) {
+				if(Date.from(Instant.now()).after(Date.from(enchere.getArticleVendu().getDateFinEncheres().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+					ventesUtilisateurTerminees.add(enchere);
+				}
+			}
+		}
+		
+//    	--------------- CATEGORIES ----------------	
     	try {
     		categories = mgrCat.recupererLesCategorie();
 		} catch (Exception e) {
@@ -188,9 +247,20 @@ public class ServletAccueil extends HttpServlet {
 			erreurs.add(e.toString());
 		}
 		
-//    	this.getServletContext().setAttribute("mesEncheres", mesEncheres);
-		this.getServletContext().setAttribute("encheresFiltrees", encheresFiltrees);
+//    	ACHATS
+    	this.getServletContext().setAttribute("enchereOuvertes", enchereOuvertes);
+    	this.getServletContext().setAttribute("mesEncheres", mesEncheres);
+    	this.getServletContext().setAttribute("mesEncheresRemportees", mesEncheresRemportees);
+    	
+//    	VENTES
+    	this.getServletContext().setAttribute("ventesUtilisateurEnCours", ventesUtilisateurEnCours);
+    	this.getServletContext().setAttribute("ventesUtilisateurNonDebutees", ventesUtilisateurNonDebutees);
+    	this.getServletContext().setAttribute("ventesUtilisateurTerminees", ventesUtilisateurTerminees);
+    	
+//    	CATEGORIES
     	this.getServletContext().setAttribute("categories", categories);
+    	
+//    	ERREURS
 		this.getServletContext().setAttribute("erreurs", erreurs);
 	}
 
