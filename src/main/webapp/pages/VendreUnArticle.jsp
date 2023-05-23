@@ -1,5 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="fr.eni.projet.bo.Categorie" %>
+<%@page import="fr.eni.projet.bo.Utilisateur" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -8,7 +9,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Vendre un article</title>
-	<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet" type="text/css">
 	<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/ressources/images/tacos_favicon.png">
 </head>
 <header>
@@ -35,6 +36,7 @@
 					<label name="labelCategorie" for="categorie">Catégorie : </label>
 					
 					<% @SuppressWarnings("unchecked")
+					Utilisateur utilisateur = (Utilisateur)request.getAttribute("utilisateur");
 					List<Categorie> listeCategories = (List<Categorie>)request.getAttribute("listeCategories");
 					%>
 					
@@ -57,16 +59,16 @@
 					
 					
 					<label name="labelCheckbox" for="myCheck">Utiliser mon adresse: </label>
-					<input type="checkbox" id="myCheck" onclick="toggle()">
+					<input type="checkbox" id="myCheck" onclick="toggle()" checked>
 					
 					<label name="labelRue" for="rue">Rue : </label>
-					<input type="text" id="rue" name="rue"/>
+					<input disabled type="text" id="rue" name="rue" value="${utilisateur.getAdresse().getRue()}"/>
 					
 					<label name="labelCodePostal" for="codePostal">Code postal : </label>
-					<input type="text" id="codePostal" name="codePostal"/>
+					<input disabled type="text" id="codePostal" name="codePostal" value="${utilisateur.getAdresse().getCodePostal()}"/>
 					
 					<label name="labelVille" for="ville">Ville : </label>
-					<input type="text" id="ville" name="ville"/>
+					<input disabled type="text" id="ville" name="ville" value="${utilisateur.getAdresse().getVille()}"/>
 					
 			
 					<button class="bouton__enregistrer--couleur" id="btnEnregistrer" name="btnEnregistrer" type="submit">Enregistrer</button>
@@ -82,9 +84,34 @@
 
 <script>
 function toggle() {
-  document.getElementById("rue").disabled = !document.getElementById("rue").disabled;
-  document.getElementById("codePostal").disabled = !document.getElementById("codePostal").disabled;
-  document.getElementById("ville").disabled = !document.getElementById("ville").disabled;
+  
+  if(document.getElementById("rue").disabled){
+	  
+	  document.getElementById("rue").value = " ";
+	  document.getElementById("rue").disabled = false;
+  } else {
+	  document.getElementById("rue").value = document.getElementById("rue").defaultValue;
+	  document.getElementById("rue").disabled = true; 
+  }
+  
+  if(document.getElementById("codePostal").disabled){
+	  
+	  document.getElementById("codePostal").value = " ";
+	  document.getElementById("codePostal").disabled = false;
+  } else {
+	  document.getElementById("codePostal").value = document.getElementById("codePostal").defaultValue;
+	  document.getElementById("codePostal").disabled = true; 
+  }
+  
+  if(document.getElementById("ville").disabled){
+	  
+	  document.getElementById("ville").value = " ";
+	  document.getElementById("ville").disabled = false;
+  } else {
+	  document.getElementById("ville").value = document.getElementById("ville").defaultValue;
+	  document.getElementById("ville").disabled = true; 
+  }
+  
 }
 
 </script>
