@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="fr.eni.projet.bo.Utilisateur" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +19,10 @@
 			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Accueil">Enchères</a></li>
 			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/VendreUnArticle">Vendre un Article</a></li>
 			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Profil">Mon Profil</a></li>
-			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Header">Déconnexion</a></li>
+			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Deconnexion">Déconnexion</a></li>
 		</ul>
 	</div>
+	<% Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur"); %>
+	<div id="credit_volant">Crédit : <c:out value="${ utilisateur.getCredit() }"/></div>
 </body>
 </html>

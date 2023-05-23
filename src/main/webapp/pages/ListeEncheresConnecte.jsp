@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Liste des enchères</title>
-<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet" type="text/css">
 <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/ressources/images/tacos_favicon.png">
 </head>
 <header>
@@ -65,7 +65,7 @@
 			<div>
 				<img alt="" src="" height="200" width="200">
 				<ul>
-					<li>PC Gamer pour travailler</li>
+					<a href="<%=request.getContextPath()%>/Encherir"><li>PC Gamer pour travailler</li></a>
 					<li>Prix : 210 points</li>
 					<li>Fin de L'enchère : 10/08/2018</li>
 					<li>Vendeur : <a href="Profil.jsp">RoiTacos</a></li>

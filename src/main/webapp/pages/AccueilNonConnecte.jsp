@@ -6,11 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Accueil</title>
-<<<<<<< Updated upstream
 <link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet" type="text/css">
-=======
-<link type="text/css" href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet">
->>>>>>> Stashed changes
 <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/ressources/images/tacos_favicon.png">
 </head>
 <header>

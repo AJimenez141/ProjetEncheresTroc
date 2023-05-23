@@ -242,6 +242,18 @@ form {
 	margin: 0 1em;
 }
 
+#credit_volant {
+	background-color: var(--couleur_fond_2);
+/* 	border-top: 3rem solid var(--couleur_bouton_hover); */
+	
+	font-size: 1.8em;
+	text-align: center;
+	
+	width: 5em;
+	padding: 1rem;
+	margin: 1rem;
+}
+
 /* GESTION DES CATEGORIES */
 
 #GestionCategories .section {
