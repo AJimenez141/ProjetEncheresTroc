@@ -11,6 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.bo.Utilisateur;
+import fr.eni.projet.bo.Enchere;
+import fr.eni.projet.bll.BLLException;
+import fr.eni.projet.bll.CategorieManager;
+import fr.eni.projet.bll.EnchereManager;
+import fr.eni.projet.bll.UtilisateurManager;
+import fr.eni.projet.bo.Categorie;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class ServeltAccueil
@@ -31,7 +39,48 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+//		PREPARATION DES VARIABLES
+    	List<Enchere> encheres 			= new ArrayList<>();
+    	List<Enchere> enchereCourantes 	= new ArrayList<>();
+    	List<Categorie> categories 		= new ArrayList<>();
+    	
+//    	INSTANCIATION DES MANAGERS
+    	EnchereManager mgr = EnchereManager.getInstance();
+    	CategorieManager mgrCat = CategorieManager.getInstance();
+    	
+//    	CREATION D'UNE LISTE D'ERREUR POUR AFFICHAGE
+    	List<String> erreurs = new ArrayList<>();
+    	
+//    	ENCHERES
+    	
+		try {
+			encheres = mgr.recupererLesEncheres();
+			
+		} catch (BLLException e) {
+			
+			e.printStackTrace();
+    		erreurs.add(e.toString());
+		}
+		
+		for (Enchere enchere : encheres) {
+			if(enchere.getArticleVendu().isEnVente()) {
+				
+				enchereCourantes.add(enchere);
+			}
+		}
+    	
+//    	CATEGORIES
+    	
+    	try {
+    		categories = mgrCat.recupererLesCategorie();
+		} catch (Exception e) {
+			e.printStackTrace();
+    		erreurs.add(e.toString());
+		}
+		
+    	this.getServletContext().setAttribute("encheresCourantes", enchereCourantes);
+    	this.getServletContext().setAttribute("categories", categories);
+    	this.getServletContext().setAttribute("erreurs", erreurs);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
 		rd.forward(request, response);
@@ -41,8 +90,108 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+//		RECUPERATION DES FILTRES
+		String categorie = request.getParameter("categorie");
+		String recherche = request.getParameter("filtre");
+		
+//		RECUPERATION DU FILTRE CORRESPONDANT AU CHOIX DE L'UTILISATEUR
+		String choixListe = request.getParameter("choixListe");
+		
+//		RECUPERATION DE L'UTILISATEUR DE LA SESSION
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		
+//		ID DE L'UTILISATEUR
+		int idUtilisateur = utilisateur.getNoUtilisateur();
+		
+//		COTE ACHATS
+		String enchereOuvertes = request.getParameter("enchereOuvertes");
+		String mesEncheres = request.getParameter("mesEncheres");
+		String mesEncheresRemportees = request.getParameter("mesEncheresRemportees");
+		
+//		COTE VENTES
+		String mesVentesEnCours = request.getParameter("mesVentesEnCours");
+		String ventesNonDebutees = request.getParameter("ventesNonDebutees");
+		String ventesTerminees = request.getParameter("ventesTerminees");
+				
+//		RECUPERATION DES LISTES
+		List<Enchere> encheresFiltrees = new ArrayList<>();
+		List<Enchere> encheresUtilisateur = new ArrayList<>();
+		List<Enchere> enchereGagneeUtilisateur = new ArrayList<>();
+		
+//		RECUPERATION DES CATEGORIES
+    	List<Categorie> categories = new ArrayList<>();
+    	
+//    	RECUPERATION DES ERREURS
+		List<String> erreurs = new ArrayList<>();
+		
+    	EnchereManager mgr = EnchereManager.getInstance();
+    	CategorieManager mgrCat = CategorieManager.getInstance();
+		
+//    	String test = null;
+    	
+//    	------------------ ACHAT ------------------
+    	
+//    	ENCHERES REMPORTEES
+//    	TODO - A FINALISER AVEC DAO
+    	
+//    	if(mesEncheresRemportees != null) {
+//    		try {
+//    			
+//    		}catch (BLLException e) {
+//				e.printStackTrace();
+//				erreurs.add(e.toString());
+//			}
+//    	}
+    	
+//    	ENCHERES UTILISATEURS
+    	if(mesEncheres != null) {
+    		try {
+    			encheresUtilisateur = mgr.recupererEncheresUtilisateurs(idUtilisateur);
+    		} catch (Exception e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+    	}
+		
+//    	ENCHERES COURANTES
+		if(categorie != null && recherche != null && enchereOuvertes != null) {
+			try {
+				encheresFiltrees = mgr.recupererEnchereFiltreeRechercheCategorie(recherche, categorie);
+			} catch (BLLException e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+		} else if(recherche != null && enchereOuvertes != null) {
+			try {
+				encheresFiltrees = mgr.recupererEnchereFiltreeRecherche(recherche);
+			} catch (BLLException e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+		} else if(categorie != null && enchereOuvertes != null) {
+			try {
+				encheresFiltrees = mgr.recupererEnchereFiltreeCategorie(categorie);
+			} catch (BLLException e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+		}
+		
+//    	------------------ VENTE ------------------
+		
+//    	CATEGORIES	
+    	try {
+    		categories = mgrCat.recupererLesCategorie();
+		} catch (Exception e) {
+			e.printStackTrace();
+			erreurs.add(e.toString());
+		}
+		
+//    	this.getServletContext().setAttribute("mesEncheres", mesEncheres);
+		this.getServletContext().setAttribute("encheresFiltrees", encheresFiltrees);
+    	this.getServletContext().setAttribute("categories", categories);
+		this.getServletContext().setAttribute("erreurs", erreurs);
 	}
 
 }
