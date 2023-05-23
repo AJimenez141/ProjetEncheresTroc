@@ -4,13 +4,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Connexion</title>
-<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet" type="text/css">
 <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/ressources/images/tacos_favicon.png">
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 </head>
 <header>
 	<div class="conteneur" id="Header">
-		<a href="AccueilNonConnecte.jsp"><h1 class="ombre_foncee">Tacos - Enchères</h1></a>
+		<a href="<%=request.getContextPath()%>/AccueilNonConnecte"><h1 class="ombre_foncee">Tacos - Enchères</h1></a>
 	</div>
 </header>
 

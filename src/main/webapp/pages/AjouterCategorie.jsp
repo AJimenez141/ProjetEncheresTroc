@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Ajouter catégorie</title>
-<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/ressources/styles/main.css" rel="stylesheet" type="text/css">
 <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/ressources/images/tacos_favicon.png">
 </head>
 <header>

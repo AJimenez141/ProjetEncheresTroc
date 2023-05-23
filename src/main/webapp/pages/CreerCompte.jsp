@@ -10,7 +10,7 @@
 </head>
 <header>
 	<div class="conteneur" id="Header">
-		<a href="AccueilNonConnecte.jsp"><h1 class="ombre_foncee">Tacos - Enchères</h1></a>
+		<a href="<%=request.getContextPath()%>/AccueilNonConnecte"><h1 class="ombre_foncee">Tacos - Enchères</h1></a>
 	</div>
 </header>
 
