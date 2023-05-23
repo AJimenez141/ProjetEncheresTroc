@@ -55,14 +55,18 @@
 					
 					<h3>Retrait</h3><div></div>
 					
+					
+					<label name="labelCheckbox" for="myCheck">Utiliser mon adresse: </label>
+					<input type="checkbox" id="myCheck" onclick="toggle()">
+					
 					<label name="labelRue" for="rue">Rue : </label>
-					<input type="text" name="rue"/>
+					<input type="text" id="rue" name="rue"/>
 					
 					<label name="labelCodePostal" for="codePostal">Code postal : </label>
-					<input type="text" name="codePostal"/>
+					<input type="text" id="codePostal" name="codePostal"/>
 					
 					<label name="labelVille" for="ville">Ville : </label>
-					<input type="text" name="ville"/>
+					<input type="text" id="ville" name="ville"/>
 					
 			
 					<button class="bouton__enregistrer--couleur" id="btnEnregistrer" name="btnEnregistrer" type="submit">Enregistrer</button>
@@ -75,4 +79,14 @@
 
 	</div>
 </body>
+
+<script>
+function toggle() {
+  document.getElementById("rue").disabled = !document.getElementById("rue").disabled;
+  document.getElementById("codePostal").disabled = !document.getElementById("codePostal").disabled;
+  document.getElementById("ville").disabled = !document.getElementById("ville").disabled;
+}
+
+</script>
+
 </html>
