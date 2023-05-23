@@ -23,16 +23,101 @@ import fr.eni.projet.dal.EnchereDAO;
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String SELECT_ALL_ENCHERES = "(SELECT * FROM ENCHERES "
-													+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
-													+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
-													+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
-													+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES)) "
-													+ "UNION "
-													+ "(SELECT * FROM ENCHERES "
-													+ "RIGHT OUTER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
-													+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
-													+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
-													+ "WHERE montant_enchere IS NULL) ";
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES)) "
+		+ "UNION "
+		+ "(SELECT * FROM ENCHERES "
+		+ "RIGHT OUTER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere IS NULL) ";
+	
+	private static final String SELECT_ALL_ENCHERES_OUVERTES = "(SELECT * FROM ENCHERES "
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES) "
+		+ "AND GETDATE() BETWEEN ARTICLES_VENDUS.date_debut_encheres AND ARTICLES_VENDUS.date_fin_encheres ) "
+		+ "UNION "
+		+ "(SELECT * FROM ENCHERES "
+		+ "RIGHT OUTER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere IS NULL "
+		+ "AND GETDATE() BETWEEN ARTICLES_VENDUS.date_debut_encheres AND ARTICLES_VENDUS.date_fin_encheres )";
+	
+	private static final String SELECT_MES_ENCHERES = "(SELECT * FROM ENCHERES "
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES) "
+		+ "AND GETDATE() BETWEEN ARTICLES_VENDUS.date_debut_encheres AND ARTICLES_VENDUS.date_fin_encheres "
+		+ "AND ENCHERES.no_utilisateurs = ? ) "
+		+ "UNION "
+		+ "(SELECT * FROM ENCHERES "
+		+ "RIGHT OUTER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere IS NULL "
+		+ "AND GETDATE() BETWEEN ARTICLES_VENDUS.date_debut_encheres AND ARTICLES_VENDUS.date_fin_encheres "
+		+ "AND ENCHERES.no_utilisateur = ? )";
+	
+	private static final String SELECT_MES_ENCHERES_TERMINEES = "(SELECT * FROM ENCHERES "
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES) "
+		+ "AND ARTICLES_VENDUS.date_fin_encheres < GETDATE() "
+		+ "AND ENCHERES.no_utilisateurs = ? ) "
+		+ "UNION "
+		+ "(SELECT * FROM ENCHERES "
+		+ "RIGHT OUTER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere IS NULL "
+		+ "AND ARTICLES_VENDUS.date_fin_encheres < GETDATE() "
+		+ "AND ENCHERES.no_utilisateur = ? )";
+	
+	private static final String SELECT_ENCHERES_BY_UTILISATEUR = "SELECT * FROM ENCHERES "
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES) AND ENCHERES.no_utilisateur = ?";
+	
+	private static final String SELECT_VENTES_BY_UTILISATEUR_TERMINEES = "SELECT * FROM ENCHERES "
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES) AND ENCHERES.no_utilisateur = ? "
+		+ "AND ARTICLES_VENDUS.dateFinEncheres < GETDATE()";
+	
+	private static final String SELECT_VENTES_BY_UTILISATEUR_EN_COURS = "SELECT * FROM ENCHERES "
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES) AND ENCHERES.no_utilisateur = ? "
+		+ "AND GETDATE() BETWEEN ARTICLES_VENDUS.dateDebutEncheres AND ARTICLES_VENDUS.dateFinEncheres";
+	
+	private static final String SELECT_VENTES_BY_UTILISATEUR_NON_DEMARREES = "SELECT * FROM ENCHERES "
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES) AND ENCHERES.no_utilisateur = ? "
+		+ "AND ARTICLES_VENDUS.dateDebutEncheres < GETDATE()";
+	
+	private static final String SELECT_ALL_ENCHERES_BY_CATEGORIES = "(SELECT * FROM ENCHERES "
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES) AND CATEGORIES.libelle = ?) "
+		+ "UNION "
+		+ "(SELECT * FROM ENCHERES "
+		+ "RIGHT OUTER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+		+ "WHERE montant_enchere IS NULL AND CATEGORIES.libelle = ?)";
 			
 	private static final String SELECT_ENCHERE_BY_ID = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE no_enchere = ?";
 	
