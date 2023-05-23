@@ -12,13 +12,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class ServletHeader
  */
 @WebServlet("/Header")
-public class ServletHeader extends HttpServlet {
+public class ServletDeconnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletHeader() {
+    public ServletDeconnexion() {
         super();
         // TODO Auto-generated constructor stub
     }
