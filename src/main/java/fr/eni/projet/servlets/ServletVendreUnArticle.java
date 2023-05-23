@@ -12,12 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.RetraitManager;
-import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bo.Retrait;
@@ -39,6 +39,8 @@ public class ServletVendreUnArticle extends HttpServlet {
 			//On récupère la liste des categories et on les envoie à la jsp pour les charger dans la combobox
 			listeCategorie = CategorieManager.getInstance().recupererLesCategorie();
 			request.setAttribute("listeCategories",listeCategorie);
+			
+			
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
@@ -55,8 +57,9 @@ public class ServletVendreUnArticle extends HttpServlet {
 		{
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			
-			//TODO vendeur en dur pour l'instant. Utiliser variable session id utilisateur pour get
-			Utilisateur vendeur = UtilisateurManager.getInstance().recupererUnUtilisateur(1);
+			//On récupère l'utilisateur en session en guise de vendeur
+			HttpSession session = request.getSession();
+			Utilisateur vendeur = (Utilisateur) session.getAttribute("utilisateur");
 			
 			//On récup la catégorie choisie dans la combobox
 			int idCategorieChoisie = Integer.parseInt(request.getParameter("selectCategories"));
