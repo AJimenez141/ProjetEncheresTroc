@@ -22,8 +22,18 @@ import fr.eni.projet.dal.EnchereDAO;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 
-	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article";
-	
+	private static final String SELECT_ALL_ENCHERES = "(SELECT * FROM ENCHERES "
+													+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+													+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+													+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+													+ "WHERE montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES)) "
+													+ "UNION "
+													+ "(SELECT * FROM ENCHERES "
+													+ "RIGHT OUTER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+													+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+													+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
+													+ "WHERE montant_enchere IS NULL) ";
+			
 	private static final String SELECT_ENCHERE_BY_ID = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE no_enchere = ?";
 	
 	private static final String SELECT_ENCHERE_BY_UTILISATEUR_ID = "SELECT * FROM ENCHERES AS E INNER JOIN UTILISATEURS AS U ON E.no_utilisateur = U.no_utilisateur INNER JOIN ARTICLES_VENDUS AS A ON A.no_article = E.no_article WHERE E.no_utilisateur = ?";
