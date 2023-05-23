@@ -16,8 +16,8 @@
 
 <body>
 	<div class="conteneur" id="Connexion">
-		<div class="section" id="section_connexion">
-			<form id="section_connexion_div" method="post">
+		<div class="section" id="section_connexion" >
+			<form id="section_connexion_div" method="post" action="<%=request.getContextPath()%>/Connexion">
 				<div id="section_connexion_id_div">
 						<label for="id">Identifiant :</label>
 						<input type="text" id="id" name="id">
@@ -28,9 +28,7 @@
 					<br>
 					<br>
 				</div>
-					<a href="/Connexion">
-						<button id="btnConnexion" name="btnConnexion">Connexion</button>
-					</a>
+					<button type="submit" id="btnConnexion" name="btnConnexion">Connexion</button>
 				<br>
 				<br>
 					<input type="checkbox" id="ckSouvenir" name="ckSouvenir">
@@ -39,7 +37,7 @@
 					<a href="#">Mot de passe oublié</a>
 				<br>
 				<br>
-				<a href="/Inscription">
+				<a href="<%=request.getContextPath()%>/Inscription">
 					<button class="bouton__enregistrer--couleur" id="btnCreerCompte" name="btnCreerCompte">Créer un compte</button>
 				</a>
 			</form>
