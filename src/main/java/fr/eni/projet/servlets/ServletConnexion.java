@@ -42,13 +42,9 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("d");
 		String emailOuPseudo = request.getParameter("id");
 		String mdp = request.getParameter("mdp");
-		
-		System.out.println("emailOuPseudo " + emailOuPseudo + " mdp " + mdp);
-		
-		
+				
 		try {
 			Utilisateur utilisateur = UtilisateurManager.getInstance().seConnecter(emailOuPseudo, mdp);
 			System.out.println(utilisateur);
@@ -56,8 +52,8 @@ public class ServletConnexion extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateur", utilisateur);
 
-			RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
-			rd.forward(request, response);
+			HttpServletResponse httpResponse = (HttpServletResponse) response;
+			httpResponse.sendRedirect( ( (HttpServletRequest) request).getContextPath() + "/Accueil");
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
