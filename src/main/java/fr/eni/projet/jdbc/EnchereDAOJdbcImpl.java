@@ -87,9 +87,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 //	POUR UN UTILISATEUR CONNECTE - ACHATS 
 	private static final String SELECT_MES_ACHATS = "SELECT * FROM ENCHERES "
 		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
-		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
+		+ "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur "
 		+ "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie "
-		+ "AND ENCHERES.no_utilisateurs = ? ";
+		+ "AND ENCHERES.no_utilisateur = ? ";
 	
 	
 //	POUR UN UTILISATEUR CONNECTE - VENTES
