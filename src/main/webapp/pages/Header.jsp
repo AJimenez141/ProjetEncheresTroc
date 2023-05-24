@@ -19,7 +19,7 @@
 			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Accueil">Enchères</a></li>
 			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/VendreUnArticle">Vendre un Article</a></li>
 			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Profil">Mon Profil</a></li>
-			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Deconnexion">Déconnexion</a></li>
+			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Deconnecter">Déconnexion</a></li>
 		</ul>
 	</div>
 	<% Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur"); %>

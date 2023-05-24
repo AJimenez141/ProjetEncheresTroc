@@ -102,7 +102,7 @@
 		 			<img alt="" src="" height="200" width="200">
 		 		</div>
 		 		<ul>
-					<a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ enchere.getArticleVendu().getNoArticle()}"><li>${ enchere.getArticleVendu().getNomArticle() }</li></a>
+					<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getNomArticle() }</a></li>
 					<li>Enchere en cours : ${ enchere.montant_enchere }</li>
 					<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
 					<li>Vendeur : <a href="Profil.jsp">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
