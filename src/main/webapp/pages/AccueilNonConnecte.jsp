@@ -33,11 +33,9 @@
 					<label name="labelCategorie" for="categorie">Categorie : </label>
 					<select name="categorie">
 						<option value="toutes">Toutes</option>
-						<!-- 
-						<c:forEach var="categorie" items="${ categories }">
-							<option value="${ option.getLibelle() }"></option>
+						<c:forEach var="categorie" items="${categories}">
+							<option value="${categorie.libelle}">${categorie.libelle}</option>
 						</c:forEach>
-						 -->
 					</select>
 			
 				</div>
@@ -49,34 +47,31 @@
 		
 		<div class="section">
 		
-		<!-- A decommenter quand mise en vente sera fonctionnelle -->
-		<!-- 
-			<c:if test="${!empty encheresCourantes}">
-				<div class="alert alert-danger" role="alert">
-					<p>Aucune enchère pour le moment</p>
-				</div>
-			</c:if>
-			<c:forEach var="enchere" items="${ encheresCourantes }">
-				<div>
-					<img alt="" src="" height="200" width="200">
-					<ul>
-						<li><c:out value="${ enchere.getArticleVendu().getNomArticle() }" /></li>
-						<li>Prix : 
-							<c:choose>
-							    <c:when test="${ enchere.getMontant_enchere() != null }">
-							        <c:out value="${ enchere.getMontant_enchere() }" />
-							    </c:when>    
-							    <c:otherwise>
-							        <c:out value="${ enchere.getArticleVendu().getMiseAPrix() }" />
-							    </c:otherwise>
-							</c:choose>
-						</li>
-						<li>Fin de L'enchère : <c:out value="${ enchere.getArticleVendu().getDateFinEncheres() }" /></li>
-						<li>Vendeur : <c:out value="${ enchere.getArticleVendu().getVendeur().getPseudo() }" /></li>
-					</ul>
-				</div>
-			</c:forEach>
-		-->
+		 	<c:if test="${ empty encheresCourantes && empty articlesEnVente }">
+		 		<p>Pas de ventes en cours...</p>
+		 	</c:if>
+		 	<c:forEach var="enchere" items="${ encheresCourantes }">
+		 		<div>
+		 			<img alt="" src="" height="200" width="200">
+		 		</div>
+		 		<ul>
+					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ enchere.getArticleVendu().getNomArticle() }</li></a>
+					<li>Enchere en cours : ${ enchere.montant_enchere }</li>
+					<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
+					<li>Vendeur : <a href="Profil.jsp">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
+				</ul>
+		 	</c:forEach>
+		 	<c:forEach var="article" items="${ articlesEnVente }">
+		 		<div>
+		 			<img alt="" src="" height="200" width="200">
+		 		</div>
+		 		<ul>
+					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ article.nomArticle }</li></a>
+					<li>Prix : ${ article.miseAPrix }</li>
+					<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
+					<li>Vendeur : <a href="Profil.jsp">${ article.getVendeur().getPseudo() }</a></li>
+				</ul>
+		 	</c:forEach>
 			
 		</div>
 		

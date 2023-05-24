@@ -90,7 +90,6 @@ public class ServletAccueilNonConnecte extends HttpServlet {
 			}	
 		}
 
-    	
 //    	CATEGORIES
     	try {
     		categories = mgrCat.recupererLesCategorie();
@@ -108,7 +107,7 @@ public class ServletAccueilNonConnecte extends HttpServlet {
 			System.out.println(string);
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/pages/AccueilNonConnecte.jsp");
 		rd.forward(request, response);
     }
     
