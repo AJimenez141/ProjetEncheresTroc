@@ -82,7 +82,6 @@
 				</c:forEach>
 			</c:if>
 		</div>
-		
 		<div class="section">
 			<!-- 
 			<div>
@@ -103,7 +102,7 @@
 		 			<img alt="" src="" height="200" width="200">
 		 		</div>
 		 		<ul>
-					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ enchere.getArticleVendu().getNomArticle() }</li></a>
+					<a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ enchere.getArticleVendu().getNoArticle()}"><li>${ enchere.getArticleVendu().getNomArticle() }</li></a>
 					<li>Enchere en cours : ${ enchere.montant_enchere }</li>
 					<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
 					<li>Vendeur : <a href="Profil.jsp">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
