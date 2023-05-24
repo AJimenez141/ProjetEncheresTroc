@@ -325,23 +325,53 @@ public class ServletAccueil extends HttpServlet {
     		
 //      --------------  DEBUT VENTE --------------- 
 //      -------------------------------------------
-    	} else if (choixListe.equals("ventes")) {
+    	} else if (choixListe.equals("mesVentes")) {
     		
 //    		------------- MES VENTES EN COURS ------------
-    		if(enchereAchat.equals("")) {
+    		if(enchereVente.equals("mesVentesEnCours")) {
+    			List<ArticleVendu> articlesEnVenteUtilisateur = new ArrayList<>();
     			
+    			try {
+    				articlesEnVenteUtilisateur = ArticleVenduManager.getInstance().recupererLesArticlesVendusParUtilisateur(idUtilisateur);
+				} catch (BLLException e) {
+					e.printStackTrace();
+					erreurs.add(e.toString());
+				}
+    			
+//    			AJOUT DES ENCHERES DANS ENCHERESCOURANTES
+    			for (ArticleVendu article : articlesEnVenteUtilisateur) {
+    				Enchere plusHauteEnchere = null;
+    				int numeroArticle = article.getNoArticle();
+    				
+    				try {
+    					plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+    				} catch (BLLException e) {
+    					e.printStackTrace();
+    					erreurs.add(e.toString());
+    				}
+    				
+    				if(plusHauteEnchere != null) {
+    					enchereCourantes.add(plusHauteEnchere);
+    				} else {
+    					articlesEnVente.add(article);
+    				}	
+    			}
     		}
 //    		----------- FIN MES VENTES EN COURS ----------
     		
     		
 //    		----------- MES VENTES NON DEBUTEES ----------
-    		
+    		else if(enchereVente.equals("ventesNonDebutees")) {
+    			
+    		}
     		
 //    		--------- FIN MES VENTES NON DEBUTEES --------
     		
     		
 //    		------------ MES VENTES TERMINEES ------------
-    		
+    		else if(enchereVente.equals("ventesTerminees")) {
+    			
+    		}
     		
 //    		----------- FIN MES VENTES TERMINEES ---------	
     	}
