@@ -24,7 +24,13 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,0)";
 	
-	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
+	//TODO Solution provisoire pour éviter les conflits. A corriger par contrainte "delete on cascade" directement sur la bdd.
+	private final String DELETE_UTILISATEUR = "DELETE ENCHERES FROM ENCHERES "
+											+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+											+ "WHERE ARTICLES_VENDUS.no_utilisateur = ? "
+											+ "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = ? "
+											+ "DELETE FROM ENCHERES WHERE no_utilisateur = ? "
+											+ "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 	
 	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ? WHERE no_utilisateur = ?";
 	
@@ -162,6 +168,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			PreparedStatement pStmt = connexion.prepareStatement(DELETE_UTILISATEUR);
 		){
 			pStmt.setInt(1, pUtilisateurId);
+			pStmt.setInt(2, pUtilisateurId);
+			pStmt.setInt(3, pUtilisateurId);
+			pStmt.setInt(4, pUtilisateurId);
 			pStmt.executeUpdate();
 			
 		} catch (SQLException e) {
