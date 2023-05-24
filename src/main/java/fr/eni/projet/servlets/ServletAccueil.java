@@ -121,7 +121,6 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 //		RECUPERATION DES FILTRES
 		String categorie = request.getParameter("categorie");
 		String recherche = request.getParameter("filtre");
@@ -175,35 +174,7 @@ public class ServletAccueil extends HttpServlet {
 		
 //    	String test = null;
     	
-//    	------------------ ACHAT ------------------   	
-    	
-//    	ENCHERES UTILISATEURS
-    	if(mesEncheres != null || mesEncheresRemportees != null) {
-    		try {
-    			encheresUtilisateur = mgr.recupererEncheresUtilisateurs(idUtilisateur);
-    		} catch (Exception e) {
-				e.printStackTrace();
-				erreurs.add(e.toString());
-			}
-    		
-    		if(mesEncheres != null) {
-    			for (Enchere enchere : encheresUtilisateur) {
-    				if(enchere.getArticleVendu().isEnVente()) {
-    					encheresUtilisateur.add(enchere);
-    				}
-    			}
-    		}
-    		if(mesEncheresRemportees != null) {
-    			for (Enchere enchere : encheresUtilisateur) {
-    				if(!enchere.getArticleVendu().isEnVente()) {
-    					enchereGagneesUtilisateur.add(enchere);
-    				}
-    			}
-    		}
-    	}
-		
-//    	ENCHERES COURANTES
-//    	String test = null;
+//		------------------- FILTRE -------------------
     	if(categorie.equals("Toutes") && recherche.isBlank() ) {
     		
 //    		RECUPERATION DE TOUS LES ARTICLES
@@ -277,6 +248,34 @@ public class ServletAccueil extends HttpServlet {
     			}	
     		}
 		}
+//		------------------ FIN FILTRE -----------------
+    	
+//    	------------------ ACHAT ------------------   	
+    	
+//    	ENCHERES UTILISATEURS
+    	if(mesEncheres != null || mesEncheresRemportees != null) {
+    		try {
+    			encheresUtilisateur = mgr.recupererEncheresUtilisateurs(idUtilisateur);
+    		} catch (Exception e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+    		
+    		if(mesEncheres != null) {
+    			for (Enchere enchere : encheresUtilisateur) {
+    				if(enchere.getArticleVendu().isEnVente()) {
+    					encheresUtilisateur.add(enchere);
+    				}
+    			}
+    		}
+    		if(mesEncheresRemportees != null) {
+    			for (Enchere enchere : encheresUtilisateur) {
+    				if(!enchere.getArticleVendu().isEnVente()) {
+    					enchereGagneesUtilisateur.add(enchere);
+    				}
+    			}
+    		}
+    	}
 		
 /*
 //    	------------------ VENTE ------------------
@@ -348,6 +347,7 @@ public class ServletAccueil extends HttpServlet {
 			e.printStackTrace();
 			erreurs.add(e.toString());
 		}
+//    	-------------- FIN CATEGORIES --------------	
     	
 //    	ERREURS
 		this.getServletContext().setAttribute("erreurs", erreurs);

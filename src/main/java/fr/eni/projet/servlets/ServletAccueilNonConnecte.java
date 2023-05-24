@@ -101,17 +101,6 @@ public class ServletAccueilNonConnecte extends HttpServlet {
     	for (String string : erreurs) {
 			System.out.println(string);
 		}
-    	
-//    	OK 
-//    	List<ArticleVendu> a = new ArrayList<>();
-//		try {
-//			a = ArticleVenduManager.getInstance().recupererLesArticlesVendusParRechercheEtCategorie("lave","Electromenager");
-//		} catch (BLLException e) {
-//			e.printStackTrace();
-//		}
-//    	for (ArticleVendu articleVendu : a) {
-//			System.out.println(articleVendu);
-//		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/AccueilNonConnecte.jsp");
 		rd.forward(request, response);
@@ -125,16 +114,16 @@ public class ServletAccueilNonConnecte extends HttpServlet {
 //		RECUPERATION DES FILTRES
 		String categorie = request.getParameter("categorie");
 		String recherche = request.getParameter("filtre");
-//DEFINITION DE LA VARIABLE
+//		DEFINITION DE LA VARIABLE
 		List<ArticleVendu> encheresFiltrees = new ArrayList<>();
+//    	ENCHERES COURANTES OU A DEFAUT ARTICLES EN VENTES
+		List<Enchere> enchereCourantes 	= new ArrayList<>();
+		List<ArticleVendu> articlesEnVente = new ArrayList<>();
 		
     	List<Categorie> categories = new ArrayList<>();
     	List<ArticleVendu> articlesVendus = new ArrayList<>();
 		List<String> erreurs = new ArrayList<>();
 		
-//    	ENCHERES COURANTES OU A DEFAUT ARTICLES EN VENTES
-    	List<Enchere> enchereCourantes 	= new ArrayList<>();
-    	List<ArticleVendu> articlesEnVente = new ArrayList<>();
 		
     	CategorieManager mgrCat = CategorieManager.getInstance();
 		
