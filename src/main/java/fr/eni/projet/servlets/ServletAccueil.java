@@ -179,6 +179,8 @@ public class ServletAccueil extends HttpServlet {
 //    	-------------------------------------------
     	if(choixListe.equals("achats")) {
     		
+    		session.setAttribute("achatChecked", true);
+    		
     		
 //			------------------- FILTRE -------------------
 //    		SI RIEN DE MODIFIE
@@ -326,6 +328,7 @@ public class ServletAccueil extends HttpServlet {
 //      --------------  DEBUT VENTE --------------- 
 //      -------------------------------------------
     	} else if (choixListe.equals("mesVentes")) {
+    		session.setAttribute("achatChecked", false);
     		
 //    		------------- MES VENTES EN COURS ------------
     		if(enchereVente.equals("mesVentesEnCours")) {
@@ -362,6 +365,14 @@ public class ServletAccueil extends HttpServlet {
     		
 //    		----------- MES VENTES NON DEBUTEES ----------
     		else if(enchereVente.equals("ventesNonDebutees")) {
+    			List<ArticleVendu> articlesEnVenteUtilisateur = new ArrayList<>();
+    			
+    			try {
+    				articlesEnVenteUtilisateur = ArticleVenduManager.getInstance().recupererLesArticlesVendusParUtilisateur(idUtilisateur);
+				} catch (BLLException e) {
+					e.printStackTrace();
+					erreurs.add(e.toString());
+				}
     			
     		}
     		
@@ -370,7 +381,14 @@ public class ServletAccueil extends HttpServlet {
     		
 //    		------------ MES VENTES TERMINEES ------------
     		else if(enchereVente.equals("ventesTerminees")) {
+    			List<ArticleVendu> articlesEnVenteUtilisateur = new ArrayList<>();
     			
+    			try {
+    				articlesEnVenteUtilisateur = ArticleVenduManager.getInstance().recupererLesArticlesVendusParUtilisateur(idUtilisateur);
+				} catch (BLLException e) {
+					e.printStackTrace();
+					erreurs.add(e.toString());
+				}
     		}
     		
 //    		----------- FIN MES VENTES TERMINEES ---------	

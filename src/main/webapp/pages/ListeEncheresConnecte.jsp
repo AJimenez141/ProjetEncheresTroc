@@ -43,7 +43,14 @@
 					
 					<div id="divAchats">
 						<h3>
-							<input type="radio" value="achats" name="choixListe" checked />
+							<c:choose>
+							    <c:when test="${ achatChecked }">
+							        <input type="radio" value="achats" name="choixListe" checked />
+							    </c:when>    
+							    <c:otherwise>
+							        <input type="radio" value="achats" name="choixListe" />
+							    </c:otherwise>
+							</c:choose>
 							<label for="achats">Achats</label>
 						</h3>
 						 
@@ -58,7 +65,14 @@
 					</div>
 					<div id="divVentes">
 						<h3>
-							<input type="radio" value="mesVentes" name="choixListe"/>
+							<c:choose>
+							    <c:when test="${ achatChecked }">
+							        <input type="radio" value="mesVentes" name="choixListe" />
+							    </c:when>    
+							    <c:otherwise>
+							        <input type="radio" value="mesVentes" name="choixListe" checked />
+							    </c:otherwise>
+							</c:choose>
 							<label for="ventes">Mes Ventes</label>
 						</h3>
 						 
