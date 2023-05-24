@@ -49,16 +49,19 @@ public class ServletAccueil extends HttpServlet {
     	List<ArticleVendu> articlesEnVente = new ArrayList<>();
 //    	LISTE CATEGORIES
     	List<Categorie> categories = new ArrayList<>();	
-    	
 //    	INSTANCIATION DES MANAGERS
     	EnchereManager mgr = EnchereManager.getInstance();
     	CategorieManager mgrCat = CategorieManager.getInstance();
     	ArticleVenduManager mgrArt = ArticleVenduManager.getInstance();
+//    	RECUPERATION DE LA SESSION
+    	HttpSession session = request.getSession();
     	
 //    	CREATION D'UNE LISTE D'ERREUR POUR AFFICHAGE
     	List<String> erreurs = new ArrayList<>();
     	 
-//    	ENCHERES	
+//    	ENCHERES
+//    	VERIFICATION SI RECHERCHE FILTREE EXISTE
+    	
 //    	RECUPERATION DE TOUTES LES ENCHERES
 		try {
 			encheres = mgr.recupererLesEncheres();
@@ -118,8 +121,7 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-/*
- * 
+
 //		RECUPERATION DES FILTRES
 		String categorie = request.getParameter("categorie");
 		String recherche = request.getParameter("filtre");
@@ -146,7 +148,12 @@ public class ServletAccueil extends HttpServlet {
 		String ventesTerminees = request.getParameter("ventesTerminees");
 				
 //		RECUPERATION DES LISTES - ACHATS
-		List<Enchere> encheresFiltrees = new ArrayList<>();
+//		DEFINITION DE LA VARIABLE
+		List<ArticleVendu> encheresFiltrees = new ArrayList<>();
+    	List<ArticleVendu> articlesVendus = new ArrayList<>();
+//    	ENCHERES COURANTES OU A DEFAUT ARTICLES EN VENTES
+		List<Enchere> enchereCourantes 	= new ArrayList<>();
+		List<ArticleVendu> articlesEnVente = new ArrayList<>();
 		List<Enchere> encheresUtilisateur = new ArrayList<>();
 		List<Enchere> enchereGagneesUtilisateur = new ArrayList<>();
 		
@@ -196,29 +203,82 @@ public class ServletAccueil extends HttpServlet {
     	}
 		
 //    	ENCHERES COURANTES
-		if(categorie != null && recherche != null && enchereOuvertes != null) {
+//    	String test = null;
+    	if(categorie.equals("Toutes") && recherche.isBlank() ) {
+    		
+//    		RECUPERATION DE TOUS LES ARTICLES
+    		try {
+    			articlesVendus = ArticleVenduManager.getInstance().recupererLesArticlesVendus();
+    		} catch (BLLException e) {
+    			e.printStackTrace();
+        		erreurs.add(e.toString());
+    		}
+    		
+//    		AJOUT DES ENCHERES DANS ENCHERESCOURANTES
+    		for (ArticleVendu article : articlesVendus) {
+    			Enchere plusHauteEnchere = null;
+    			int numeroArticle = article.getNoArticle();
+    			
+    			try {
+    				plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+    			} catch (BLLException e) {
+    				e.printStackTrace();
+    				erreurs.add(e.toString());
+    			}
+    			
+    			if(plusHauteEnchere != null) {
+    				enchereCourantes.add(plusHauteEnchere);
+    			} else {
+    				articlesEnVente.add(article);
+    			}	
+    		}
+    	} else if(!categorie.equals("Toutes") && !recherche.isBlank()) {
 			try {
-				encheresFiltrees = mgr.recupererEnchereFiltreeRechercheCategorie(recherche, categorie);
+				encheresFiltrees = ArticleVenduManager.getInstance().recupererLesArticlesVendusParRechercheEtCategorie(recherche,categorie);
 			} catch (BLLException e) {
 				e.printStackTrace();
 				erreurs.add(e.toString());
 			}
-		} else if(recherche != null && enchereOuvertes != null) {
+		} else if(!recherche.equals("")) {
 			try {
-				encheresFiltrees = mgr.recupererEnchereFiltreeRecherche(recherche);
+				encheresFiltrees = ArticleVenduManager.getInstance().recuperLesArticlesVendusParRecherche(recherche);
+				for (ArticleVendu art : encheresFiltrees) {
+					System.out.println(art);
+				}
 			} catch (BLLException e) {
 				e.printStackTrace();
 				erreurs.add(e.toString());
-			}
-		} else if(categorie != null && enchereOuvertes != null) {
+			}	
+		} else if(!categorie.equals("Toutes")) {	
 			try {
-				encheresFiltrees = mgr.recupererEnchereFiltreeCategorie(categorie);
+				encheresFiltrees = ArticleVenduManager.getInstance().recupererLesArticlesVendusParCategorie(categorie);
 			} catch (BLLException e) {
 				e.printStackTrace();
 				erreurs.add(e.toString());
 			}
 		}
 		
+    	if(!encheresFiltrees.isEmpty()) { 		
+    		for (ArticleVendu article : encheresFiltrees) {
+    			Enchere plusHauteEnchere = null;
+    			int numeroArticle = article.getNoArticle();
+    			
+    			try {
+    				plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+    			} catch (BLLException e) {
+    				e.printStackTrace();
+    				erreurs.add(e.toString());
+    			}
+    			
+    			if(plusHauteEnchere != null) {
+    				enchereCourantes.add(plusHauteEnchere);
+    			} else {
+    				articlesEnVente.add(article);
+    			}	
+    		}
+		}
+		
+/*
 //    	------------------ VENTE ------------------
 		
 //		VENTES EN COURS
@@ -269,14 +329,6 @@ public class ServletAccueil extends HttpServlet {
 			}
 		}
 		
-//    	--------------- CATEGORIES ----------------	
-    	try {
-    		categories = mgrCat.recupererLesCategorie();
-		} catch (Exception e) {
-			e.printStackTrace();
-			erreurs.add(e.toString());
-		}
-		
 //    	ACHATS
     	this.getServletContext().setAttribute("enchereOuvertes", enchereOuvertes);
     	this.getServletContext().setAttribute("mesEncheres", mesEncheres);
@@ -286,14 +338,23 @@ public class ServletAccueil extends HttpServlet {
     	this.getServletContext().setAttribute("ventesUtilisateurEnCours", ventesUtilisateurEnCours);
     	this.getServletContext().setAttribute("ventesUtilisateurNonDebutees", ventesUtilisateurNonDebutees);
     	this.getServletContext().setAttribute("ventesUtilisateurTerminees", ventesUtilisateurTerminees);
+		
+ */
     	
-//    	CATEGORIES
-    	this.getServletContext().setAttribute("categories", categories);
+//    	--------------- CATEGORIES ----------------	
+    	try {
+    		categories = mgrCat.recupererLesCategorie();
+		} catch (Exception e) {
+			e.printStackTrace();
+			erreurs.add(e.toString());
+		}
     	
 //    	ERREURS
 		this.getServletContext().setAttribute("erreurs", erreurs);
-		
-*/
+    	this.getServletContext().setAttribute("encheresCourantes", enchereCourantes);
+    	this.getServletContext().setAttribute("articlesEnVente", articlesEnVente);
+    	this.getServletContext().setAttribute("categories", categories);
+		this.getServletContext().setAttribute("erreurs", erreurs);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
 		rd.forward(request, response);

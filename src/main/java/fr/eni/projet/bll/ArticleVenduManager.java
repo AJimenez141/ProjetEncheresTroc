@@ -97,10 +97,42 @@ public class ArticleVenduManager {
 	 * @return List<ArticleVendu>
 	 * @throws ArticleVenduDALException
 	 */
-	public List<ArticleVendu> recupererLesArticlesVendusParCategorie(int pNoCategorie) throws BLLException {
+	public List<ArticleVendu> recupererLesArticlesVendusParCategorie(String pLibelle) throws BLLException {
 		List<ArticleVendu> articlesVendus = new ArrayList<>();
 		try {
-			articlesVendus = this.articleVenduDAO.selectionnerParCategorie(pNoCategorie);
+			articlesVendus = this.articleVenduDAO.selectionnerParCategorie(pLibelle);
+		} catch (ArticleVenduDALException e) {
+			e.printStackTrace();
+		}
+		return articlesVendus;
+	}
+	
+	/**
+	 * Recuperation de tous les article d'une recherche
+	 * 
+	 * @return List<ArticleVendu>
+	 * @throws ArticleVenduDALException
+	 */
+	public List<ArticleVendu> recuperLesArticlesVendusParRecherche(String pRecherche) throws BLLException {
+		List<ArticleVendu> articlesVendus = new ArrayList<>();
+		try {
+			articlesVendus = this.articleVenduDAO.selectionnerParSearch(pRecherche);
+		} catch (ArticleVenduDALException e) {
+			e.printStackTrace();
+		}
+		return articlesVendus;
+	}
+	
+	/**
+	 * Recuperation de tous les article d'une recherche
+	 * 
+	 * @return List<ArticleVendu>
+	 * @throws ArticleVenduDALException
+	 */
+	public List<ArticleVendu> recupererLesArticlesVendusParRechercheEtCategorie(String pRecherche, String pCategorie) throws BLLException {
+		List<ArticleVendu> articlesVendus = new ArrayList<>();
+		try {
+			articlesVendus = this.articleVenduDAO.selectionnerParSearchEtCategorie(pRecherche,pCategorie);
 		} catch (ArticleVenduDALException e) {
 			e.printStackTrace();
 		}

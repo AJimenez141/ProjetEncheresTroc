@@ -55,6 +55,25 @@ public interface ArticleVenduDAO {
 	 * @return
 	 * @throws ArticleVenduDALException
 	 */
-	public List<ArticleVendu> selectionnerParCategorie(int pNoCategorie) throws ArticleVenduDALException;
+	public List<ArticleVendu> selectionnerParCategorie(String pCategorie) throws ArticleVenduDALException;
+	
+	/**
+	 * selectionner des articles par recherche
+	 * 
+	 * @param pSearch
+	 * @return
+	 * @throws ArticleVenduDALException
+	 */
+	public List<ArticleVendu> selectionnerParSearch(String pSearch) throws ArticleVenduDALException;
+	
+	/**
+	 * selectionner des articles par recherche et categorie
+	 * 
+	 * @param pSearch
+	 * @param pCategorie
+	 * @return
+	 * @throws ArticleVenduDALException
+	 */
+	public List<ArticleVendu> selectionnerParSearchEtCategorie(String pSearch, String pCategorie) throws ArticleVenduDALException;
 	
 }

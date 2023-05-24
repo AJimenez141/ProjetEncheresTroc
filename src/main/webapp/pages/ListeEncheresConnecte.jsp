@@ -42,8 +42,10 @@
 					</select>
 					
 					<div id="divAchats">
-						<h3><input type="radio" value="achats" name="choixListe"/>
-						<label name="labelAchats" for="achats">Achats</label></h3>
+						<h3>
+							<input type="radio" value="achats" name="choixListe"/>
+							<label name="labelAchats" for="achats">Achats</label>
+						</h3>
 							<input type="checkbox" name="enchereOuvertes"/>
 							<label name="labelEncheresOuvertes" for="encheresOuvertes">enchères ouvertes</label>
 							
@@ -65,11 +67,20 @@
 							<input type="checkbox" name="ventesTerminees"/>
 							<label name="labelVentesTerminees" for="ventesTerminees">ventes terminées</label>
 					</div>
+					<div id="divBouton">
+						<button type="submit" id="btnRechercher" name="btnRechercher">Rechercher</button>
+					</div>
 				</form>
 			</div>
-			<div id="divBouton">
-				<button type="submit" id="btnRechercher" name="btnRechercher">Rechercher</button>
-			</div>
+		</div>
+		
+		<div>
+			<c:if test="${ !empty erreurs }">
+				<c:forEach var="erreur" items="${ erreurs }">
+					<p>${ erreur.toString() }</p>
+					<br>
+				</c:forEach>
+			</c:if>
 		</div>
 		
 		<div class="section">
