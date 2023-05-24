@@ -220,9 +220,9 @@ public class UtilisateurManager {
 		/**
 		 * TODO - À redéfinir une fois que le hash du mot de passe sera correctement défini
 		 */
-		if(pUtilisateur.getMotDePasse() == null ||pUtilisateur.getMotDePasse().isBlank()) {
-			sb.append("Le mot de passe doit être défini.\n");
-		}
+//		if(pUtilisateur.getMotDePasse() == null ||pUtilisateur.getMotDePasse().isBlank()) {
+//			sb.append("Le mot de passe doit être défini.\n");
+//		}
 		if(pUtilisateur.getTelephone() == null || pUtilisateur.getTelephone().isBlank()) {
 			sb.append("Le numéro de téléphone doit être rensigné.\n");
 		}

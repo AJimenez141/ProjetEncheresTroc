@@ -40,16 +40,12 @@
 						<input type="text" id="cp" name="cp" value="<c:out value="${util.getAdresse().getCodePostal()}"/>">
 					<br>
 					<br>	
-						<label for="mdp">Mot de passe :</label>
-						<input type="password" id="mdp" name="mdp">
-					<br>
-					<br>
 						<label for="mdpNouveau">Nouveau mot de passe :</label>
 						<input type="password" id="mdpNouveau" name="mdpNouveau">
 					<br>
 					<br>
-						<label>Crédit :</label>
-						<c:out value="${util.getCredit()}"/>
+						<label for="confirmMdp">Confirmation :</label>
+						<input type="password" id="confirmMdp" name="confirmMdp">
 					<br>
 					<br>
 					</div>
@@ -71,14 +67,14 @@
 						<input type="text" id="ville" name="ville" value="<c:out value="${util.getAdresse().getVille()}"/>">
 					<br>
 					<br>
-						<label for="confirmMdp">Confirmation :</label>
-						<input type="password" id="confirmMdp" name="confirmMdp">
+						<label>Crédit :</label>
+						<c:out value="${util.getCredit()}"/>
 					<br>
 					<br>
 					</div>
 				</div>
 				<div id="section_profil_bouton">
-					<a href="<%=request.getContextPath()%>/Profil">
+					<a href="<%=request.getContextPath()%>/ModifierProfil">
 						<button type="submit" class="bouton__enregistrer--couleur" id="btnEnregistrerTest" name="btnEnregistrerTest">Enregistrer</button>
 					</a>
 					<a href="<%=request.getContextPath()%>/Deconnexion">

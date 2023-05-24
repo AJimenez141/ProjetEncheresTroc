@@ -356,7 +356,7 @@ public class ServletAccueil extends HttpServlet {
     	this.getServletContext().setAttribute("articlesEnVente", articlesEnVente);
     	this.getServletContext().setAttribute("categories", categories);
 		this.getServletContext().setAttribute("erreurs", erreurs);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
 		rd.forward(request, response);
 	}

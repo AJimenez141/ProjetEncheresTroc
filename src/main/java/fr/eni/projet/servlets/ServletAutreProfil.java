@@ -25,7 +25,6 @@ public class ServletAutreProfil extends HttpServlet {
      */
     public ServletAutreProfil() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
