@@ -77,7 +77,7 @@
 					<a href="<%=request.getContextPath()%>/ModifierProfil">
 						<button type="submit" class="bouton__enregistrer--couleur" id="btnEnregistrerTest" name="btnEnregistrerTest">Enregistrer</button>
 					</a>
-					<a href="<%=request.getContextPath()%>/Deconnexion">
+					<a href="<%=request.getContextPath()%>/Supprimer">
 						<button type="button" class="bouton__supprimer--couleur" id="btnSupprimerTest" name="btnSupprimerTest">Supprimer mon compte</button>
 					</a>
 				</div>
