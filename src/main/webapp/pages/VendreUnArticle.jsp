@@ -25,13 +25,13 @@
 			</div>
 			
 			<div>
-				<form action="<%=request.getContextPath()%>/VendreUnArticle" method="POST">
+				<form action="<%=request.getContextPath()%>/VendreUnArticle" method="POST" onsubmit="controleChamps()">
 		
 					<label name="labelArticle" for="article">Article : </label>
-					<input type="text" name="article"/>
+					<input type="text" id="article" name="article"/>
 					
 					<label name="labelDescription" for="description">Description : </label>
-					<input type="text" name="description"/>
+					<input type="text" id="description" name="description"/>
 					
 					<label name="labelCategorie" for="categorie">Catégorie : </label>
 					
@@ -47,19 +47,19 @@
 					</select>
 					
 					<label name="labelPrixDepart" for="prixDepart">Prix de départ : </label>
-					<input type="number" name="prixDepart"/>
+					<input type="number" id="prixDepart" name="prixDepart"/>
 					
 					<label name="labelDebutEnchere" for="debutEnchere">Début de l'enchère : </label>
-					<input type="date" name="debutEnchere"/>
+					<input type="date" id="debutEnchere" name="debutEnchere"/>
 					
 					<label name="labelFinEnchere" for="finEnchere">Fin de l'enchère : </label>
-					<input type="date" name="finEnchere"/>
+					<input type="date" id="finEnchere" name="finEnchere"/>
 					
 					<h3>Retrait</h3><div></div>
 					
 					
-					<label name="labelCheckbox" for="myCheck">Utiliser mon adresse: </label>
-					<input type="checkbox" id="myCheck" onclick="toggle()" checked>
+					<label name="labelCheckbox" for="chkMonAdresse">Utiliser mon adresse: </label>
+					<input type="checkbox" id="chkMonAdresse" name="chkMonAdresse" onclick="toggle()" checked>
 					
 					<label name="labelRue" for="rue">Rue : </label>
 					<input disabled type="text" id="rue" name="rue" value="${utilisateur.getAdresse().getRue()}"/>
@@ -82,12 +82,12 @@
 	</div>
 </body>
 
-<script>
+<script type="text/javascript">
 function toggle() {
   
   if(document.getElementById("rue").disabled){
 	  
-	  document.getElementById("rue").value = " ";
+	  document.getElementById("rue").value = "";
 	  document.getElementById("rue").disabled = false;
   } else {
 	  document.getElementById("rue").value = document.getElementById("rue").defaultValue;
@@ -96,7 +96,7 @@ function toggle() {
   
   if(document.getElementById("codePostal").disabled){
 	  
-	  document.getElementById("codePostal").value = " ";
+	  document.getElementById("codePostal").value = "";
 	  document.getElementById("codePostal").disabled = false;
   } else {
 	  document.getElementById("codePostal").value = document.getElementById("codePostal").defaultValue;
@@ -105,13 +105,58 @@ function toggle() {
   
   if(document.getElementById("ville").disabled){
 	  
-	  document.getElementById("ville").value = " ";
+	  document.getElementById("ville").value = "";
 	  document.getElementById("ville").disabled = false;
   } else {
 	  document.getElementById("ville").value = document.getElementById("ville").defaultValue;
 	  document.getElementById("ville").disabled = true; 
   }
   
+}
+
+function controleChamps() {
+	
+	var warning = "";
+	
+	event.preventDefault();
+	
+	if(document.querySelector("#article").value === "")
+	{
+	warning +="Renseignez le titre de votre article.\n";
+	}
+	
+	if(document.querySelector("#description").value === "")
+	{
+	warning +="Renseignez la description de votre article.\n";
+	}
+	
+	if(document.querySelector("#prixDepart").value === "")
+	{
+	warning +="Renseignez le prix de départ de votre article.\n";
+	}
+	
+	if(document.querySelector("#debutEnchere").value === "")
+	{
+	warning +="Renseignez la date de début de l'enchère.\n";
+	}
+	
+	if(document.querySelector("#finEnchere").value === "")
+	{
+	warning +="Renseignez la date de fin de l'enchère.\n";
+	}
+	
+	if(document.querySelector("#rue").value === "" || document.querySelector("#codePostal").value === "" || document.querySelector("#ville").value === "")
+	{
+	warning +="Renseignez l'adresse de retrait.\n";
+	}
+	
+	if(warning.value != "")
+	{
+		alert(warning);
+	} else {
+		alert("Article en ligne.")
+	}
+	
 }
 
 </script>
