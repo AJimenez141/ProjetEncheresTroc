@@ -43,29 +43,34 @@
 					
 					<div id="divAchats">
 						<h3>
-							<input type="radio" value="achats" name="choixListe"/>
-							<label name="labelAchats" for="achats">Achats</label>
+							<input type="radio" value="achats" name="choixListe" checked />
+							<label for="achats">Achats</label>
 						</h3>
-							<input type="checkbox" name="enchereOuvertes"/>
-							<label name="labelEncheresOuvertes" for="encheresOuvertes">enchères ouvertes</label>
-							
-							<input type="checkbox" name="mesEncheres"/>
-							<label name="labelMesEncheres" for="mesEncheres">mes enchères</label>
-							
-							<input type="checkbox" name="mesEncheresRemportees"/>
-							<label name="labelMesEncheresRemportees" for="mesEncheresRemportees">mes enchères remportées</label>
+						 
+						<input type="radio" name="enchereAchat" value="encheresOuvertes" checked />
+						<label for="enchereAchat">enchères ouvertes</label>
+						
+						<input type="radio" name="enchereAchat" value="mesEncheres" />
+						<label for="enchereAchat">mes enchères</label>
+						
+						<input type="radio" name="enchereAchat" value="mesEncheresRemportees"/>
+						<label for="enchereAchat">mes enchères remportées</label>
 					</div>
 					<div id="divVentes">
-						<h3><input type="radio" value="mesVentes" name="choixListe"/>
-						<label name="labelVentes" for="ventes">Mes Ventes</label></h3>
-							<input type="checkbox" name="mesVentesEnCours"/>
-							<label name="labelMesVentesEnCours" for="mesVentesEnCours">mes ventes en cours</label>
-							
-							<input type="checkbox" name="ventesNonDebutees"/>
-							<label name="labelVentesNonDebutees" for="ventesNonDebutees">ventes non débutées</label>
-							
-							<input type="checkbox" name="ventesTerminees"/>
-							<label name="labelVentesTerminees" for="ventesTerminees">ventes terminées</label>
+						<h3>
+							<input type="radio" value="mesVentes" name="choixListe"/>
+							<label for="ventes">Mes Ventes</label>
+						</h3>
+						 
+						 <input type="radio" name="enchereVente" value="mesVentesEnCours" checked />
+						<label for="enchereVente">mes ventes en cours</label>
+						
+						<input type="radio" name="enchereVente" value="ventesNonDebutees"/>
+						<label for="enchereVente">ventes non débutées</label>
+						
+						<input type="radio" name="enchereVente" value="ventesTerminees" />
+						<label for="enchereVente">ventes terminées</label>
+						
 					</div>
 					<div id="divBouton">
 						<button type="submit" id="btnRechercher" name="btnRechercher">Rechercher</button>
@@ -83,17 +88,6 @@
 			</c:if>
 		</div>
 		<div class="section">
-			<!-- 
-			<div>
-				<img alt="" src="" height="200" width="200">
-				<ul>
-					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>PC Gamer pour travailler</li></a>
-					<li>Prix : 210 points</li>
-					<li>Fin de L'enchère : 10/08/2018</li>
-					<li>Vendeur : <a href="Profil.jsp">RoiTacos</a></li>
-				</ul>
-			</div>
-		 	-->
 		 	<c:if test="${ empty encheresCourantes && empty articlesEnVente }">
 		 		<p>Pas de ventes en cours...</p>
 		 	</c:if>
