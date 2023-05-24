@@ -14,15 +14,14 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.bo.Enchere;
+import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.EnchereManager;
-import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.Categorie;
+import fr.eni.projet.bo.ArticleVendu;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 
 /**
  * Servlet implementation class ServeltAccueil
@@ -42,34 +41,59 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		
 //		PREPARATION DES VARIABLES
-    	List<Enchere> encheres 			= new ArrayList<>();
+    	List<Enchere> encheres = new ArrayList<>();
+    	List<ArticleVendu> articlesVendus = new ArrayList<>();
+//    	ENCHERES COURANTES OU A DEFAUT ARTICLES EN VENTES
     	List<Enchere> enchereCourantes 	= new ArrayList<>();
-    	List<Categorie> categories 		= new ArrayList<>();
+    	List<ArticleVendu> articlesEnVente = new ArrayList<>();
+//    	LISTE CATEGORIES
+    	List<Categorie> categories = new ArrayList<>();	
     	
 //    	INSTANCIATION DES MANAGERS
     	EnchereManager mgr = EnchereManager.getInstance();
     	CategorieManager mgrCat = CategorieManager.getInstance();
+    	ArticleVenduManager mgrArt = ArticleVenduManager.getInstance();
     	
 //    	CREATION D'UNE LISTE D'ERREUR POUR AFFICHAGE
     	List<String> erreurs = new ArrayList<>();
-    	
+    	 
 //    	ENCHERES	
+//    	RECUPERATION DE TOUTES LES ENCHERES
 		try {
 			encheres = mgr.recupererLesEncheres();
-			
 		} catch (BLLException e) {
-			
 			e.printStackTrace();
     		erreurs.add(e.toString());
 		}
-		
-		for (Enchere enchere : encheres) {
-			if(enchere.getArticleVendu().isEnVente()) {
-				
-				enchereCourantes.add(enchere);
-			}
+//		RECUPERATION DE TOUS LES ARTICLES
+		try {
+			articlesVendus = mgrArt.recupererLesArticlesVendus();
+		} catch (BLLException e) {
+			e.printStackTrace();
+    		erreurs.add(e.toString());
 		}
+//		AJOUT DES ENCHERES DANS ENCHERESCOURANTES
+		for (ArticleVendu article : articlesVendus) {
+			Enchere plusHauteEnchere = null;
+			int numeroArticle = article.getNoArticle();
+			
+			try {
+				plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+			} catch (BLLException e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+			
+			if(plusHauteEnchere != null) {
+				enchereCourantes.add(plusHauteEnchere);
+			} else {
+				articlesEnVente.add(article);
+			}	
+		}
+
     	
 //    	CATEGORIES
     	try {
@@ -80,9 +104,14 @@ public class ServletAccueil extends HttpServlet {
 		}
 		
     	this.getServletContext().setAttribute("encheresCourantes", enchereCourantes);
+    	this.getServletContext().setAttribute("articlesEnVente", articlesEnVente);
     	this.getServletContext().setAttribute("categories", categories);
     	this.getServletContext().setAttribute("erreurs", erreurs);
-
+    	
+    	for (String string : erreurs) {
+			System.out.println(string);
+		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
 		rd.forward(request, response);
 	}
@@ -91,11 +120,14 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*
+ * 
 //		RECUPERATION DES FILTRES
 		String categorie = request.getParameter("categorie");
 		String recherche = request.getParameter("filtre");
 		
 //		RECUPERATION DU FILTRE CORRESPONDANT AU CHOIX DE L'UTILISATEUR
+//		TODO - A VOIR SI UTILE
 		String choixListe = request.getParameter("choixListe");
 		
 //		RECUPERATION DE L'UTILISATEUR DE LA SESSION
@@ -262,6 +294,11 @@ public class ServletAccueil extends HttpServlet {
     	
 //    	ERREURS
 		this.getServletContext().setAttribute("erreurs", erreurs);
+		
+*/
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
+		rd.forward(request, response);
 	}
 
 }

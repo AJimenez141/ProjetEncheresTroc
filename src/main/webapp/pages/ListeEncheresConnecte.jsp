@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,13 @@
 	<div class="conteneur" id="ListeEncheresConnecte">
 		<div class="section">
 			<div>
+			
+				<c:if test="${ !empty erreurs }">
+					<c:forEach var="erreur" items="${ erreurs }">
+						<p>${ erreur }</p>
+						<br>
+					</c:forEach>
+				</c:if>
 				
 				<form action="<%=request.getContextPath()%>/Accueil" method="POST">
 					<h3>Filtres : </h3>
@@ -28,6 +36,9 @@
 					<label name="labelCategorie" for="categorie">Categorie : </label>
 					<select>
 						<option value="toutes">Toutes</option>
+						<c:forEach var="categorie" items="${categories}">
+							<option value="${categorie.libelle}">${categorie.libelle}</option>
+						</c:forEach>
 					</select>
 					
 					<div id="divAchats">
@@ -62,6 +73,7 @@
 		</div>
 		
 		<div class="section">
+			<!-- 
 			<div>
 				<img alt="" src="" height="200" width="200">
 				<ul>
@@ -71,6 +83,33 @@
 					<li>Vendeur : <a href="Profil.jsp">RoiTacos</a></li>
 				</ul>
 			</div>
+		 	-->
+		 	<c:if test="${ empty encheresCourantes && empty articlesEnVente }">
+		 		<p>Pas de ventes en cours...</p>
+		 	</c:if>
+		 	<c:forEach var="enchere" items="${ encheresCourantes }">
+		 		<div>
+		 			<img alt="" src="" height="200" width="200">
+		 		</div>
+		 		<ul>
+					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ enchere.getArticleVendu().getNomArticle() }</li></a>
+					<li>Enchere en cours : ${ enchere.montant_enchere }</li>
+					<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
+					<li>Vendeur : <a href="Profil.jsp">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
+				</ul>
+		 	</c:forEach>
+		 	<c:forEach var="article" items="${ articlesEnVente }">
+		 		<div>
+		 			<img alt="" src="" height="200" width="200">
+		 		</div>
+		 		<ul>
+					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ article.nomArticle }</li></a>
+					<li>Prix : ${ article.miseAPrix }</li>
+					<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
+					<li>Vendeur : <a href="Profil.jsp">${ article.getVendeur().getPseudo() }</a></li>
+				</ul>
+		 	</c:forEach>
+
 		</div>
 	</div>
 </body>
