@@ -65,7 +65,7 @@
 			<div>
 				<img alt="" src="" height="200" width="200">
 				<ul>
-					<a href="<%=request.getContextPath()%>/Encherir"><li>PC Gamer pour travailler</li></a>
+					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>PC Gamer pour travailler</li></a>
 					<li>Prix : 210 points</li>
 					<li>Fin de L'enchère : 10/08/2018</li>
 					<li>Vendeur : <a href="Profil.jsp">RoiTacos</a></li>
