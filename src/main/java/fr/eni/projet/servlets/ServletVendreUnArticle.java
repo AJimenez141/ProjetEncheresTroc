@@ -1,7 +1,6 @@
 package fr.eni.projet.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -87,8 +86,8 @@ public class ServletVendreUnArticle extends HttpServlet {
 			
 			Retrait retrait = new Retrait(null, articleVendu);
 			
-			//Si on a coché "utiliser mon adresse", on prend l'adresse vendeur par défaut
-			if(request.getParameter("chkMonAdresse") == null) {
+			//Si un des champs de l'adresse n'est pas renseigné, on prend l'adresse du vendeur
+			if(rue == null || codePostal == null || ville == null) {
 				retrait.setAdresse(vendeur.getAdresse());
 			//Sinon, on prend l'adresse saisie
 			} else {
@@ -99,7 +98,6 @@ public class ServletVendreUnArticle extends HttpServlet {
 		}
 		catch(DateTimeParseException | BLLException e)
 		{
-			
 			e.printStackTrace();
 		}	
 		
