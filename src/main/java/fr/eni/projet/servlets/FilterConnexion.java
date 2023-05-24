@@ -25,7 +25,8 @@ public class FilterConnexion implements Filter {
 		
 		if( !httpRequest.getServletPath().toLowerCase().contains("connexion") && 
 			!httpRequest.getServletPath().toLowerCase().contains("inscription") && 
-			!httpRequest.getServletPath().toLowerCase().contains("accueilnonconnecte")) //si on accède à une page où la connexion est nécessaire alors
+			!httpRequest.getServletPath().toLowerCase().contains("accueilnonconnecte") && //si on accède à une page où la connexion est nécessaire alors
+			!httpRequest.getServletPath().toLowerCase().contains("ressources"))
 		{		
 			if(session != null && session.getAttribute("utilisateur") != null)//si l'utilisateur possède une session et qu'aucun utilisateur n'es sauvegarder en session, il continue sa navigation
 			{
