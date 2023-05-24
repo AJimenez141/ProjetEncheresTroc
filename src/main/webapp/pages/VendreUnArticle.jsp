@@ -25,7 +25,7 @@
 			</div>
 			
 			<div>
-				<form action="<%=request.getContextPath()%>/VendreUnArticle" method="POST" onsubmit="controleChamps()">
+				<form method="POST" onsubmit="return controleChamps()" action="<%=request.getContextPath()%>/VendreUnArticle">
 		
 					<label name="labelArticle" for="article">Article : </label>
 					<input type="text" id="article" name="article"/>
@@ -116,47 +116,43 @@ function toggle() {
 
 function controleChamps() {
 	
-	var warning = "";
-	
-	event.preventDefault();
+	var ok = true;
 	
 	if(document.querySelector("#article").value === "")
 	{
-	warning +="Renseignez le titre de votre article.\n";
+		ok = false;
 	}
 	
 	if(document.querySelector("#description").value === "")
 	{
-	warning +="Renseignez la description de votre article.\n";
+		ok = false;
 	}
 	
 	if(document.querySelector("#prixDepart").value === "")
 	{
-	warning +="Renseignez le prix de départ de votre article.\n";
+		ok = false;
 	}
 	
 	if(document.querySelector("#debutEnchere").value === "")
 	{
-	warning +="Renseignez la date de début de l'enchère.\n";
+		ok = false;
 	}
 	
 	if(document.querySelector("#finEnchere").value === "")
 	{
-	warning +="Renseignez la date de fin de l'enchère.\n";
+		ok = false;
 	}
 	
 	if(document.querySelector("#rue").value === "" || document.querySelector("#codePostal").value === "" || document.querySelector("#ville").value === "")
 	{
-	warning +="Renseignez l'adresse de retrait.\n";
+		ok = false;
 	}
 	
-	if(warning.value != "")
+	if(!ok)
 	{
-		alert(warning);
-	} else {
-		alert("Article en ligne.")
-	}
-	
+		alert("Merci de renseigner tous les champs");
+		return false;
+	} 
 }
 
 </script>
