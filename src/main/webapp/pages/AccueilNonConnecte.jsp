@@ -52,33 +52,27 @@
 		 	</c:if>
 		 	<c:forEach var="enchere" items="${ encheresCourantes }">
 		 		<div>
-			 		<div>
-			 			<img alt="" src="" height="200" width="200">
-			 		</div>
-			 		<ul>
-						<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ enchere.getArticleVendu().getNomArticle() }</li></a>
-						<li>Enchere en cours : ${ enchere.montant_enchere }</li>
-						<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
-						<li>Vendeur : <a href="Profil.jsp">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
-					</ul>
+		 			<img alt="" src="" height="200" width="200">
 		 		</div>
+		 		<ul>
+					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ enchere.getArticleVendu().getNomArticle() }</li></a>
+					<li>Enchere en cours : ${ enchere.montant_enchere }</li>
+					<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
+					<li>Vendeur : ${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
+				</ul>
 		 	</c:forEach>
 		 	<c:forEach var="article" items="${ articlesEnVente }">
 		 		<div>
-			 		<div>
-			 			<img alt="" src="" height="200" width="200">
-			 		</div>
-			 		<ul>
-						<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ article.nomArticle }</li></a>
-						<li>Prix : ${ article.miseAPrix }</li>
-						<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
-						<li>Vendeur : <a href="Profil.jsp">${ article.getVendeur().getPseudo() }</a></li>
-					</ul>
+		 			<img alt="" src="" height="200" width="200">
 		 		</div>
+		 		<ul>
+					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ article.nomArticle }</li></a>
+					<li>Prix : ${ article.miseAPrix }</li>
+					<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
+					<li>Vendeur : ${ article.getVendeur().getPseudo() }</a></li>
+				</ul>
 		 	</c:forEach>
-			
 		</div>
-		
 	</div>
 </body>
 </html>

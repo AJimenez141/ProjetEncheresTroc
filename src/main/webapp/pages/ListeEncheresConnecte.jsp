@@ -106,7 +106,7 @@
 						<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getNomArticle() }</a></li>
 						<li>Enchere en cours : ${ enchere.montant_enchere }</li>
 						<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
-						<li>Vendeur : <a href="Profil.jsp">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
+						<li>Vendeur : <a href="<%=request.getContextPath()%>/AutreProfil?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
 					</ul>		 		
 		 		</div>
 		 	</c:forEach>
@@ -119,7 +119,7 @@
 						<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ article.nomArticle }</li></a>
 						<li>Prix : ${ article.miseAPrix }</li>
 						<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
-						<li>Vendeur : <a href="Profil.jsp">${ article.getVendeur().getPseudo() }</a></li>
+						<li>Vendeur : <a href="<%=request.getContextPath()%>/AutreProfil?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ article.getVendeur().getPseudo() }</a></li>
 					</ul>
 		 		</div>
 		 	</c:forEach>

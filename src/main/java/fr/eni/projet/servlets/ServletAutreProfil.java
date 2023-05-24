@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.UtilisateurManager;
+import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Utilisateur;
 
 /**
@@ -31,19 +33,22 @@ public class ServletAutreProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idUtil = 0;
+		
 		Utilisateur util = null;
-		
-		idUtil=1;
-		
 		try {
-			util = UtilisateurManager.getInstance().recupererUnUtilisateur(idUtil);
+			ArticleVendu article = null;
+			article = ArticleVenduManager.getInstance().recupererUnArticleVendu(Integer.parseInt(request.getParameter("idArticle")));
+			Utilisateur utilisateurPage = article.getVendeur();
+			util = UtilisateurManager.getInstance().recupererUnUtilisateur(utilisateurPage.getNoUtilisateur());
 			request.setAttribute("util", util);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/Profil.jsp");
 		rd.forward(request, response);
 	}
