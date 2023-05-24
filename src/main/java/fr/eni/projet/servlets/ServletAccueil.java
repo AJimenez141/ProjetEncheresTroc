@@ -41,8 +41,6 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
 //		PREPARATION DES VARIABLES
     	List<Enchere> encheres = new ArrayList<>();
     	List<ArticleVendu> articlesVendus = new ArrayList<>();
