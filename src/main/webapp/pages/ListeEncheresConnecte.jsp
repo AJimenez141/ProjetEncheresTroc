@@ -89,7 +89,7 @@
 		</div>
 		<div class="section">
 		 	<c:if test="${ empty encheresCourantes && empty articlesEnVente }">
-		 		<p>Pas de ventes en cours...</p>
+		 		<p>Aucun élément à afficher</p>
 		 	</c:if>
 		 	<c:forEach var="enchere" items="${ encheresCourantes }">
 		 		<div>

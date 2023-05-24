@@ -126,8 +126,10 @@ public class ServletAccueil extends HttpServlet {
 		String categorie = request.getParameter("categorie");
 		String recherche = request.getParameter("filtre");
 		
+		String enchereAchat = request.getParameter("enchereAchat");
+		String enchereVente = request.getParameter("enchereVente");
+		
 //		RECUPERATION DU FILTRE CORRESPONDANT AU CHOIX DE L'UTILISATEUR
-//		TODO - A VOIR SI UTILE
 		String choixListe = request.getParameter("choixListe");
 		
 //		RECUPERATION DE L'UTILISATEUR DE LA SESSION
@@ -146,11 +148,11 @@ public class ServletAccueil extends HttpServlet {
 		String mesVentesEnCours = request.getParameter("mesVentesEnCours");
 		String ventesNonDebutees = request.getParameter("ventesNonDebutees");
 		String ventesTerminees = request.getParameter("ventesTerminees");
-				
-//		RECUPERATION DES LISTES - ACHATS
+
 //		DEFINITION DE LA VARIABLE
 		List<ArticleVendu> encheresFiltrees = new ArrayList<>();
     	List<ArticleVendu> articlesVendus = new ArrayList<>();
+    	
 //    	ENCHERES COURANTES OU A DEFAUT ARTICLES EN VENTES
 		List<Enchere> enchereCourantes 	= new ArrayList<>();
 		List<ArticleVendu> articlesEnVente = new ArrayList<>();
@@ -159,7 +161,6 @@ public class ServletAccueil extends HttpServlet {
 		
 //		RECUPERATION DES LISTES - VENTES
 		List<Enchere> ventesUtilisateur = new ArrayList<>();
-		
 		List<Enchere> ventesUtilisateurEnCours = new ArrayList<>();
 		List<Enchere> ventesUtilisateurTerminees = new ArrayList<>();
 		List<Enchere> ventesUtilisateurNonDebutees = new ArrayList<>();
@@ -172,174 +173,180 @@ public class ServletAccueil extends HttpServlet {
 		
     	EnchereManager mgr = EnchereManager.getInstance();
     	CategorieManager mgrCat = CategorieManager.getInstance();
-		
-//    	String test = null;
     	
-//		------------------- FILTRE -------------------
-    	if(categorie.equals("Toutes") && recherche.isBlank() ) {
+    	
+//    	------------------ ACHAT ------------------  
+//    	-------------------------------------------
+    	if(choixListe.equals("achats")) {
     		
-//    		RECUPERATION DE TOUS LES ARTICLES
-    		try {
-    			articlesVendus = ArticleVenduManager.getInstance().recupererLesArticlesVendus();
-    		} catch (BLLException e) {
-    			e.printStackTrace();
-        		erreurs.add(e.toString());
-    		}
     		
-//    		AJOUT DES ENCHERES DANS ENCHERESCOURANTES
-    		for (ArticleVendu article : articlesVendus) {
-    			Enchere plusHauteEnchere = null;
-    			int numeroArticle = article.getNoArticle();
+//			------------------- FILTRE -------------------
+//    		SI RIEN DE MODIFIE
+    		if(categorie.equals("Toutes") && recherche.isBlank() && enchereAchat.equals("encheresOuvertes") ) {
     			
+//    			RECUPERATION DE TOUS LES ARTICLES
     			try {
-    				plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+    				articlesVendus = ArticleVenduManager.getInstance().recupererLesArticlesVendus();
     			} catch (BLLException e) {
     				e.printStackTrace();
     				erreurs.add(e.toString());
     			}
     			
-    			if(plusHauteEnchere != null) {
-    				enchereCourantes.add(plusHauteEnchere);
-    			} else {
-    				articlesEnVente.add(article);
-    			}	
+//    			AJOUT DES ENCHERES DANS ENCHERESCOURANTES
+    			for (ArticleVendu article : articlesVendus) {
+    				Enchere plusHauteEnchere = null;
+    				int numeroArticle = article.getNoArticle();
+    				
+    				try {
+    					plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+    				} catch (BLLException e) {
+    					e.printStackTrace();
+    					erreurs.add(e.toString());
+    				}
+    				
+    				if(plusHauteEnchere != null) {
+    					enchereCourantes.add(plusHauteEnchere);
+    				} else {
+    					articlesEnVente.add(article);
+    				}	
+    			}
+    			
+//    		SI BARRE RECHERCHE + CATEGORIE MODIFIES
+    		} else if(!categorie.equals("Toutes") && !recherche.isBlank()) {
+    			try {
+    				encheresFiltrees = ArticleVenduManager.getInstance().recupererLesArticlesVendusParRechercheEtCategorie(recherche,categorie);
+    			} catch (BLLException e) {
+    				e.printStackTrace();
+    				erreurs.add(e.toString());
+    			}
+    			
+//    		SI RECHERCHE UNIQUEMENT EST MODIFIEE
+    		} else if(!recherche.equals("")) {
+    			try {
+    				encheresFiltrees = ArticleVenduManager.getInstance().recuperLesArticlesVendusParRecherche(recherche);
+    				for (ArticleVendu art : encheresFiltrees) {
+    					System.out.println(art);
+    				}
+    			} catch (BLLException e) {
+    				e.printStackTrace();
+    				erreurs.add(e.toString());
+    			}
+    			
+//    		SI CATEGORIE UNIQUEMENT EST MODIFIEE
+    		} else if(!categorie.equals("Toutes")) {	
+    			try {
+    				encheresFiltrees = ArticleVenduManager.getInstance().recupererLesArticlesVendusParCategorie(categorie);
+    			} catch (BLLException e) {
+    				e.printStackTrace();
+    				erreurs.add(e.toString());
+    			}
     		}
-    	} else if(!categorie.equals("Toutes") && !recherche.isBlank()) {
-			try {
-				encheresFiltrees = ArticleVenduManager.getInstance().recupererLesArticlesVendusParRechercheEtCategorie(recherche,categorie);
-			} catch (BLLException e) {
-				e.printStackTrace();
-				erreurs.add(e.toString());
-			}
-		} else if(!recherche.equals("")) {
-			try {
-				encheresFiltrees = ArticleVenduManager.getInstance().recuperLesArticlesVendusParRecherche(recherche);
-				for (ArticleVendu art : encheresFiltrees) {
-					System.out.println(art);
+    		
+    		if(!encheresFiltrees.isEmpty()) { 		
+    			for (ArticleVendu article : encheresFiltrees) {
+    				Enchere plusHauteEnchere = null;
+    				int numeroArticle = article.getNoArticle();
+    				
+    				try {
+    					plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+    				} catch (BLLException e) {
+    					e.printStackTrace();
+    					erreurs.add(e.toString());
+    				}
+    				
+    				if(plusHauteEnchere != null) {
+    					enchereCourantes.add(plusHauteEnchere);
+    				} else {
+    					articlesEnVente.add(article);
+    				}	
+    			}
+    		}
+    		
+//			------------------ FIN FILTRE -----------------
+    		
+//    		----------------- MES ENCHERES ----------------
+    		else if(enchereAchat.equals("mesEncheres")) {  
+    			List<Integer> filtreArticle = new ArrayList<>();
+    			
+    			try {
+    				encheresUtilisateur = EnchereManager.getInstance().recupererEncheresUtilisateurs(idUtilisateur);
+				} catch (BLLException e) {
+					e.printStackTrace();
+					erreurs.add(e.toString());
 				}
-			} catch (BLLException e) {
-				e.printStackTrace();
-				erreurs.add(e.toString());
-			}	
-		} else if(!categorie.equals("Toutes")) {	
-			try {
-				encheresFiltrees = ArticleVenduManager.getInstance().recupererLesArticlesVendusParCategorie(categorie);
-			} catch (BLLException e) {
-				e.printStackTrace();
-				erreurs.add(e.toString());
-			}
-		}
-		
-    	if(!encheresFiltrees.isEmpty()) { 		
-    		for (ArticleVendu article : encheresFiltrees) {
-    			Enchere plusHauteEnchere = null;
-    			int numeroArticle = article.getNoArticle();
+    			
+    			for (Enchere enchere : encheresUtilisateur) {
+					if(!filtreArticle.contains(enchere.getArticleVendu().getNoArticle()) && enchere.getArticleVendu().isEnVente()) {
+						filtreArticle.add(enchere.getArticleVendu().getNoArticle());
+						
+						System.out.println(filtreArticle);
+						
+						Enchere enchereLaPlusHaute = null;
+						
+						try {
+							enchereLaPlusHaute = EnchereManager.getInstance().recupererEnchereLaPlusHaute(enchere.getArticleVendu().getNoArticle());
+						} catch (BLLException e) {
+							e.printStackTrace();
+							erreurs.add(e.toString());
+						}
+						
+						enchereCourantes.add(enchereLaPlusHaute);
+					}
+				}
+    			
+    		}
+//      	--------------- FIN MES ENCHERES --------------
+    		
+//    		------------ MES ENCHERES REMPORTEES ----------
+    		else if(enchereAchat.equals("mesEncheresRemportees")) {
+    			List<Integer> filtreArticle = new ArrayList<>();
     			
     			try {
-    				plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
-    			} catch (BLLException e) {
-    				e.printStackTrace();
-    				erreurs.add(e.toString());
-    			}
+    				encheresUtilisateur = EnchereManager.getInstance().recupererEncheresUtilisateurs(idUtilisateur);
+				} catch (BLLException e) {
+					e.printStackTrace();
+					erreurs.add(e.toString());
+				}
     			
-    			if(plusHauteEnchere != null) {
-    				enchereCourantes.add(plusHauteEnchere);
-    			} else {
-    				articlesEnVente.add(article);
-    			}	
+    			for (Enchere enchere : encheresUtilisateur) {
+    				System.out.println("je passe bien ici");
+					if(!filtreArticle.contains(enchere.getArticleVendu().getNoArticle()) && !enchere.getArticleVendu().isEnVente()) {
+						filtreArticle.add(enchere.getArticleVendu().getNoArticle());					
+						enchereCourantes.add(enchere);
+						System.out.println(enchereCourantes);
+					}
+					
+				}
     		}
-		}
-//		------------------ FIN FILTRE -----------------
-    	
-//    	------------------ ACHAT ------------------   	
-    	
-//    	ENCHERES UTILISATEURS
-    	if(mesEncheres != null || mesEncheresRemportees != null) {
-    		try {
-    			encheresUtilisateur = mgr.recupererEncheresUtilisateurs(idUtilisateur);
-    		} catch (Exception e) {
-				e.printStackTrace();
-				erreurs.add(e.toString());
-			}
+//      	---------- FIN MES ENCHERES REMPORTEES --------
     		
-    		if(mesEncheres != null) {
-    			for (Enchere enchere : encheresUtilisateur) {
-    				if(enchere.getArticleVendu().isEnVente()) {
-    					encheresUtilisateur.add(enchere);
-    				}
-    			}
+//      -------------------------------------------
+//      ---------------  FIN ACHAT ----------------
+    		
+//      --------------  DEBUT VENTE --------------- 
+//      -------------------------------------------
+    	} else if (choixListe.equals("ventes")) {
+    		
+//    		------------- MES VENTES EN COURS ------------
+    		if(enchereAchat.equals("")) {
+    			
     		}
-    		if(mesEncheresRemportees != null) {
-    			for (Enchere enchere : encheresUtilisateur) {
-    				if(!enchere.getArticleVendu().isEnVente()) {
-    					enchereGagneesUtilisateur.add(enchere);
-    				}
-    			}
-    		}
+//    		----------- FIN MES VENTES EN COURS ----------
+    		
+    		
+//    		----------- MES VENTES NON DEBUTEES ----------
+    		
+    		
+//    		--------- FIN MES VENTES NON DEBUTEES --------
+    		
+    		
+//    		------------ MES VENTES TERMINEES ------------
+    		
+    		
+//    		----------- FIN MES VENTES TERMINEES ---------	
     	}
-		
-/*
-//    	------------------ VENTE ------------------
-		
-//		VENTES EN COURS
-		if(mesVentesEnCours != null) {
-			try {
-				ventesUtilisateur = mgr.recupererVenteUtilisateurs(idUtilisateur);
-			}catch (BLLException e) {
-				e.printStackTrace();
-				erreurs.add(e.toString());
-			}
-			
-			for (Enchere enchere : ventesUtilisateur) {
-				if(Date.from(Instant.now()).after(Date.from(enchere.getArticleVendu().getDateDebutEncheres().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())) && Date.from(Instant.now()).before(Date.from(enchere.getArticleVendu().getDateFinEncheres().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
-					ventesUtilisateurEnCours.add(enchere);
-				}
-			}
-		}
-		
-//		VENTES NON DEBUTEES
-		if(ventesNonDebutees != null) {
-			try {
-				ventesUtilisateur = mgr.recupererVenteUtilisateurs(idUtilisateur);
-			}catch (BLLException e) {
-				e.printStackTrace();
-				erreurs.add(e.toString());
-			}
-			
-			for (Enchere enchere : ventesUtilisateur) {
-				if(Date.from(Instant.now()).before(Date.from(enchere.getArticleVendu().getDateDebutEncheres().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
-					ventesUtilisateurNonDebutees.add(enchere);
-				}
-			}
-		}
-		
-//		VENTES TERMINEES
-		if(ventesTerminees != null) {
-			try {
-				ventesUtilisateur = mgr.recupererVenteUtilisateurs(idUtilisateur);
-			}catch (BLLException e) {
-				e.printStackTrace();
-				erreurs.add(e.toString());
-			}
-			
-			for (Enchere enchere : ventesUtilisateur) {
-				if(Date.from(Instant.now()).after(Date.from(enchere.getArticleVendu().getDateFinEncheres().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
-					ventesUtilisateurTerminees.add(enchere);
-				}
-			}
-		}
-		
-//    	ACHATS
-    	this.getServletContext().setAttribute("enchereOuvertes", enchereOuvertes);
-    	this.getServletContext().setAttribute("mesEncheres", mesEncheres);
-    	this.getServletContext().setAttribute("mesEncheresRemportees", mesEncheresRemportees);
-    	
-//    	VENTES
-    	this.getServletContext().setAttribute("ventesUtilisateurEnCours", ventesUtilisateurEnCours);
-    	this.getServletContext().setAttribute("ventesUtilisateurNonDebutees", ventesUtilisateurNonDebutees);
-    	this.getServletContext().setAttribute("ventesUtilisateurTerminees", ventesUtilisateurTerminees);
-		
- */
+//      -------------------------------------------
+//      ---------------  FIN VENTE ----------------
     	
 //    	--------------- CATEGORIES ----------------	
     	try {
@@ -356,7 +363,7 @@ public class ServletAccueil extends HttpServlet {
     	this.getServletContext().setAttribute("articlesEnVente", articlesEnVente);
     	this.getServletContext().setAttribute("categories", categories);
 		this.getServletContext().setAttribute("erreurs", erreurs);
-
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/ListeEncheresConnecte.jsp");
 		rd.forward(request, response);
 	}
