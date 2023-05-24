@@ -54,8 +54,9 @@ public class ServletActionEnchere extends HttpServlet {
 				
 			}
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("l'article n'existe pas");
+			HttpServletResponse httpResponse = (HttpServletResponse) response;
+			httpResponse.sendRedirect( ( (HttpServletRequest) request).getContextPath() + "/Accueil");
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
