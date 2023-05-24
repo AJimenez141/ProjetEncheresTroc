@@ -46,12 +46,17 @@ public class ServletActionEnchere extends HttpServlet {
 			
 			if( utilisateurPage.getNoUtilisateur() == utilisateurSession.getNoUtilisateur())
 			{
+				//vendeur
+				
+				request.setAttribute("article", article);
 				RequestDispatcher rd = request.getRequestDispatcher("/pages/EnchereNonCommencee.jsp");
 				rd.forward(request, response);
 			} else {
+				//acheteur
+				
+				request.setAttribute("article", article);
 				RequestDispatcher rd = request.getRequestDispatcher("/pages/Encherir.jsp");
 				rd.forward(request, response);
-				
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("l'article n'existe pas");

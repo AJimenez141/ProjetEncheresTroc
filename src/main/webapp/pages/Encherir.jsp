@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="fr.eni.projet.bo.ArticleVendu" %>
+<%@page import="fr.eni.projet.bo.Retrait" %>
+<%@page import="fr.eni.projet.bll.RetraitManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,42 +27,52 @@
 			<div>
 				<form action="">
 					<div>
-						XXX
+						<%ArticleVendu article = (ArticleVendu) request.getAttribute("article");%>
+						<%Retrait retrait = (Retrait) request.getAttribute("retrait"); %>
+						<label for="pseudo">Pseudo :</label>
+						<c:out value="${article.getNomArticle()}"/>
 						<br>
 						<br>
-							<label for="description">Description :</label>
-							XXX						
+						
+						<label for="description">Description :</label>
+						<c:out value="${article.getDescription()}"/>
+						<br>
+						<br>				
+
+						<label for="categorie">Catégorie :</label>
+						<c:out value="${article.getCategorie().getLibelle()}"/>
 						<br>
 						<br>
-							<label for="categorie">Catégorie :</label>
-							XXX
+
+						<label for="offre">Meilleur offre :</label>
+						<c:out value="${article.getPrixVente()}"/>
 						<br>
 						<br>
-							<label for="offre">Meilleur offre :</label>
-							XXX
+
+						<label for="prix">Mise à prix :</label>
+						<c:out value="${article.getMiseAPrix()}"/>
 						<br>
 						<br>
-							<label for="prix">Mise à prix :</label>
-							XXX
+
+						<label for="finEnchere">Fin de l'enchère :</label>
+						<c:out value="${article.getDateFinEncheres()}"/>
 						<br>
 						<br>
-							<label for="finEnchere">Fin de l'enchère :</label>
-							XXX
+
+						<label for="retrait">Retrait :</label>
+						<c:out value="${retrait.getAdresse().getVille()}"/>
 						<br>
 						<br>
-							<label for="retrait">Retrait :</label>
-							XXX
+
+						<label for="vendeur">Vendeur :</label>
+						<c:out value="${article.getVendeur().getPseudo()}"/>
 						<br>
 						<br>
-							<label for="vendeur">Vendeur :</label>
-							XXX
-						<br>
-						<br>
-							<label for="proposition">Ma proposition :</label>
-							<input type="number">
-						<br>
-						<br>
-							<button class="bouton__enregistrer--couleur" id="btnEncherir" name="btnEncherir">Enchérir</button>
+
+						<label for="proposition">Ma proposition :</label>
+						<input type="number">
+
+						<button class="bouton__enregistrer--couleur" id="btnEncherir" name="btnEncherir">Enchérir</button>
 					</div>
 				</form>
 			</div>
