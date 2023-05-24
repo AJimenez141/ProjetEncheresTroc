@@ -99,25 +99,29 @@
 		 	</c:if>
 		 	<c:forEach var="enchere" items="${ encheresCourantes }">
 		 		<div>
-		 			<img alt="" src="" height="200" width="200">
+			 		<div>
+			 			<img alt="" src="" height="200" width="200">
+			 		</div>
+			 		<ul>
+						<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getNomArticle() }</a></li>
+						<li>Enchere en cours : ${ enchere.montant_enchere }</li>
+						<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
+						<li>Vendeur : <a href="Profil.jsp">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
+					</ul>		 		
 		 		</div>
-		 		<ul>
-					<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getNomArticle() }</a></li>
-					<li>Enchere en cours : ${ enchere.montant_enchere }</li>
-					<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
-					<li>Vendeur : <a href="Profil.jsp">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
-				</ul>
 		 	</c:forEach>
 		 	<c:forEach var="article" items="${ articlesEnVente }">
 		 		<div>
-		 			<img alt="" src="" height="200" width="200">
+			 		<div>
+			 			<img alt="" src="" height="200" width="200">
+			 		</div>
+			 		<ul>
+						<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ article.nomArticle }</li></a>
+						<li>Prix : ${ article.miseAPrix }</li>
+						<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
+						<li>Vendeur : <a href="Profil.jsp">${ article.getVendeur().getPseudo() }</a></li>
+					</ul>
 		 		</div>
-		 		<ul>
-					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ article.nomArticle }</li></a>
-					<li>Prix : ${ article.miseAPrix }</li>
-					<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
-					<li>Vendeur : <a href="Profil.jsp">${ article.getVendeur().getPseudo() }</a></li>
-				</ul>
 		 	</c:forEach>
 
 		</div>
