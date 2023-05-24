@@ -116,10 +116,10 @@
 			 			<img alt="" src="" height="200" width="200">
 			 		</div>
 			 		<ul>
-						<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ article.nomArticle }</li></a>
+						<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ article.getNoArticle()}">${ article.nomArticle }</a></li>
 						<li>Prix : ${ article.miseAPrix }</li>
 						<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
-						<li>Vendeur : <a href="<%=request.getContextPath()%>/AutreProfil?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ article.getVendeur().getPseudo() }</a></li>
+						<li>Vendeur : <a href="<%=request.getContextPath()%>/AutreProfil?idArticle=${ article.getNoArticle()}">${ article.getVendeur().getPseudo() }</a></li>
 					</ul>
 		 		</div>
 		 	</c:forEach>
