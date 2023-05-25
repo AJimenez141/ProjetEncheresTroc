@@ -26,7 +26,7 @@
 				<img alt="" src="" width="400" height="300">		
 			</div>
 			<div>
-				<form action="<%=request.getContextPath()%>/VendreUnArticle" method="POST">
+				<form action="<%=request.getContextPath()%>/ActionEnchere" method="POST">
 					<%ArticleVendu article = (ArticleVendu) request.getAttribute("article");%>
 					<%Retrait retrait = (Retrait) request.getAttribute("retrait"); %>
 					<label name="labelArticle" for="article">Article : </label>
