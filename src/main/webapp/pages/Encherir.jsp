@@ -25,11 +25,11 @@
 				<img src="../ressources/images/tacos_dos.jpg" alt="J'ai faim !">
 			</div>
 			<div>
-				<form action="">
+				<%ArticleVendu article = (ArticleVendu) request.getAttribute("article");%>
+				<%Retrait retrait = (Retrait) request.getAttribute("retrait"); %>
+				<form action="<%=request.getContextPath()%>/Article?idArticle=${ article.getNoArticle()}" method="POST">
 					<div>
-						<%ArticleVendu article = (ArticleVendu) request.getAttribute("article");%>
-						<%Retrait retrait = (Retrait) request.getAttribute("retrait"); %>
-						<label for="pseudo">Pseudo :</label>
+						<label for="article">Article :</label>
 						<c:out value="${article.getNomArticle()}"/>
 						<br>
 						<br>
@@ -72,7 +72,7 @@
 						<br>
 
 						<label for="proposition">Ma proposition :</label>
-						<input type="number">
+						<input type="number" name="proposition">
 
 						<button class="bouton__enregistrer--couleur" id="btnEncherir" name="btnEncherir">Enchérir</button>
 					</div>
