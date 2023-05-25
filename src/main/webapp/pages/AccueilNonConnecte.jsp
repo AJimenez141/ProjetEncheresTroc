@@ -45,12 +45,17 @@
 			</form>
 		</div>
 		
-		<div class="section">
-			<c:if test="${ empty erreurs }">
+		<c:if test="${ !empty erreurs }">
+			<div class="section">
+				<ul>
 		 		<c:forEach var="erreur" items="${ erreurs }">
-		 			<p>${ erreur }</p><br>
+		 			<li style="color:red">${ erreur }</li><br>
 		 		</c:forEach>
-		 	</c:if>
+				</ul>
+			</div>
+	 	</c:if>
+	 	
+		<div class="section">
 		
 		 	<c:if test="${ empty encheresCourantes && empty articlesEnVente }">
 		 		<p>Pas de ventes en cours...</p>

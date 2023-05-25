@@ -92,15 +92,12 @@ public class ServletAccueilNonConnecte extends HttpServlet {
 			e.printStackTrace();
     		erreurs.add(e.toString());
 		}
+    	
 		
     	this.getServletContext().setAttribute("encheresCourantes", enchereCourantes);
     	this.getServletContext().setAttribute("articlesEnVente", articlesEnVente);
     	this.getServletContext().setAttribute("categories", categories);
     	this.getServletContext().setAttribute("erreurs", erreurs);
-    	
-    	for (String string : erreurs) {
-			System.out.println(string);
-		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/AccueilNonConnecte.jsp");
 		rd.forward(request, response);
@@ -158,6 +155,8 @@ public class ServletAccueilNonConnecte extends HttpServlet {
     				}	
     			}
     		}
+    		
+    	
     	} else if(!categorie.equals("Toutes") && !recherche.isBlank()) {
     		
 			try {
@@ -218,6 +217,7 @@ public class ServletAccueilNonConnecte extends HttpServlet {
 			e.printStackTrace();
 			erreurs.add(e.toString());
 		}
+
     	
     	this.getServletContext().setAttribute("encheresCourantes", enchereCourantes);
     	this.getServletContext().setAttribute("articlesEnVente", articlesEnVente);
