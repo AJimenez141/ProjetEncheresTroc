@@ -16,7 +16,6 @@ import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.RetraitManager;
-import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.Adresse;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Categorie;
