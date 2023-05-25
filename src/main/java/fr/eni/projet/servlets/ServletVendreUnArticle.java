@@ -90,7 +90,7 @@ public class ServletVendreUnArticle extends HttpServlet {
 			Retrait retrait = new Retrait(null, articleVendu);
 			
 			//Si on a coché "utiliser mon adresse", on prend l'adresse vendeur par défaut
-			if(request.getParameter("chkMonAdresse") == null) {
+			if(request.getParameter("chkMonAdresse") != null) {
 				retrait.setAdresse(vendeur.getAdresse());
 			//Sinon, on prend l'adresse saisie
 			} else {
