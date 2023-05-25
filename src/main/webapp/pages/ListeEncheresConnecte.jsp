@@ -93,14 +93,16 @@
 			</div>
 		</div>
 		
-		<div>
-			<c:if test="${ !empty erreurs }">
-				<c:forEach var="erreur" items="${ erreurs }">
-					<p>${ erreur.toString() }</p>
-					<br>
-				</c:forEach>
-			</c:if>
-		</div>
+		<c:if test="${ !empty erreurs }">
+			<div class="section">
+				<ul>
+		 		<c:forEach var="erreur" items="${ erreurs }">
+		 			<li style="color:red">${ erreur }</li><br>
+		 		</c:forEach>
+				</ul>
+			</div>
+	 	</c:if>
+	 	
 		<div class="section">
 		 	<c:if test="${ empty encheresCourantes && empty articlesEnVente }">
 		 		<p>Aucun élément à afficher</p>
