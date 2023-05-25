@@ -4,19 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
 
 import fr.eni.projet.bo.Adresse;
-import fr.eni.projet.bo.ArticleVendu;
-import fr.eni.projet.bo.Categorie;
-import fr.eni.projet.bo.Enchere;
 import fr.eni.projet.bo.Retrait;
-import fr.eni.projet.bo.Utilisateur;
-import fr.eni.projet.dal.ArticleVenduDALException;
 import fr.eni.projet.dal.ConnectionProvider;
-import fr.eni.projet.dal.DALException;
-import fr.eni.projet.dal.EnchereDALException;
 import fr.eni.projet.dal.RetraitDALException;
 import fr.eni.projet.dal.RetraitDAO;
 
