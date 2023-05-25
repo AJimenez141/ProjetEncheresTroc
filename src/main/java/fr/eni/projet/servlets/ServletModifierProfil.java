@@ -44,7 +44,6 @@ public class ServletModifierProfil extends HttpServlet {
 			util = UtilisateurManager.getInstance().recupererUnUtilisateur(utilisateur.getNoUtilisateur());
 			request.setAttribute("util", util);
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -111,7 +110,6 @@ public class ServletModifierProfil extends HttpServlet {
 				System.out.println("Confirmer le mdp");
 			}
 		} catch (UtilisateurDALException | SQLException | BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

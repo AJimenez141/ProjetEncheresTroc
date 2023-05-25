@@ -10,7 +10,6 @@ import java.util.List;
 
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ConnectionProvider;
-import fr.eni.projet.dal.ConnexionException;
 import fr.eni.projet.dal.UtilisateurDALException;
 import fr.eni.projet.dal.UtilisateurDAO;
 import fr.eni.projet.bo.Adresse;
@@ -26,11 +25,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	//TODO Solution provisoire pour éviter les conflits. A corriger par contrainte "delete on cascade" directement sur la bdd.
 	private final String DELETE_UTILISATEUR = "DELETE ENCHERES FROM ENCHERES "
-											+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
-											+ "WHERE ARTICLES_VENDUS.no_utilisateur = ? "
-											+ "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = ? "
-											+ "DELETE FROM ENCHERES WHERE no_utilisateur = ? "
-											+ "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
+		+ "INNER JOIN ARTICLES_VENDUS ON ARTICLES_VENDUS.no_article = ENCHERES.no_article "
+		+ "WHERE ARTICLES_VENDUS.no_utilisateur = ? "
+		+ "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = ? "
+		+ "DELETE FROM ENCHERES WHERE no_utilisateur = ? "
+		+ "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 	
 	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ? WHERE no_utilisateur = ?";
 	

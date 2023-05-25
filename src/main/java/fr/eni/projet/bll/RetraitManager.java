@@ -1,10 +1,7 @@
 package fr.eni.projet.bll;
 
-import java.sql.SQLException;
-
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Retrait;
-import fr.eni.projet.dal.ArticleVenduDALException;
 import fr.eni.projet.dal.DAOFactory;
 import fr.eni.projet.dal.RetraitDALException;
 import fr.eni.projet.dal.RetraitDAO;

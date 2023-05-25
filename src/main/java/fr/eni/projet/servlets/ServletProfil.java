@@ -41,7 +41,6 @@ public class ServletProfil extends HttpServlet {
 			util = UtilisateurManager.getInstance().recupererUnUtilisateur(utilisateur.getNoUtilisateur());
 			request.setAttribute("util", util);
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

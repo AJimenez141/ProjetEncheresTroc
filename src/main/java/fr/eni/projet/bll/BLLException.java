@@ -2,7 +2,9 @@ package fr.eni.projet.bll;
 
 public class BLLException extends Exception {
 
-//	Constructors
+	private static final long serialVersionUID = 3282722952173825409L;
+
+	//	Constructors
 	public BLLException() 
 	{
 		super();

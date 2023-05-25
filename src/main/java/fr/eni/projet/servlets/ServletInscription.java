@@ -26,7 +26,6 @@ public class ServletInscription extends HttpServlet {
      */
     public ServletInscription() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -56,7 +55,6 @@ public class ServletInscription extends HttpServlet {
 		try {
 			UtilisateurManager.getInstance().insererUtilisateur(utilisateur);
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

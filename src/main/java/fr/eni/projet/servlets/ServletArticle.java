@@ -27,7 +27,6 @@ public class ServletArticle extends HttpServlet {
      */
     public ServletArticle() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -55,10 +54,8 @@ public class ServletArticle extends HttpServlet {
 			EnchereManager.getInstance().creerEnchere(enchere);
 			
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

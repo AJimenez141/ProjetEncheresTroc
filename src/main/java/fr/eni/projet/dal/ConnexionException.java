@@ -1,7 +1,10 @@
 package fr.eni.projet.dal;
 
 public class ConnexionException extends Exception {
-//	Constructors
+
+	private static final long serialVersionUID = -3848277146722489342L;
+
+	//	Constructors
 	public ConnexionException() 
 	{
 		super();

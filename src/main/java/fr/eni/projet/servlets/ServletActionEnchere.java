@@ -34,7 +34,6 @@ public class ServletActionEnchere extends HttpServlet {
      */
     public ServletActionEnchere() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -73,7 +72,6 @@ public class ServletActionEnchere extends HttpServlet {
 					retrait = RetraitManager.getInstance().selectionnerRetraitArticle(article.getNoArticle());
 					request.setAttribute("retrait", retrait);
 				} catch (BLLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -88,7 +86,6 @@ public class ServletActionEnchere extends HttpServlet {
 					retrait = RetraitManager.getInstance().selectionnerRetraitArticle(article.getNoArticle());
 					request.setAttribute("retrait", retrait);
 				} catch (BLLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -100,7 +97,6 @@ public class ServletActionEnchere extends HttpServlet {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			httpResponse.sendRedirect( ( (HttpServletRequest) request).getContextPath() + "/Accueil");
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -145,10 +141,8 @@ public class ServletActionEnchere extends HttpServlet {
 				request.setAttribute("retrait", retrait);
 				
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (BLLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

@@ -42,10 +42,8 @@ public class ServletAutreProfil extends HttpServlet {
 			util = UtilisateurManager.getInstance().recupererUnUtilisateur(utilisateurPage.getNoUtilisateur());
 			request.setAttribute("util", util);
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -57,7 +55,6 @@ public class ServletAutreProfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

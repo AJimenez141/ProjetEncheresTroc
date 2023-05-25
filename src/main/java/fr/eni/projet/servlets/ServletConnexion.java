@@ -26,7 +26,6 @@ public class ServletConnexion extends HttpServlet {
      */
     public ServletConnexion() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -54,7 +53,6 @@ public class ServletConnexion extends HttpServlet {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			httpResponse.sendRedirect( ( (HttpServletRequest) request).getContextPath() + "/Accueil");
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

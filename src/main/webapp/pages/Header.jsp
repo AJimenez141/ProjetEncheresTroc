@@ -11,7 +11,7 @@
 	<div class="conteneur" id="Header">
 		<div>
 			<img alt="" src="<%=request.getContextPath()%>/ressources/images/tacos_logo.png">
-			<a class="ombre_foncee" href="<%=request.getContextPath()%>/Accueil"><h1>Tacos - Enchères</h1></a>		
+			<h1><a class="ombre_foncee" href="<%=request.getContextPath()%>/Accueil">Tacos - Enchères</a></h1>
 		</div>
 		<ul>
 			<!-- <li><a class="ombre_foncee" href="GestionUtilisateurs.jsp">Gestion des utilisateurs</a></li>

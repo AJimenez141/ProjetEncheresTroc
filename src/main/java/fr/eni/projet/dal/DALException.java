@@ -2,7 +2,9 @@ package fr.eni.projet.dal;
 
 public class DALException extends Exception {
 
-//	Constructors
+	private static final long serialVersionUID = 5908397361511142446L;
+
+	//	Constructors
 	public DALException() 
 	{
 		super();

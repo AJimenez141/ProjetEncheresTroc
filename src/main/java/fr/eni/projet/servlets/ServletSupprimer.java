@@ -24,7 +24,6 @@ public class ServletSupprimer extends HttpServlet {
      */
     public ServletSupprimer() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -37,7 +36,6 @@ public class ServletSupprimer extends HttpServlet {
 		try {
 			UtilisateurManager.getInstance().supprimerUtilisateur(utilisateur.getNoUtilisateur());
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		session.invalidate();
@@ -50,7 +48,6 @@ public class ServletSupprimer extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

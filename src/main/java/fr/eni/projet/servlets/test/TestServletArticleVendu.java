@@ -19,9 +19,6 @@ import fr.eni.projet.bo.Adresse;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bo.Utilisateur;
-import fr.eni.projet.dal.ArticleVenduDALException;
-import fr.eni.projet.dal.CategorieDALException;
-import fr.eni.projet.dal.UtilisateurDALException;
 
 /**
  * Servlet implementation class TestServletArticleVendu
@@ -51,11 +48,8 @@ public class TestServletArticleVendu extends HttpServlet {
 		
 		Adresse adresseJeanLuc = new Adresse("200 rue des coquillettes", "44100", "Nantes");
 		Utilisateur jeanLuc = new Utilisateur(1, "jjluc", "Jean-Luc", "Grandfan", "jluclefan@mail.com", "aeroTiti000", "0712345678",adresseJeanLuc, 25);
-//		LocalDate dateDebutEnchere = LocalDate.of(2023, 05, 15);
 		LocalDate dateDebutEnchere = LocalDate.of(2023, 04, 15);
 		LocalDate dateFinEnchere = LocalDate.of(2023, 10, 15); 
-//		LocalDate dateFinEnchere = LocalDate.of(2023, 04, 15); 
-// TODO - erreur date de fin d'enchère antérieure à la date de début
 		
 //		RECUPERATION UTILISATEUR
 		
