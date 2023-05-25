@@ -263,7 +263,6 @@ public class ServletAccueil extends HttpServlet {
     				
 					if(!filtreArticle.contains(enchere.getArticleVendu().getNoArticle()) && enchere.getArticleVendu().isEnVente()) {
 						filtreArticle.add(enchere.getArticleVendu().getNoArticle());
-						
 						Enchere enchereLaPlusHaute = null;
 						
 						try {
@@ -283,6 +282,7 @@ public class ServletAccueil extends HttpServlet {
 //    		------------ MES ENCHERES REMPORTEES ----------
     		else if(enchereAchat.equals("mesEncheresRemportees")) {
     			List<Integer> filtreArticle = new ArrayList<>();
+    			
     			this.getServletContext().setAttribute("enchereRemportees", true);
     			
     			try {
@@ -292,9 +292,18 @@ public class ServletAccueil extends HttpServlet {
 					erreurs.add(e.toString());
 				}
     			
-    			for (Enchere enchere : encheresUtilisateur) {
-					if(!filtreArticle.contains(enchere.getArticleVendu().getNoArticle()) && !enchere.getArticleVendu().isEnVente()) {
-						filtreArticle.add(enchere.getArticleVendu().getNoArticle());					
+    			for (Enchere enchere : encheresUtilisateur) {   
+    				Enchere comparatif = null;
+    				try {
+    					comparatif = EnchereManager.getInstance().recupererEnchereLaPlusHaute(enchere.getArticleVendu().getNoArticle());
+    				} catch (Exception e) {
+    					e.printStackTrace();
+    					erreurs.add(e.toString());
+					}
+    				
+					if( comparatif.getMontant_enchere() == enchere.getMontant_enchere() && !filtreArticle.contains(enchere.getArticleVendu().getNoArticle()) && !enchere.getArticleVendu().isEnVente()) {
+						
+						filtreArticle.add(enchere.getArticleVendu().getNoArticle());
 						enchereCourantes.add(enchere);
 					}
 					

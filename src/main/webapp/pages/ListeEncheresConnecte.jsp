@@ -114,15 +114,17 @@
 			 		</div>
 			 		<ul>
 						<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getNomArticle() }</a></li>
+						
 						<c:choose>
-						    <c:when test="${ enchereRemportees }">
-						        <li>Acheté à : ${ enchere.montant_enchere }</li>
+						    <c:when test="${ enchere.getArticleVendu().isEnVente() }">
+						        <li>Enchere en cours : ${ enchere.montant_enchere }</li>
+						        <li>Fin d'enchère le : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
 						    </c:when>    
 						    <c:otherwise>
-						        <li>Enchere en cours : ${ enchere.montant_enchere }</li>
+						        <li>Vendu : ${ enchere.montant_enchere }</li>
+								<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
 						    </c:otherwise>
 						</c:choose>
-						<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
 						<li>Vendeur : <a href="<%=request.getContextPath()%>/AutreProfil?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
 					</ul>		 		
 		 		</div>
@@ -134,8 +136,16 @@
 			 		</div>
 			 		<ul>
 						<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ article.getNoArticle()}">${ article.nomArticle }</a></li>
-						<li>Prix : ${ article.miseAPrix }</li>
-						<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
+						<c:choose>
+						    <c:when test="${ enchere.getArticleVendu().isEnVente() }">
+						        <li>Prix : ${ article.miseAPrix }</li>
+								<li>Fin d'enchère le : ${ article.dateFinEncheres }</li>
+						    </c:when>    
+						    <c:otherwise>
+						        <li>Non vendu</li>
+						        <li>Terminé le : ${ article.dateFinEncheres }</li>
+						    </c:otherwise>
+						</c:choose>
 						<li>Vendeur : <a href="<%=request.getContextPath()%>/AutreProfil?idArticle=${ article.getNoArticle()}">${ article.getVendeur().getPseudo() }</a></li>
 					</ul>
 		 		</div>
