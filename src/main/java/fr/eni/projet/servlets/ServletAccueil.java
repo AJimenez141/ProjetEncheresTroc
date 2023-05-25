@@ -1,9 +1,7 @@
 package fr.eni.projet.servlets;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +21,6 @@ import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bo.ArticleVendu;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Servlet implementation class ServeltAccueil
@@ -44,7 +41,8 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		PREPARATION DES VARIABLES
-    	List<Enchere> encheres = new ArrayList<>();
+    	@SuppressWarnings("unused")
+		List<Enchere> encheres = new ArrayList<>();
     	List<ArticleVendu> articlesVendus = new ArrayList<>();
 //    	ENCHERES COURANTES OU A DEFAUT ARTICLES EN VENTES
     	List<Enchere> enchereCourantes 	= new ArrayList<>();
@@ -55,8 +53,6 @@ public class ServletAccueil extends HttpServlet {
     	EnchereManager mgr = EnchereManager.getInstance();
     	CategorieManager mgrCat = CategorieManager.getInstance();
     	ArticleVenduManager mgrArt = ArticleVenduManager.getInstance();
-//    	RECUPERATION DE LA SESSION
-    	HttpSession session = request.getSession();
     	
 //    	CREATION D'UNE LISTE D'ERREUR POUR AFFICHAGE
     	List<String> erreurs = new ArrayList<>();
@@ -141,16 +137,6 @@ public class ServletAccueil extends HttpServlet {
 		
 //		ID DE L'UTILISATEUR
 		int idUtilisateur = utilisateur.getNoUtilisateur();
-		
-//		COTE ACHATS
-		String enchereOuvertes = request.getParameter("enchereOuvertes");
-		String mesEncheres = request.getParameter("mesEncheres");
-		String mesEncheresRemportees = request.getParameter("mesEncheresRemportees");
-		
-//		COTE VENTES
-		String mesVentesEnCours = request.getParameter("mesVentesEnCours");
-		String ventesNonDebutees = request.getParameter("ventesNonDebutees");
-		String ventesTerminees = request.getParameter("ventesTerminees");
 
 //		DEFINITION DE LA VARIABLE
 		List<ArticleVendu> encheresFiltrees = new ArrayList<>();
@@ -160,13 +146,6 @@ public class ServletAccueil extends HttpServlet {
 		List<Enchere> enchereCourantes 	= new ArrayList<>();
 		List<ArticleVendu> articlesEnVente = new ArrayList<>();
 		List<Enchere> encheresUtilisateur = new ArrayList<>();
-		List<Enchere> enchereGagneesUtilisateur = new ArrayList<>();
-		
-//		RECUPERATION DES LISTES - VENTES
-		List<Enchere> ventesUtilisateur = new ArrayList<>();
-		List<Enchere> ventesUtilisateurEnCours = new ArrayList<>();
-		List<Enchere> ventesUtilisateurTerminees = new ArrayList<>();
-		List<Enchere> ventesUtilisateurNonDebutees = new ArrayList<>();
 		
 //		RECUPERATION DES CATEGORIES
     	List<Categorie> categories = new ArrayList<>();
@@ -174,13 +153,12 @@ public class ServletAccueil extends HttpServlet {
 //    	RECUPERATION DES ERREURS
 		List<String> erreurs = new ArrayList<>();
 		
-    	EnchereManager mgr = EnchereManager.getInstance();
     	CategorieManager mgrCat = CategorieManager.getInstance();
     	
     	
 //    	------------------ ACHAT ------------------  
 //    	-------------------------------------------
-    	if(choixListe.equals("achats")) {
+    	if(choixListe != null && choixListe.equals("achats")) {
     		
     		session.setAttribute("venteChecked", false);
     		
@@ -324,7 +302,7 @@ public class ServletAccueil extends HttpServlet {
     		
 //      --------------  DEBUT VENTE --------------- 
 //      -------------------------------------------
-    	} else if (choixListe.equals("mesVentes")) {
+    	} else if (choixListe != null && choixListe.equals("mesVentes")) {
     		session.setAttribute("venteChecked", true);
     		
 //    		------------- MES VENTES EN COURS ------------
@@ -419,9 +397,40 @@ public class ServletAccueil extends HttpServlet {
     		}
     		
 //    		----------- FIN MES VENTES TERMINEES ---------	
-    	}
 //      -------------------------------------------
 //      ---------------  FIN VENTE ----------------
+    		
+//      --------------- DEFAUT ----------------	
+    	} else {
+			try {
+				articlesVendus = ArticleVenduManager.getInstance().recupererLesArticlesVendus();
+			} catch (BLLException e) {
+				e.printStackTrace();
+				erreurs.add(e.toString());
+			}
+			
+//			AJOUT DES ENCHERES DANS ENCHERESCOURANTES
+			for (ArticleVendu article : articlesVendus) {    				
+				if(article.isEnVente()) {
+					Enchere plusHauteEnchere = null;
+					int numeroArticle = article.getNoArticle();
+					
+					try {
+						plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+					} catch (BLLException e) {
+						e.printStackTrace();
+						erreurs.add(e.toString());
+					}
+					
+					if(plusHauteEnchere != null) {
+						enchereCourantes.add(plusHauteEnchere);
+					} else {
+						articlesEnVente.add(article);
+					}	
+				}
+			}
+    	}
+    	
     	
 //    	--------------- CATEGORIES ----------------	
     	try {
