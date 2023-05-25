@@ -35,6 +35,9 @@
 				<c:out value="${util.getAdresse().getVille()}"/>
 			<br>
 			<br>
+				<a href="<%=request.getContextPath()%>/Accueil">
+					<button id="btnRetour" name="btnRetour" type="button">Retour</button>
+				</a>
 		</div>
 	</div>
 </body>
