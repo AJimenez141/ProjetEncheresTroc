@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.BLLException;
+import fr.eni.projet.bll.RetraitManager;
 import fr.eni.projet.bo.ArticleVendu;
+import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.bo.Utilisateur;
 
 /**
@@ -49,12 +51,31 @@ public class ServletActionEnchere extends HttpServlet {
 				//vendeur
 				
 				request.setAttribute("article", article);
+				
+				Retrait retrait;
+				try {
+					retrait = RetraitManager.getInstance().selectionnerRetraitArticle(article.getNoArticle());
+					request.setAttribute("retrait", retrait);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/pages/EnchereNonCommencee.jsp");
 				rd.forward(request, response);
 			} else {
 				//acheteur
 				
 				request.setAttribute("article", article);
+				Retrait retrait;
+				try {
+					retrait = RetraitManager.getInstance().selectionnerRetraitArticle(article.getNoArticle());
+					request.setAttribute("retrait", retrait);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/pages/Encherir.jsp");
 				rd.forward(request, response);
 			}
