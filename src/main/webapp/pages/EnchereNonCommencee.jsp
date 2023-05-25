@@ -26,7 +26,7 @@
 				<img alt="" src="" width="400" height="300">		
 			</div>
 			<div>
-				<form action="<%=request.getContextPath()%>/ActionEnchere" method="POST">
+				<form action="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ article.getNoArticle()}" method="POST">
 					<%ArticleVendu article = (ArticleVendu) request.getAttribute("article");%>
 					<%Retrait retrait = (Retrait) request.getAttribute("retrait"); %>
 					<label name="labelArticle" for="article">Article : </label>
@@ -80,20 +80,6 @@
 			
 				</form>
 			</div>
-	</div>
-	
-	
-	
-	<div>
-		<div>
-			<img alt="" src="" height="200" width="200">
-			<ul>
-				<li>PC Gamer pour travailler</li>
-				<li>Prix : 210 points</li>
-				<li>Fin de L'enchère : 10/08/2018</li>
-				<li>Vendeur : RoiTacos</li>
-			</ul>
-		</div>
 	</div>
 </body>
 </html>

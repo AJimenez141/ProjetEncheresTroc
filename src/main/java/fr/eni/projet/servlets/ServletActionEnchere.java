@@ -111,45 +111,36 @@ public class ServletActionEnchere extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			ArticleVendu articleVendu = null;
 			try {
+				ArticleVendu articleVendu = null;
 				articleVendu = ArticleVenduManager.getInstance().recupererUnArticleVendu(Integer.parseInt(request.getParameter("idArticle")));
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (BLLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
-			String rue = request.getParameter("rue");
-			String codePostal = request.getParameter("codePostal");
-			String ville = request.getParameter("ville");
-			
-			Adresse adresse = new Adresse(rue, codePostal, ville);
-			
-			String article = request.getParameter("article");
-			String description = request.getParameter("description");
-			String categorieLibelle = request.getParameter("categorie");
-			LocalDate debutEnchere = LocalDate.parse(request.getParameter("debutEnchere"));
-			LocalDate finEnchere = LocalDate.parse(request.getParameter("finEnchere"));
-			int prixDepart = Integer.parseInt(request.getParameter("prixDepart"));
-			
-			Categorie categorie = new Categorie(categorieLibelle);
-			
-			articleVendu.setNomArticle(article);
-			articleVendu.setDescription(description);
-			articleVendu.setCategorie(categorie);
-			articleVendu.setDateDebutEncheres(debutEnchere);
-			articleVendu.setDateFinEncheres(finEnchere);
-			articleVendu.setMiseAPrix(prixDepart);
-			
-			Retrait retrait = new Retrait(adresse, articleVendu);
-			
-			retrait.setAdresse(adresse);
-			
-			
-			try {
+				String rue = request.getParameter("rue");
+				String codePostal = request.getParameter("codePostal");
+				String ville = request.getParameter("ville");
+				
+				Adresse adresse = new Adresse(rue, codePostal, ville);
+				
+				String article = request.getParameter("article");
+				String description = request.getParameter("description");
+				String categorieLibelle = request.getParameter("categorie");
+				LocalDate debutEnchere = LocalDate.parse(request.getParameter("debutEnchere"));
+				LocalDate finEnchere = LocalDate.parse(request.getParameter("finEnchere"));
+				int prixDepart = Integer.parseInt(request.getParameter("prixDepart"));
+				
+				Categorie categorie = new Categorie(categorieLibelle);
+				
+				articleVendu.setNomArticle(article);
+				articleVendu.setDescription(description);
+				articleVendu.setCategorie(categorie);
+				articleVendu.setDateDebutEncheres(debutEnchere);
+				articleVendu.setDateFinEncheres(finEnchere);
+				articleVendu.setMiseAPrix(prixDepart);
+				
+				Retrait retrait = new Retrait(adresse, articleVendu);
+				
+				retrait.setAdresse(adresse);
+
 				ArticleVenduManager.getInstance().mettreAJourUnArticleVendu(articleVendu);
 				request.setAttribute("article", articleVendu);
 				request.setAttribute("retrait", retrait);
