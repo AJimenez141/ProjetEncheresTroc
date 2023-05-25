@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.RetraitManager;
 import fr.eni.projet.bo.Retrait;
+import fr.eni.projet.bo.ArticleVendu;
 
 /**
  * Servlet implementation class ServletArticle
@@ -31,10 +33,6 @@ public class ServletArticle extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArticleVendu article = (ArticleVendu) request.getAttribute("article");
-		Retrait retrait = RetraitManager.getInstance().selectionnerRetraitArticle(article.getNoArticle());
-		
-		request.setAttribute("retrait", retrait);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/Encherir.jsp");
 		rd.forward(request, response);

@@ -60,6 +60,8 @@
 						<br>
 
 						<label for="retrait">Retrait :</label>
+						<c:out value="${retrait.getAdresse().getRue()}"/>
+						<c:out value="${retrait.getAdresse().getCodePostal()}"/>
 						<c:out value="${retrait.getAdresse().getVille()}"/>
 						<br>
 						<br>
