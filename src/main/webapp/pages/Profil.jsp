@@ -20,15 +20,7 @@
 		<div class="section" id="section_profil">
 			<%Utilisateur util = (Utilisateur)request.getAttribute("util");%>
 				<label for="pseudo">Pseudo :</label>
-				<c:out value="${util.getPseudo()}"/>
-			<br>
-			<br>
-				<label for="nom">Nom :</label>
-				<c:out value="${util.getNom()}"/>				
-			<br>
-			<br>			
-				<label for="prenom">Prénom :</label>
-				<c:out value="${util.getPrenom()}"/>		
+				<c:out value="${util.getPseudo()}"/>	
 			<br>
 			<br>			
 				<label for="email">Email :</label>
