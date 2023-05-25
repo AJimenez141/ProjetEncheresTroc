@@ -52,7 +52,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			 + "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur "
 			 + "INNER JOIN CATEGORIES ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie WHERE no_article = ?";
 	
-	private static final String SELECT_MAX_ENCHERE_BY_ARTICLE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur WHERE no_article = ? AND montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES)";
+	private static final String SELECT_MAX_ENCHERE_BY_ARTICLE = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur WHERE ENCHERES.no_article = ? AND montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES WHERE ENCHERES.no_article = ?)";
 
 	/**
 	 * retourne un article en fonction de son ID
@@ -301,6 +301,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			PreparedStatement pStmt = connexion.prepareStatement(SELECT_MAX_ENCHERE_BY_ARTICLE);
 		){
 			pStmt.setInt(1, pArticleVenduId);
+			pStmt.setInt(2, pArticleVenduId);
 			ResultSet rs = pStmt.executeQuery();
 			
 			if(rs.next()) {

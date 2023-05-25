@@ -258,8 +258,12 @@ public class ServletAccueil extends HttpServlet {
 				}
     			
     			for (Enchere enchere : encheresUtilisateur) {
+    				
+    				System.out.println(enchere);
+    				
 					if(!filtreArticle.contains(enchere.getArticleVendu().getNoArticle()) && enchere.getArticleVendu().isEnVente()) {
 						filtreArticle.add(enchere.getArticleVendu().getNoArticle());
+						
 						Enchere enchereLaPlusHaute = null;
 						
 						try {
@@ -267,9 +271,9 @@ public class ServletAccueil extends HttpServlet {
 						} catch (BLLException e) {
 							e.printStackTrace();
 							erreurs.add(e.toString());
-						}
-						
+						}						
 						enchereCourantes.add(enchereLaPlusHaute);
+						
 					}
 				}
     			
@@ -279,6 +283,7 @@ public class ServletAccueil extends HttpServlet {
 //    		------------ MES ENCHERES REMPORTEES ----------
     		else if(enchereAchat.equals("mesEncheresRemportees")) {
     			List<Integer> filtreArticle = new ArrayList<>();
+    			this.getServletContext().setAttribute("enchereRemportees", true);
     			
     			try {
     				encheresUtilisateur = EnchereManager.getInstance().recupererEncheresUtilisateurs(idUtilisateur);

@@ -114,7 +114,14 @@
 			 		</div>
 			 		<ul>
 						<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getNomArticle() }</a></li>
-						<li>Enchere en cours : ${ enchere.montant_enchere }</li>
+						<c:choose>
+						    <c:when test="${ enchereRemportees }">
+						        <li>Acheté à : ${ enchere.montant_enchere }</li>
+						    </c:when>    
+						    <c:otherwise>
+						        <li>Enchere en cours : ${ enchere.montant_enchere }</li>
+						    </c:otherwise>
+						</c:choose>
 						<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
 						<li>Vendeur : <a href="<%=request.getContextPath()%>/AutreProfil?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
 					</ul>		 		
