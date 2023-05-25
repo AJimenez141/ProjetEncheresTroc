@@ -1,11 +1,6 @@
 package fr.eni.projet.servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,15 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.BLLException;
-import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.UtilisateurManager;
-import fr.eni.projet.bo.ArticleVendu;
-import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bo.Utilisateur;
-import fr.eni.projet.dal.UtilisateurDALException;
-import fr.eni.projet.bo.Adresse;
 
 /**
  * Servlet implementation class ServletProfil
