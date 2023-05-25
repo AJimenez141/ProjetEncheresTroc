@@ -51,11 +51,14 @@ public class ServletInscription extends HttpServlet {
 				request.getParameter("tel"),
 				adresse,
 				100);
-		System.out.println(utilisateur);
+		
+		
 		try {
 			UtilisateurManager.getInstance().insererUtilisateur(utilisateur);
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		httpResponse.sendRedirect( ( (HttpServletRequest) request).getContextPath() + "/Accueil");
 	}
 }
