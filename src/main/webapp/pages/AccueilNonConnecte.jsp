@@ -66,7 +66,7 @@
 		 			<img alt="" src="" height="200" width="200">
 		 		</div>
 		 		<ul>
-					<li><a href="<%=request.getContextPath()%>/ActionEnchere">${ enchere.getArticleVendu().getNomArticle() }</a></li>
+					<li>${ enchere.getArticleVendu().getNomArticle() }</li>
 					<li>Enchere en cours : ${ enchere.montant_enchere }</li>
 					<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
 					<li>Vendeur : ${ enchere.getArticleVendu().getVendeur().getPseudo() }</li>
@@ -77,7 +77,7 @@
 		 			<img alt="" src="" height="200" width="200">
 		 		</div>
 		 		<ul>
-					<li><a href="<%=request.getContextPath()%>/ActionEnchere">${ article.nomArticle }</a></li>
+					<li>${ article.nomArticle }</li>
 					<li>Prix : ${ article.miseAPrix }</li>
 					<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
 					<li>Vendeur : ${ article.getVendeur().getPseudo() }</li>

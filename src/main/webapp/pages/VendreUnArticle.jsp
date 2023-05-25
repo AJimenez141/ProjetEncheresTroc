@@ -83,8 +83,9 @@
 					
 			
 					<button class="bouton__enregistrer--couleur" id="btnEnregistrer" name="btnEnregistrer" type="submit">Enregistrer</button>
-					<button id="btnAnnuler" name="btnAnnuler"  type="button">Annuler</button>
-			
+					<a href="<%=request.getContextPath()%>/Accueil">
+						<button id="btnAnnuler" name="btnAnnuler"  type="button">Annuler</button>
+					</a>
 				</form>
 			</div>
 		</div>

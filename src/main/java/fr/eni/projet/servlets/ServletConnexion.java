@@ -45,7 +45,6 @@ public class ServletConnexion extends HttpServlet {
 				
 		try {
 			Utilisateur utilisateur = UtilisateurManager.getInstance().seConnecter(emailOuPseudo, mdp);
-			System.out.println(utilisateur);
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateur", utilisateur);
