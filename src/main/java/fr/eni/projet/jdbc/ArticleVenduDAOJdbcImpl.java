@@ -405,7 +405,7 @@ List<ArticleVendu> articles = new ArrayList<>();
 
 		try(
 				Connection connexion = ConnectionProvider.getConnection();
-				PreparedStatement pStmt = connexion.prepareStatement(INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement pStmt = connexion.prepareStatement(UPDATE_ARTICLE);
 			){
 				
 				Utilisateur vendeurArticle = pArticleVendu.getVendeur();
