@@ -32,7 +32,7 @@
 	
 					<input type="text" name="filtre"/>
 					
-					<label name="labelCategorie" for="categorie">Categorie : </label>
+					<label for="categorie">Categorie : </label>
 					<select name="categorie">
 						<option>Toutes</option>
 						<c:forEach var="categorie" items="${categories}">
@@ -69,7 +69,7 @@
 					<li><a href="<%=request.getContextPath()%>/ActionEnchere">${ enchere.getArticleVendu().getNomArticle() }</a></li>
 					<li>Enchere en cours : ${ enchere.montant_enchere }</li>
 					<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
-					<li>Vendeur : ${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
+					<li>Vendeur : ${ enchere.getArticleVendu().getVendeur().getPseudo() }</li>
 				</ul>
 		 	</c:forEach>
 		 	<c:forEach var="article" items="${ articlesEnVente }">
