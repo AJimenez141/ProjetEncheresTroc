@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.EnchereManager;
-import fr.eni.projet.bll.RetraitManager;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Enchere;
 
