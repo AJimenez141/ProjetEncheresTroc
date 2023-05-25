@@ -219,14 +219,13 @@ form {
 }
 
 #Header img {
-	min-width: 25%;
 	max-width : 25%;
 	height : 60%;
 	
 	margin-right: 4rem;
 }
 
-#Header div {
+#Header > div {
 	display: flex;
 }
 
@@ -241,12 +240,6 @@ form {
 	
 	text-align: center;	
 	margin: 0 1em;
-}
-
-#Header #identite {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: no-wrap;
 }
 
 #credit_volant {
