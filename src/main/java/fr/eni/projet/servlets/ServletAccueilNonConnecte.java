@@ -8,11 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import java.util.List;
 import fr.eni.projet.bo.Enchere;
-import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.BLLException;
@@ -41,7 +39,6 @@ public class ServletAccueilNonConnecte extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
 //		PREPARATION DES VARIABLES
-    	List<Enchere> encheres = new ArrayList<>();
     	List<ArticleVendu> articlesVendus = new ArrayList<>();
     	
 //    	ENCHERES COURANTES OU A DEFAUT ARTICLES EN VENTES
@@ -52,17 +49,12 @@ public class ServletAccueilNonConnecte extends HttpServlet {
     	List<Categorie> categories = new ArrayList<>();	
     	
 //    	INSTANCIATION DES MANAGERS
-    	EnchereManager mgr = EnchereManager.getInstance();
     	CategorieManager mgrCat = CategorieManager.getInstance();
     	ArticleVenduManager mgrArt = ArticleVenduManager.getInstance();
     	
 //    	CREATION D'UNE LISTE D'ERREUR POUR AFFICHAGE
     	List<String> erreurs = new ArrayList<>();
-    	
-//    	RECUPERATION DE LA SESSION
-    	HttpSession session = request.getSession();
-    	
-    	
+    	    	
 //    	ENCHERES	
 //		RECUPERATION DE TOUS LES ARTICLES
 		try {
@@ -122,16 +114,16 @@ public class ServletAccueilNonConnecte extends HttpServlet {
 //		RECUPERATION DES FILTRES
 		String categorie = request.getParameter("categorie");
 		String recherche = request.getParameter("filtre");
-//		DEFINITION DE LA VARIABLE
+		
+//		DEFINITION DES VARIABLES
 		List<ArticleVendu> encheresFiltrees = new ArrayList<>();
+		List<Categorie> categories = new ArrayList<>();
+		List<ArticleVendu> articlesVendus = new ArrayList<>();
+		List<String> erreurs = new ArrayList<>();
+		
 //    	ENCHERES COURANTES OU A DEFAUT ARTICLES EN VENTES
 		List<Enchere> enchereCourantes 	= new ArrayList<>();
 		List<ArticleVendu> articlesEnVente = new ArrayList<>();
-		
-    	List<Categorie> categories = new ArrayList<>();
-    	List<ArticleVendu> articlesVendus = new ArrayList<>();
-		List<String> erreurs = new ArrayList<>();
-		
 		
     	CategorieManager mgrCat = CategorieManager.getInstance();
 		

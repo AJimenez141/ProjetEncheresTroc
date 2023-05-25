@@ -46,6 +46,11 @@
 		</div>
 		
 		<div class="section">
+			<c:if test="${ empty erreurs }">
+		 		<c:forEach var="erreur" items="${ erreurs }">
+		 			<p>${ erreur }</p><br>
+		 		</c:forEach>
+		 	</c:if>
 		
 		 	<c:if test="${ empty encheresCourantes && empty articlesEnVente }">
 		 		<p>Pas de ventes en cours...</p>
