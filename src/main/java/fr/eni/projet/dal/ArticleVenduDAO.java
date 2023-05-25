@@ -75,5 +75,14 @@ public interface ArticleVenduDAO {
 	 * @throws ArticleVenduDALException
 	 */
 	public List<ArticleVendu> selectionnerParSearchEtCategorie(String pSearch, String pCategorie) throws ArticleVenduDALException;
+
+	/**
+	 * Modifier un article
+	 * 
+	 * @param pArticleVendu
+	 * @return
+	 * @throws ArticleVenduDALException
+	 */
+	void updateArticleVendu(ArticleVendu pArticleVendu) throws ArticleVenduDALException;
 	
 }

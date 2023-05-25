@@ -48,6 +48,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?,?)";
 
+	private static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_utilisateur = ?, no_categorie = ? WHERE no_article = ?";
+	
 	@Override
 	public ArticleVendu selectById(int pArticleVenduId) throws ArticleVenduDALException {
 
@@ -397,5 +399,33 @@ List<ArticleVendu> articles = new ArrayList<>();
 		
 		return articles;
 	}
+	
+	@Override
+	public void updateArticleVendu(ArticleVendu pArticleVendu) throws ArticleVenduDALException {
 
+		try(
+				Connection connexion = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = connexion.prepareStatement(INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS);
+			){
+				
+				Utilisateur vendeurArticle = pArticleVendu.getVendeur();
+				Categorie categorieArticle = pArticleVendu.getCategorie();
+				
+				pStmt.setString(1, pArticleVendu.getNomArticle());
+				pStmt.setString(2, pArticleVendu.getDescription());
+				pStmt.setDate(3, java.sql.Date.valueOf(pArticleVendu.getDateDebutEncheres()));
+				pStmt.setDate(4, java.sql.Date.valueOf(pArticleVendu.getDateFinEncheres()));
+				pStmt.setInt(5, pArticleVendu.getMiseAPrix());
+				pStmt.setInt(6, pArticleVendu.getPrixVente());
+				pStmt.setInt(7, vendeurArticle.getNoUtilisateur());
+				pStmt.setInt(8, categorieArticle.getNoCategorie());
+				pStmt.setInt(9, pArticleVendu.getNoArticle());
+				
+				pStmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new ArticleVenduDALException("Impossible de mettre à jour l'article",e);
+			}
+		
+	}
 }

@@ -75,6 +75,15 @@ public class ArticleVenduManager {
 		return articleVendu;
 	}
 	
+	public void mettreAJourUnArticleVendu(ArticleVendu pArticleVendu) throws BLLException {
+		validerArticleVendu(pArticleVendu);
+		try {
+			this.articleVenduDAO.updateArticleVendu(pArticleVendu);
+		} catch (ArticleVenduDALException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Recuperation de tous les articles
 	 * 
