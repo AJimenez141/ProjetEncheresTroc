@@ -35,18 +35,12 @@ public class ServletModifierProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// On récupère l'utilisateur en session
+		//On récupère l'utilisateur en session
 		HttpSession session = request.getSession();
+		
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
-		Utilisateur util = null;
-		
-		try {
-			util = UtilisateurManager.getInstance().recupererUnUtilisateur(utilisateur.getNoUtilisateur());
-			request.setAttribute("util", util);
-		} catch (BLLException e) {
-			e.printStackTrace();
-		}
-		
+		request.setAttribute("util", utilisateur);
+
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/ModifierProfil.jsp");
 		rd.forward(request, response);
 	}
