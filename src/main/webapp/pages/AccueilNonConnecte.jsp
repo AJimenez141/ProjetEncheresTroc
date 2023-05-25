@@ -11,9 +11,11 @@
 </head>
 <header>
 	<div class="conteneur" id="Header">
-		<a href="<%=request.getContextPath()%>/AccueilNonConnecte">
-			<h1 class="ombre_foncee">Tacos - Enchères</h1>
-		</a>
+		<h1 class="ombre_foncee">
+			<a href="<%=request.getContextPath()%>/AccueilNonConnecte">
+				Tacos - Enchères
+			</a>
+		</h1>
 		<ul>
 			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Inscription">S'inscrire</a></li>
 			<li><a class="ombre_foncee" href="<%=request.getContextPath()%>/Connexion">Se Connecter</a></li>
@@ -55,8 +57,7 @@
 			</div>
 	 	</c:if>
 	 	
-		<div class="section">
-		
+		<div class="section">	
 		 	<c:if test="${ empty encheresCourantes && empty articlesEnVente }">
 		 		<p>Pas de ventes en cours...</p>
 		 	</c:if>
@@ -65,7 +66,7 @@
 		 			<img alt="" src="" height="200" width="200">
 		 		</div>
 		 		<ul>
-					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ enchere.getArticleVendu().getNomArticle() }</li></a>
+					<li><a href="<%=request.getContextPath()%>/ActionEnchere">${ enchere.getArticleVendu().getNomArticle() }</a></li>
 					<li>Enchere en cours : ${ enchere.montant_enchere }</li>
 					<li>Fin de L'enchère : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
 					<li>Vendeur : ${ enchere.getArticleVendu().getVendeur().getPseudo() }</a></li>
@@ -76,10 +77,10 @@
 		 			<img alt="" src="" height="200" width="200">
 		 		</div>
 		 		<ul>
-					<a href="<%=request.getContextPath()%>/ActionEnchere"><li>${ article.nomArticle }</li></a>
+					<li><a href="<%=request.getContextPath()%>/ActionEnchere">${ article.nomArticle }</a></li>
 					<li>Prix : ${ article.miseAPrix }</li>
 					<li>Fin de L'enchère : ${ article.dateFinEncheres }</li>
-					<li>Vendeur : ${ article.getVendeur().getPseudo() }</a></li>
+					<li>Vendeur : ${ article.getVendeur().getPseudo() }</li>
 				</ul>
 		 	</c:forEach>
 		</div>
