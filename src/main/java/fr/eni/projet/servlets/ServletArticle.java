@@ -1,6 +1,7 @@
 package fr.eni.projet.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,12 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.BLLException;
 import fr.eni.projet.bll.EnchereManager;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Enchere;
+import fr.eni.projet.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletArticle
@@ -44,13 +47,16 @@ public class ServletArticle extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String credits = request.getParameter("proposition");
-		ArticleVendu article; 
+		ArticleVendu article;
+		
+//		RECUPERATION DE L'UTILISATEUR DE LA SESSION
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		
 		try {
 			article = ArticleVenduManager.getInstance().recupererUnArticleVendu(Integer.parseInt(request.getParameter("idArticle")));
-			
-			Enchere enchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(article.getNoArticle());
-			
-			enchere.setMontant_enchere(Integer.parseInt(credits));
+
+			Enchere enchere = new Enchere(LocalDate.now(), Integer.parseInt(credits), utilisateur, article);
 			EnchereManager.getInstance().creerEnchere(enchere);
 			
 		} catch (NumberFormatException e) {
