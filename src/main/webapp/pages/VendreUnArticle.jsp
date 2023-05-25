@@ -25,7 +25,23 @@
 			</div>
 			
 			<div>
-				<form method="POST" onsubmit="return controleChamps()" action="<%=request.getContextPath()%>/VendreUnArticle">
+			
+					<c:if test="${ !empty erreurs }">
+						<div class="section">
+							<ul>
+								<c:forEach var="erreur" items="${ erreurs }">
+									<li style="color:red">${ erreur }</li><br>
+								</c:forEach>
+							</ul>
+						</div>
+					</c:if>
+					
+					<% @SuppressWarnings("unchecked")
+						Utilisateur utilisateur = (Utilisateur)request.getAttribute("utilisateur");
+						List<Categorie> listeCategories = (List<Categorie>)request.getAttribute("listeCategories");
+					%>
+						
+				<form method="POST" action="<%=request.getContextPath()%>/VendreUnArticle">
 		
 					<label name="labelArticle" for="article">Article : </label>
 					<input type="text" id="article" name="article"/>
@@ -34,12 +50,7 @@
 					<input type="text" id="description" name="description"/>
 					
 					<label name="labelCategorie" for="categorie">Catégorie : </label>
-					
-					<% @SuppressWarnings("unchecked")
-					Utilisateur utilisateur = (Utilisateur)request.getAttribute("utilisateur");
-					List<Categorie> listeCategories = (List<Categorie>)request.getAttribute("listeCategories");
-					%>
-					
+
 					<select name="selectCategories">
 						<c:forEach var="categorie" items="${listeCategories}">
 							<option value='<c:out value="${categorie.getNoCategorie()}"/>'><c:out value="${categorie.getLibelle()}"/></option>				
@@ -112,47 +123,6 @@ function toggle() {
 	  document.getElementById("ville").disabled = true; 
   }
   
-}
-
-function controleChamps() {
-	
-	var ok = true;
-	
-	if(document.querySelector("#article").value === "")
-	{
-		ok = false;
-	}
-	
-	if(document.querySelector("#description").value === "")
-	{
-		ok = false;
-	}
-	
-	if(document.querySelector("#prixDepart").value === "")
-	{
-		ok = false;
-	}
-	
-	if(document.querySelector("#debutEnchere").value === "")
-	{
-		ok = false;
-	}
-	
-	if(document.querySelector("#finEnchere").value === "")
-	{
-		ok = false;
-	}
-	
-	if(document.querySelector("#rue").value === "" || document.querySelector("#codePostal").value === "" || document.querySelector("#ville").value === "")
-	{
-		ok = false;
-	}
-	
-	if(!ok)
-	{
-		alert("Merci de renseigner tous les champs");
-		return false;
-	} 
 }
 
 </script>

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,6 +54,8 @@ public class ServletVendreUnArticle extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		// CREATION D'UNE LISTE D'ERREUR POUR AFFICHAGE 
+		List<String> erreurs = new ArrayList<>();
 		
 		try
 		{
@@ -96,15 +99,19 @@ public class ServletVendreUnArticle extends HttpServlet {
 			}
 			//On insère ce retrait
 			RetraitManager.getInstance().creerRetrait(retrait);
-		}
-		catch(DateTimeParseException | BLLException e)
-		{
 			
-			e.printStackTrace();
+			//Enfin, on redirige sur la bonne page
+			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
+			rd.forward(request, response);
+		}
+		catch(DateTimeParseException | NumberFormatException | BLLException e)
+		{
+			e.printStackTrace(); 
+			erreurs.add(e.toString()); 
+			
+			this.getServletContext().setAttribute("erreurs",erreurs);
+			RequestDispatcher rd = request.getRequestDispatcher("/pages/VendreUnArticle.jsp");
+			rd.forward(request, response);
 		}	
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
-		rd.forward(request, response);
 	}
-
 }
