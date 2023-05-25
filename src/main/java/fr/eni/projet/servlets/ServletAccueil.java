@@ -2,6 +2,7 @@ package fr.eni.projet.servlets;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 
 import javax.servlet.RequestDispatcher;
@@ -79,21 +80,23 @@ public class ServletAccueil extends HttpServlet {
 		}
 //		AJOUT DES ENCHERES DANS ENCHERESCOURANTES
 		for (ArticleVendu article : articlesVendus) {
-			Enchere plusHauteEnchere = null;
-			int numeroArticle = article.getNoArticle();
-			
-			try {
-				plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
-			} catch (BLLException e) {
-				e.printStackTrace();
-				erreurs.add(e.toString());
+			if(article.isEnVente()) {				
+				Enchere plusHauteEnchere = null;
+				int numeroArticle = article.getNoArticle();
+				
+				try {
+					plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+				} catch (BLLException e) {
+					e.printStackTrace();
+					erreurs.add(e.toString());
+				}
+				
+				if(plusHauteEnchere != null) {
+					enchereCourantes.add(plusHauteEnchere);
+				} else {
+					articlesEnVente.add(article);
+				}	
 			}
-			
-			if(plusHauteEnchere != null) {
-				enchereCourantes.add(plusHauteEnchere);
-			} else {
-				articlesEnVente.add(article);
-			}	
 		}
 
     	
@@ -179,7 +182,7 @@ public class ServletAccueil extends HttpServlet {
 //    	-------------------------------------------
     	if(choixListe.equals("achats")) {
     		
-    		session.setAttribute("achatChecked", true);
+    		session.setAttribute("venteChecked", false);
     		
     		
 //			------------------- FILTRE -------------------
@@ -195,22 +198,24 @@ public class ServletAccueil extends HttpServlet {
     			}
     			
 //    			AJOUT DES ENCHERES DANS ENCHERESCOURANTES
-    			for (ArticleVendu article : articlesVendus) {
-    				Enchere plusHauteEnchere = null;
-    				int numeroArticle = article.getNoArticle();
-    				
-    				try {
-    					plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
-    				} catch (BLLException e) {
-    					e.printStackTrace();
-    					erreurs.add(e.toString());
+    			for (ArticleVendu article : articlesVendus) {    				
+    				if(article.isEnVente()) {
+    					Enchere plusHauteEnchere = null;
+    					int numeroArticle = article.getNoArticle();
+    					
+    					try {
+    						plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+    					} catch (BLLException e) {
+    						e.printStackTrace();
+    						erreurs.add(e.toString());
+    					}
+    					
+    					if(plusHauteEnchere != null) {
+    						enchereCourantes.add(plusHauteEnchere);
+    					} else {
+    						articlesEnVente.add(article);
+    					}	
     				}
-    				
-    				if(plusHauteEnchere != null) {
-    					enchereCourantes.add(plusHauteEnchere);
-    				} else {
-    					articlesEnVente.add(article);
-    				}	
     			}
     			
 //    		SI BARRE RECHERCHE + CATEGORIE MODIFIES
@@ -226,9 +231,6 @@ public class ServletAccueil extends HttpServlet {
     		} else if(!recherche.equals("")) {
     			try {
     				encheresFiltrees = ArticleVenduManager.getInstance().recuperLesArticlesVendusParRecherche(recherche);
-    				for (ArticleVendu art : encheresFiltrees) {
-    					System.out.println(art);
-    				}
     			} catch (BLLException e) {
     				e.printStackTrace();
     				erreurs.add(e.toString());
@@ -280,9 +282,6 @@ public class ServletAccueil extends HttpServlet {
     			for (Enchere enchere : encheresUtilisateur) {
 					if(!filtreArticle.contains(enchere.getArticleVendu().getNoArticle()) && enchere.getArticleVendu().isEnVente()) {
 						filtreArticle.add(enchere.getArticleVendu().getNoArticle());
-						
-						System.out.println(filtreArticle);
-						
 						Enchere enchereLaPlusHaute = null;
 						
 						try {
@@ -311,11 +310,9 @@ public class ServletAccueil extends HttpServlet {
 				}
     			
     			for (Enchere enchere : encheresUtilisateur) {
-    				System.out.println("je passe bien ici");
 					if(!filtreArticle.contains(enchere.getArticleVendu().getNoArticle()) && !enchere.getArticleVendu().isEnVente()) {
 						filtreArticle.add(enchere.getArticleVendu().getNoArticle());					
 						enchereCourantes.add(enchere);
-						System.out.println(enchereCourantes);
 					}
 					
 				}
@@ -328,7 +325,7 @@ public class ServletAccueil extends HttpServlet {
 //      --------------  DEBUT VENTE --------------- 
 //      -------------------------------------------
     	} else if (choixListe.equals("mesVentes")) {
-    		session.setAttribute("achatChecked", false);
+    		session.setAttribute("venteChecked", true);
     		
 //    		------------- MES VENTES EN COURS ------------
     		if(enchereVente.equals("mesVentesEnCours")) {
@@ -343,21 +340,23 @@ public class ServletAccueil extends HttpServlet {
     			
 //    			AJOUT DES ENCHERES DANS ENCHERESCOURANTES
     			for (ArticleVendu article : articlesEnVenteUtilisateur) {
-    				Enchere plusHauteEnchere = null;
-    				int numeroArticle = article.getNoArticle();
-    				
-    				try {
-    					plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
-    				} catch (BLLException e) {
-    					e.printStackTrace();
-    					erreurs.add(e.toString());
+    				if(article.isEnVente()) {	
+    					Enchere plusHauteEnchere = null;
+    					int numeroArticle = article.getNoArticle();
+    					
+    					try {
+    						plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+    					} catch (BLLException e) {
+    						e.printStackTrace();
+    						erreurs.add(e.toString());
+    					}
+    					
+    					if(plusHauteEnchere != null) {
+    						enchereCourantes.add(plusHauteEnchere);
+    					} else {
+    						articlesEnVente.add(article);
+    					}	
     				}
-    				
-    				if(plusHauteEnchere != null) {
-    					enchereCourantes.add(plusHauteEnchere);
-    				} else {
-    					articlesEnVente.add(article);
-    				}	
     			}
     		}
 //    		----------- FIN MES VENTES EN COURS ----------
@@ -374,6 +373,13 @@ public class ServletAccueil extends HttpServlet {
 					erreurs.add(e.toString());
 				}
     			
+    			for (ArticleVendu article : articlesEnVenteUtilisateur) {    				
+					if(!article.isEnVente() && LocalDate.now().isBefore(article.getDateDebutEncheres())
+					) {
+						articlesEnVente.add(article);
+					}
+				}
+    			
     		}
     		
 //    		--------- FIN MES VENTES NON DEBUTEES --------
@@ -381,14 +387,35 @@ public class ServletAccueil extends HttpServlet {
     		
 //    		------------ MES VENTES TERMINEES ------------
     		else if(enchereVente.equals("ventesTerminees")) {
-    			List<ArticleVendu> articlesEnVenteUtilisateur = new ArrayList<>();
-    			
+ 			List<ArticleVendu> articlesEnVenteUtilisateur = new ArrayList<>();
+
     			try {
     				articlesEnVenteUtilisateur = ArticleVenduManager.getInstance().recupererLesArticlesVendusParUtilisateur(idUtilisateur);
 				} catch (BLLException e) {
 					e.printStackTrace();
 					erreurs.add(e.toString());
 				}
+    			
+//    			AJOUT DES ENCHERES DANS ENCHERESCOURANTES
+    			for (ArticleVendu article : articlesEnVenteUtilisateur) {
+    				if(!article.isEnVente() && LocalDate.now().isAfter(article.getDateFinEncheres())) {	
+    					Enchere plusHauteEnchere = null;
+    					int numeroArticle = article.getNoArticle();
+    					
+    					try {
+    						plusHauteEnchere = EnchereManager.getInstance().recupererEnchereLaPlusHaute(numeroArticle);
+    					} catch (BLLException e) {
+    						e.printStackTrace();
+    						erreurs.add(e.toString());
+    					}
+    					
+    					if(plusHauteEnchere != null) {
+    						enchereCourantes.add(plusHauteEnchere);
+    					} else {
+    						articlesEnVente.add(article);
+    					}	
+    				}
+    			}
     		}
     		
 //    		----------- FIN MES VENTES TERMINEES ---------	
@@ -404,6 +431,7 @@ public class ServletAccueil extends HttpServlet {
 			erreurs.add(e.toString());
 		}
 //    	-------------- FIN CATEGORIES --------------	
+    	
     	
 //    	ERREURS
 		this.getServletContext().setAttribute("erreurs", erreurs);
