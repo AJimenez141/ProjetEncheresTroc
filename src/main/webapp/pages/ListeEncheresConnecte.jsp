@@ -116,7 +116,7 @@
 						<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ enchere.getArticleVendu().getNoArticle()}">${ enchere.getArticleVendu().getNomArticle() }</a></li>
 						
 						<c:choose>
-						    <c:when test="${ enchere.getArticleVendu().isEnVente() }">
+						    <c:when test="${ enchere.getArticleVendu().enVente }">
 						        <li>Enchere en cours : ${ enchere.montant_enchere }</li>
 						        <li>Fin d'enchère le : ${ enchere.getArticleVendu().getDateFinEncheres() }</li>
 						    </c:when>    
@@ -137,7 +137,7 @@
 			 		<ul>
 						<li><a href="<%=request.getContextPath()%>/ActionEnchere?idArticle=${ article.getNoArticle()}">${ article.nomArticle }</a></li>
 						<c:choose>
-						    <c:when test="${ enchere.getArticleVendu().isEnVente() }">
+						    <c:when test="${ article.enVente }">
 						        <li>Prix : ${ article.miseAPrix }</li>
 								<li>Fin d'enchère le : ${ article.dateFinEncheres }</li>
 						    </c:when>    
